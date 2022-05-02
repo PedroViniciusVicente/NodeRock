@@ -1,0 +1,60 @@
+soulike@soulike-virtual:~/NodeAL$ VERBOSE=1 yarn nodeprof ~/NodeALDataset/knownBugs/agentkeepalive-issue23-6f059d7/ testcase.js 
+yarn run v1.22.17
+$ yarn build
+$ rm -rf dist/ && tsc --noEmit
+$ node esbuild.js
+
+  dist/index.js                     196.5kb
+  dist/bin/nodeprof-no-analysis.js   72.6kb
+  dist/bin/nodeprof-test.js           1.6kb
+  dist/bin/nodeprof-raw.js            1.2kb
+  dist/bin/nodeprof.js                1.2kb
+  dist/bin/node.js                    817b 
+
+$ node ./dist/bin/nodeprof.js /home/soulike/NodeALDataset/knownBugs/agentkeepalive-issue23-6f059d7/ testcase.js
+END REQ
+problem with request:  Error: socket hang up
+    at connResetException (internal/errors.js:607:14)
+    at Socket.socketCloseListener (_http_client.js:443:25)
+    at Socket.emit (events.js:327:22)
+    at TCP.<anonymous> (net.js:673:12)
+    at TCP.callbackTrampoline (internal/async_hooks.js:131:14) {
+  code: 'ECONNRESET'
+}
+AsyncContext: 0.214s
+LastExpression: 0.002s
+Iterator: 0.002s
+Array: 0.018s
+Set: 0.001s
+Map: 0s
+Object: 0.24s
+FileHandle: 0.001s
+FsAsync: 0.002s
+FsSync: 0.001s
+FsPromises: 0.002s
+ArrayBuffer: 0s
+Buffer: 0.004s
+DataView: 0.004s
+TypedArray: 0.003s
+Primitive: 0.687s
+HttpAgent: 0.001s
+HttpIncomingMessage: 0.002s
+HttpOutgoingMessage: 0.006s
+Http: 0.021s
+Net: 0.04s
+Stream: 0.001s
+EventEmitter: 0.024s
+Crypto: 0.017s
+Zlib: 0.006s
+StringDecoder: 0s
+JSON: 0.001s
+RaceDetector: 0.532s
+analysis load: 1.509s
+entry: 4.073s
+eventCount: 924
+raceCount: 5
+filteredRaceCount: 910
+ResourceCount: 286
+ResourceOperationCount: 1730
+analysis: 8.712s
+Done in 12.13s.

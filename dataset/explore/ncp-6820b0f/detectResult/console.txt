@@ -1,0 +1,57 @@
+soulike@soulike-virtual:~/NodeAL$ VERBOSE=1 yarn nodeprof:test ~/NodeALDataset/explore/ncp-6820b0f/ node_modules/.bin/_mocha
+yarn run v1.22.17
+$ yarn build
+$ rm -rf dist/ && tsc --noEmit
+$ node esbuild.js
+
+  dist/index.js                     196.8kb
+  dist/bin/nodeprof-no-analysis.js   72.6kb
+  dist/bin/nodeprof-test.js           1.6kb
+  dist/bin/nodeprof-raw.js            1.2kb
+  dist/bin/nodeprof.js                1.2kb
+  dist/bin/node.js                    817b 
+
+$ node ./dist/bin/nodeprof-test.js /home/soulike/NodeALDataset/explore/ncp-6820b0f/ node_modules/.bin/_mocha
+
+  ․․․․․․․․․․․․․․․․․․․․․․
+
+  22 passing (8s)
+
+AsyncContext: 0.118s
+LastExpression: 0.012s
+Iterator: 0.013s
+Array: 0.027s
+Set: 0.01s
+Map: 0.01s
+Object: 0.769s
+FileHandle: 0.004s
+FsAsync: 0.933s
+FsSync: 0.491s
+FsPromises: 0.024s
+ArrayBuffer: 0.021s
+Buffer: 0.03s
+DataView: 0.015s
+TypedArray: 0.022s
+Primitive: 3.628s
+HttpAgent: 0.006s
+HttpIncomingMessage: 0.007s
+HttpOutgoingMessage: 0.014s
+Http: 0.007s
+Net: 0.025s
+Stream: 0.004s
+EventEmitter: 0.085s
+Crypto: 0.123s
+Zlib: 0.02s
+StringDecoder: 0.014s
+JSON: 0s
+max memory usage: 1.3259925842285156 GB
+RaceDetector: 3.368s
+analysis load: 1.725s
+entry: 10.308s
+eventCount: 620
+raceCount: 27
+filteredFPCount: 2946
+ResourceCount: 6912
+ResourceOperationCount: 18179
+analysis: 15.111s
+Done in 17.74s.

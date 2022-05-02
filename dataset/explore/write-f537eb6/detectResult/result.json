@@ -1,0 +1,1158 @@
+[
+    {
+        "resourceInfo": {
+            "type": "file",
+            "possibleDefineCodeScope": "index.js:184:33:184:75",
+            "filePath": "/home/soulike/NodeALDataset/explore/write-f537eb6/test/fixtures"
+        },
+        "timeDiff": "240,520,699",
+        "asyncContextToOperations1": [
+            {
+                "stackTrace": [
+                    "(index.js:184:22:184:76)",
+                    "(index.js:183:15:185:2)",
+                    "(index.js:41:15:71:2)"
+                ],
+                "asyncId": 147,
+                "asyncType": "FSREQCALLBACK",
+                "asyncContext": {
+                    "stackTrace": [],
+                    "asyncId": 144,
+                    "asyncType": "Immediate",
+                    "asyncContext": {
+                        "stackTrace": [],
+                        "asyncId": 140,
+                        "asyncType": "FSREQCALLBACK",
+                        "asyncContext": {
+                            "stackTrace": [],
+                            "asyncId": 139,
+                            "asyncType": "FSREQCALLBACK",
+                            "asyncContext": {
+                                "stackTrace": [],
+                                "asyncId": 134,
+                                "asyncType": "FSREQCALLBACK",
+                                "asyncContext": {
+                                    "stackTrace": [],
+                                    "asyncId": 129,
+                                    "asyncType": "FSREQCALLBACK",
+                                    "asyncContext": {
+                                        "stackTrace": [],
+                                        "asyncId": 128,
+                                        "asyncType": "FSREQCALLBACK",
+                                        "asyncContext": {
+                                            "stackTrace": [],
+                                            "asyncId": 127,
+                                            "asyncType": "FSREQCALLBACK",
+                                            "asyncContext": {
+                                                "stackTrace": [],
+                                                "asyncId": 110,
+                                                "asyncType": "PROMISE",
+                                                "asyncContext": {
+                                                    "stackTrace": [],
+                                                    "asyncId": 105,
+                                                    "asyncType": "PROMISE",
+                                                    "asyncContext": {
+                                                        "stackTrace": [],
+                                                        "asyncId": 104,
+                                                        "asyncType": "Immediate",
+                                                        "asyncContext": {
+                                                            "stackTrace": [],
+                                                            "asyncId": 100,
+                                                            "asyncType": "FSREQCALLBACK",
+                                                            "asyncContext": {
+                                                                "stackTrace": [],
+                                                                "asyncId": 99,
+                                                                "asyncType": "FSREQCALLBACK",
+                                                                "asyncContext": {
+                                                                    "stackTrace": [],
+                                                                    "asyncId": 94,
+                                                                    "asyncType": "FSREQCALLBACK",
+                                                                    "asyncContext": {
+                                                                        "stackTrace": [],
+                                                                        "asyncId": 89,
+                                                                        "asyncType": "FSREQCALLBACK",
+                                                                        "asyncContext": {
+                                                                            "stackTrace": [],
+                                                                            "asyncId": 88,
+                                                                            "asyncType": "FSREQCALLBACK",
+                                                                            "asyncContext": {
+                                                                                "stackTrace": [],
+                                                                                "asyncId": 87,
+                                                                                "asyncType": "FSREQCALLBACK",
+                                                                                "asyncContext": {
+                                                                                    "stackTrace": [],
+                                                                                    "asyncId": 26,
+                                                                                    "asyncType": "PROMISE",
+                                                                                    "asyncContext": {
+                                                                                        "stackTrace": [],
+                                                                                        "asyncId": 20,
+                                                                                        "asyncType": "PROMISE",
+                                                                                        "asyncContext": {
+                                                                                            "stackTrace": [],
+                                                                                            "asyncId": 19,
+                                                                                            "asyncType": "Immediate",
+                                                                                            "asyncContext": "[Omitted]",
+                                                                                            "codeInfo": "index.js:41:15:71:1",
+                                                                                            "index": 16,
+                                                                                            "timerInfo": null,
+                                                                                            "immediateInfo": null
+                                                                                        },
+                                                                                        "codeInfo": null,
+                                                                                        "index": 17,
+                                                                                        "timerInfo": null,
+                                                                                        "immediateInfo": null
+                                                                                    },
+                                                                                    "codeInfo": null,
+                                                                                    "index": 23,
+                                                                                    "timerInfo": null,
+                                                                                    "immediateInfo": null
+                                                                                },
+                                                                                "codeInfo": null,
+                                                                                "index": 84,
+                                                                                "timerInfo": null,
+                                                                                "immediateInfo": null
+                                                                            },
+                                                                            "codeInfo": null,
+                                                                            "index": 85,
+                                                                            "timerInfo": null,
+                                                                            "immediateInfo": null
+                                                                        },
+                                                                        "codeInfo": null,
+                                                                        "index": 86,
+                                                                        "timerInfo": null,
+                                                                        "immediateInfo": null
+                                                                    },
+                                                                    "codeInfo": null,
+                                                                    "index": 91,
+                                                                    "timerInfo": null,
+                                                                    "immediateInfo": null
+                                                                },
+                                                                "codeInfo": null,
+                                                                "index": 96,
+                                                                "timerInfo": null,
+                                                                "immediateInfo": null
+                                                            },
+                                                            "codeInfo": null,
+                                                            "index": 97,
+                                                            "timerInfo": null,
+                                                            "immediateInfo": null
+                                                        },
+                                                        "codeInfo": "index.js:88:14:103:1",
+                                                        "index": 101,
+                                                        "timerInfo": null,
+                                                        "immediateInfo": null
+                                                    },
+                                                    "codeInfo": null,
+                                                    "index": 102,
+                                                    "timerInfo": null,
+                                                    "immediateInfo": null
+                                                },
+                                                "codeInfo": null,
+                                                "index": 107,
+                                                "timerInfo": null,
+                                                "immediateInfo": null
+                                            },
+                                            "codeInfo": null,
+                                            "index": 124,
+                                            "timerInfo": null,
+                                            "immediateInfo": null
+                                        },
+                                        "codeInfo": null,
+                                        "index": 125,
+                                        "timerInfo": null,
+                                        "immediateInfo": null
+                                    },
+                                    "codeInfo": null,
+                                    "index": 126,
+                                    "timerInfo": null,
+                                    "immediateInfo": null
+                                },
+                                "codeInfo": null,
+                                "index": 131,
+                                "timerInfo": null,
+                                "immediateInfo": null
+                            },
+                            "codeInfo": null,
+                            "index": 136,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": null,
+                        "index": 137,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": "index.js:88:14:103:1",
+                    "index": 141,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "index.js:184:60:184:74",
+                "index": 144,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(index.js:184:60:184:75)"
+                    ],
+                    "scopeCodeInfo": "index.js:184:33:184:75",
+                    "index": 662,
+                    "timestamp": "939,267,644,077,030",
+                    "accessStage": "finish",
+                    "operationOn": "content"
+                }
+            ]
+        ],
+        "asyncContextToOperations2": [
+            {
+                "stackTrace": [
+                    "(index.js:184:22:184:76)",
+                    "(index.js:183:15:185:2)",
+                    "(index.js:41:15:71:2)"
+                ],
+                "asyncId": 242,
+                "asyncType": "FSREQCALLBACK",
+                "asyncContext": {
+                    "stackTrace": [],
+                    "asyncId": 239,
+                    "asyncType": "Immediate",
+                    "asyncContext": {
+                        "stackTrace": [],
+                        "asyncId": 235,
+                        "asyncType": "FSREQCALLBACK",
+                        "asyncContext": {
+                            "stackTrace": [],
+                            "asyncId": 234,
+                            "asyncType": "FSREQCALLBACK",
+                            "asyncContext": {
+                                "stackTrace": [],
+                                "asyncId": 224,
+                                "asyncType": "FSREQCALLBACK",
+                                "asyncContext": {
+                                    "stackTrace": [],
+                                    "asyncId": 214,
+                                    "asyncType": "FSREQCALLBACK",
+                                    "asyncContext": {
+                                        "stackTrace": [],
+                                        "asyncId": 213,
+                                        "asyncType": "FSREQCALLBACK",
+                                        "asyncContext": {
+                                            "stackTrace": [],
+                                            "asyncId": 212,
+                                            "asyncType": "FSREQCALLBACK",
+                                            "asyncContext": {
+                                                "stackTrace": [],
+                                                "asyncId": 151,
+                                                "asyncType": "PROMISE",
+                                                "asyncContext": {
+                                                    "stackTrace": [],
+                                                    "asyncId": 145,
+                                                    "asyncType": "PROMISE",
+                                                    "asyncContext": {
+                                                        "stackTrace": [],
+                                                        "asyncId": 120,
+                                                        "asyncType": "PROMISE",
+                                                        "asyncContext": {
+                                                            "stackTrace": [],
+                                                            "asyncId": 117,
+                                                            "asyncType": "PROMISE",
+                                                            "asyncContext": {
+                                                                "stackTrace": [],
+                                                                "asyncId": 114,
+                                                                "asyncType": "PROMISE",
+                                                                "asyncContext": {
+                                                                    "stackTrace": [],
+                                                                    "asyncId": 111,
+                                                                    "asyncType": "PROMISE",
+                                                                    "asyncContext": {
+                                                                        "stackTrace": null,
+                                                                        "asyncId": 0,
+                                                                        "asyncType": "UNKNOWN",
+                                                                        "asyncContext": "[Omitted]",
+                                                                        "codeInfo": null,
+                                                                        "index": null,
+                                                                        "timerInfo": null,
+                                                                        "immediateInfo": null
+                                                                    },
+                                                                    "codeInfo": null,
+                                                                    "index": 108,
+                                                                    "timerInfo": null,
+                                                                    "immediateInfo": null
+                                                                },
+                                                                "codeInfo": null,
+                                                                "index": 111,
+                                                                "timerInfo": null,
+                                                                "immediateInfo": null
+                                                            },
+                                                            "codeInfo": null,
+                                                            "index": 114,
+                                                            "timerInfo": null,
+                                                            "immediateInfo": null
+                                                        },
+                                                        "codeInfo": null,
+                                                        "index": 117,
+                                                        "timerInfo": null,
+                                                        "immediateInfo": null
+                                                    },
+                                                    "codeInfo": null,
+                                                    "index": 142,
+                                                    "timerInfo": null,
+                                                    "immediateInfo": null
+                                                },
+                                                "codeInfo": null,
+                                                "index": 148,
+                                                "timerInfo": null,
+                                                "immediateInfo": null
+                                            },
+                                            "codeInfo": null,
+                                            "index": 209,
+                                            "timerInfo": null,
+                                            "immediateInfo": null
+                                        },
+                                        "codeInfo": null,
+                                        "index": 210,
+                                        "timerInfo": null,
+                                        "immediateInfo": null
+                                    },
+                                    "codeInfo": null,
+                                    "index": 211,
+                                    "timerInfo": null,
+                                    "immediateInfo": null
+                                },
+                                "codeInfo": null,
+                                "index": 221,
+                                "timerInfo": null,
+                                "immediateInfo": null
+                            },
+                            "codeInfo": null,
+                            "index": 231,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": null,
+                        "index": 232,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": "index.js:41:15:71:1",
+                    "index": 236,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "index.js:184:60:184:74",
+                "index": 239,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(index.js:184:60:184:75)"
+                    ],
+                    "scopeCodeInfo": "index.js:184:33:184:75",
+                    "index": 1113,
+                    "timestamp": "939,267,884,597,729",
+                    "accessStage": "finish",
+                    "operationOn": "content"
+                }
+            ]
+        ]
+    },
+    {
+        "resourceInfo": {
+            "type": "file",
+            "possibleDefineCodeScope": "index.js:58:9:58:44",
+            "filePath": "/home/soulike/NodeALDataset/explore/write-f537eb6/test/fixtures/a.txt"
+        },
+        "timeDiff": "34,997,238",
+        "asyncContextToOperations1": [
+            {
+                "stackTrace": [],
+                "asyncId": 250,
+                "asyncType": "TickObject",
+                "asyncContext": {
+                    "stackTrace": [],
+                    "asyncId": 249,
+                    "asyncType": "FSREQCALLBACK",
+                    "asyncContext": {
+                        "stackTrace": [
+                            "(index.js:57:26:62:8)",
+                            "(index.js:56:11:63:6)"
+                        ],
+                        "asyncId": 247,
+                        "asyncType": "FSREQCALLBACK",
+                        "asyncContext": {
+                            "stackTrace": [
+                                "(index.js:41:15:71:2)"
+                            ],
+                            "asyncId": 243,
+                            "asyncType": "PROMISE",
+                            "asyncContext": {
+                                "stackTrace": [
+                                    "(index.js:183:15:185:2)",
+                                    "(index.js:41:15:71:2)"
+                                ],
+                                "asyncId": 241,
+                                "asyncType": "PROMISE",
+                                "asyncContext": {
+                                    "stackTrace": [],
+                                    "asyncId": 239,
+                                    "asyncType": "Immediate",
+                                    "asyncContext": {
+                                        "stackTrace": [],
+                                        "asyncId": 235,
+                                        "asyncType": "FSREQCALLBACK",
+                                        "asyncContext": {
+                                            "stackTrace": [],
+                                            "asyncId": 234,
+                                            "asyncType": "FSREQCALLBACK",
+                                            "asyncContext": {
+                                                "stackTrace": [],
+                                                "asyncId": 224,
+                                                "asyncType": "FSREQCALLBACK",
+                                                "asyncContext": {
+                                                    "stackTrace": [],
+                                                    "asyncId": 214,
+                                                    "asyncType": "FSREQCALLBACK",
+                                                    "asyncContext": {
+                                                        "stackTrace": [],
+                                                        "asyncId": 213,
+                                                        "asyncType": "FSREQCALLBACK",
+                                                        "asyncContext": {
+                                                            "stackTrace": [],
+                                                            "asyncId": 212,
+                                                            "asyncType": "FSREQCALLBACK",
+                                                            "asyncContext": {
+                                                                "stackTrace": [],
+                                                                "asyncId": 151,
+                                                                "asyncType": "PROMISE",
+                                                                "asyncContext": {
+                                                                    "stackTrace": [],
+                                                                    "asyncId": 145,
+                                                                    "asyncType": "PROMISE",
+                                                                    "asyncContext": {
+                                                                        "stackTrace": [],
+                                                                        "asyncId": 120,
+                                                                        "asyncType": "PROMISE",
+                                                                        "asyncContext": {
+                                                                            "stackTrace": [],
+                                                                            "asyncId": 117,
+                                                                            "asyncType": "PROMISE",
+                                                                            "asyncContext": {
+                                                                                "stackTrace": [],
+                                                                                "asyncId": 114,
+                                                                                "asyncType": "PROMISE",
+                                                                                "asyncContext": {
+                                                                                    "stackTrace": [],
+                                                                                    "asyncId": 111,
+                                                                                    "asyncType": "PROMISE",
+                                                                                    "asyncContext": {
+                                                                                        "stackTrace": null,
+                                                                                        "asyncId": 0,
+                                                                                        "asyncType": "UNKNOWN",
+                                                                                        "asyncContext": "[Omitted]",
+                                                                                        "codeInfo": null,
+                                                                                        "index": null,
+                                                                                        "timerInfo": null,
+                                                                                        "immediateInfo": null
+                                                                                    },
+                                                                                    "codeInfo": null,
+                                                                                    "index": 108,
+                                                                                    "timerInfo": null,
+                                                                                    "immediateInfo": null
+                                                                                },
+                                                                                "codeInfo": null,
+                                                                                "index": 111,
+                                                                                "timerInfo": null,
+                                                                                "immediateInfo": null
+                                                                            },
+                                                                            "codeInfo": null,
+                                                                            "index": 114,
+                                                                            "timerInfo": null,
+                                                                            "immediateInfo": null
+                                                                        },
+                                                                        "codeInfo": null,
+                                                                        "index": 117,
+                                                                        "timerInfo": null,
+                                                                        "immediateInfo": null
+                                                                    },
+                                                                    "codeInfo": null,
+                                                                    "index": 142,
+                                                                    "timerInfo": null,
+                                                                    "immediateInfo": null
+                                                                },
+                                                                "codeInfo": null,
+                                                                "index": 148,
+                                                                "timerInfo": null,
+                                                                "immediateInfo": null
+                                                            },
+                                                            "codeInfo": null,
+                                                            "index": 209,
+                                                            "timerInfo": null,
+                                                            "immediateInfo": null
+                                                        },
+                                                        "codeInfo": null,
+                                                        "index": 210,
+                                                        "timerInfo": null,
+                                                        "immediateInfo": null
+                                                    },
+                                                    "codeInfo": null,
+                                                    "index": 211,
+                                                    "timerInfo": null,
+                                                    "immediateInfo": null
+                                                },
+                                                "codeInfo": null,
+                                                "index": 221,
+                                                "timerInfo": null,
+                                                "immediateInfo": null
+                                            },
+                                            "codeInfo": null,
+                                            "index": 231,
+                                            "timerInfo": null,
+                                            "immediateInfo": null
+                                        },
+                                        "codeInfo": null,
+                                        "index": 232,
+                                        "timerInfo": null,
+                                        "immediateInfo": null
+                                    },
+                                    "codeInfo": "index.js:41:15:71:1",
+                                    "index": 236,
+                                    "timerInfo": null,
+                                    "immediateInfo": null
+                                },
+                                "codeInfo": null,
+                                "index": 238,
+                                "timerInfo": null,
+                                "immediateInfo": null
+                            },
+                            "codeInfo": "index.js:56:11:63:5",
+                            "index": 240,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": null,
+                        "index": 244,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": null,
+                    "index": 246,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": null,
+                "index": 247,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "write",
+                    "stackTrace": [],
+                    "scopeCodeInfo": "index.js:58:9:58:44",
+                    "index": 1133,
+                    "timestamp": "939,267,919,692,466",
+                    "accessStage": "finish",
+                    "operationOn": "content"
+                }
+            ]
+        ],
+        "asyncContextToOperations2": [
+            {
+                "stackTrace": [
+                    "(index.js:41:15:71:2)"
+                ],
+                "asyncId": 271,
+                "asyncType": "PROMISE",
+                "asyncContext": {
+                    "stackTrace": [
+                        "(index.js:183:15:185:2)",
+                        "(index.js:41:15:71:2)"
+                    ],
+                    "asyncId": 269,
+                    "asyncType": "PROMISE",
+                    "asyncContext": {
+                        "stackTrace": [],
+                        "asyncId": 267,
+                        "asyncType": "Immediate",
+                        "asyncContext": {
+                            "stackTrace": [],
+                            "asyncId": 263,
+                            "asyncType": "FSREQCALLBACK",
+                            "asyncContext": {
+                                "stackTrace": [],
+                                "asyncId": 262,
+                                "asyncType": "FSREQCALLBACK",
+                                "asyncContext": {
+                                    "stackTrace": [],
+                                    "asyncId": 261,
+                                    "asyncType": "FSREQCALLBACK",
+                                    "asyncContext": {
+                                        "stackTrace": [],
+                                        "asyncId": 260,
+                                        "asyncType": "FSREQCALLBACK",
+                                        "asyncContext": {
+                                            "stackTrace": [],
+                                            "asyncId": 259,
+                                            "asyncType": "FSREQCALLBACK",
+                                            "asyncContext": {
+                                                "stackTrace": [],
+                                                "asyncId": 258,
+                                                "asyncType": "FSREQCALLBACK",
+                                                "asyncContext": {
+                                                    "stackTrace": [
+                                                        "(index.js:41:15:71:2)"
+                                                    ],
+                                                    "asyncId": 244,
+                                                    "asyncType": "PROMISE",
+                                                    "asyncContext": {
+                                                        "stackTrace": [
+                                                            "(index.js:41:15:71:2)"
+                                                        ],
+                                                        "asyncId": 243,
+                                                        "asyncType": "PROMISE",
+                                                        "asyncContext": {
+                                                            "stackTrace": [
+                                                                "(index.js:183:15:185:2)",
+                                                                "(index.js:41:15:71:2)"
+                                                            ],
+                                                            "asyncId": 241,
+                                                            "asyncType": "PROMISE",
+                                                            "asyncContext": {
+                                                                "stackTrace": [],
+                                                                "asyncId": 239,
+                                                                "asyncType": "Immediate",
+                                                                "asyncContext": {
+                                                                    "stackTrace": [],
+                                                                    "asyncId": 235,
+                                                                    "asyncType": "FSREQCALLBACK",
+                                                                    "asyncContext": {
+                                                                        "stackTrace": [],
+                                                                        "asyncId": 234,
+                                                                        "asyncType": "FSREQCALLBACK",
+                                                                        "asyncContext": {
+                                                                            "stackTrace": [],
+                                                                            "asyncId": 224,
+                                                                            "asyncType": "FSREQCALLBACK",
+                                                                            "asyncContext": {
+                                                                                "stackTrace": [],
+                                                                                "asyncId": 214,
+                                                                                "asyncType": "FSREQCALLBACK",
+                                                                                "asyncContext": {
+                                                                                    "stackTrace": [],
+                                                                                    "asyncId": 213,
+                                                                                    "asyncType": "FSREQCALLBACK",
+                                                                                    "asyncContext": {
+                                                                                        "stackTrace": [],
+                                                                                        "asyncId": 212,
+                                                                                        "asyncType": "FSREQCALLBACK",
+                                                                                        "asyncContext": {
+                                                                                            "stackTrace": [],
+                                                                                            "asyncId": 151,
+                                                                                            "asyncType": "PROMISE",
+                                                                                            "asyncContext": "[Omitted]",
+                                                                                            "codeInfo": null,
+                                                                                            "index": 148,
+                                                                                            "timerInfo": null,
+                                                                                            "immediateInfo": null
+                                                                                        },
+                                                                                        "codeInfo": null,
+                                                                                        "index": 209,
+                                                                                        "timerInfo": null,
+                                                                                        "immediateInfo": null
+                                                                                    },
+                                                                                    "codeInfo": null,
+                                                                                    "index": 210,
+                                                                                    "timerInfo": null,
+                                                                                    "immediateInfo": null
+                                                                                },
+                                                                                "codeInfo": null,
+                                                                                "index": 211,
+                                                                                "timerInfo": null,
+                                                                                "immediateInfo": null
+                                                                            },
+                                                                            "codeInfo": null,
+                                                                            "index": 221,
+                                                                            "timerInfo": null,
+                                                                            "immediateInfo": null
+                                                                        },
+                                                                        "codeInfo": null,
+                                                                        "index": 231,
+                                                                        "timerInfo": null,
+                                                                        "immediateInfo": null
+                                                                    },
+                                                                    "codeInfo": null,
+                                                                    "index": 232,
+                                                                    "timerInfo": null,
+                                                                    "immediateInfo": null
+                                                                },
+                                                                "codeInfo": "index.js:41:15:71:1",
+                                                                "index": 236,
+                                                                "timerInfo": null,
+                                                                "immediateInfo": null
+                                                            },
+                                                            "codeInfo": null,
+                                                            "index": 238,
+                                                            "timerInfo": null,
+                                                            "immediateInfo": null
+                                                        },
+                                                        "codeInfo": "index.js:56:11:63:5",
+                                                        "index": 240,
+                                                        "timerInfo": null,
+                                                        "immediateInfo": null
+                                                    },
+                                                    "codeInfo": "index.js:66:18:66:45",
+                                                    "index": 241,
+                                                    "timerInfo": null,
+                                                    "immediateInfo": null
+                                                },
+                                                "codeInfo": null,
+                                                "index": 255,
+                                                "timerInfo": null,
+                                                "immediateInfo": null
+                                            },
+                                            "codeInfo": null,
+                                            "index": 256,
+                                            "timerInfo": null,
+                                            "immediateInfo": null
+                                        },
+                                        "codeInfo": null,
+                                        "index": 257,
+                                        "timerInfo": null,
+                                        "immediateInfo": null
+                                    },
+                                    "codeInfo": null,
+                                    "index": 258,
+                                    "timerInfo": null,
+                                    "immediateInfo": null
+                                },
+                                "codeInfo": null,
+                                "index": 259,
+                                "timerInfo": null,
+                                "immediateInfo": null
+                            },
+                            "codeInfo": null,
+                            "index": 260,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": "index.js:41:15:71:1",
+                        "index": 264,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": null,
+                    "index": 266,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "index.js:56:11:63:5",
+                "index": 268,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(index.js:57:26:62:8)",
+                        "(index.js:56:11:63:6)"
+                    ],
+                    "scopeCodeInfo": "index.js:58:9:58:44",
+                    "index": 1181,
+                    "timestamp": "939,267,954,689,704",
+                    "accessStage": "start",
+                    "operationOn": "content"
+                }
+            ]
+        ]
+    },
+    {
+        "resourceInfo": {
+            "type": "file",
+            "possibleDefineCodeScope": "index.js:58:9:58:44",
+            "filePath": "/home/soulike/NodeALDataset/explore/write-f537eb6/test/fixtures/a.txt"
+        },
+        "timeDiff": "42,561,181",
+        "asyncContextToOperations1": [
+            {
+                "stackTrace": [
+                    "(index.js:41:15:71:2)"
+                ],
+                "asyncId": 243,
+                "asyncType": "PROMISE",
+                "asyncContext": {
+                    "stackTrace": [
+                        "(index.js:183:15:185:2)",
+                        "(index.js:41:15:71:2)"
+                    ],
+                    "asyncId": 241,
+                    "asyncType": "PROMISE",
+                    "asyncContext": {
+                        "stackTrace": [],
+                        "asyncId": 239,
+                        "asyncType": "Immediate",
+                        "asyncContext": {
+                            "stackTrace": [],
+                            "asyncId": 235,
+                            "asyncType": "FSREQCALLBACK",
+                            "asyncContext": {
+                                "stackTrace": [],
+                                "asyncId": 234,
+                                "asyncType": "FSREQCALLBACK",
+                                "asyncContext": {
+                                    "stackTrace": [],
+                                    "asyncId": 224,
+                                    "asyncType": "FSREQCALLBACK",
+                                    "asyncContext": {
+                                        "stackTrace": [],
+                                        "asyncId": 214,
+                                        "asyncType": "FSREQCALLBACK",
+                                        "asyncContext": {
+                                            "stackTrace": [],
+                                            "asyncId": 213,
+                                            "asyncType": "FSREQCALLBACK",
+                                            "asyncContext": {
+                                                "stackTrace": [],
+                                                "asyncId": 212,
+                                                "asyncType": "FSREQCALLBACK",
+                                                "asyncContext": {
+                                                    "stackTrace": [],
+                                                    "asyncId": 151,
+                                                    "asyncType": "PROMISE",
+                                                    "asyncContext": {
+                                                        "stackTrace": [],
+                                                        "asyncId": 145,
+                                                        "asyncType": "PROMISE",
+                                                        "asyncContext": {
+                                                            "stackTrace": [],
+                                                            "asyncId": 120,
+                                                            "asyncType": "PROMISE",
+                                                            "asyncContext": {
+                                                                "stackTrace": [],
+                                                                "asyncId": 117,
+                                                                "asyncType": "PROMISE",
+                                                                "asyncContext": {
+                                                                    "stackTrace": [],
+                                                                    "asyncId": 114,
+                                                                    "asyncType": "PROMISE",
+                                                                    "asyncContext": {
+                                                                        "stackTrace": [],
+                                                                        "asyncId": 111,
+                                                                        "asyncType": "PROMISE",
+                                                                        "asyncContext": {
+                                                                            "stackTrace": null,
+                                                                            "asyncId": 0,
+                                                                            "asyncType": "UNKNOWN",
+                                                                            "asyncContext": "[Omitted]",
+                                                                            "codeInfo": null,
+                                                                            "index": null,
+                                                                            "timerInfo": null,
+                                                                            "immediateInfo": null
+                                                                        },
+                                                                        "codeInfo": null,
+                                                                        "index": 108,
+                                                                        "timerInfo": null,
+                                                                        "immediateInfo": null
+                                                                    },
+                                                                    "codeInfo": null,
+                                                                    "index": 111,
+                                                                    "timerInfo": null,
+                                                                    "immediateInfo": null
+                                                                },
+                                                                "codeInfo": null,
+                                                                "index": 114,
+                                                                "timerInfo": null,
+                                                                "immediateInfo": null
+                                                            },
+                                                            "codeInfo": null,
+                                                            "index": 117,
+                                                            "timerInfo": null,
+                                                            "immediateInfo": null
+                                                        },
+                                                        "codeInfo": null,
+                                                        "index": 142,
+                                                        "timerInfo": null,
+                                                        "immediateInfo": null
+                                                    },
+                                                    "codeInfo": null,
+                                                    "index": 148,
+                                                    "timerInfo": null,
+                                                    "immediateInfo": null
+                                                },
+                                                "codeInfo": null,
+                                                "index": 209,
+                                                "timerInfo": null,
+                                                "immediateInfo": null
+                                            },
+                                            "codeInfo": null,
+                                            "index": 210,
+                                            "timerInfo": null,
+                                            "immediateInfo": null
+                                        },
+                                        "codeInfo": null,
+                                        "index": 211,
+                                        "timerInfo": null,
+                                        "immediateInfo": null
+                                    },
+                                    "codeInfo": null,
+                                    "index": 221,
+                                    "timerInfo": null,
+                                    "immediateInfo": null
+                                },
+                                "codeInfo": null,
+                                "index": 231,
+                                "timerInfo": null,
+                                "immediateInfo": null
+                            },
+                            "codeInfo": null,
+                            "index": 232,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": "index.js:41:15:71:1",
+                        "index": 236,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": null,
+                    "index": 238,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "index.js:56:11:63:5",
+                "index": 240,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(index.js:57:26:62:8)",
+                        "(index.js:56:11:63:6)"
+                    ],
+                    "scopeCodeInfo": "index.js:58:9:58:44",
+                    "index": 1121,
+                    "timestamp": "939,267,912,128,523",
+                    "accessStage": "start",
+                    "operationOn": "content"
+                }
+            ]
+        ],
+        "asyncContextToOperations2": [
+            {
+                "stackTrace": [
+                    "(index.js:41:15:71:2)"
+                ],
+                "asyncId": 271,
+                "asyncType": "PROMISE",
+                "asyncContext": {
+                    "stackTrace": [
+                        "(index.js:183:15:185:2)",
+                        "(index.js:41:15:71:2)"
+                    ],
+                    "asyncId": 269,
+                    "asyncType": "PROMISE",
+                    "asyncContext": {
+                        "stackTrace": [],
+                        "asyncId": 267,
+                        "asyncType": "Immediate",
+                        "asyncContext": {
+                            "stackTrace": [],
+                            "asyncId": 263,
+                            "asyncType": "FSREQCALLBACK",
+                            "asyncContext": {
+                                "stackTrace": [],
+                                "asyncId": 262,
+                                "asyncType": "FSREQCALLBACK",
+                                "asyncContext": {
+                                    "stackTrace": [],
+                                    "asyncId": 261,
+                                    "asyncType": "FSREQCALLBACK",
+                                    "asyncContext": {
+                                        "stackTrace": [],
+                                        "asyncId": 260,
+                                        "asyncType": "FSREQCALLBACK",
+                                        "asyncContext": {
+                                            "stackTrace": [],
+                                            "asyncId": 259,
+                                            "asyncType": "FSREQCALLBACK",
+                                            "asyncContext": {
+                                                "stackTrace": [],
+                                                "asyncId": 258,
+                                                "asyncType": "FSREQCALLBACK",
+                                                "asyncContext": {
+                                                    "stackTrace": [
+                                                        "(index.js:41:15:71:2)"
+                                                    ],
+                                                    "asyncId": 244,
+                                                    "asyncType": "PROMISE",
+                                                    "asyncContext": {
+                                                        "stackTrace": [
+                                                            "(index.js:41:15:71:2)"
+                                                        ],
+                                                        "asyncId": 243,
+                                                        "asyncType": "PROMISE",
+                                                        "asyncContext": {
+                                                            "stackTrace": [
+                                                                "(index.js:183:15:185:2)",
+                                                                "(index.js:41:15:71:2)"
+                                                            ],
+                                                            "asyncId": 241,
+                                                            "asyncType": "PROMISE",
+                                                            "asyncContext": {
+                                                                "stackTrace": [],
+                                                                "asyncId": 239,
+                                                                "asyncType": "Immediate",
+                                                                "asyncContext": {
+                                                                    "stackTrace": [],
+                                                                    "asyncId": 235,
+                                                                    "asyncType": "FSREQCALLBACK",
+                                                                    "asyncContext": {
+                                                                        "stackTrace": [],
+                                                                        "asyncId": 234,
+                                                                        "asyncType": "FSREQCALLBACK",
+                                                                        "asyncContext": {
+                                                                            "stackTrace": [],
+                                                                            "asyncId": 224,
+                                                                            "asyncType": "FSREQCALLBACK",
+                                                                            "asyncContext": {
+                                                                                "stackTrace": [],
+                                                                                "asyncId": 214,
+                                                                                "asyncType": "FSREQCALLBACK",
+                                                                                "asyncContext": {
+                                                                                    "stackTrace": [],
+                                                                                    "asyncId": 213,
+                                                                                    "asyncType": "FSREQCALLBACK",
+                                                                                    "asyncContext": {
+                                                                                        "stackTrace": [],
+                                                                                        "asyncId": 212,
+                                                                                        "asyncType": "FSREQCALLBACK",
+                                                                                        "asyncContext": {
+                                                                                            "stackTrace": [],
+                                                                                            "asyncId": 151,
+                                                                                            "asyncType": "PROMISE",
+                                                                                            "asyncContext": "[Omitted]",
+                                                                                            "codeInfo": null,
+                                                                                            "index": 148,
+                                                                                            "timerInfo": null,
+                                                                                            "immediateInfo": null
+                                                                                        },
+                                                                                        "codeInfo": null,
+                                                                                        "index": 209,
+                                                                                        "timerInfo": null,
+                                                                                        "immediateInfo": null
+                                                                                    },
+                                                                                    "codeInfo": null,
+                                                                                    "index": 210,
+                                                                                    "timerInfo": null,
+                                                                                    "immediateInfo": null
+                                                                                },
+                                                                                "codeInfo": null,
+                                                                                "index": 211,
+                                                                                "timerInfo": null,
+                                                                                "immediateInfo": null
+                                                                            },
+                                                                            "codeInfo": null,
+                                                                            "index": 221,
+                                                                            "timerInfo": null,
+                                                                            "immediateInfo": null
+                                                                        },
+                                                                        "codeInfo": null,
+                                                                        "index": 231,
+                                                                        "timerInfo": null,
+                                                                        "immediateInfo": null
+                                                                    },
+                                                                    "codeInfo": null,
+                                                                    "index": 232,
+                                                                    "timerInfo": null,
+                                                                    "immediateInfo": null
+                                                                },
+                                                                "codeInfo": "index.js:41:15:71:1",
+                                                                "index": 236,
+                                                                "timerInfo": null,
+                                                                "immediateInfo": null
+                                                            },
+                                                            "codeInfo": null,
+                                                            "index": 238,
+                                                            "timerInfo": null,
+                                                            "immediateInfo": null
+                                                        },
+                                                        "codeInfo": "index.js:56:11:63:5",
+                                                        "index": 240,
+                                                        "timerInfo": null,
+                                                        "immediateInfo": null
+                                                    },
+                                                    "codeInfo": "index.js:66:18:66:45",
+                                                    "index": 241,
+                                                    "timerInfo": null,
+                                                    "immediateInfo": null
+                                                },
+                                                "codeInfo": null,
+                                                "index": 255,
+                                                "timerInfo": null,
+                                                "immediateInfo": null
+                                            },
+                                            "codeInfo": null,
+                                            "index": 256,
+                                            "timerInfo": null,
+                                            "immediateInfo": null
+                                        },
+                                        "codeInfo": null,
+                                        "index": 257,
+                                        "timerInfo": null,
+                                        "immediateInfo": null
+                                    },
+                                    "codeInfo": null,
+                                    "index": 258,
+                                    "timerInfo": null,
+                                    "immediateInfo": null
+                                },
+                                "codeInfo": null,
+                                "index": 259,
+                                "timerInfo": null,
+                                "immediateInfo": null
+                            },
+                            "codeInfo": null,
+                            "index": 260,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": "index.js:41:15:71:1",
+                        "index": 264,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": null,
+                    "index": 266,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "index.js:56:11:63:5",
+                "index": 268,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(index.js:57:26:62:8)",
+                        "(index.js:56:11:63:6)"
+                    ],
+                    "scopeCodeInfo": "index.js:58:9:58:44",
+                    "index": 1181,
+                    "timestamp": "939,267,954,689,704",
+                    "accessStage": "start",
+                    "operationOn": "content"
+                }
+            ]
+        ]
+    }
+]

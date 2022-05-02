@@ -1,0 +1,11 @@
+src/
+spec/
+.gitignore
+.npmignore
+.travis.yml
+*.log
+*.swp
+*.coffee
+*.tmp
+node_modules
+TODO

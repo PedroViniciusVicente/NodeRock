@@ -1,0 +1,1045 @@
+soulike@soulike-virtual:~/nrace$ ./bin/noderacer instrument --outputDir /tmp/nraceOutput ~/NodeALDataset/explore/ncp-6820b0f/
+[2021-11-25T22:33:52.740] [INFO] default - Running command: instrument --outputDir /tmp/nraceOutput /home/soulike/NodeALDataset/explore/ncp-6820b0f/
+[2021-11-25T22:33:52.745] [INFO] default - instrumenting application: /home/soulike/NodeALDataset/explore/ncp-6820b0f/
+[2021-11-25T22:33:52.745] [INFO] default - run command: node /home/soulike/nrace/driver/instApp.js --justGenerate --verbose --outputDir /tmp/nraceOutput /home/soulike/NodeALDataset/explore/ncp-6820b0f/ , desc: instrumentation
+instrumenting /tmp/nraceOutput/ncp-6820b0f/lib/ncp_orig_.js
+[2021-11-25T22:33:53.473] [INFO] default - instrumentation complete
+
+soulike@soulike-virtual:/tmp/nraceOutput/ncp-6820b0f$ node node_modules/.bin/_mocha 
+
+  ․․․․․․․․․․․․․․․․․․․․․․
+
+  22 passing (624ms)
+
+[2021-11-25T22:34:28.296] [INFO] default - process exited
+[2021-11-25T22:34:28.297] [INFO] default - Done collecting trace.
+
+[32m[2021-11-25T22:35:49.212] [INFO] default - [39mRunning command: parse -g /tmp/nraceOutput/ncp-6820b0f/
+[32m[2021-11-25T22:35:49.239] [INFO] default - [39mBegin parsing trace /tmp/nraceOutput/ncp-6820b0f/ascii-trace.log
+[32m[2021-11-25T22:35:49.547] [INFO] default - [39mEnd parsing.
+idle (111): [
+  '7',   '10',  '83',  '84',  '87',  '88',  '91',  '92',
+  '95',  '96',  '99',  '100', '103', '104', '140', '141',
+  '142', '143', '144', '145', '146', '147', '150', '151',
+  '152', '153', '162', '163', '166', '167', '182', '183',
+  '185', '186', '277', '344', '345', '348', '349', '352',
+  '353', '356', '357', '360', '361', '389', '390', '391',
+  '392', '393', '394', '395', '396', '398', '399', '404',
+  '405', '414', '415', '495', '534', '535', '563', '564',
+  '567', '568', '571', '572', '575', '576', '579', '580',
+  '614', '615', '620', '621', '622', '624', '625', '626',
+  '627', '628', '629', '630', '637', '638', '643', '644',
+  '669', '670', '671', '672', '678', '716', '721', '726',
+  '731', '736', '741', '749',
+  ... 11 more items
+]
+_index: [
+  '1',   '8',   '9',   '11',  '12',  '13',  '14',  '15',  '16',
+  '17',  '18',  '19',  '20',  '21',  '22',  '23',  '24',  '25',
+  '26',  '27',  '28',  '29',  '30',  '31',  '32',  '33',  '34',
+  '35',  '36',  '37',  '38',  '39',  '40',  '41',  '42',  '43',
+  '44',  '45',  '46',  '47',  '48',  '49',  '50',  '51',  '52',
+  '53',  '54',  '55',  '56',  '57',  '58',  '59',  '60',  '61',
+  '62',  '63',  '64',  '65',  '66',  '67',  '68',  '69',  '70',
+  '71',  '72',  '73',  '74',  '75',  '76',  '77',  '78',  '79',
+  '80',  '81',  '82',  '85',  '86',  '89',  '90',  '93',  '94',
+  '97',  '98',  '101', '102', '105', '106', '107', '108', '109',
+  '110', '111', '112', '113', '114', '115', '116', '117', '118',
+  '119',
+  ... 595 more items
+]
+length: 695
+init: 695
+1
+9
+8
+11
+12
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+*A*1201
+40
+*A*1267
+41
+*A*1306
+42
+*A*1332
+43
+*A*1391
+*A*1438
+*A*1485
+*A*1532
+*A*1579
+*A*1626
+*A*1673
+44
+*A*1767
+45
+*A*1838
+46
+*A*1909
+47
+*A*1980
+48
+*A*2051
+49
+*A*2122
+50
+*A*2187
+51
+58
+59
+52
+62
+63
+53
+66
+67
+54
+70
+71
+55
+55
+74
+75
+56
+78
+79
+57
+*A*2695
+60
+61
+*A*2719
+*A*2720
+85
+64
+65
+*A*2744
+*A*2745
+89
+68
+69
+*A*2769
+*A*2770
+93
+72
+73
+*A*2794
+*A*2795
+97
+76
+77
+*A*2819
+*A*2820
+101
+80
+81
+*A*2844
+*A*2845
+105
+82
+*A*2870
+86
+*A*2879
+109
+90
+*A*2887
+112
+94
+114
+*A*2898
+115
+98
+118
+*A*2934
+119
+102
+122
+*A*2970
+123
+106
+126
+*A*3006
+127
+107
+*A*3087
+*A*3134
+108
+110
+132
+*A*3172
+133
+111
+113
+136
+*A*3210
+137
+116
+117
+120
+121
+124
+125
+128
+129
+130
+*A*3343
+131
+*A*3414
+134
+135
+138
+139
+148
+154
+155
+149
+158
+159
+156
+157
+*A*3614
+*A*3615
+164
+160
+161
+*A*3639
+*A*3640
+168
+165
+*A*3651
+171
+169
+173
+*A*3662
+174
+170
+172
+177
+*A*3700
+178
+175
+176
+180
+179
+181
+184
+187
+188
+189
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+278
+279
+280
+281
+282
+283
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+*A*4269
+307
+*A*4334
+308
+*A*4372
+309
+*A*4397
+310
+*A*4509
+*A*4565
+*A*4621
+*A*4677
+*A*4733
+*A*4789
+311
+*A*4882
+312
+*A*4953
+313
+*A*5024
+314
+*A*5095
+315
+*A*5166
+316
+*A*5231
+317
+323
+324
+318
+327
+328
+319
+331
+332
+320
+335
+336
+321
+339
+340
+322
+*A*5659
+325
+326
+*A*5683
+*A*5684
+346
+329
+330
+*A*5708
+*A*5709
+350
+333
+334
+*A*5733
+*A*5734
+354
+337
+338
+*A*5758
+*A*5759
+358
+341
+342
+*A*5783
+*A*5784
+362
+343
+*A*5809
+347
+*A*5818
+366
+351
+368
+*A*5829
+369
+355
+372
+*A*5865
+373
+359
+376
+*A*5901
+377
+363
+380
+*A*5937
+381
+364
+*A*6073
+365
+367
+385
+*A*6111
+386
+370
+371
+374
+375
+378
+379
+382
+383
+384
+*A*6244
+387
+388
+397
+400
+401
+402
+403
+*A*6356
+*A*6357
+406
+407
+408
+*A*6371
+409
+411
+410
+412
+413
+416
+417
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+*A*6835
+507
+*A*6900
+508
+*A*6931
+509
+*A*6990
+*A*7037
+*A*7084
+*A*7131
+*A*7178
+*A*7225
+*A*7272
+510
+*A*7365
+511
+*A*7436
+512
+*A*7507
+513
+*A*7578
+514
+*A*7649
+515
+*A*7720
+516
+*A*7785
+517
+524
+525
+518
+*A*7900
+519
+*A*7958
+520
+*A*8016
+521
+*A*8074
+522
+*A*8132
+523
+*A*8185
+526
+527
+*A*8209
+*A*8210
+536
+528
+538
+539
+529
+542
+543
+530
+546
+547
+531
+550
+551
+532
+554
+555
+533
+*A*8619
+*A*8666
+537
+*A*8699
+561
+540
+541
+*A*8720
+*A*8721
+565
+544
+545
+*A*8745
+*A*8746
+569
+548
+549
+*A*8770
+*A*8771
+573
+552
+553
+*A*8795
+*A*8796
+577
+556
+557
+*A*8820
+*A*8821
+581
+558
+*A*8892
+559
+*A*8963
+560
+562
+585
+*A*8979
+586
+566
+*A*9012
+590
+570
+592
+*A*9023
+593
+574
+596
+*A*9059
+597
+*A*9230
+578
+601
+*A*9249
+602
+582
+605
+*A*9285
+606
+583
+609
+610
+584
+*A*9421
+587
+588
+589
+591
+616
+*A*9469
+617
+594
+595
+598
+599
+*A*9571
+600
+603
+604
+607
+608
+611
+612
+*A*9620
+*A*9621
+631
+613
+633
+634
+618
+619
+623
+*A*9732
+632
+*A*9743
+641
+635
+636
+*A*9764
+*A*9765
+645
+639
+*A*9824
+*A*9871
+*A*9918
+*A*9965
+*A*10012
+*A*10059
+*A*10106
+640
+642
+654
+*A*10144
+655
+646
+658
+*A*10180
+659
+647
+*A*10273
+648
+*A*10344
+649
+*A*10415
+650
+*A*10486
+651
+*A*10557
+652
+*A*10628
+653
+*A*10693
+656
+657
+660
+661
+662
+663
+664
+665
+666
+667
+668
+*A*10990
+673
+*A*11049
+*A*11096
+674
+*A*11189
+675
+*A*11260
+676
+677
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+*A*11531
+690
+*A*11596
+691
+*A*11627
+692
+*A*11686
+*A*11733
+*A*11780
+*A*11827
+*A*11874
+*A*11921
+*A*11968
+693
+*A*12061
+694
+*A*12132
+695
+*A*12203
+696
+*A*12274
+697
+*A*12345
+698
+*A*12416
+699
+*A*12481
+700
+*A*12517
+701
+*A*12575
+702
+*A*12633
+703
+*A*12691
+704
+*A*12749
+705
+*A*12807
+706
+*A*12860
+707
+*A*12923
+*A*12924
+714
+715
+708
+*A*12999
+*A*13000
+719
+720
+709
+*A*13075
+*A*13076
+724
+725
+710
+*A*13151
+*A*13152
+729
+730
+711
+*A*13227
+*A*13228
+734
+735
+712
+*A*13303
+*A*13304
+739
+740
+713
+*A*13375
+*A*13422
+717
+746
+747
+718
+722
+750
+751
+723
+727
+754
+755
+728
+732
+758
+759
+733
+737
+762
+763
+738
+742
+766
+767
+743
+744
+*A*13599
+745
+*A*13670
+748
+*A*13681
+773
+752
+*A*13689
+776
+756
+778
+*A*13700
+779
+760
+782
+*A*13737
+783
+764
+788
+*A*13785
+789
+768
+792
+*A*13822
+793
+770
+*A*13881
+771
+*A*13939
+786
+772
+774
+799
+*A*13980
+800
+775
+777
+803
+*A*14019
+804
+780
+781
+784
+787
+790
+simpleRuleTime: 0.042, FIFORuleTime: 0, nextTickRuleTime: 0
+/tmp/nraceOutput/ncp-6820b0f/ascii-trace.newhb-full.json
+/tmp/nraceOutput/ncp-6820b0f/ascii-trace.newhb.json
+[32m[2021-11-25T22:35:59.930] [INFO] default - [39mLength of events: 695
+[32m[2021-11-25T22:35:59.931] [INFO] default - [39mParse time: 10.692
+
+soulike@soulike-virtual:~/nrace$ ./bin/noderacer dfanalyze /tmp/nraceOutput/ncp-6820b0f/[2021-11-25T22:36:19.111] [INFO] default - Running command: dfanalyze /tmp/nraceOutput/ncp-6820b0f/
+[2021-11-25T22:36:19.114] [INFO] default - analyzing application: /tmp/nraceOutput/ncp-6820b0f/
+init: 679
+[2021-11-25T22:36:19.159] [INFO] default - Preparing tuples for detecting bugs...
+hb_check: 340628
+call: 39557, iteration: 26624
+chc: 39646
+
+*** BUG REPORTS ***
+Count of undefined bugs found: 10
+[1]lib/ncp_orig_.js#222#20#228#6 vs. lib/ncp_orig_.js#138#21#143#6:FS_RACE_$O
+{entryType:"O", event:"51", lineno:2228, cbLoc:"lib/ncp_orig_.js#222#20#228#6"}
+{entryType:"O", event:"707", lineno:12892, cbLoc:"lib/ncp_orig_.js#138#21#143#6"}
+
+[2]lib/ncp_orig_.js#59#18#81#6 vs. lib/ncp_orig_.js#222#20#228#6:FS_RACE_DS
+{entryType:"S", event:"44", iid:"4897", location:"lib/ncp_orig_.js#221#3#229#4", lineno:1767, cbLoc:"lib/ncp_orig_.js#59#18#81#6"}
+{entryType:"D", event:"700", iid:"2985", location:"lib/ncp_orig_.js#137#3#144#4", lineno:12517, cbLoc:"lib/ncp_orig_.js#222#20#228#6"}
+
+[3]lib/ncp_orig_.js#124#9#124#19 vs. undefined:FS_RACE_$W
+{entryType:"W", event:"61", iid:"2569", location:"lib/ncp_orig_.js#123#30#125#8", lineno:2720, cbLoc:"lib/ncp_orig_.js#124#9#124#19"}
+{entryType:"W", event:"86", lineno:2879}
+
+[4]lib/ncp_orig_.js#124#9#124#19 vs. lib/ncp_orig_.js#124#9#124#19:FS_RACE_$W
+{entryType:"W", event:"61", iid:"2569", location:"lib/ncp_orig_.js#123#30#125#8", lineno:2720, cbLoc:"lib/ncp_orig_.js#124#9#124#19"}
+{entryType:"W", event:"527", iid:"2569", location:"lib/ncp_orig_.js#123#30#125#8", lineno:8210, cbLoc:"lib/ncp_orig_.js#124#9#124#19"}
+
+[5]lib/ncp_orig_.js#124#9#124#19 vs. lib/ncp_orig_.js#222#20#228#6:FS_RACE_DW
+{entryType:"W", event:"61", iid:"2569", location:"lib/ncp_orig_.js#123#30#125#8", lineno:2720, cbLoc:"lib/ncp_orig_.js#124#9#124#19"}
+{entryType:"D", event:"700", iid:"2985", location:"lib/ncp_orig_.js#137#3#144#4", lineno:12517, cbLoc:"lib/ncp_orig_.js#222#20#228#6"}
+
+[6]lib/ncp_orig_.js#124#9#124#19 vs. lib/ncp_orig_.js#138#21#143#6:FS_RACE_$W
+{entryType:"W", event:"61", iid:"2569", location:"lib/ncp_orig_.js#123#30#125#8", lineno:2720, cbLoc:"lib/ncp_orig_.js#124#9#124#19"}
+{entryType:"W", event:"707", iid:"2793", location:"lib/ncp_orig_.js#113#3#135#4", lineno:12924, cbLoc:"lib/ncp_orig_.js#138#21#143#6"}
+
+[7]undefined vs. undefined:FS_RACE_$W
+{entryType:"W", event:"86", lineno:2879}
+{entryType:"W", event:"537", lineno:8699}
+
+[8]undefined vs. lib/ncp_orig_.js#222#20#228#6:FS_RACE_DW
+{entryType:"W", event:"86", lineno:2879}
+{entryType:"D", event:"700", iid:"2985", location:"lib/ncp_orig_.js#137#3#144#4", lineno:12517, cbLoc:"lib/ncp_orig_.js#222#20#228#6"}
+
+[9]undefined vs. lib/ncp_orig_.js#138#21#143#6:FS_RACE_$W
+{entryType:"W", event:"86", lineno:2879}
+{entryType:"W", event:"707", iid:"2793", location:"lib/ncp_orig_.js#113#3#135#4", lineno:12924, cbLoc:"lib/ncp_orig_.js#138#21#143#6"}
+
+[10]lib/ncp_orig_.js#138#21#143#6 vs. lib/ncp_orig_.js#138#21#143#6:FS_RACE_$O
+{entryType:"O", event:"528", lineno:8242, cbLoc:"lib/ncp_orig_.js#138#21#143#6"}
+{entryType:"O", event:"708", lineno:12968, cbLoc:"lib/ncp_orig_.js#138#21#143#6"
+
+
+*** BENIGN BUG REPORTS ***
+[1]lib/ncp_orig_.js#128#13#128#21 vs. lib/ncp_orig_.js#166#21#174#6:VAR_WR
+{name:"started", entryType:"READ", event:"115", iid:"5273", location:"lib/ncp_orig_.js#253#10#253#17", lineno:2920, val:"28", valIsObject:"false", cbLoc:"lib/ncp_orig_.js#128#13#128#21"}
+{name:"started", entryType:"WRITE", event:"107", iid:"729", location:"lib/ncp_orig_.js#", lineno:3062, val:"38", valIsObject:"false", cbLoc:"lib/ncp_orig_.js#166#21#174#6"}
+
+[2]lib/ncp_orig_.js#128#13#128#21 vs. lib/ncp_orig_.js#7#1#259#2:VAR_WR
+{name:"started", entryType:"READ", event:"115", iid:"5273", location:"lib/ncp_orig_.js#253#10#253#17", lineno:2920, val:"28", valIsObject:"false", cbLoc:"lib/ncp_orig_.js#128#13#128#21"}
+{name:"started", entryType:"WRITE", event:"306", iid:"729", location:"lib/ncp_orig_.js#", lineno:4234, val:"6", valIsObject:"false", cbLoc:"lib/ncp_orig_.js#7#1#259#2"}
+
+[3]lib/ncp_orig_.js#128#13#128#21 vs. lib/ncp_orig_.js#128#13#128#21:VAR_WR
+{name:"started", entryType:"READ", event:"115", iid:"5273", location:"lib/ncp_orig_.js#253#10#253#17", lineno:2920, val:"28", valIsObject:"false", cbLoc:"lib/ncp_orig_.js#128#13#128#21"}
+{name:"started", entryType:"WRITE", event:"597", iid:"729", location:"lib/ncp_orig_.js#", lineno:9205, val:"6", valIsObject:"false", cbLoc:"lib/ncp_orig_.js#128#13#128#21"}
+
+[4]lib/ncp_orig_.js#222#20#228#6 vs. lib/ncp_orig_.js#166#21#174#6:VAR_WR
+{name:"started", entryType:"READ", event:"518", iid:"5273", location:"lib/ncp_orig_.js#253#10#253#17", lineno:7921, val:"28", valIsObject:"false", cbLoc:"lib/ncp_orig_.js#222#20#228#6"}
+{name:"started", entryType:"WRITE", event:"533", iid:"729", location:"lib/ncp_orig_.js#", lineno:8594, val:"38", valIsObject:"false", cbLoc:"lib/ncp_orig_.js#166#21#174#6"}
+
+[5]lib/ncp_orig_.js#222#20#228#6 vs. lib/ncp_orig_.js#128#13#128#21:VAR_WR
+{name:"started", entryType:"READ", event:"518", iid:"5273", location:"lib/ncp_orig_.js#253#10#253#17", lineno:7921, val:"28", valIsObject:"false", cbLoc:"lib/ncp_orig_.js#222#20#228#6"}
+{name:"started", entryType:"WRITE", event:"597", iid:"729", location:"lib/ncp_orig_.js#", lineno:9205, val:"6", valIsObject:"false", cbLoc:"lib/ncp_orig_.js#128#13#128#21"}
+
+[6]lib/ncp_orig_.js#222#20#228#6 vs. lib/ncp_orig_.js#7#1#259#2:VAR_WR
+{name:"started", entryType:"READ", event:"518", iid:"5273", location:"lib/ncp_orig_.js#253#10#253#17", lineno:7921, val:"28", valIsObject:"false", cbLoc:"lib/ncp_orig_.js#222#20#228#6"}
+{name:"started", entryType:"WRITE", event:"688", iid:"729", location:"lib/ncp_orig_.js#", lineno:11506, val:"6", valIsObject:"false", cbLoc:"lib/ncp_orig_.js#7#1#259#2"}
+
+[7]lib/ncp_orig_.js#166#21#174#6 vs. lib/ncp_orig_.js#166#21#174#6:VAR_WR
+{name:"started", entryType:"READ", event:"533", iid:"721", location:"lib/ncp_orig_.js#35#5#35#12", lineno:8592, val:"28", valIsObject:"false", cbLoc:"lib/ncp_orig_.js#166#21#174#6"}
+{name:"started", entryType:"WRITE", event:"639", iid:"729", location:"lib/ncp_orig_.js#", lineno:9799, val:"10", valIsObject:"false", cbLoc:"lib/ncp_orig_.js#166#21#174#6"}
+
+[8]lib/ncp_orig_.js#166#21#174#6 vs. lib/ncp_orig_.js#7#1#259#2:VAR_WR
+{name:"started", entryType:"READ", event:"533", iid:"721", location:"lib/ncp_orig_.js#35#5#35#12", lineno:8592, val:"28", valIsObject:"false", cbLoc:"lib/ncp_orig_.js#166#21#174#6"}
+{name:"started", entryType:"WRITE", event:"688", iid:"729", location:"lib/ncp_orig_.js#", lineno:11506, val:"6", valIsObject:"false", cbLoc:"lib/ncp_orig_.js#7#1#259#2"}
+
+[9]lib/ncp_orig_.js#222#20#228#6 vs. lib/ncp_orig_.js#222#20#228#6:VAR_WR
+{name:"finished", entryType:"READ", event:"518", iid:"5249", location:"lib/ncp_orig_.js#252#5#252#13", lineno:7917, val:"6", valIsObject:"false", cbLoc:"lib/ncp_orig_.js#222#20#228#6"}
+{name:"finished", entryType:"WRITE", event:"519", iid:"5257", location:"lib/ncp_orig_.js#", lineno:7977, val:"13", valIsObject:"false", cbLoc:"lib/ncp_orig_.js#222#20#228#6"}
+
+
+[2021-11-25T22:36:25.068] [INFO] default - Detect time: 5.954

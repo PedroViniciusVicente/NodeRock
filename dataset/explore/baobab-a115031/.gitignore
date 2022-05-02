@@ -1,0 +1,8 @@
+node_modules
+.DS_Store
+TODO.md
+benchmark.js
+*.log
+dist
+.idea/
+*.iml

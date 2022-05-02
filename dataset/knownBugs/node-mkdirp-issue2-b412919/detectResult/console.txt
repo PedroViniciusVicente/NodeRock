@@ -1,0 +1,57 @@
+soulike@soulike-virtual:~/NodeAL$ VERBOSE=1 yarn nodeprof ~/NodeALDataset/knownBugs/node-mkdirp-issue2-b412919/ testcase.js 
+yarn run v1.22.17
+$ yarn build
+$ rm -rf dist/ && tsc --noEmit
+$ node esbuild.js
+
+  dist/index.js                     196.5kb
+  dist/bin/nodeprof-no-analysis.js   72.6kb
+  dist/bin/nodeprof-test.js           1.6kb
+  dist/bin/nodeprof-raw.js            1.2kb
+  dist/bin/nodeprof.js                1.2kb
+  dist/bin/node.js                    817b 
+
+$ node ./dist/bin/nodeprof.js /home/soulike/NodeALDataset/knownBugs/node-mkdirp-issue2-b412919/ testcase.js
+[Error: EEXIST: file already exists, mkdir '/tmp/hello'] {
+  errno: -17,
+  code: 'EEXIST',
+  syscall: 'mkdir',
+  path: '/tmp/hello'
+}
+AsyncContext: 0.011s
+LastExpression: 0s
+Iterator: 0.002s
+Array: 0.017s
+Set: 0.001s
+Map: 0s
+Object: 0.076s
+FileHandle: 0.002s
+FsAsync: 0.092s
+FsSync: 0.001s
+FsPromises: 0.002s
+ArrayBuffer: 0s
+Buffer: 0.004s
+DataView: 0s
+TypedArray: 0.002s
+Primitive: 0.159s
+HttpAgent: 0s
+HttpIncomingMessage: 0.001s
+HttpOutgoingMessage: 0.002s
+Http: 0s
+Net: 0.026s
+Stream: 0.002s
+EventEmitter: 0.001s
+Crypto: 0.017s
+Zlib: 0.004s
+StringDecoder: 0.003s
+JSON: 0s
+RaceDetector: 0.233s
+analysis load: 1.61s
+entry: 1.438s
+eventCount: 8
+raceCount: 1
+filteredRaceCount: 2
+ResourceCount: 90
+ResourceOperationCount: 181
+analysis: 6.336s
+Done in 8.89s.

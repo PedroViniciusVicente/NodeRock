@@ -1,0 +1,1514 @@
+[
+    {
+        "resourceInfo": {
+            "type": "primitive",
+            "possibleDefineCodeScope": "testcase.js:1:1:68:9",
+            "iid": 1,
+            "name": "timeout",
+            "typeWhenDefined": "var",
+            "scope": {
+                "id": 1637755250176,
+                "type": "function",
+                "name": "",
+                "parent": {
+                    "id": 1637755248131,
+                    "type": "function",
+                    "name": "global",
+                    "parent": null,
+                    "sourceCodeInfo": null
+                },
+                "sourceCodeInfo": "testcase.js:1:1:68:9"
+            }
+        },
+        "timeDiff": "36,496,958",
+        "asyncContextToOperations1": [
+            {
+                "stackTrace": [
+                    "(testcase.js:1:1:68:10)"
+                ],
+                "asyncId": 12,
+                "asyncType": "Timeout",
+                "asyncContext": {
+                    "stackTrace": null,
+                    "asyncId": 1,
+                    "asyncType": "GLOBAL",
+                    "asyncContext": "[Omitted]",
+                    "codeInfo": null,
+                    "index": null,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "testcase.js:50:30:61:1",
+                "index": 938,
+                "timerInfo": {
+                    "callback": "[Function anonymous]",
+                    "delay": 1,
+                    "type": "interval",
+                    "index": 907
+                },
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(testcase.js:50:30:61:2)"
+                    ],
+                    "scopeCodeInfo": "testcase.js:56:9:56:15",
+                    "index": 1538,
+                    "timestamp": "514,446,630,435,961",
+                    "valueBefore": false,
+                    "value": false,
+                    "isInitialization": false
+                }
+            ]
+        ],
+        "asyncContextToOperations2": [
+            {
+                "stackTrace": [
+                    "(lib/_http_agent.js:80:19:127:4)",
+                    "(lib/_http_agent.js:229:3:231:4)"
+                ],
+                "asyncId": 35,
+                "asyncType": "Timeout",
+                "asyncContext": {
+                    "stackTrace": [],
+                    "asyncId": 31,
+                    "asyncType": "TickObject",
+                    "asyncContext": {
+                        "stackTrace": [
+                            "(lib/_http_agent.js:203:32:274:2)",
+                            "(lib/agent.js:75:32:84:2)",
+                            "(lib/_http_agent.js:156:30:201:2)",
+                            "(testcase.js:18:18:36:2)",
+                            "(testcase.js:1:1:68:10)"
+                        ],
+                        "asyncId": 6,
+                        "asyncType": "TCPWRAP",
+                        "asyncContext": {
+                            "stackTrace": null,
+                            "asyncId": 1,
+                            "asyncType": "GLOBAL",
+                            "asyncContext": "[Omitted]",
+                            "codeInfo": null,
+                            "index": null,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": "lib/_http_agent.js:234:3:246:3",
+                        "index": 3,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": "lib/_http_agent.js:229:3:231:3",
+                    "index": 125,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "lib/_http_agent.js:249:3:255:3",
+                "index": 129,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(testcase.js:44:24:47:6)"
+                    ],
+                    "scopeCodeInfo": "testcase.js:46:9:46:22",
+                    "index": 1632,
+                    "timestamp": "514,446,666,932,919",
+                    "value": true,
+                    "isInitialization": false
+                }
+            ]
+        ]
+    },
+    {
+        "resourceInfo": {
+            "type": "object",
+            "possibleDefineCodeScope": "lib/_http_agent.js:69:18:69:19",
+            "objectWeakRef": "[object Object]"
+        },
+        "timeDiff": "3,199,072,198",
+        "asyncContextToOperations1": [
+            {
+                "stackTrace": [],
+                "asyncId": 31,
+                "asyncType": "TickObject",
+                "asyncContext": {
+                    "stackTrace": [
+                        "(lib/_http_agent.js:203:32:274:2)",
+                        "(lib/agent.js:75:32:84:2)",
+                        "(lib/_http_agent.js:156:30:201:2)",
+                        "(testcase.js:18:18:36:2)",
+                        "(testcase.js:1:1:68:10)"
+                    ],
+                    "asyncId": 6,
+                    "asyncType": "TCPWRAP",
+                    "asyncContext": {
+                        "stackTrace": null,
+                        "asyncId": 1,
+                        "asyncType": "GLOBAL",
+                        "asyncContext": "[Omitted]",
+                        "codeInfo": null,
+                        "index": null,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": "lib/_http_agent.js:234:3:246:3",
+                    "index": 3,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "lib/_http_agent.js:229:3:231:3",
+                "index": 125,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:103:13:103:30",
+                    "index": 621,
+                    "timestamp": "514,445,547,631,014",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:104:20:104:37",
+                    "index": 626,
+                    "timestamp": "514,445,549,249,912",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:287:9:287:21",
+                    "index": 693,
+                    "timestamp": "514,445,589,488,665",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:288:19:288:31",
+                    "index": 696,
+                    "timestamp": "514,445,591,281,363",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:290:9:290:21",
+                    "index": 703,
+                    "timestamp": "514,445,602,120,951",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:292:13:292:25",
+                    "index": 708,
+                    "timestamp": "514,445,614,100,637",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:293:11:293:30",
+                    "index": 712,
+                    "timestamp": "514,445,620,844,829",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                }
+            ]
+        ],
+        "asyncContextToOperations2": [
+            {
+                "stackTrace": [
+                    "(testcase.js:1:1:68:10)"
+                ],
+                "asyncId": 12,
+                "asyncType": "Timeout",
+                "asyncContext": {
+                    "stackTrace": null,
+                    "asyncId": 1,
+                    "asyncType": "GLOBAL",
+                    "asyncContext": "[Omitted]",
+                    "codeInfo": null,
+                    "index": null,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "testcase.js:50:30:61:1",
+                "index": 941,
+                "timerInfo": {
+                    "callback": "[Function anonymous]",
+                    "delay": 1,
+                    "type": "interval",
+                    "index": 908
+                },
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:156:30:201:2)",
+                        "(testcase.js:18:18:36:2)",
+                        "(testcase.js:50:30:61:2)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:168:5:168:27",
+                    "index": 1740,
+                    "timestamp": "514,448,819,917,027",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:156:30:201:2)",
+                        "(testcase.js:18:18:36:2)",
+                        "(testcase.js:50:30:61:2)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:172:27:172:44",
+                    "index": 1747,
+                    "timestamp": "514,448,826,471,419",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:203:32:274:2)",
+                        "(lib/agent.js:75:32:84:2)",
+                        "(lib/_http_agent.js:156:30:201:2)",
+                        "(testcase.js:18:18:36:2)",
+                        "(testcase.js:50:30:61:2)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:223:8:223:25",
+                    "index": 1833,
+                    "timestamp": "514,448,850,746,191",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:203:32:274:2)",
+                        "(lib/agent.js:75:32:84:2)",
+                        "(lib/_http_agent.js:156:30:201:2)",
+                        "(testcase.js:18:18:36:2)",
+                        "(testcase.js:50:30:61:2)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:226:3:226:20",
+                    "index": 1836,
+                    "timestamp": "514,448,856,723,684",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:203:32:274:2)",
+                        "(lib/agent.js:75:32:84:2)",
+                        "(lib/_http_agent.js:156:30:201:2)",
+                        "(testcase.js:18:18:36:2)",
+                        "(testcase.js:50:30:61:2)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:227:26:227:43",
+                    "index": 1843,
+                    "timestamp": "514,448,864,143,275",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                }
+            ]
+        ]
+    },
+    {
+        "resourceInfo": {
+            "type": "object",
+            "possibleDefineCodeScope": "lib/_http_agent.js:69:18:69:19",
+            "objectWeakRef": "[object Object]"
+        },
+        "timeDiff": "3,582,305,054",
+        "asyncContextToOperations1": [
+            {
+                "stackTrace": [],
+                "asyncId": 31,
+                "asyncType": "TickObject",
+                "asyncContext": {
+                    "stackTrace": [
+                        "(lib/_http_agent.js:203:32:274:2)",
+                        "(lib/agent.js:75:32:84:2)",
+                        "(lib/_http_agent.js:156:30:201:2)",
+                        "(testcase.js:18:18:36:2)",
+                        "(testcase.js:1:1:68:10)"
+                    ],
+                    "asyncId": 6,
+                    "asyncType": "TCPWRAP",
+                    "asyncContext": {
+                        "stackTrace": null,
+                        "asyncId": 1,
+                        "asyncType": "GLOBAL",
+                        "asyncContext": "[Omitted]",
+                        "codeInfo": null,
+                        "index": null,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": "lib/_http_agent.js:234:3:246:3",
+                    "index": 3,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "lib/_http_agent.js:229:3:231:3",
+                "index": 125,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:103:13:103:30",
+                    "index": 621,
+                    "timestamp": "514,445,547,631,014",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:104:20:104:37",
+                    "index": 626,
+                    "timestamp": "514,445,549,249,912",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:287:9:287:21",
+                    "index": 693,
+                    "timestamp": "514,445,589,488,665",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:288:19:288:31",
+                    "index": 696,
+                    "timestamp": "514,445,591,281,363",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:290:9:290:21",
+                    "index": 703,
+                    "timestamp": "514,445,602,120,951",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:292:13:292:25",
+                    "index": 708,
+                    "timestamp": "514,445,614,100,637",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:293:11:293:30",
+                    "index": 712,
+                    "timestamp": "514,445,620,844,829",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                }
+            ]
+        ],
+        "asyncContextToOperations2": [
+            {
+                "stackTrace": [],
+                "asyncId": 78,
+                "asyncType": "TickObject",
+                "asyncContext": {
+                    "stackTrace": [
+                        "(lib/_http_agent.js:203:32:274:2)",
+                        "(lib/agent.js:75:32:84:2)",
+                        "(lib/_http_agent.js:156:30:201:2)",
+                        "(testcase.js:18:18:36:2)",
+                        "(testcase.js:50:30:61:2)"
+                    ],
+                    "asyncId": 39,
+                    "asyncType": "TCPWRAP",
+                    "asyncContext": {
+                        "stackTrace": [
+                            "(testcase.js:1:1:68:10)"
+                        ],
+                        "asyncId": 12,
+                        "asyncType": "Timeout",
+                        "asyncContext": {
+                            "stackTrace": null,
+                            "asyncId": 1,
+                            "asyncType": "GLOBAL",
+                            "asyncContext": "[Omitted]",
+                            "codeInfo": null,
+                            "index": null,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": "testcase.js:50:30:61:1",
+                        "index": 941,
+                        "timerInfo": {
+                            "callback": "[Function anonymous]",
+                            "delay": 1,
+                            "type": "interval",
+                            "index": 908
+                        },
+                        "immediateInfo": null
+                    },
+                    "codeInfo": null,
+                    "index": 943,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "lib/_http_agent.js:229:3:231:3",
+                "index": 982,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:103:13:103:30",
+                    "index": 1952,
+                    "timestamp": "514,449,203,149,883",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:104:20:104:37",
+                    "index": 1957,
+                    "timestamp": "514,449,207,361,178",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:287:9:287:21",
+                    "index": 2024,
+                    "timestamp": "514,449,230,043,552",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:288:19:288:31",
+                    "index": 2027,
+                    "timestamp": "514,449,231,252,250",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:290:9:290:21",
+                    "index": 2034,
+                    "timestamp": "514,449,233,008,848",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:292:13:292:25",
+                    "index": 2039,
+                    "timestamp": "514,449,234,606,646",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:293:11:293:30",
+                    "index": 2043,
+                    "timestamp": "514,449,235,877,845",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                }
+            ]
+        ]
+    },
+    {
+        "resourceInfo": {
+            "type": "object",
+            "possibleDefineCodeScope": "lib/_http_agent.js:70:22:70:23",
+            "objectWeakRef": "[object Object]"
+        },
+        "timeDiff": "2,553,076,845",
+        "asyncContextToOperations1": [
+            {
+                "stackTrace": [
+                    "(lib/_http_agent.js:80:19:127:4)",
+                    "(lib/_http_agent.js:229:3:231:4)"
+                ],
+                "asyncId": 35,
+                "asyncType": "Timeout",
+                "asyncContext": {
+                    "stackTrace": [],
+                    "asyncId": 31,
+                    "asyncType": "TickObject",
+                    "asyncContext": {
+                        "stackTrace": [
+                            "(lib/_http_agent.js:203:32:274:2)",
+                            "(lib/agent.js:75:32:84:2)",
+                            "(lib/_http_agent.js:156:30:201:2)",
+                            "(testcase.js:18:18:36:2)",
+                            "(testcase.js:1:1:68:10)"
+                        ],
+                        "asyncId": 6,
+                        "asyncType": "TCPWRAP",
+                        "asyncContext": {
+                            "stackTrace": null,
+                            "asyncId": 1,
+                            "asyncType": "GLOBAL",
+                            "asyncContext": "[Omitted]",
+                            "codeInfo": null,
+                            "index": null,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": "lib/_http_agent.js:234:3:246:3",
+                        "index": 3,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": "lib/_http_agent.js:229:3:231:3",
+                    "index": 125,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "lib/_http_agent.js:249:3:255:3",
+                "index": 129,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:249:3:255:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:287:9:287:21",
+                    "index": 1599,
+                    "timestamp": "514,446,657,617,730",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:249:3:255:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:288:19:288:31",
+                    "index": 1602,
+                    "timestamp": "514,446,657,888,329",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:249:3:255:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:290:9:290:21",
+                    "index": 1609,
+                    "timestamp": "514,446,658,841,228",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:249:3:255:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:292:13:292:25",
+                    "index": 1614,
+                    "timestamp": "514,446,659,977,627",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:249:3:255:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:293:11:293:30",
+                    "index": 1618,
+                    "timestamp": "514,446,660,382,326",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                }
+            ]
+        ],
+        "asyncContextToOperations2": [
+            {
+                "stackTrace": [],
+                "asyncId": 78,
+                "asyncType": "TickObject",
+                "asyncContext": {
+                    "stackTrace": [
+                        "(lib/_http_agent.js:203:32:274:2)",
+                        "(lib/agent.js:75:32:84:2)",
+                        "(lib/_http_agent.js:156:30:201:2)",
+                        "(testcase.js:18:18:36:2)",
+                        "(testcase.js:50:30:61:2)"
+                    ],
+                    "asyncId": 39,
+                    "asyncType": "TCPWRAP",
+                    "asyncContext": {
+                        "stackTrace": [
+                            "(testcase.js:1:1:68:10)"
+                        ],
+                        "asyncId": 12,
+                        "asyncType": "Timeout",
+                        "asyncContext": {
+                            "stackTrace": null,
+                            "asyncId": 1,
+                            "asyncType": "GLOBAL",
+                            "asyncContext": "[Omitted]",
+                            "codeInfo": null,
+                            "index": null,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": "testcase.js:50:30:61:1",
+                        "index": 941,
+                        "timerInfo": {
+                            "callback": "[Function anonymous]",
+                            "delay": 1,
+                            "type": "interval",
+                            "index": 908
+                        },
+                        "immediateInfo": null
+                    },
+                    "codeInfo": null,
+                    "index": 943,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "lib/_http_agent.js:229:3:231:3",
+                "index": 982,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:112:11:112:46",
+                    "index": 1973,
+                    "timestamp": "514,449,213,459,171",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                }
+            ]
+        ]
+    },
+    {
+        "resourceInfo": {
+            "type": "object",
+            "possibleDefineCodeScope": "lib/_http_agent.js:70:22:70:23",
+            "objectWeakRef": "[object Object]"
+        },
+        "timeDiff": "3,655,627,469",
+        "asyncContextToOperations1": [
+            {
+                "stackTrace": [],
+                "asyncId": 31,
+                "asyncType": "TickObject",
+                "asyncContext": {
+                    "stackTrace": [
+                        "(lib/_http_agent.js:203:32:274:2)",
+                        "(lib/agent.js:75:32:84:2)",
+                        "(lib/_http_agent.js:156:30:201:2)",
+                        "(testcase.js:18:18:36:2)",
+                        "(testcase.js:1:1:68:10)"
+                    ],
+                    "asyncId": 6,
+                    "asyncType": "TCPWRAP",
+                    "asyncContext": {
+                        "stackTrace": null,
+                        "asyncId": 1,
+                        "asyncType": "GLOBAL",
+                        "asyncContext": "[Omitted]",
+                        "codeInfo": null,
+                        "index": null,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": "lib/_http_agent.js:234:3:246:3",
+                    "index": 3,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "lib/_http_agent.js:229:3:231:3",
+                "index": 125,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:112:11:112:46",
+                    "index": 642,
+                    "timestamp": "514,445,557,831,702",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                }
+            ]
+        ],
+        "asyncContextToOperations2": [
+            {
+                "stackTrace": [],
+                "asyncId": 78,
+                "asyncType": "TickObject",
+                "asyncContext": {
+                    "stackTrace": [
+                        "(lib/_http_agent.js:203:32:274:2)",
+                        "(lib/agent.js:75:32:84:2)",
+                        "(lib/_http_agent.js:156:30:201:2)",
+                        "(testcase.js:18:18:36:2)",
+                        "(testcase.js:50:30:61:2)"
+                    ],
+                    "asyncId": 39,
+                    "asyncType": "TCPWRAP",
+                    "asyncContext": {
+                        "stackTrace": [
+                            "(testcase.js:1:1:68:10)"
+                        ],
+                        "asyncId": 12,
+                        "asyncType": "Timeout",
+                        "asyncContext": {
+                            "stackTrace": null,
+                            "asyncId": 1,
+                            "asyncType": "GLOBAL",
+                            "asyncContext": "[Omitted]",
+                            "codeInfo": null,
+                            "index": null,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": "testcase.js:50:30:61:1",
+                        "index": 941,
+                        "timerInfo": {
+                            "callback": "[Function anonymous]",
+                            "delay": 1,
+                            "type": "interval",
+                            "index": 908
+                        },
+                        "immediateInfo": null
+                    },
+                    "codeInfo": null,
+                    "index": 943,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "lib/_http_agent.js:229:3:231:3",
+                "index": 982,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:112:11:112:46",
+                    "index": 1973,
+                    "timestamp": "514,449,213,459,171",
+                    "fields": [
+                        "cn.bing.com:80::"
+                    ],
+                    "isConstruction": false
+                }
+            ]
+        ]
+    },
+    {
+        "resourceInfo": {
+            "type": "object",
+            "possibleDefineCodeScope": "lib/_http_agent.js:61:3:61:23",
+            "objectWeakRef": "[object Object]"
+        },
+        "timeDiff": "3,605,075,428",
+        "asyncContextToOperations1": [
+            {
+                "stackTrace": [],
+                "asyncId": 31,
+                "asyncType": "TickObject",
+                "asyncContext": {
+                    "stackTrace": [
+                        "(lib/_http_agent.js:203:32:274:2)",
+                        "(lib/agent.js:75:32:84:2)",
+                        "(lib/_http_agent.js:156:30:201:2)",
+                        "(testcase.js:18:18:36:2)",
+                        "(testcase.js:1:1:68:10)"
+                    ],
+                    "asyncId": 6,
+                    "asyncType": "TCPWRAP",
+                    "asyncContext": {
+                        "stackTrace": null,
+                        "asyncId": 1,
+                        "asyncType": "GLOBAL",
+                        "asyncContext": "[Omitted]",
+                        "codeInfo": null,
+                        "index": null,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": "lib/_http_agent.js:234:3:246:3",
+                    "index": 3,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "lib/_http_agent.js:229:3:231:3",
+                "index": 125,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:85:9:85:21",
+                    "index": 599,
+                    "timestamp": "514,445,542,167,120",
+                    "fields": [
+                        "requests"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:99:11:99:22",
+                    "index": 609,
+                    "timestamp": "514,445,544,685,417",
+                    "fields": [
+                        "options"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:100:27:100:42",
+                    "index": 612,
+                    "timestamp": "514,445,545,523,416",
+                    "fields": [
+                        "freeSockets"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:103:13:103:24",
+                    "index": 619,
+                    "timestamp": "514,445,547,211,214",
+                    "fields": [
+                        "sockets"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:104:20:104:31",
+                    "index": 624,
+                    "timestamp": "514,445,548,692,313",
+                    "fields": [
+                        "sockets"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:106:21:106:35",
+                    "index": 631,
+                    "timestamp": "514,445,551,670,609",
+                    "fields": [
+                        "maxSockets"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:106:51:106:69",
+                    "index": 634,
+                    "timestamp": "514,445,553,107,607",
+                    "fields": [
+                        "maxFreeSockets"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:112:11:112:26",
+                    "index": 639,
+                    "timestamp": "514,445,555,899,704",
+                    "fields": [
+                        "freeSockets"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:113:37:113:55",
+                    "index": 645,
+                    "timestamp": "514,445,560,591,799",
+                    "fields": [
+                        "keepAliveMsecs"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:279:15:279:26",
+                    "index": 679,
+                    "timestamp": "514,445,583,370,972",
+                    "fields": [
+                        "sockets"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:298:7:298:19",
+                    "index": 718,
+                    "timestamp": "514,445,623,477,526",
+                    "fields": [
+                        "requests"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:120:29:120:49",
+                    "index": 725,
+                    "timestamp": "514,445,630,205,518",
+                    "fields": [
+                        "keepAliveTimeout"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/agent.js:62:19:64:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/agent.js:63:5:63:21",
+                    "index": 728,
+                    "timestamp": "514,445,635,030,213",
+                    "fields": [
+                        "requestCount"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(lib/agent.js:62:19:64:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/agent.js:63:5:63:23",
+                    "index": 729,
+                    "timestamp": "514,445,635,424,412",
+                    "fields": [
+                        "requestCount"
+                    ],
+                    "isConstruction": false
+                }
+            ]
+        ],
+        "asyncContextToOperations2": [
+            {
+                "stackTrace": [],
+                "asyncId": 78,
+                "asyncType": "TickObject",
+                "asyncContext": {
+                    "stackTrace": [
+                        "(lib/_http_agent.js:203:32:274:2)",
+                        "(lib/agent.js:75:32:84:2)",
+                        "(lib/_http_agent.js:156:30:201:2)",
+                        "(testcase.js:18:18:36:2)",
+                        "(testcase.js:50:30:61:2)"
+                    ],
+                    "asyncId": 39,
+                    "asyncType": "TCPWRAP",
+                    "asyncContext": {
+                        "stackTrace": [
+                            "(testcase.js:1:1:68:10)"
+                        ],
+                        "asyncId": 12,
+                        "asyncType": "Timeout",
+                        "asyncContext": {
+                            "stackTrace": null,
+                            "asyncId": 1,
+                            "asyncType": "GLOBAL",
+                            "asyncContext": "[Omitted]",
+                            "codeInfo": null,
+                            "index": null,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": "testcase.js:50:30:61:1",
+                        "index": 941,
+                        "timerInfo": {
+                            "callback": "[Function anonymous]",
+                            "delay": 1,
+                            "type": "interval",
+                            "index": 908
+                        },
+                        "immediateInfo": null
+                    },
+                    "codeInfo": null,
+                    "index": 943,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "lib/_http_agent.js:229:3:231:3",
+                "index": 982,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:85:9:85:21",
+                    "index": 1930,
+                    "timestamp": "514,449,196,033,491",
+                    "fields": [
+                        "requests"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:99:11:99:22",
+                    "index": 1940,
+                    "timestamp": "514,449,198,567,688",
+                    "fields": [
+                        "options"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:100:27:100:42",
+                    "index": 1943,
+                    "timestamp": "514,449,200,136,186",
+                    "fields": [
+                        "freeSockets"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:103:13:103:24",
+                    "index": 1950,
+                    "timestamp": "514,449,201,824,284",
+                    "fields": [
+                        "sockets"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:104:20:104:31",
+                    "index": 1955,
+                    "timestamp": "514,449,205,933,380",
+                    "fields": [
+                        "sockets"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:106:21:106:35",
+                    "index": 1962,
+                    "timestamp": "514,449,208,832,376",
+                    "fields": [
+                        "maxSockets"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:106:51:106:69",
+                    "index": 1965,
+                    "timestamp": "514,449,210,331,074",
+                    "fields": [
+                        "maxFreeSockets"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:112:11:112:26",
+                    "index": 1970,
+                    "timestamp": "514,449,211,978,373",
+                    "fields": [
+                        "freeSockets"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:113:37:113:55",
+                    "index": 1976,
+                    "timestamp": "514,449,220,143,863",
+                    "fields": [
+                        "keepAliveMsecs"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:279:15:279:26",
+                    "index": 2010,
+                    "timestamp": "514,449,227,571,355",
+                    "fields": [
+                        "sockets"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:276:32:304:2)",
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:298:7:298:19",
+                    "index": 2049,
+                    "timestamp": "514,449,236,391,244",
+                    "fields": [
+                        "requests"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/_http_agent.js:80:19:127:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/_http_agent.js:120:29:120:49",
+                    "index": 2056,
+                    "timestamp": "514,449,238,725,742",
+                    "fields": [
+                        "keepAliveTimeout"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/agent.js:62:19:64:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/agent.js:63:5:63:21",
+                    "index": 2059,
+                    "timestamp": "514,449,240,499,840",
+                    "fields": [
+                        "requestCount"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(lib/agent.js:62:19:64:4)",
+                        "(lib/_http_agent.js:229:3:231:4)"
+                    ],
+                    "scopeCodeInfo": "lib/agent.js:63:5:63:23",
+                    "index": 2060,
+                    "timestamp": "514,449,242,730,537",
+                    "fields": [
+                        "requestCount"
+                    ],
+                    "isConstruction": false
+                }
+            ]
+        ]
+    }
+]

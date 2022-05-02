@@ -1,0 +1,118 @@
+soulike@soulike-virtual:~/NodeAL$ VERBOSE=1 yarn nodeprof ~/NodeALDataset/knownBugs/nes-issue18-3ff3317/ node_modules/.bin/lab -m 3000 testcase.js
+yarn run v1.22.17
+$ yarn build
+$ rm -rf dist/ && tsc --noEmit
+$ node esbuild.js
+
+  dist/index.js                     196.5kb
+  dist/bin/nodeprof-no-analysis.js   72.6kb
+  dist/bin/nodeprof-test.js           1.6kb
+  dist/bin/nodeprof-raw.js            1.2kb
+  dist/bin/nodeprof.js                1.2kb
+  dist/bin/node.js                    817b 
+
+$ node ./dist/bin/nodeprof.js /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/ node_modules/.bin/lab -m 3000 testcase.js
+
+  
+  x
+
+Failed tests:
+
+  1) _reconnect() aborts reconnect if disconnect is called in between attempts:
+
+      Cannot read property 'auth' of null
+
+      at Timeout.<anonymous> (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/lib/client.js:170:31)
+      at listOnTimeout (internal/timers.js:554:17)
+      at process.processTimers (internal/timers.js:497:7)
+      at .end (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/reporters/console.js:109:36)
+      at .finalize (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/reporters/index.js:84:22)
+      at /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:104:25
+      at /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/items/lib/index.js:104:25
+      at /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:74:20
+      at /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:154:16
+      at /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:228:9
+      at done (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/items/lib/index.js:30:25)
+      at /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:223:13
+      at done (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/items/lib/index.js:30:25)
+      at Object.executeDeps (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:236:16)
+      at /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:206:27
+      at /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:212:13
+      at iterate (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/items/lib/index.js:35:13)
+      at done (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/items/lib/index.js:27:25)
+      at /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:228:9
+      at done (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/items/lib/index.js:30:25)
+      at /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:223:13
+      at done (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/items/lib/index.js:30:25)
+      at Object.executeDeps (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:236:16)
+      at /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:206:27
+      at /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:212:13
+      at iterate (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/items/lib/index.js:35:13)
+      at done (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/items/lib/index.js:27:25)
+      at /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:228:9
+      at Object.serial (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/items/lib/index.js:13:9)
+      at Object.executeExperiments (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:161:11)
+      at /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:196:27
+      at /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:212:13
+      at iterate (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/items/lib/index.js:35:13)
+      at done (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/items/lib/index.js:27:25)
+      at /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:356:20
+      at Object.parallel (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/items/lib/index.js:47:9)
+      at /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:354:15
+      at done (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/items/lib/index.js:30:25)
+      at /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:348:20
+      at done (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/items/lib/index.js:30:25)
+      at Object.serial (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/items/lib/index.js:13:9)
+      at Object.executeDeps (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:239:11)
+      at /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:334:34
+      at /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:340:13
+      at iterate (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/items/lib/index.js:35:13)
+      at done (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/items/lib/index.js:27:25)
+      at /home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:327:28
+      at Immediate.immed (/home/soulike/NodeALDataset/knownBugs/nes-issue18-3ff3317/node_modules/lab/lib/runner.js:409:20)
+      at process.processImmediate (internal/timers.js:461:21)
+      at process.topLevelDomainCallback (domain.js:144:15)
+      at process.callbackTrampoline (internal/async_hooks.js:129:14)
+
+
+1 of 1 tests failed
+Test duration: 2190 ms
+The following leaks were detected:AggregateError, BigInt64Array, BigUint64Array, BigInt, Polyglot, Reflect, SharedArrayBuffer, Atomics, WeakRef, FinalizationRegistry, Graal, Java, Packages, java, javafx, javax, com, org, edu, __jalangiAdapter, URL, URLSearchParams, TextEncoder, TextDecoder, queueMicrotask, J$, path, key
+
+AsyncContext: 0.032s
+LastExpression: 0.004s
+Iterator: 0.005s
+Array: 0.01s
+Set: 0s
+Map: 0s
+Object: 0.234s
+FileHandle: 0.002s
+FsAsync: 0.004s
+FsSync: 0.004s
+FsPromises: 0s
+ArrayBuffer: 0.003s
+Buffer: 0.005s
+DataView: 0s
+TypedArray: 0.005s
+Primitive: 0.268s
+HttpAgent: 0s
+HttpIncomingMessage: 0.003s
+HttpOutgoingMessage: 0.002s
+Http: 0s
+Net: 0.039s
+Stream: 0s
+EventEmitter: 0.011s
+Crypto: 0.014s
+Zlib: 0.002s
+StringDecoder: 0.003s
+JSON: 0.021s
+RaceDetector: 0.24s
+analysis load: 1.607s
+entry: 6.806s
+eventCount: 10
+raceCount: 1
+filteredRaceCount: 3
+ResourceCount: 355
+ResourceOperationCount: 734
+analysis: 11.679s
+Done in 14.22s.

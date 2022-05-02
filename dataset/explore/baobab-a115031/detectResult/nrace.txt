@@ -1,0 +1,121 @@
+soulike@soulike-virtual:~/nrace$ ./bin/noderacer instrument --outputDir /tmp/nraceOutput  ~/NodeALDataset/explore/baobab-a115031/
+[2021-11-26T15:50:18.050] [INFO] default - Running command: instrument --outputDir /tmp/nraceOutput /home/soulike/NodeALDataset/explore/baobab-a115031/
+[2021-11-26T15:50:18.053] [INFO] default - instrumenting application: /home/soulike/NodeALDataset/explore/baobab-a115031/
+[2021-11-26T15:50:18.054] [INFO] default - run command: node /home/soulike/nrace/driver/instApp.js --justGenerate --verbose --outputDir /tmp/nraceOutput /home/soulike/NodeALDataset/explore/baobab-a115031/ , desc: instrumentation
+instrumenting /tmp/nraceOutput/baobab-a115031/benchmark_orig_.js
+instrumenting /tmp/nraceOutput/baobab-a115031/eslint.config_orig_.js
+instrumenting /tmp/nraceOutput/baobab-a115031/scripts/build_orig_.js
+instrumenting /tmp/nraceOutput/baobab-a115031/scripts/commonjs-addendum_orig_.js
+instrumenting /tmp/nraceOutput/baobab-a115031/src/baobab_orig_.js
+
+
+Failed to instrument src/baobab_orig_.js: 'import' and 'export' may appear only with 'sourceType: module' (7:0)
+
+SyntaxError: 'import' and 'export' may appear only with 'sourceType: module' (7:0)
+    at Parser.pp.raise (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:920:13)
+    at Parser.pp.parseStatement (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1742:34)
+    at Parser.pp.parseTopLevel (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1648:21)
+    at Parser.parse (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1616:17)
+    at Object.parse (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:882:44)
+    at transformString (/home/soulike/nrace/lib/analysis/jalangi2/src/js/instrument/esnstrument.js:1913:28)
+    at Object.instrumentCode (/home/soulike/nrace/lib/analysis/jalangi2/src/js/instrument/esnstrument.js:2001:30)
+    at InstrumentJSStream._flush (/home/soulike/nrace/lib/analysis/jalangi2/src/js/commands/instrument.js:297:38)
+    at InstrumentJSStream.final [as _final] (node:internal/streams/transform:112:25)
+    at callFinal (node:internal/streams/writable:694:27)
+instrumenting /tmp/nraceOutput/baobab-a115031/src/cursor_orig_.js
+
+
+Failed to instrument src/cursor_orig_.js: 'import' and 'export' may appear only with 'sourceType: module' (7:0)
+
+SyntaxError: 'import' and 'export' may appear only with 'sourceType: module' (7:0)
+    at Parser.pp.raise (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:920:13)
+    at Parser.pp.parseStatement (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1742:34)
+    at Parser.pp.parseTopLevel (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1648:21)
+    at Parser.parse (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1616:17)
+    at Object.parse (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:882:44)
+    at transformString (/home/soulike/nrace/lib/analysis/jalangi2/src/js/instrument/esnstrument.js:1913:28)
+    at Object.instrumentCode (/home/soulike/nrace/lib/analysis/jalangi2/src/js/instrument/esnstrument.js:2001:30)
+    at InstrumentJSStream._flush (/home/soulike/nrace/lib/analysis/jalangi2/src/js/commands/instrument.js:297:38)
+    at InstrumentJSStream.final [as _final] (node:internal/streams/transform:112:25)
+    at callFinal (node:internal/streams/writable:694:27)
+instrumenting /tmp/nraceOutput/baobab-a115031/src/helpers_orig_.js
+
+
+Failed to instrument src/helpers_orig_.js: 'import' and 'export' may appear only with 'sourceType: module' (9:0)
+
+SyntaxError: 'import' and 'export' may appear only with 'sourceType: module' (9:0)
+    at Parser.pp.raise (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:920:13)
+    at Parser.pp.parseStatement (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1742:34)
+    at Parser.pp.parseTopLevel (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1648:21)
+    at Parser.parse (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1616:17)
+    at Object.parse (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:882:44)
+    at transformString (/home/soulike/nrace/lib/analysis/jalangi2/src/js/instrument/esnstrument.js:1913:28)
+    at Object.instrumentCode (/home/soulike/nrace/lib/analysis/jalangi2/src/js/instrument/esnstrument.js:2001:30)
+    at InstrumentJSStream._flush (/home/soulike/nrace/lib/analysis/jalangi2/src/js/commands/instrument.js:297:38)
+    at InstrumentJSStream.final [as _final] (node:internal/streams/transform:112:25)
+    at callFinal (node:internal/streams/writable:694:27)
+instrumenting /tmp/nraceOutput/baobab-a115031/src/monkey_orig_.js
+
+
+Failed to instrument src/monkey_orig_.js: 'import' and 'export' may appear only with 'sourceType: module' (7:0)
+
+SyntaxError: 'import' and 'export' may appear only with 'sourceType: module' (7:0)
+    at Parser.pp.raise (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:920:13)
+    at Parser.pp.parseStatement (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1742:34)
+    at Parser.pp.parseTopLevel (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1648:21)
+    at Parser.parse (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1616:17)
+    at Object.parse (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:882:44)
+    at transformString (/home/soulike/nrace/lib/analysis/jalangi2/src/js/instrument/esnstrument.js:1913:28)
+    at Object.instrumentCode (/home/soulike/nrace/lib/analysis/jalangi2/src/js/instrument/esnstrument.js:2001:30)
+    at InstrumentJSStream._flush (/home/soulike/nrace/lib/analysis/jalangi2/src/js/commands/instrument.js:297:38)
+    at InstrumentJSStream.final [as _final] (node:internal/streams/transform:112:25)
+    at callFinal (node:internal/streams/writable:694:27)
+instrumenting /tmp/nraceOutput/baobab-a115031/src/type_orig_.js
+
+
+Failed to instrument src/type_orig_.js: 'import' and 'export' may appear only with 'sourceType: module' (9:0)
+
+SyntaxError: 'import' and 'export' may appear only with 'sourceType: module' (9:0)
+    at Parser.pp.raise (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:920:13)
+    at Parser.pp.parseStatement (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1742:34)
+    at Parser.pp.parseTopLevel (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1648:21)
+    at Parser.parse (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1616:17)
+    at Object.parse (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:882:44)
+    at transformString (/home/soulike/nrace/lib/analysis/jalangi2/src/js/instrument/esnstrument.js:1913:28)
+    at Object.instrumentCode (/home/soulike/nrace/lib/analysis/jalangi2/src/js/instrument/esnstrument.js:2001:30)
+    at InstrumentJSStream._flush (/home/soulike/nrace/lib/analysis/jalangi2/src/js/commands/instrument.js:297:38)
+    at InstrumentJSStream.final [as _final] (node:internal/streams/transform:112:25)
+    at callFinal (node:internal/streams/writable:694:27)
+instrumenting /tmp/nraceOutput/baobab-a115031/src/update_orig_.js
+
+
+Failed to instrument src/update_orig_.js: 'import' and 'export' may appear only with 'sourceType: module' (7:0)
+
+SyntaxError: 'import' and 'export' may appear only with 'sourceType: module' (7:0)
+    at Parser.pp.raise (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:920:13)
+    at Parser.pp.parseStatement (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1742:34)
+    at Parser.pp.parseTopLevel (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1648:21)
+    at Parser.parse (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1616:17)
+    at Object.parse (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:882:44)
+    at transformString (/home/soulike/nrace/lib/analysis/jalangi2/src/js/instrument/esnstrument.js:1913:28)
+    at Object.instrumentCode (/home/soulike/nrace/lib/analysis/jalangi2/src/js/instrument/esnstrument.js:2001:30)
+    at InstrumentJSStream._flush (/home/soulike/nrace/lib/analysis/jalangi2/src/js/commands/instrument.js:297:38)
+    at InstrumentJSStream.final [as _final] (node:internal/streams/transform:112:25)
+    at callFinal (node:internal/streams/writable:694:27)
+instrumenting /tmp/nraceOutput/baobab-a115031/src/watcher_orig_.js
+
+
+Failed to instrument src/watcher_orig_.js: 'import' and 'export' may appear only with 'sourceType: module' (8:0)
+
+SyntaxError: 'import' and 'export' may appear only with 'sourceType: module' (8:0)
+    at Parser.pp.raise (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:920:13)
+    at Parser.pp.parseStatement (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1742:34)
+    at Parser.pp.parseTopLevel (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1648:21)
+    at Parser.parse (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1616:17)
+    at Object.parse (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:882:44)
+    at transformString (/home/soulike/nrace/lib/analysis/jalangi2/src/js/instrument/esnstrument.js:1913:28)
+    at Object.instrumentCode (/home/soulike/nrace/lib/analysis/jalangi2/src/js/instrument/esnstrument.js:2001:30)
+    at InstrumentJSStream._flush (/home/soulike/nrace/lib/analysis/jalangi2/src/js/commands/instrument.js:297:38)
+    at InstrumentJSStream.final [as _final] (node:internal/streams/transform:112:25)
+    at callFinal (node:internal/streams/writable:694:27)
+[2021-11-26T15:50:18.246] [INFO] default - instrumentation complete

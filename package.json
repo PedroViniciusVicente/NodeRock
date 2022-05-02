@@ -1,0 +1,35 @@
+{
+  "name": "node-rt",
+  "version": "1.0.0",
+  "repository": "git@github.com:Soulike/NodeRT.git",
+  "author": "Soulike <soulike@qq.com>",
+  "license": "GPL-3.0",
+  "private": true,
+  "scripts": {
+    "prebuild": "rm -rf dist/ && tsc --noEmit",
+    "build": "node esbuild.js",
+    "prenodeprof": "yarn build",
+    "prenodeprof:raw": "yarn build",
+    "preraw": "yarn build",
+    "nodeprof": "node ./dist/bin/nodeprof.js",
+    "prenodeprof:test": "yarn build",
+    "nodeprof:test": "node ./dist/bin/nodeprof-test.js",
+    "nodeprof:raw": "node ./dist/bin/nodeprof-raw.js",
+    "raw": "node ./dist/bin/node.js"
+  },
+  "dependencies": {
+    "@datastructures-js/queue": "^4.1.3",
+    "@datastructures-js/set": "^4.1.1",
+    "@types/is-bigint": "^1.0.0",
+    "is-bigint": "^1.0.4",
+    "lodash": "^4.17.21",
+    "object-hash": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.171",
+    "@types/node": "^16.11.7",
+    "@types/object-hash": "^2.2.1",
+    "esbuild": "^0.13.9",
+    "typescript": "^4.3.2"
+  }
+}

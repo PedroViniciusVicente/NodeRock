@@ -1,0 +1,50 @@
+soulike@soulike-virtual:~/NodeAL$ VERBOSE=1 yarn nodeprof ~/NodeALDataset/knownBugs/json-file-store-issue20-6aada66/ testcase.js yarn run v1.22.17
+$ yarn build
+$ rm -rf dist/ && tsc --noEmit
+$ node esbuild.js
+
+  dist/index.js                     196.5kb
+  dist/bin/nodeprof-no-analysis.js   72.6kb
+  dist/bin/nodeprof-test.js           1.6kb
+  dist/bin/nodeprof-raw.js            1.2kb
+  dist/bin/nodeprof.js                1.2kb
+  dist/bin/node.js                    817b 
+
+$ node ./dist/bin/nodeprof.js /home/soulike/NodeALDataset/knownBugs/json-file-store-issue20-6aada66/ testcase.js
+AsyncContext: 0.01s
+LastExpression: 0.006s
+Iterator: 0.001s
+Array: 0.001s
+Set: 0.001s
+Map: 0.002s
+Object: 0.231s
+FileHandle: 0.001s
+FsAsync: 0.098s
+FsSync: 0.019s
+FsPromises: 0s
+ArrayBuffer: 0.001s
+Buffer: 0.006s
+DataView: 0.001s
+TypedArray: 0.009s
+Primitive: 0.248s
+HttpAgent: 0s
+HttpIncomingMessage: 0.003s
+HttpOutgoingMessage: 0.003s
+Http: 0s
+Net: 0.015s
+Stream: 0s
+EventEmitter: 0s
+Crypto: 0.012s
+Zlib: 0.002s
+StringDecoder: 0.002s
+JSON: 0.012s
+RaceDetector: 0.322s
+analysis load: 1.537s
+entry: 2.008s
+eventCount: 8
+raceCount: 4
+filteredRaceCount: 4
+ResourceCount: 230
+ResourceOperationCount: 704
+analysis: 6.796s
+Done in 9.35s.

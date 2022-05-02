@@ -1,0 +1,108 @@
+soulike@soulike-virtual:~/NodeAL$ VERBOSE=1 yarn nodeprof:test ~/NodeALDataset/explore/nodejs-websocket-e6a57ed/ node_modules/.bin/_mocha --timeout 8000 --exit
+yarn run v1.22.17
+$ yarn build
+$ rm -rf dist/ && tsc --noEmit
+$ node esbuild.js
+
+  dist/index.js                     196.8kb
+  dist/bin/nodeprof-no-analysis.js   72.6kb
+  dist/bin/nodeprof-test.js           1.6kb
+  dist/bin/nodeprof-raw.js            1.2kb
+  dist/bin/nodeprof.js                1.2kb
+  dist/bin/node.js                    817b 
+
+$ node ./dist/bin/nodeprof-test.js /home/soulike/NodeALDataset/explore/nodejs-websocket-e6a57ed/ node_modules/.bin/_mocha --timeout 8000 --exit
+
+
+  extraHeaders
+    ✓ should create a headerString with extra header options (1017ms)
+
+  frames
+    ✓ should connect to a websocket server (94ms)
+    ✓ should deliver texts in order (95ms)
+    ✓ should send binary data (83ms)
+    ✓ should stream binary data (2198ms)
+    ✓ should not accept concurrent text with binary (42ms)
+    ✓ should expose the headers
+    ✓ should emit pong event on ping (100ms)
+    ✓ should send text and binary data (86ms)
+    ✓ should connect to a websocket server (71ms)
+    ✓ should deliver texts in order (110ms)
+    ✓ should send binary data (43ms)
+    ✓ should stream binary data (1876ms)
+    ✓ should not accept concurrent text with binary
+    ✓ should expose the headers
+    ✓ should emit pong event on ping (55ms)
+    ✓ should send text and binary data (83ms)
+
+  handshake
+    ✓ should work when the handshake response is followed by a WS frame (7177ms)
+    ✓ should work when there is some missing headers (403ms)
+    ✓ should work when the handshake response is followed by a WS frame (2003ms)
+    ✓ should work when there is some missing headers (401ms)
+
+  close
+    ✓ should stop the server from accepting new connections
+    ✓ should stop the server from accepting new connections
+    ✓ should emit close after all client connections are closed
+
+  protocols negotiation
+    with a server with no declared protocol support
+      ✓ should fail when client tries to negotiate (2565ms)
+      ✓ should fail when client tries to negotiate (2604ms)
+    with a server with declared support list
+      ✓ should succeed when client does not try to negotiate (2150ms)
+      ✓ should succeed when client list at least one valid protocol (3102ms)
+      ✓ should fail when client list only invalid protocols (2861ms)
+      ✓ should succeed when client does not try to negotiate (2719ms)
+      ✓ should succeed when client list at least one valid protocol (3984ms)
+      ✓ should fail when client list only invalid protocols (2314ms)
+    with a server with custom negotiation logic
+      ✓ should succeed when client does not try to negotiate (196ms)
+      ✓ should succeed when client list at least one valid protocol (532ms)
+      ✓ should fail when client list only invalid protocols (759ms)
+      ✓ should succeed when client does not try to negotiate (774ms)
+      ✓ should succeed when client list at least one valid protocol (1407ms)
+      ✓ should fail when client list only invalid protocols (1505ms)
+
+
+  38 passing (48s)
+
+AsyncContext: 0.051s
+LastExpression: 0.042s
+Iterator: 0.019s
+Array: 0.081s
+Set: 0.01s
+Map: 0.009s
+Object: 2.15s
+FileHandle: 0.005s
+FsAsync: 0.022s
+FsSync: 0.016s
+FsPromises: 0.011s
+ArrayBuffer: 0.008s
+Buffer: 38.915s
+DataView: 0.012s
+TypedArray: 0.073s
+Primitive: 3.427s
+HttpAgent: 0.008s
+HttpIncomingMessage: 0.005s
+HttpOutgoingMessage: 0.009s
+Http: 0s
+Net: 0.366s
+Stream: 0.005s
+EventEmitter: 0.107s
+Crypto: 0.101s
+Zlib: 0.018s
+StringDecoder: 0.031s
+JSON: 0.002s
+max memory usage: 2.1034774780273438 GB
+RaceDetector: 39.112s
+analysis load: 1.638s
+entry: 50.950s
+eventCount: 320
+raceCount: 6
+filteredFPCount: 151426
+ResourceCount: 6877
+ResourceOperationCount: 187646
+analysis: 56.642s
+Done in 59.39s.

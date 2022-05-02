@@ -1,0 +1,24 @@
+yarn run v1.22.17
+$ ./bin/noderacer instrument --outputDir /tmp/nraceOutput /home/soulike/NodeALDataset/explore/static-8339e93/
+[32m[2021-11-27T14:50:52.979] [INFO] default - [39mRunning command: instrument --outputDir /tmp/nraceOutput /home/soulike/NodeALDataset/explore/static-8339e93/
+[32m[2021-11-27T14:50:52.982] [INFO] default - [39minstrumenting application: /home/soulike/NodeALDataset/explore/static-8339e93/
+[32m[2021-11-27T14:50:52.983] [INFO] default - [39mrun command: node /home/soulike/nrace/driver/instApp.js --justGenerate --verbose --outputDir /tmp/nraceOutput /home/soulike/NodeALDataset/explore/static-8339e93/ , desc: instrumentation
+instrumenting /tmp/nraceOutput/static-8339e93/index_orig_.js
+
+
+Failed to instrument index_orig_.js: Unexpected token (39:17)
+
+SyntaxError: Unexpected token (39:17)
+    at Parser.pp.raise (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:920:13)
+    at Parser.pp.unexpected (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1483:8)
+    at Parser.pp.semicolon (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1462:73)
+    at Parser.pp.parseReturnStatement (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1854:49)
+    at Parser.pp.parseStatement (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1719:19)
+    at Parser.pp.parseBlock (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1991:21)
+    at Parser.pp.parseStatement (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1735:19)
+    at Parser.pp.parseIfStatement (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1840:26)
+    at Parser.pp.parseStatement (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1717:19)
+    at Parser.pp.parseBlock (/home/soulike/nrace/node_modules/acorn/dist/acorn.js:1991:21)
+instrumenting /tmp/nraceOutput/static-8339e93/example_orig_.js
+[32m[2021-11-27T14:50:53.171] [INFO] default - [39minstrumentation complete
+Done in 0.30s.

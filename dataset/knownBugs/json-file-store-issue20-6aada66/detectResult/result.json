@@ -1,0 +1,736 @@
+[
+    {
+        "resourceInfo": {
+            "type": "file",
+            "possibleDefineCodeScope": "Store.js:313:14:313:40",
+            "filePath": "/home/soulike/NodeALDataset/knownBugs/json-file-store-issue20-6aada66/data.json"
+        },
+        "timeDiff": "3,896,511",
+        "asyncContextToOperations1": [
+            {
+                "stackTrace": [],
+                "asyncId": 13,
+                "asyncType": "FSREQCALLBACK",
+                "asyncContext": {
+                    "stackTrace": [],
+                    "asyncId": 11,
+                    "asyncType": "FSREQCALLBACK",
+                    "asyncContext": {
+                        "stackTrace": [
+                            "(Store.js:110:26:118:6)"
+                        ],
+                        "asyncId": 9,
+                        "asyncType": "FSREQCALLBACK",
+                        "asyncContext": {
+                            "stackTrace": [
+                                "(Store.js:78:42:81:4)"
+                            ],
+                            "asyncId": 7,
+                            "asyncType": "FSREQCALLBACK",
+                            "asyncContext": {
+                                "stackTrace": [
+                                    "(Store.js:77:22:82:2)",
+                                    "(Store.js:94:24:128:2)",
+                                    "(Store.js:235:14:277:2)",
+                                    "(Store.js:358:12:360:6)"
+                                ],
+                                "asyncId": 5,
+                                "asyncType": "FSREQCALLBACK",
+                                "asyncContext": {
+                                    "stackTrace": null,
+                                    "asyncId": 1,
+                                    "asyncType": "GLOBAL",
+                                    "asyncContext": "[Omitted]",
+                                    "codeInfo": null,
+                                    "index": null,
+                                    "timerInfo": null,
+                                    "immediateInfo": null
+                                },
+                                "codeInfo": "Store.js:78:42:81:3",
+                                "index": 2,
+                                "timerInfo": null,
+                                "immediateInfo": null
+                            },
+                            "codeInfo": "Store.js:110:26:118:5",
+                            "index": 4,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": null,
+                        "index": 6,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": null,
+                    "index": 8,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "Store.js:113:57:117:7",
+                "index": 10,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(Store.js:113:57:117:8)"
+                    ],
+                    "scopeCodeInfo": "Store.js:116:9:116:50",
+                    "index": 651,
+                    "timestamp": "945,471,822,043,295",
+                    "accessStage": "start",
+                    "operationOn": "content"
+                }
+            ]
+        ],
+        "asyncContextToOperations2": [
+            {
+                "stackTrace": [
+                    "(Store.js:113:57:117:8)"
+                ],
+                "asyncId": 14,
+                "asyncType": "FSREQCALLBACK",
+                "asyncContext": {
+                    "stackTrace": [],
+                    "asyncId": 12,
+                    "asyncType": "FSREQCALLBACK",
+                    "asyncContext": {
+                        "stackTrace": [],
+                        "asyncId": 10,
+                        "asyncType": "FSREQCALLBACK",
+                        "asyncContext": {
+                            "stackTrace": [
+                                "(Store.js:110:26:118:6)"
+                            ],
+                            "asyncId": 8,
+                            "asyncType": "FSREQCALLBACK",
+                            "asyncContext": {
+                                "stackTrace": [
+                                    "(Store.js:78:42:81:4)"
+                                ],
+                                "asyncId": 6,
+                                "asyncType": "FSREQCALLBACK",
+                                "asyncContext": {
+                                    "stackTrace": [
+                                        "(Store.js:77:22:82:2)",
+                                        "(Store.js:94:24:128:2)",
+                                        "(Store.js:134:13:191:2)",
+                                        "(Store.js:334:12:338:6)"
+                                    ],
+                                    "asyncId": 4,
+                                    "asyncType": "FSREQCALLBACK",
+                                    "asyncContext": {
+                                        "stackTrace": null,
+                                        "asyncId": 1,
+                                        "asyncType": "GLOBAL",
+                                        "asyncContext": "[Omitted]",
+                                        "codeInfo": null,
+                                        "index": null,
+                                        "timerInfo": null,
+                                        "immediateInfo": null
+                                    },
+                                    "codeInfo": "Store.js:78:42:81:3",
+                                    "index": 1,
+                                    "timerInfo": null,
+                                    "immediateInfo": null
+                                },
+                                "codeInfo": "Store.js:110:26:118:5",
+                                "index": 3,
+                                "timerInfo": null,
+                                "immediateInfo": null
+                            },
+                            "codeInfo": null,
+                            "index": 5,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": null,
+                        "index": 7,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": "Store.js:113:57:117:7",
+                    "index": 9,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "Store.js:164:14:182:3",
+                "index": 11,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(Store.js:164:14:182:4)"
+                    ],
+                    "scopeCodeInfo": "Store.js:116:9:116:50",
+                    "index": 653,
+                    "timestamp": "945,471,825,939,806",
+                    "accessStage": "finish",
+                    "operationOn": "content"
+                }
+            ]
+        ]
+    },
+    {
+        "resourceInfo": {
+            "type": "file",
+            "possibleDefineCodeScope": "Store.js:313:14:313:40",
+            "filePath": "/home/soulike/NodeALDataset/knownBugs/json-file-store-issue20-6aada66/data.json"
+        },
+        "timeDiff": "77,359,917",
+        "asyncContextToOperations1": [
+            {
+                "stackTrace": [
+                    "(Store.js:113:57:117:8)"
+                ],
+                "asyncId": 14,
+                "asyncType": "FSREQCALLBACK",
+                "asyncContext": {
+                    "stackTrace": [],
+                    "asyncId": 12,
+                    "asyncType": "FSREQCALLBACK",
+                    "asyncContext": {
+                        "stackTrace": [],
+                        "asyncId": 10,
+                        "asyncType": "FSREQCALLBACK",
+                        "asyncContext": {
+                            "stackTrace": [
+                                "(Store.js:110:26:118:6)"
+                            ],
+                            "asyncId": 8,
+                            "asyncType": "FSREQCALLBACK",
+                            "asyncContext": {
+                                "stackTrace": [
+                                    "(Store.js:78:42:81:4)"
+                                ],
+                                "asyncId": 6,
+                                "asyncType": "FSREQCALLBACK",
+                                "asyncContext": {
+                                    "stackTrace": [
+                                        "(Store.js:77:22:82:2)",
+                                        "(Store.js:94:24:128:2)",
+                                        "(Store.js:134:13:191:2)",
+                                        "(Store.js:334:12:338:6)"
+                                    ],
+                                    "asyncId": 4,
+                                    "asyncType": "FSREQCALLBACK",
+                                    "asyncContext": {
+                                        "stackTrace": null,
+                                        "asyncId": 1,
+                                        "asyncType": "GLOBAL",
+                                        "asyncContext": "[Omitted]",
+                                        "codeInfo": null,
+                                        "index": null,
+                                        "timerInfo": null,
+                                        "immediateInfo": null
+                                    },
+                                    "codeInfo": "Store.js:78:42:81:3",
+                                    "index": 1,
+                                    "timerInfo": null,
+                                    "immediateInfo": null
+                                },
+                                "codeInfo": "Store.js:110:26:118:5",
+                                "index": 3,
+                                "timerInfo": null,
+                                "immediateInfo": null
+                            },
+                            "codeInfo": null,
+                            "index": 5,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": null,
+                        "index": 7,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": "Store.js:113:57:117:7",
+                    "index": 9,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "Store.js:164:14:182:3",
+                "index": 11,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(Store.js:164:14:182:4)"
+                    ],
+                    "scopeCodeInfo": "Store.js:116:9:116:50",
+                    "index": 653,
+                    "timestamp": "945,471,825,939,806",
+                    "accessStage": "finish",
+                    "operationOn": "content"
+                }
+            ]
+        ],
+        "asyncContextToOperations2": [
+            {
+                "stackTrace": [
+                    "(Store.js:113:57:117:8)"
+                ],
+                "asyncId": 15,
+                "asyncType": "FSREQCALLBACK",
+                "asyncContext": {
+                    "stackTrace": [],
+                    "asyncId": 13,
+                    "asyncType": "FSREQCALLBACK",
+                    "asyncContext": {
+                        "stackTrace": [],
+                        "asyncId": 11,
+                        "asyncType": "FSREQCALLBACK",
+                        "asyncContext": {
+                            "stackTrace": [
+                                "(Store.js:110:26:118:6)"
+                            ],
+                            "asyncId": 9,
+                            "asyncType": "FSREQCALLBACK",
+                            "asyncContext": {
+                                "stackTrace": [
+                                    "(Store.js:78:42:81:4)"
+                                ],
+                                "asyncId": 7,
+                                "asyncType": "FSREQCALLBACK",
+                                "asyncContext": {
+                                    "stackTrace": [
+                                        "(Store.js:77:22:82:2)",
+                                        "(Store.js:94:24:128:2)",
+                                        "(Store.js:235:14:277:2)",
+                                        "(Store.js:358:12:360:6)"
+                                    ],
+                                    "asyncId": 5,
+                                    "asyncType": "FSREQCALLBACK",
+                                    "asyncContext": {
+                                        "stackTrace": null,
+                                        "asyncId": 1,
+                                        "asyncType": "GLOBAL",
+                                        "asyncContext": "[Omitted]",
+                                        "codeInfo": null,
+                                        "index": null,
+                                        "timerInfo": null,
+                                        "immediateInfo": null
+                                    },
+                                    "codeInfo": "Store.js:78:42:81:3",
+                                    "index": 2,
+                                    "timerInfo": null,
+                                    "immediateInfo": null
+                                },
+                                "codeInfo": "Store.js:110:26:118:5",
+                                "index": 4,
+                                "timerInfo": null,
+                                "immediateInfo": null
+                            },
+                            "codeInfo": null,
+                            "index": 6,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": null,
+                        "index": 8,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": "Store.js:113:57:117:7",
+                    "index": 10,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "Store.js:245:14:252:3",
+                "index": 12,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(Store.js:245:14:252:4)"
+                    ],
+                    "scopeCodeInfo": "Store.js:116:9:116:50",
+                    "index": 663,
+                    "timestamp": "945,471,903,299,723",
+                    "accessStage": "finish",
+                    "operationOn": "content"
+                }
+            ]
+        ]
+    },
+    {
+        "resourceInfo": {
+            "type": "file",
+            "possibleDefineCodeScope": "Store.js:313:14:313:40",
+            "filePath": "/home/soulike/NodeALDataset/knownBugs/json-file-store-issue20-6aada66/data.json"
+        },
+        "timeDiff": "85,828,041",
+        "asyncContextToOperations1": [
+            {
+                "stackTrace": [],
+                "asyncId": 12,
+                "asyncType": "FSREQCALLBACK",
+                "asyncContext": {
+                    "stackTrace": [],
+                    "asyncId": 10,
+                    "asyncType": "FSREQCALLBACK",
+                    "asyncContext": {
+                        "stackTrace": [
+                            "(Store.js:110:26:118:6)"
+                        ],
+                        "asyncId": 8,
+                        "asyncType": "FSREQCALLBACK",
+                        "asyncContext": {
+                            "stackTrace": [
+                                "(Store.js:78:42:81:4)"
+                            ],
+                            "asyncId": 6,
+                            "asyncType": "FSREQCALLBACK",
+                            "asyncContext": {
+                                "stackTrace": [
+                                    "(Store.js:77:22:82:2)",
+                                    "(Store.js:94:24:128:2)",
+                                    "(Store.js:134:13:191:2)",
+                                    "(Store.js:334:12:338:6)"
+                                ],
+                                "asyncId": 4,
+                                "asyncType": "FSREQCALLBACK",
+                                "asyncContext": {
+                                    "stackTrace": null,
+                                    "asyncId": 1,
+                                    "asyncType": "GLOBAL",
+                                    "asyncContext": "[Omitted]",
+                                    "codeInfo": null,
+                                    "index": null,
+                                    "timerInfo": null,
+                                    "immediateInfo": null
+                                },
+                                "codeInfo": "Store.js:78:42:81:3",
+                                "index": 1,
+                                "timerInfo": null,
+                                "immediateInfo": null
+                            },
+                            "codeInfo": "Store.js:110:26:118:5",
+                            "index": 3,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": null,
+                        "index": 5,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": null,
+                    "index": 7,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "Store.js:113:57:117:7",
+                "index": 9,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(Store.js:113:57:117:8)"
+                    ],
+                    "scopeCodeInfo": "Store.js:116:9:116:50",
+                    "index": 641,
+                    "timestamp": "945,471,817,471,682",
+                    "accessStage": "start",
+                    "operationOn": "content"
+                }
+            ]
+        ],
+        "asyncContextToOperations2": [
+            {
+                "stackTrace": [
+                    "(Store.js:113:57:117:8)"
+                ],
+                "asyncId": 15,
+                "asyncType": "FSREQCALLBACK",
+                "asyncContext": {
+                    "stackTrace": [],
+                    "asyncId": 13,
+                    "asyncType": "FSREQCALLBACK",
+                    "asyncContext": {
+                        "stackTrace": [],
+                        "asyncId": 11,
+                        "asyncType": "FSREQCALLBACK",
+                        "asyncContext": {
+                            "stackTrace": [
+                                "(Store.js:110:26:118:6)"
+                            ],
+                            "asyncId": 9,
+                            "asyncType": "FSREQCALLBACK",
+                            "asyncContext": {
+                                "stackTrace": [
+                                    "(Store.js:78:42:81:4)"
+                                ],
+                                "asyncId": 7,
+                                "asyncType": "FSREQCALLBACK",
+                                "asyncContext": {
+                                    "stackTrace": [
+                                        "(Store.js:77:22:82:2)",
+                                        "(Store.js:94:24:128:2)",
+                                        "(Store.js:235:14:277:2)",
+                                        "(Store.js:358:12:360:6)"
+                                    ],
+                                    "asyncId": 5,
+                                    "asyncType": "FSREQCALLBACK",
+                                    "asyncContext": {
+                                        "stackTrace": null,
+                                        "asyncId": 1,
+                                        "asyncType": "GLOBAL",
+                                        "asyncContext": "[Omitted]",
+                                        "codeInfo": null,
+                                        "index": null,
+                                        "timerInfo": null,
+                                        "immediateInfo": null
+                                    },
+                                    "codeInfo": "Store.js:78:42:81:3",
+                                    "index": 2,
+                                    "timerInfo": null,
+                                    "immediateInfo": null
+                                },
+                                "codeInfo": "Store.js:110:26:118:5",
+                                "index": 4,
+                                "timerInfo": null,
+                                "immediateInfo": null
+                            },
+                            "codeInfo": null,
+                            "index": 6,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": null,
+                        "index": 8,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": "Store.js:113:57:117:7",
+                    "index": 10,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "Store.js:245:14:252:3",
+                "index": 12,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(Store.js:245:14:252:4)"
+                    ],
+                    "scopeCodeInfo": "Store.js:116:9:116:50",
+                    "index": 663,
+                    "timestamp": "945,471,903,299,723",
+                    "accessStage": "finish",
+                    "operationOn": "content"
+                }
+            ]
+        ]
+    },
+    {
+        "resourceInfo": {
+            "type": "object",
+            "possibleDefineCodeScope": "Store.js:55:12:55:79",
+            "objectWeakRef": "[object Object]"
+        },
+        "timeDiff": "15,031,643",
+        "asyncContextToOperations1": [
+            {
+                "stackTrace": [
+                    "(Store.js:113:57:117:8)"
+                ],
+                "asyncId": 14,
+                "asyncType": "FSREQCALLBACK",
+                "asyncContext": {
+                    "stackTrace": [],
+                    "asyncId": 12,
+                    "asyncType": "FSREQCALLBACK",
+                    "asyncContext": {
+                        "stackTrace": [],
+                        "asyncId": 10,
+                        "asyncType": "FSREQCALLBACK",
+                        "asyncContext": {
+                            "stackTrace": [
+                                "(Store.js:110:26:118:6)"
+                            ],
+                            "asyncId": 8,
+                            "asyncType": "FSREQCALLBACK",
+                            "asyncContext": {
+                                "stackTrace": [
+                                    "(Store.js:78:42:81:4)"
+                                ],
+                                "asyncId": 6,
+                                "asyncType": "FSREQCALLBACK",
+                                "asyncContext": {
+                                    "stackTrace": [
+                                        "(Store.js:77:22:82:2)",
+                                        "(Store.js:94:24:128:2)",
+                                        "(Store.js:134:13:191:2)",
+                                        "(Store.js:334:12:338:6)"
+                                    ],
+                                    "asyncId": 4,
+                                    "asyncType": "FSREQCALLBACK",
+                                    "asyncContext": {
+                                        "stackTrace": null,
+                                        "asyncId": 1,
+                                        "asyncType": "GLOBAL",
+                                        "asyncContext": "[Omitted]",
+                                        "codeInfo": null,
+                                        "index": null,
+                                        "timerInfo": null,
+                                        "immediateInfo": null
+                                    },
+                                    "codeInfo": "Store.js:78:42:81:3",
+                                    "index": 1,
+                                    "timerInfo": null,
+                                    "immediateInfo": null
+                                },
+                                "codeInfo": "Store.js:110:26:118:5",
+                                "index": 3,
+                                "timerInfo": null,
+                                "immediateInfo": null
+                            },
+                            "codeInfo": null,
+                            "index": 5,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": null,
+                        "index": 7,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": "Store.js:113:57:117:7",
+                    "index": 9,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "Store.js:164:14:182:3",
+                "index": 11,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(Store.js:164:14:182:4)"
+                    ],
+                    "scopeCodeInfo": "Store.js:175:7:175:25",
+                    "index": 658,
+                    "timestamp": "945,471,894,592,198",
+                    "fields": [
+                        "id"
+                    ],
+                    "isConstruction": false
+                }
+            ]
+        ],
+        "asyncContextToOperations2": [
+            {
+                "stackTrace": [
+                    "(Store.js:113:57:117:8)"
+                ],
+                "asyncId": 15,
+                "asyncType": "FSREQCALLBACK",
+                "asyncContext": {
+                    "stackTrace": [],
+                    "asyncId": 13,
+                    "asyncType": "FSREQCALLBACK",
+                    "asyncContext": {
+                        "stackTrace": [],
+                        "asyncId": 11,
+                        "asyncType": "FSREQCALLBACK",
+                        "asyncContext": {
+                            "stackTrace": [
+                                "(Store.js:110:26:118:6)"
+                            ],
+                            "asyncId": 9,
+                            "asyncType": "FSREQCALLBACK",
+                            "asyncContext": {
+                                "stackTrace": [
+                                    "(Store.js:78:42:81:4)"
+                                ],
+                                "asyncId": 7,
+                                "asyncType": "FSREQCALLBACK",
+                                "asyncContext": {
+                                    "stackTrace": [
+                                        "(Store.js:77:22:82:2)",
+                                        "(Store.js:94:24:128:2)",
+                                        "(Store.js:235:14:277:2)",
+                                        "(Store.js:358:12:360:6)"
+                                    ],
+                                    "asyncId": 5,
+                                    "asyncType": "FSREQCALLBACK",
+                                    "asyncContext": {
+                                        "stackTrace": null,
+                                        "asyncId": 1,
+                                        "asyncType": "GLOBAL",
+                                        "asyncContext": "[Omitted]",
+                                        "codeInfo": null,
+                                        "index": null,
+                                        "timerInfo": null,
+                                        "immediateInfo": null
+                                    },
+                                    "codeInfo": "Store.js:78:42:81:3",
+                                    "index": 2,
+                                    "timerInfo": null,
+                                    "immediateInfo": null
+                                },
+                                "codeInfo": "Store.js:110:26:118:5",
+                                "index": 4,
+                                "timerInfo": null,
+                                "immediateInfo": null
+                            },
+                            "codeInfo": null,
+                            "index": 6,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": null,
+                        "index": 8,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": "Store.js:113:57:117:7",
+                    "index": 10,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "Store.js:245:14:252:3",
+                "index": 12,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(Store.js:245:14:252:4)"
+                    ],
+                    "scopeCodeInfo": "Store.js:250:5:250:26",
+                    "index": 667,
+                    "timestamp": "945,471,909,623,841",
+                    "fields": [
+                        "id"
+                    ],
+                    "isConstruction": false
+                }
+            ]
+        ]
+    }
+]

@@ -1,0 +1,80 @@
+yarn run v1.22.17
+$ yarn build
+$ rm -rf dist/ && tsc --noEmit
+$ node esbuild.js
+$ node ./dist/bin/nodeprof-test.js /home/soulike/NodeALDataset/explore/sendfile-0fef701/ node_modules/.bin/_mocha -r should --exit
+
+
+  when path is a directory
+    ✓ should 404 (532ms)
+
+  when path does not exist
+    ✓ should 404 (59ms)
+
+  when path exists
+    when GET
+      ✓ should send the file (226ms)
+      ✓ should support weak etag 304 (64ms)
+      ✓ should support last-modified 304 (76ms)
+      ✓ should cleanup on socket error (78ms)
+    when HEAD
+      ✓ should 200 (56ms)
+      ✓ should 304 (44ms)
+
+  when path is a directory
+    ✓ should 404
+
+  when path does not exist
+    ✓ should 404 (40ms)
+
+  when path exists
+    when GET
+      ✓ should send the file (54ms)
+      ✓ should support weak etag 304
+      ✓ should support last-modified 304
+      ✓ should cleanup on socket error (49ms)
+    when HEAD
+      ✓ should 200
+      ✓ should 304 (39ms)
+
+
+  16 passing (2s)
+
+AsyncContext: 0.077s
+LastExpression: 0.004s
+Iterator: 0.003s
+Array: 0.001s
+Set: 0.002s
+Map: 0.001s
+Object: 0.114s
+FileHandle: 0s
+FsAsync: 0.003s
+FsSync: 0.044s
+FsPromises: 0s
+ArrayBuffer: 0.001s
+Buffer: 0.004s
+DataView: 0s
+TypedArray: 0.006s
+Primitive: 0.208s
+HttpAgent: 0s
+HttpIncomingMessage: 0.001s
+HttpOutgoingMessage: 0.001s
+Http: 0s
+Net: 0.11s
+Stream: 0.001s
+EventEmitter: 0.003s
+Crypto: 0.012s
+Zlib: 0.004s
+StringDecoder: 0.001s
+JSON: 0s
+max memory usage: 1.3909530639648438 GB
+RaceDetector: 0.117s
+analysis load: 1.693s
+entry: 6.647s
+eventCount: 33
+raceCount: 0
+filteredFPCount: 54
+ResourceCount: 158
+ResourceOperationCount: 661
+analysis: 11.312s
+Done in 13.94s.

@@ -1,0 +1,69 @@
+soulike@soulike-virtual:~/nrace$ ./bin/noderacer instrument --outputDir /tmp/nraceOutput ~/NodeALDataset/knownBugs/node-logger-file-issue1-759a2a5/
+[2021-11-24T22:30:24.648] [INFO] default - Running command: instrument --outputDir /tmp/nraceOutput /home/soulike/NodeALDataset/knownBugs/node-logger-file-issue1-759a2a5/
+[2021-11-24T22:30:24.652] [INFO] default - instrumenting application: /home/soulike/NodeALDataset/knownBugs/node-logger-file-issue1-759a2a5/
+[2021-11-24T22:30:24.652] [INFO] default - run command: node /home/soulike/nrace/driver/instApp.js --justGenerate --verbose --outputDir /tmp/nraceOutput /home/soulike/NodeALDataset/knownBugs/node-logger-file-issue1-759a2a5/ , desc: instrumentation
+instrumenting /tmp/nraceOutput/node-logger-file-issue1-759a2a5/index_orig_.js
+instrumenting /tmp/nraceOutput/node-logger-file-issue1-759a2a5/lib/formatter.json_orig_.js
+[2021-11-24T22:30:25.020] [INFO] default - instrumentation complete
+
+soulike@soulike-virtual:/tmp/nraceOutput/node-logger-file-issue1-759a2a5$ node testcase.js 
+log files are created at /tmp
+(node:2377452) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[2021-11-24T22:31:35.611] [INFO] default - process exited
+[2021-11-24T22:31:35.612] [INFO] default - Done collecting trace.
+
+soulike@soulike-virtual:~/nrace$ ./bin/noderacer parse -g /tmp/nraceOutput/node-logger-file-issue1-759a2a5/
+[2021-11-24T22:31:57.466] [INFO] default - Running command: parse -g /tmp/nraceOutput/node-logger-file-issue1-759a2a5/
+[2021-11-24T22:31:57.494] [INFO] default - Begin parsing trace /tmp/nraceOutput/node-logger-file-issue1-759a2a5/ascii-trace.log
+[2021-11-24T22:31:57.738] [INFO] default - End parsing.
+idle (5): [ '7', '8', '13', '18', '22' ]
+_index: [
+  '1',  '9',  '10', '11',
+  '12', '14', '15', '16',
+  '17', '19', '20', '21',
+  '23', '24', '25'
+]
+length: 15
+init: 15
+1
+*A*1532
+*A*1659
+9
+10
+*A*6808
+11
+12
+*A*12003
+14
+15
+17
+*A*12139
+*A*12185
+19
+20
+*A*12269
+23
+*A*12338
+24
+simpleRuleTime: 0.002, FIFORuleTime: 0, nextTickRuleTime: 0
+/tmp/nraceOutput/node-logger-file-issue1-759a2a5/ascii-trace.newhb-full.json
+/tmp/nraceOutput/node-logger-file-issue1-759a2a5/ascii-trace.newhb.json
+[2021-11-24T22:31:57.772] [INFO] default - Length of events: 15
+[2021-11-24T22:31:57.772] [INFO] default - Parse time: 0.278
+
+soulike@soulike-virtual:~/nrace$ ./bin/noderacer dfanalyze /tmp/nraceOutput/node-logger-file-issue1-759a2a5/
+[2021-11-24T22:36:26.820] [INFO] default - Running command: dfanalyze /tmp/nraceOutput/node-logger-file-issue1-759a2a5/
+[2021-11-24T22:36:26.823] [INFO] default - analyzing application: /tmp/nraceOutput/node-logger-file-issue1-759a2a5/
+init: 12
+[2021-11-24T22:36:26.859] [INFO] default - Preparing tuples for detecting bugs...
+hb_check: 208
+call: 2098, iteration: 171
+chc: 2098
+
+*** BUG REPORTS ***
+Count of undefined bugs found: 0
+
+*** BENIGN BUG REPORTS ***
+
+[2021-11-24T22:36:27.606] [INFO] default - Detect time: 0.782

@@ -1,0 +1,279 @@
+yarn run v1.22.17
+$ yarn build
+$ rm -rf dist/ && tsc --noEmit
+$ node esbuild.js
+$ node ./dist/bin/nodeprof-test.js /home/soulike/NodeALDataset/explore/serve-static-94feedb/ node_modules/.bin/_mocha --exit
+
+
+  serveStatic()
+    basic operations
+      ✓ should require root path
+      ✓ should require root path to be string
+      ✓ should serve static files (686ms)
+      ✓ should support nesting (85ms)
+      ✓ should set Content-Type (62ms)
+      ✓ should set Last-Modified (59ms)
+      ✓ should default max-age=0 (62ms)
+      ✓ should support urlencoded pathnames (72ms)
+      ✓ should not choke on auth-looking URL (73ms)
+      ✓ should support index.html (60ms)
+      ✓ should support ../ (41ms)
+      ✓ should support HEAD
+      ✓ should skip POST requests
+      ✓ should support conditional requests (85ms)
+      ✓ should support precondition checks (47ms)
+      ✓ should serve zero-length files (43ms)
+      ✓ should ignore hidden files (40ms)
+      ✓ should require root path
+      ✓ should require root path to be string
+      ✓ should serve static files
+      ✓ should support nesting
+      ✓ should set Content-Type
+      ✓ should set Last-Modified (38ms)
+      ✓ should default max-age=0 (42ms)
+      ✓ should support urlencoded pathnames
+      ✓ should not choke on auth-looking URL
+      ✓ should support index.html
+      ✓ should support ../
+      ✓ should support HEAD
+      ✓ should skip POST requests
+      ✓ should support conditional requests (44ms)
+      ✓ should support precondition checks (40ms)
+      ✓ should serve zero-length files
+      ✓ should ignore hidden files
+    current dir
+      ✓ should be served with "."
+      ✓ should be served with "."
+    acceptRanges
+      when false
+        ✓ should not include Accept-Ranges (71ms)
+        ✓ should ignore Rage request header (40ms)
+      when false
+        ✓ should not include Accept-Ranges
+        ✓ should ignore Rage request header
+      when true
+        ✓ should include Accept-Ranges (40ms)
+        ✓ should obey Rage request header (53ms)
+      when true
+        ✓ should include Accept-Ranges
+        ✓ should obey Rage request header
+    cacheControl
+      when false
+        ✓ should not include Cache-Control
+        ✓ should ignore maxAge
+      when true
+        ✓ should include Cache-Control
+      when false
+        ✓ should not include Cache-Control
+        ✓ should ignore maxAge
+      when true
+        ✓ should include Cache-Control
+    extensions
+      ✓ should be not be enabled by default
+      ✓ should be configurable
+      ✓ should support disabling extensions (40ms)
+      ✓ should support fallbacks
+      ✓ should 404 if nothing found
+    extensions
+      ✓ should be not be enabled by default
+      ✓ should be configurable
+      ✓ should support disabling extensions
+      ✓ should support fallbacks
+      ✓ should 404 if nothing found
+    fallthrough
+      ✓ should default to true
+      ✓ should default to true
+      when true
+        ✓ should fall-through when OPTIONS request
+        ✓ should fall-through when URL malformed
+        ✓ should fall-through when traversing past root
+        ✓ should fall-through when URL too long (271ms)
+        ✓ should fall-through when OPTIONS request
+        ✓ should fall-through when URL malformed
+        ✓ should fall-through when traversing past root
+        ✓ should fall-through when URL too long (196ms)
+        with redirect: true
+          ✓ should fall-through when directory
+          ✓ should redirect when directory without slash (117ms)
+          ✓ should fall-through when directory
+          ✓ should redirect when directory without slash (51ms)
+        with redirect: false
+          ✓ should fall-through when directory
+          ✓ should fall-through when directory without slash
+          ✓ should fall-through when directory
+          ✓ should fall-through when directory without slash
+      when false
+        ✓ should 405 when OPTIONS request
+        ✓ should 400 when URL malformed
+        ✓ should 403 when traversing past root
+        ✓ should 404 when URL too long (216ms)
+        ✓ should 405 when OPTIONS request
+        ✓ should 400 when URL malformed
+        ✓ should 403 when traversing past root
+        ✓ should 404 when URL too long (235ms)
+        with redirect: true
+          ✓ should 404 when directory
+          ✓ should redirect when directory without slash
+          ✓ should 404 when directory
+          ✓ should redirect when directory without slash
+        with redirect: false
+          ✓ should 404 when directory
+          ✓ should 404 when directory without slash
+          ✓ should 404 when directory
+          ✓ should 404 when directory without slash
+    hidden files
+      ✓ should be served when dotfiles: "allow" is given
+      ✓ should be served when dotfiles: "allow" is given
+    immutable
+      ✓ should default to false
+      ✓ should set immutable directive in Cache-Control
+    immutable
+      ✓ should default to false
+      ✓ should set immutable directive in Cache-Control
+    lastModified
+      when false
+        ✓ should not include Last-Modifed
+      when true
+        ✓ should include Last-Modifed
+    maxAge
+      ✓ should accept string
+      ✓ should be reasonable when infinite
+    lastModified
+      when false
+        ✓ should not include Last-Modifed
+      when true
+        ✓ should include Last-Modifed
+    maxAge
+      ✓ should accept string
+      ✓ should be reasonable when infinite
+    redirect
+      ✓ should redirect directories
+      ✓ should include HTML link
+      ✓ should redirect directories with query string
+      ✓ should not redirect to protocol-relative locations
+      ✓ should ensure redirect URL is properly encoded
+      ✓ should respond with default Content-Security-Policy
+      ✓ should not redirect incorrectly
+      ✓ should redirect directories
+      ✓ should include HTML link
+      ✓ should redirect directories with query string (39ms)
+      ✓ should not redirect to protocol-relative locations
+      ✓ should ensure redirect URL is properly encoded
+      ✓ should respond with default Content-Security-Policy
+      ✓ should not redirect incorrectly
+      when false
+        ✓ should disable redirect
+        ✓ should disable redirect
+    setHeaders
+      ✓ should reject non-functions
+      ✓ should get called when sending file
+      ✓ should not get called on 404
+      ✓ should not get called on redirect
+    setHeaders
+      ✓ should reject non-functions
+      ✓ should get called when sending file
+      ✓ should not get called on 404
+      ✓ should not get called on redirect
+    when traversing past root
+      ✓ should catch urlencoded ../
+      ✓ should not allow root path disclosure
+      ✓ should catch urlencoded ../
+      ✓ should not allow root path disclosure
+    when request has "Range" header
+      ✓ should support byte ranges
+      ✓ should be inclusive
+      ✓ should set Content-Range
+      ✓ should support -n
+      ✓ should support n-
+      ✓ should respond with 206 "Partial Content"
+      ✓ should set Content-Length to the # of octets transferred
+      ✓ should support byte ranges
+      ✓ should be inclusive
+      ✓ should set Content-Range
+      ✓ should support -n
+      ✓ should support n-
+      ✓ should respond with 206 "Partial Content"
+      ✓ should set Content-Length to the # of octets transferred
+      when last-byte-pos of the range is greater than current length
+        ✓ is taken to be equal to one less than the current length
+        ✓ should adapt the Content-Length accordingly
+      when the first- byte-pos of the range is greater than the current length
+        ✓ should respond with 416
+        ✓ should include a Content-Range header of complete length
+      when syntactically invalid
+        ✓ should respond with 200 and the entire contents
+      when last-byte-pos of the range is greater than current length
+        ✓ is taken to be equal to one less than the current length
+        ✓ should adapt the Content-Length accordingly
+      when the first- byte-pos of the range is greater than the current length
+        ✓ should respond with 416
+        ✓ should include a Content-Range header of complete length
+      when syntactically invalid
+        ✓ should respond with 200 and the entire contents
+    when index at mount point
+      ✓ should redirect correctly
+      ✓ should redirect correctly
+    when mounted
+      ✓ should redirect relative to the originalUrl
+      ✓ should not choke on auth-looking URL
+      ✓ should redirect relative to the originalUrl
+      ✓ should not choke on auth-looking URL
+    when mounted "root" as a file
+      ✓ should load the file when on trailing slash
+      ✓ should 404 when trailing slash
+      ✓ should load the file when on trailing slash
+      ✓ should 404 when trailing slash
+    when responding non-2xx or 304
+      ✓ should respond as-is (52ms)
+      ✓ should respond as-is (46ms)
+    when index file serving disabled
+      ✓ should next() on directory
+      ✓ should redirect to trailing slash
+      ✓ should next() on mount point
+      ✓ should redirect to trailing slash mount point
+      ✓ should next() on directory
+      ✓ should redirect to trailing slash
+      ✓ should next() on mount point
+      ✓ should redirect to trailing slash mount point
+
+
+  180 passing (7s)
+
+AsyncContext: 0.197s
+LastExpression: 0.007s
+Iterator: 0.013s
+Array: 0.002s
+Set: 0.004s
+Map: 0.007s
+Object: 0.406s
+FileHandle: 0.01s
+FsAsync: 0.028s
+FsSync: 0.024s
+FsPromises: 0.022s
+ArrayBuffer: 0.007s
+Buffer: 0.022s
+DataView: 0.007s
+TypedArray: 0.019s
+Primitive: 1.323s
+HttpAgent: 0.003s
+HttpIncomingMessage: 0.006s
+HttpOutgoingMessage: 0.04s
+Http: 0s
+Net: 0.392s
+Stream: 0s
+EventEmitter: 0.128s
+Crypto: 0.089s
+Zlib: 0.022s
+StringDecoder: 0.005s
+JSON: 0.004s
+max memory usage: 1.3983001708984375 GB
+RaceDetector: 0.822s
+analysis load: 1.703s
+entry: 11.969s
+eventCount: 409
+raceCount: 0
+filteredFPCount: 1100
+ResourceCount: 4415
+ResourceOperationCount: 10575
+analysis: 16.728s
+Done in 19.32s.

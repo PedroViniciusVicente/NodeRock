@@ -1,0 +1,423 @@
+[
+    {
+        "resourceInfo": {
+            "type": "object",
+            "possibleDefineCodeScope": "lib/http-proxy/index.js:96:14:96:75",
+            "objectWeakRef": "[object Object]"
+        },
+        "timeDiff": "21,377,075",
+        "asyncContextToOperations1": [
+            {
+                "stackTrace": [],
+                "asyncId": 2785,
+                "asyncType": "HTTPINCOMINGMESSAGE",
+                "asyncContext": {
+                    "stackTrace": [],
+                    "asyncId": 2784,
+                    "asyncType": "TCPWRAP",
+                    "asyncContext": {
+                        "stackTrace": [],
+                        "asyncId": 2753,
+                        "asyncType": "TCPSERVERWRAP",
+                        "asyncContext": {
+                            "stackTrace": [],
+                            "asyncId": 2749,
+                            "asyncType": "Immediate",
+                            "asyncContext": {
+                                "stackTrace": [],
+                                "asyncId": 2739,
+                                "asyncType": "Immediate",
+                                "asyncContext": {
+                                    "stackTrace": [],
+                                    "asyncId": 2725,
+                                    "asyncType": "Immediate",
+                                    "asyncContext": {
+                                        "stackTrace": [],
+                                        "asyncId": 2718,
+                                        "asyncType": "Immediate",
+                                        "asyncContext": {
+                                            "stackTrace": [],
+                                            "asyncId": 2711,
+                                            "asyncType": "Immediate",
+                                            "asyncContext": {
+                                                "stackTrace": [],
+                                                "asyncId": 2701,
+                                                "asyncType": "Immediate",
+                                                "asyncContext": {
+                                                    "stackTrace": [],
+                                                    "asyncId": 2694,
+                                                    "asyncType": "Immediate",
+                                                    "asyncContext": {
+                                                        "stackTrace": [],
+                                                        "asyncId": 2687,
+                                                        "asyncType": "Immediate",
+                                                        "asyncContext": {
+                                                            "stackTrace": [],
+                                                            "asyncId": 2680,
+                                                            "asyncType": "Immediate",
+                                                            "asyncContext": {
+                                                                "stackTrace": [],
+                                                                "asyncId": 2667,
+                                                                "asyncType": "Immediate",
+                                                                "asyncContext": {
+                                                                    "stackTrace": [],
+                                                                    "asyncId": 2660,
+                                                                    "asyncType": "Immediate",
+                                                                    "asyncContext": {
+                                                                        "stackTrace": [],
+                                                                        "asyncId": 2653,
+                                                                        "asyncType": "Immediate",
+                                                                        "asyncContext": {
+                                                                            "stackTrace": [],
+                                                                            "asyncId": 2643,
+                                                                            "asyncType": "Immediate",
+                                                                            "asyncContext": {
+                                                                                "stackTrace": [],
+                                                                                "asyncId": 2636,
+                                                                                "asyncType": "Immediate",
+                                                                                "asyncContext": {
+                                                                                    "stackTrace": [],
+                                                                                    "asyncId": 2629,
+                                                                                    "asyncType": "Immediate",
+                                                                                    "asyncContext": {
+                                                                                        "stackTrace": [],
+                                                                                        "asyncId": 2622,
+                                                                                        "asyncType": "Immediate",
+                                                                                        "asyncContext": {
+                                                                                            "stackTrace": [],
+                                                                                            "asyncId": 2609,
+                                                                                            "asyncType": "Immediate",
+                                                                                            "asyncContext": "[Omitted]",
+                                                                                            "codeInfo": "lib/http-proxy/passes/web-outgoing.js:85:17:126:3",
+                                                                                            "index": 2606,
+                                                                                            "timerInfo": null,
+                                                                                            "immediateInfo": null
+                                                                                        },
+                                                                                        "codeInfo": "lib/http-proxy/passes/ws-incoming.js:30:26:40:3",
+                                                                                        "index": 2619,
+                                                                                        "timerInfo": null,
+                                                                                        "immediateInfo": null
+                                                                                    },
+                                                                                    "codeInfo": "lib/http-proxy/passes/ws-incoming.js:30:26:40:3",
+                                                                                    "index": 2626,
+                                                                                    "timerInfo": null,
+                                                                                    "immediateInfo": null
+                                                                                },
+                                                                                "codeInfo": "lib/http-proxy/passes/ws-incoming.js:30:26:40:3",
+                                                                                "index": 2633,
+                                                                                "timerInfo": null,
+                                                                                "immediateInfo": null
+                                                                            },
+                                                                            "codeInfo": "lib/http-proxy/passes/ws-incoming.js:30:26:40:3",
+                                                                            "index": 2640,
+                                                                            "timerInfo": null,
+                                                                            "immediateInfo": null
+                                                                        },
+                                                                        "codeInfo": "lib/http-proxy/passes/ws-incoming.js:52:14:67:3",
+                                                                        "index": 2650,
+                                                                        "timerInfo": null,
+                                                                        "immediateInfo": null
+                                                                    },
+                                                                    "codeInfo": "lib/http-proxy/passes/ws-incoming.js:52:14:67:3",
+                                                                    "index": 2657,
+                                                                    "timerInfo": null,
+                                                                    "immediateInfo": null
+                                                                },
+                                                                "codeInfo": "lib/http-proxy/passes/ws-incoming.js:52:14:67:3",
+                                                                "index": 2664,
+                                                                "timerInfo": null,
+                                                                "immediateInfo": null
+                                                            },
+                                                            "codeInfo": "lib/http-proxy/passes/ws-incoming.js:30:26:40:3",
+                                                            "index": 2677,
+                                                            "timerInfo": null,
+                                                            "immediateInfo": null
+                                                        },
+                                                        "codeInfo": "lib/http-proxy/passes/ws-incoming.js:30:26:40:3",
+                                                        "index": 2684,
+                                                        "timerInfo": null,
+                                                        "immediateInfo": null
+                                                    },
+                                                    "codeInfo": "lib/http-proxy/passes/ws-incoming.js:30:26:40:3",
+                                                    "index": 2691,
+                                                    "timerInfo": null,
+                                                    "immediateInfo": null
+                                                },
+                                                "codeInfo": "lib/http-proxy/passes/ws-incoming.js:30:26:40:3",
+                                                "index": 2698,
+                                                "timerInfo": null,
+                                                "immediateInfo": null
+                                            },
+                                            "codeInfo": "lib/http-proxy/passes/ws-incoming.js:52:14:67:3",
+                                            "index": 2708,
+                                            "timerInfo": null,
+                                            "immediateInfo": null
+                                        },
+                                        "codeInfo": "lib/http-proxy/passes/ws-incoming.js:52:14:67:3",
+                                        "index": 2715,
+                                        "timerInfo": null,
+                                        "immediateInfo": null
+                                    },
+                                    "codeInfo": "lib/http-proxy/passes/ws-incoming.js:52:14:67:3",
+                                    "index": 2722,
+                                    "timerInfo": null,
+                                    "immediateInfo": null
+                                },
+                                "codeInfo": "lib/http-proxy.js:21:1:52:1",
+                                "index": 2736,
+                                "timerInfo": null,
+                                "immediateInfo": null
+                            },
+                            "codeInfo": "lib/http-proxy.js:21:1:52:1",
+                            "index": 2746,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": null,
+                        "index": 2750,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": null,
+                    "index": 2781,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "lib/http-proxy/index.js:141:31:155:1",
+                "index": 2782,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/http-proxy/index.js:141:31:155:2)"
+                    ],
+                    "scopeCodeInfo": "lib/http-proxy/index.js:143:7:143:18",
+                    "index": 25159,
+                    "timestamp": "937,096,227,674,489",
+                    "fields": [
+                        "_server"
+                    ],
+                    "isConstruction": false
+                },
+                {
+                    "type": "read",
+                    "stackTrace": [
+                        "(lib/http-proxy/index.js:141:31:155:2)"
+                    ],
+                    "scopeCodeInfo": "lib/http-proxy/index.js:144:5:144:16",
+                    "index": 25160,
+                    "timestamp": "937,096,228,359,789",
+                    "fields": [
+                        "_server"
+                    ],
+                    "isConstruction": false
+                }
+            ]
+        ],
+        "asyncContextToOperations2": [
+            {
+                "stackTrace": [
+                    "(lib/http-proxy/index.js:141:31:155:2)"
+                ],
+                "asyncId": 2791,
+                "asyncType": "TickObject",
+                "asyncContext": {
+                    "stackTrace": [
+                        "(lib/http-proxy/index.js:124:32:139:2)"
+                    ],
+                    "asyncId": 2751,
+                    "asyncType": "TCPSERVERWRAP",
+                    "asyncContext": {
+                        "stackTrace": [],
+                        "asyncId": 2749,
+                        "asyncType": "Immediate",
+                        "asyncContext": {
+                            "stackTrace": [],
+                            "asyncId": 2739,
+                            "asyncType": "Immediate",
+                            "asyncContext": {
+                                "stackTrace": [],
+                                "asyncId": 2725,
+                                "asyncType": "Immediate",
+                                "asyncContext": {
+                                    "stackTrace": [],
+                                    "asyncId": 2718,
+                                    "asyncType": "Immediate",
+                                    "asyncContext": {
+                                        "stackTrace": [],
+                                        "asyncId": 2711,
+                                        "asyncType": "Immediate",
+                                        "asyncContext": {
+                                            "stackTrace": [],
+                                            "asyncId": 2701,
+                                            "asyncType": "Immediate",
+                                            "asyncContext": {
+                                                "stackTrace": [],
+                                                "asyncId": 2694,
+                                                "asyncType": "Immediate",
+                                                "asyncContext": {
+                                                    "stackTrace": [],
+                                                    "asyncId": 2687,
+                                                    "asyncType": "Immediate",
+                                                    "asyncContext": {
+                                                        "stackTrace": [],
+                                                        "asyncId": 2680,
+                                                        "asyncType": "Immediate",
+                                                        "asyncContext": {
+                                                            "stackTrace": [],
+                                                            "asyncId": 2667,
+                                                            "asyncType": "Immediate",
+                                                            "asyncContext": {
+                                                                "stackTrace": [],
+                                                                "asyncId": 2660,
+                                                                "asyncType": "Immediate",
+                                                                "asyncContext": {
+                                                                    "stackTrace": [],
+                                                                    "asyncId": 2653,
+                                                                    "asyncType": "Immediate",
+                                                                    "asyncContext": {
+                                                                        "stackTrace": [],
+                                                                        "asyncId": 2643,
+                                                                        "asyncType": "Immediate",
+                                                                        "asyncContext": {
+                                                                            "stackTrace": [],
+                                                                            "asyncId": 2636,
+                                                                            "asyncType": "Immediate",
+                                                                            "asyncContext": {
+                                                                                "stackTrace": [],
+                                                                                "asyncId": 2629,
+                                                                                "asyncType": "Immediate",
+                                                                                "asyncContext": {
+                                                                                    "stackTrace": [],
+                                                                                    "asyncId": 2622,
+                                                                                    "asyncType": "Immediate",
+                                                                                    "asyncContext": {
+                                                                                        "stackTrace": [],
+                                                                                        "asyncId": 2609,
+                                                                                        "asyncType": "Immediate",
+                                                                                        "asyncContext": {
+                                                                                            "stackTrace": [],
+                                                                                            "asyncId": 2602,
+                                                                                            "asyncType": "Immediate",
+                                                                                            "asyncContext": "[Omitted]",
+                                                                                            "codeInfo": "lib/http-proxy/passes/web-outgoing.js:85:17:126:3",
+                                                                                            "index": 2599,
+                                                                                            "timerInfo": null,
+                                                                                            "immediateInfo": null
+                                                                                        },
+                                                                                        "codeInfo": "lib/http-proxy/passes/web-outgoing.js:85:17:126:3",
+                                                                                        "index": 2606,
+                                                                                        "timerInfo": null,
+                                                                                        "immediateInfo": null
+                                                                                    },
+                                                                                    "codeInfo": "lib/http-proxy/passes/ws-incoming.js:30:26:40:3",
+                                                                                    "index": 2619,
+                                                                                    "timerInfo": null,
+                                                                                    "immediateInfo": null
+                                                                                },
+                                                                                "codeInfo": "lib/http-proxy/passes/ws-incoming.js:30:26:40:3",
+                                                                                "index": 2626,
+                                                                                "timerInfo": null,
+                                                                                "immediateInfo": null
+                                                                            },
+                                                                            "codeInfo": "lib/http-proxy/passes/ws-incoming.js:30:26:40:3",
+                                                                            "index": 2633,
+                                                                            "timerInfo": null,
+                                                                            "immediateInfo": null
+                                                                        },
+                                                                        "codeInfo": "lib/http-proxy/passes/ws-incoming.js:30:26:40:3",
+                                                                        "index": 2640,
+                                                                        "timerInfo": null,
+                                                                        "immediateInfo": null
+                                                                    },
+                                                                    "codeInfo": "lib/http-proxy/passes/ws-incoming.js:52:14:67:3",
+                                                                    "index": 2650,
+                                                                    "timerInfo": null,
+                                                                    "immediateInfo": null
+                                                                },
+                                                                "codeInfo": "lib/http-proxy/passes/ws-incoming.js:52:14:67:3",
+                                                                "index": 2657,
+                                                                "timerInfo": null,
+                                                                "immediateInfo": null
+                                                            },
+                                                            "codeInfo": "lib/http-proxy/passes/ws-incoming.js:52:14:67:3",
+                                                            "index": 2664,
+                                                            "timerInfo": null,
+                                                            "immediateInfo": null
+                                                        },
+                                                        "codeInfo": "lib/http-proxy/passes/ws-incoming.js:30:26:40:3",
+                                                        "index": 2677,
+                                                        "timerInfo": null,
+                                                        "immediateInfo": null
+                                                    },
+                                                    "codeInfo": "lib/http-proxy/passes/ws-incoming.js:30:26:40:3",
+                                                    "index": 2684,
+                                                    "timerInfo": null,
+                                                    "immediateInfo": null
+                                                },
+                                                "codeInfo": "lib/http-proxy/passes/ws-incoming.js:30:26:40:3",
+                                                "index": 2691,
+                                                "timerInfo": null,
+                                                "immediateInfo": null
+                                            },
+                                            "codeInfo": "lib/http-proxy/passes/ws-incoming.js:30:26:40:3",
+                                            "index": 2698,
+                                            "timerInfo": null,
+                                            "immediateInfo": null
+                                        },
+                                        "codeInfo": "lib/http-proxy/passes/ws-incoming.js:52:14:67:3",
+                                        "index": 2708,
+                                        "timerInfo": null,
+                                        "immediateInfo": null
+                                    },
+                                    "codeInfo": "lib/http-proxy/passes/ws-incoming.js:52:14:67:3",
+                                    "index": 2715,
+                                    "timerInfo": null,
+                                    "immediateInfo": null
+                                },
+                                "codeInfo": "lib/http-proxy/passes/ws-incoming.js:52:14:67:3",
+                                "index": 2722,
+                                "timerInfo": null,
+                                "immediateInfo": null
+                            },
+                            "codeInfo": "lib/http-proxy.js:21:1:52:1",
+                            "index": 2736,
+                            "timerInfo": null,
+                            "immediateInfo": null
+                        },
+                        "codeInfo": "lib/http-proxy.js:21:1:52:1",
+                        "index": 2746,
+                        "timerInfo": null,
+                        "immediateInfo": null
+                    },
+                    "codeInfo": null,
+                    "index": 2748,
+                    "timerInfo": null,
+                    "immediateInfo": null
+                },
+                "codeInfo": "lib/http-proxy/index.js:148:3:154:3",
+                "index": 2788,
+                "timerInfo": null,
+                "immediateInfo": null
+            },
+            [
+                {
+                    "type": "write",
+                    "stackTrace": [
+                        "(lib/http-proxy/index.js:148:3:154:4)"
+                    ],
+                    "scopeCodeInfo": "lib/http-proxy/index.js:150:5:150:23",
+                    "index": 25164,
+                    "timestamp": "937,096,249,736,864",
+                    "fields": [
+                        "_server"
+                    ],
+                    "isConstruction": false
+                }
+            ]
+        ]
+    }
+]
