@@ -6,6 +6,10 @@ import {EventEmitterInfo} from './EventEmitterInfo';
 import {EventEmitterOperation} from './EventEmitterOperation';
 import {EventEmitter} from 'events';
 
+import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 export class EventEmitterDeclaration extends ResourceDeclaration
 {
     private readonly eventEmitterInfo: EventEmitterInfo;
@@ -13,6 +17,8 @@ export class EventEmitterDeclaration extends ResourceDeclaration
 
     constructor(eventEmitter: EventEmitter, event: EventEmitterInfo['event'], possibleDefineCodeScope: SourceCodeInfo | null)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("EventEmitterDeclaration do LogStore");
+
         super();
         this.eventEmitterInfo = new EventEmitterInfo(eventEmitter, event, possibleDefineCodeScope);
         this.asyncContextToOperations = new Map();
@@ -20,6 +26,8 @@ export class EventEmitterDeclaration extends ResourceDeclaration
 
     public appendOperation(currentCallbackFunction: AsyncCalledFunctionInfo, eventEmitterOperation: EventEmitterOperation): void
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterDeclaration do LogStore", "appendOperation");
+
         const operations = this.asyncContextToOperations.get(currentCallbackFunction);
         if (operations === undefined)
         {
@@ -34,16 +42,22 @@ export class EventEmitterDeclaration extends ResourceDeclaration
 
     public getAsyncContextToOperations(): ReadonlyMap<AsyncCalledFunctionInfo, ReadonlyArray<EventEmitterOperation>>
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterDeclaration do LogStore", "getAsyncContextToOperations");
+
         return this.asyncContextToOperations;
     }
 
     public getResourceInfo(): EventEmitterInfo
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterDeclaration do LogStore", "getResourceInfo");
+
         return this.eventEmitterInfo;
     }
 
     public is(other: unknown, event?: string | symbol): boolean
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterDeclaration do LogStore", "is");
+
         return this.eventEmitterInfo.is(other, event);
     }
 }

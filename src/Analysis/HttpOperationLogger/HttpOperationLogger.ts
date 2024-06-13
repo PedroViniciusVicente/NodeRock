@@ -11,6 +11,10 @@ import {HttpAgentOperationLogger} from './SubLogger/HttpAgentOperationLogger';
 import {HttpIncomingMessageOperationLogger} from './SubLogger/HttpIncomingMessageOperationLogger';
 import {HttpOutgoingMessageOperationLogger} from './SubLogger/HttpOutgoingMessageOperationLogger';
 
+import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 export class HttpOperationLogger extends Analysis
 {
     public invokeFun: Hooks['invokeFun'] | undefined;
@@ -20,12 +24,16 @@ export class HttpOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("HttpOperationLogger");
+
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks(): void
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("HttpOperationLogger", "registerHooks");
+
         // We only care about operations on underlying socket
         this.invokeFun = (iid, f, _base, _args, result) =>
         {

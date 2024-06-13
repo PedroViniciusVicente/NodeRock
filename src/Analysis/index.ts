@@ -32,8 +32,14 @@ import {JSONOperationLogger} from './JSONOperationLogger';
 import {AsyncAPILogger} from './AsyncAPILogger';
 import {MemoryUsageAnalysis} from './LogStoreAnalysis/MemoryUsageAnalysis';
 
+import {GerenciadorRastrearChamadas} from './GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 (function (sandbox: Sandbox)
 {
+    meuGerenciadorRastrearChamadas.criarArquivoVazio();
+    
     const startTimestamp = Date.now();
 
     if (false)
@@ -142,7 +148,7 @@ import {MemoryUsageAnalysis} from './LogStoreAnalysis/MemoryUsageAnalysis';
         sandbox.addAnalysis(new StringDecoderOperationLogger(sandbox));
         sandbox.addAnalysis(new JSONOperationLogger(sandbox));
 
-        sandbox.addAnalysis(new MemoryUsageAnalysis(sandbox));
+        //sandbox.addAnalysis(new MemoryUsageAnalysis(sandbox));
 
         const endTimestamp = Date.now() - startTimestamp;
 

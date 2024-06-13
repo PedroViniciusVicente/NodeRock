@@ -1,3 +1,7 @@
+import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 export class StatisticsStore
 {
     private static eventCount = 0;
@@ -63,16 +67,19 @@ export class StatisticsStore
 
     public static addEventCount()
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("StatisticsStore do LogStore", "***addEventCount***");
         StatisticsStore.eventCount++;
     }
 
     public static addRaceCount()
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("StatisticsStore do LogStore", "***addRaceCount***");
         StatisticsStore.raceCount++;
     }
 
     public static addFilteredFPCount()
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("StatisticsStore do LogStore", "***addFilteredFPCount***");
         StatisticsStore.filteredFPCount++;
     }
 

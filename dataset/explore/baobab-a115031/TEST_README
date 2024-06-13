@@ -1,1 +1,0 @@
-TS_NODE_TRANSPILE_ONLY=true yarn nodeprof:test ~/NodeALDataset/explore/baobab-a115031/ node_modules/.bin/_mocha --require test/register.js --require ts-node/register --require tsconfig-paths/register test/suites/*.ts --timeout 8000 --exit

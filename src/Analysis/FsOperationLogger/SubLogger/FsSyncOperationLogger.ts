@@ -13,6 +13,10 @@ import {getSourceCodeInfoFromIid, isBufferLike, shouldBeVerbose} from '../../../
 import {FileLogStoreAdaptor} from '../FileLogStoreAdaptor';
 import {willFileBeCreatedOrTruncated} from '../Util';
 
+import {GerenciadorRastrearChamadas} from '../../GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 export class FsSyncOperationLogger extends Analysis
 {
     public invokeFunPre: Hooks['invokeFunPre'] | undefined;
@@ -23,12 +27,16 @@ export class FsSyncOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("FsSyncOperationLogger");
+
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks()
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("FsSyncOperationLogger", "registerHooks");
+
         this.invokeFunPre = (iid, f, _base, args) =>
         {
             const startTimestamp = Date.now();

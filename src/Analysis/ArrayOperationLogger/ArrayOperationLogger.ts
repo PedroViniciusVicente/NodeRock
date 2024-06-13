@@ -7,6 +7,10 @@ import {ObjectLogStore} from '../../LogStore/ObjectLogStore';
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {shouldBeVerbose} from '../../Util';
 
+import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 /**Does not support spread expression now*/
 export class ArrayOperationLogger extends Analysis
 {
@@ -17,12 +21,17 @@ export class ArrayOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("ArrayOperationLogger");
+
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks()
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("ArrayOperationLogger", "registerHooks");
+
+
         this.endExecution = () =>
         {
             if (shouldBeVerbose())

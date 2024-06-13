@@ -10,6 +10,10 @@ import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {getSourceCodeInfoFromIid, shouldBeVerbose} from '../../Util';
 import {CallStackLogStore} from '../../LogStore/CallStackLogStore';
 
+import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 export class PrimitiveOperationLogger extends Analysis
 {
     public declare: Hooks['declare'] | undefined;
@@ -30,12 +34,16 @@ export class PrimitiveOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("PrimitiveOperationLogger");
+
         super(sandbox);
         this.awaitIidToScopeQueue = new Map();
     }
 
     protected override registerHooks()
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("PrimitiveOperationLogger", "registerHooks");
+
         this.awaitPre = iid =>
         {
             const startTimestamp = Date.now();
@@ -184,6 +192,8 @@ export class PrimitiveOperationLogger extends Analysis
 
     private onVariableOperation(type: 'read' | 'write', iid: number, name: string, valBefore: unknown, val: unknown, isGlobal: boolean)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("PrimitiveOperationLogger", "onVariableOperation");
+
         if (name === 'this')
         {
             return;

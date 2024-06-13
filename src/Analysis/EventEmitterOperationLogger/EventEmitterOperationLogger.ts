@@ -4,6 +4,10 @@ import {EventEmitterLogStore} from '../../LogStore/EventEmitterLogStore';
 import {getSourceCodeInfoFromIid, shouldBeVerbose} from '../../Util';
 import {CallStackLogStore} from '../../LogStore/CallStackLogStore';
 
+import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 export class EventEmitterOperationLogger extends Analysis
 {
     public invokeFunPre: Hooks['invokeFunPre'] | undefined;
@@ -13,12 +17,16 @@ export class EventEmitterOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("EventEmitterOperationLogger");
+
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks()
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterOperationLogger", "registerHooks");
+
         this.invokeFunPre = (iid, f, base, args) =>
         {
             const startTimestamp = Date.now();

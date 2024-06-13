@@ -7,6 +7,10 @@ import {SocketLogStore} from '../../LogStore/SocketLogStore';
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {getSourceCodeInfoFromIid, isBufferLike, shouldBeVerbose} from '../../Util';
 
+import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 export class NetOperationLogger extends Analysis
 {
     public invokeFun: Hooks['invokeFun'] | undefined;
@@ -17,6 +21,8 @@ export class NetOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("NetOperationLogger");
+
         super(sandbox);
         this.timeConsumed = 0;
 
@@ -25,6 +31,8 @@ export class NetOperationLogger extends Analysis
 
     protected override doMonkeyPatch()
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("NetOperationLogger", "doMonkeyPatch");
+
         const loggerThis = this;
 
         const originalSocketWrite = net.Socket.prototype.write;
@@ -85,6 +93,8 @@ export class NetOperationLogger extends Analysis
 
     protected override registerHooks()
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("NetOperationLogger", "registerHooks");
+
         // We only care about operations on underlying socket;
         this.invokeFun = (iid, f, _base, _args, result) =>
         {

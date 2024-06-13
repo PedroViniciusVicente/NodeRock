@@ -10,6 +10,10 @@ import asyncHooks from 'async_hooks';
 import {CallStackLogStore} from '../CallStackLogStore';
 import {SourceCodeInfo} from '../Class/SourceCodeInfo';
 
+import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 export class StreamLogStore
 {
     private static readonly streamToStreamDeclarations: WeakMap<Readable | Writable, StreamDeclaration> = new WeakMap();
@@ -17,11 +21,15 @@ export class StreamLogStore
 
     public static getStreamDeclarations(): ReadonlyArray<StreamDeclaration>
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("StreamLogStore do LogStore", "getStreamDeclarations");
+
         return StreamLogStore.streamDeclarations;
     }
 
     public static appendStreamOperation(stream: Readable | Writable, type: 'read' | 'write', operationKind: StreamOperation['operationKind'], sandbox: Sandbox, iid: number)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("StreamLogStore do LogStore", "appendStreamOperation");
+
         const streamDeclaration = StreamLogStore.getStreamDeclaration(stream, getSourceCodeInfoFromIid(iid, sandbox));
         const asyncContext = AsyncContextLogStore.getAsyncContextFromAsyncId(asyncHooks.executionAsyncId());
         if (type === 'write')
@@ -34,6 +42,8 @@ export class StreamLogStore
 
     private static getStreamDeclaration(stream: Readable | Writable, sourceCodeInfo: SourceCodeInfo | null)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("StreamLogStore do LogStore", "getStreamDeclaration");
+
         const streamDeclaration = StreamLogStore.streamToStreamDeclarations.get(stream);
         if (streamDeclaration === undefined)
         {

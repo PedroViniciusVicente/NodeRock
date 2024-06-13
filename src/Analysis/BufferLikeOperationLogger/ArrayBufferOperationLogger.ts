@@ -6,6 +6,10 @@ import {BufferLogStore} from '../../LogStore/BufferLogStore';
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {getSourceCodeInfoFromIid, shouldBeVerbose} from '../../Util';
 
+import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 export class ArrayBufferOperationLogger extends Analysis
 {
     public invokeFun: Hooks['invokeFun'] | undefined;
@@ -15,12 +19,16 @@ export class ArrayBufferOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("ArrayBufferOperationLogger");
+
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks(): void
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("ArrayBufferOperationLogger", "registerHooks");
+
         this.invokeFun = (iid, f, base, args, result) =>
         {
             const startTimestamp = Date.now();

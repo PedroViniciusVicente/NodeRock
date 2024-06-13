@@ -6,6 +6,10 @@ import {TimerInfo} from '../../LogStore/Class/TimerInfo';
 import {AsyncCalledFunctionInfo} from '../../LogStore/Class/AsyncCalledFunctionInfo';
 import {getUnboundFunction} from '../../Util';
 
+import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 export class TimeoutLogger extends Analysis
 {
     public invokeFunPre: Hooks['invokeFunPre'] | undefined;
@@ -16,6 +20,8 @@ export class TimeoutLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("TimeoutLogger");
+
         super(sandbox);
         this.timeoutIdToCallbackInfo = new WeakMap();
         this.intervalIdToCallbackInfo = new WeakMap();
@@ -23,6 +29,9 @@ export class TimeoutLogger extends Analysis
 
     protected override registerHooks()
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("TimeoutLogger", "registerHooks");
+
+
         this.invokeFunPre = (_iid, f, _base, args) =>
         {
             if (f === setTimeout || f === setInterval)

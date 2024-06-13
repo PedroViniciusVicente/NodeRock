@@ -12,6 +12,10 @@ import {TimerLogStore} from '../../LogStore/TimerLogStore';
 import {TimerInfo} from '../../LogStore/Class/TimerInfo';
 import {ImmediateLogStore} from '../../LogStore/ImmediateLogStore';
 
+
+import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
 /**
  * Logging all callback function content information into `AsyncContextLogStore`.
  * Should be run prior to other analysis. i.e. `--analysis AsyncContextLogStore --analysis otherAnalysis`
@@ -29,6 +33,9 @@ export class AsyncContextLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
+        // console.log("DEBUG: O construtor do AsyncContextLogger foi chamado");
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("AsyncContextLogger");
+
         super(sandbox);
         this.asyncContextChanged = false;
         this.lastAsyncId = -1;
@@ -43,6 +50,8 @@ export class AsyncContextLogger extends Analysis
 
     protected override registerHooks()
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncContextLogger", "registerHooks");
+
         this.endExecution = () =>
         {
             if (shouldBeVerbose())
@@ -136,6 +145,8 @@ export class AsyncContextLogger extends Analysis
     // must be an arrow function to fix `this`
     private asyncHookInit = (asyncId: number, type: string, triggerAsyncId: number) =>
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncContextLogger", "asyncHookInit");
+
         const startTimestamp = Date.now();
 
         let triggerAsyncFunction = AsyncContextLogStore.getAsyncContextFromAsyncId(triggerAsyncId);
@@ -156,6 +167,8 @@ export class AsyncContextLogger extends Analysis
     // must be an arrow function to fix `this`
     private asyncHookBefore = (asyncId: number) =>
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncContextLogger", "asyncHookBefore");
+
         const startTimestamp = Date.now();
 
         this.asyncContextChanged = true;

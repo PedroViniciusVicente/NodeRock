@@ -7,6 +7,10 @@ import {ObjectLogStore} from '../../LogStore/ObjectLogStore';
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {isArrayAccess, isBufferLike, logUnboundFunction, shouldBeVerbose} from '../../Util';
 
+import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 export class ObjectOperationLogger extends Analysis
 {
     public invokeFunPre: Hooks['invokeFunPre'] | undefined;
@@ -23,6 +27,8 @@ export class ObjectOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("ObjectOperationLogger");
+
         super(sandbox);
         this.constructorStack = [];
         this.timeConsumed = 0;
@@ -30,6 +36,8 @@ export class ObjectOperationLogger extends Analysis
 
     protected override registerHooks(): void
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("ObjectOperationLogger", "registerHooks");
+
         this.endExecution = () =>
         {
             if (shouldBeVerbose())

@@ -2,6 +2,10 @@
 
 import {Range} from './Range';
 
+import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 export class SourceCodeInfo
 {
     public readonly file: string;
@@ -13,12 +17,16 @@ export class SourceCodeInfo
      * */
     constructor(file: string, range: Readonly<Range>)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("SourceCodeInfo do LogStore");
+
         this.file = file;
         this.range = Object.freeze(range);
     }
 
     public toJSON()
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("SourceCodeInfo do LogStore", "toJSON");
+
         const {startRow, startCol, endRow, endCol} = this.range;
         return `${this.file}:${startRow}:${startCol}:${endRow}:${endCol}`;
     }

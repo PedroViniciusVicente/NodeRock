@@ -8,6 +8,10 @@ import {TimerInfo} from './TimerInfo';
 import {ImmediateInfo} from './ImmediateInfo';
 import {isRunningUnitTests} from '../../Util';
 
+import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 export class AsyncCalledFunctionInfo
 {
     public static readonly UNKNOWN_ASYNC_ID = 0;
@@ -42,6 +46,8 @@ export class AsyncCalledFunctionInfo
                 codeInfo: SourceCodeInfo | null,
                 timerInfo: TimerInfo | null, immediateInfo: ImmediateInfo | null)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("AsyncCalledFunctionInfo do LogStore");
+
         this.functionWeakRef = func !== null ? new WeakRef(func) : null;
         this.stackTrace = stackTrace;
         this.asyncId = asyncId;
@@ -57,6 +63,8 @@ export class AsyncCalledFunctionInfo
 
     public clone(): AsyncCalledFunctionInfo
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncCalledFunctionInfo do LogStore", "clone");
+
         const func = this.functionWeakRef === null ? null : this.functionWeakRef.deref();
         assert.ok(func !== undefined);  // func should not be gc-ed
         return new AsyncCalledFunctionInfo(
@@ -73,6 +81,8 @@ export class AsyncCalledFunctionInfo
 
     public setInfo(func: Function, stackTrace: string[], asyncId: number, asyncType: string, asyncContext: AsyncCalledFunctionInfo, codeInfo: SourceCodeInfo | null, timerInfo: TimerInfo | null, immediateInfo: ImmediateInfo | null)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncCalledFunctionInfo do LogStore", "setInfo");
+
         this.functionWeakRef = new WeakRef(func);
         this.stackTrace = stackTrace;
         this.asyncId = asyncId;
@@ -87,6 +97,8 @@ export class AsyncCalledFunctionInfo
     public setHasWriteOperation(resourceDeclaration: ResourceDeclaration): void;
     public setHasWriteOperation(resourceDeclarationOrInfo: ResourceInfo | ResourceDeclaration)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncCalledFunctionInfo do LogStore", "setHasWriteOperation");
+
         if (resourceDeclarationOrInfo instanceof ResourceDeclaration)
         {
             this.hasWriteOperationOnResourcesSet.add(resourceDeclarationOrInfo.getResourceInfo());
@@ -101,6 +113,8 @@ export class AsyncCalledFunctionInfo
     public getHasWriteOperationOn(resourceDeclaration: ResourceDeclaration): boolean;
     public getHasWriteOperationOn(resourceDeclarationOrInfo: ResourceInfo | ResourceDeclaration): boolean
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncCalledFunctionInfo do LogStore", "getHasWriteOperationOn");
+
         if (resourceDeclarationOrInfo instanceof ResourceDeclaration)
         {
             return this.hasWriteOperationOnResourcesSet.has(resourceDeclarationOrInfo.getResourceInfo());
@@ -113,6 +127,8 @@ export class AsyncCalledFunctionInfo
 
     public toJSON()
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncCalledFunctionInfo do LogStore", "toJSON");
+
         if (this.codeInfo === null && this.asyncType === 'Immediate')
         {
             return null;
@@ -151,6 +167,8 @@ export class AsyncCalledFunctionInfo
     /** get all asyncIds on the async context chain */
     public getAsyncContextChainAsyncIdsWithoutTickObjects(): Set<number>
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncCalledFunctionInfo do LogStore", "getAsyncContextChainAsyncIdsWithoutTickObjects");
+
         if (this.asyncContextChainWithoutTickObjectsAsyncIdsCache)
         {
             return this.asyncContextChainWithoutTickObjectsAsyncIdsCache;
@@ -188,6 +206,8 @@ export class AsyncCalledFunctionInfo
     /** get all asyncIds on the async context chain */
     public getAsyncContextChainAsyncIds(): Set<number>
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncCalledFunctionInfo do LogStore", "getAsyncContextChainAsyncIds");
+
         if (this.asyncContextChainAsyncIdsCache)
         {
             return this.asyncContextChainAsyncIdsCache;
@@ -220,6 +240,8 @@ export class AsyncCalledFunctionInfo
 
     public getNonTickObjectAsyncId()
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncCalledFunctionInfo do LogStore", "getNonTickObjectAsyncId");
+
         if (this.nonTickObjectAsyncIdCache !== undefined)
         {
             return this.nonTickObjectAsyncIdCache;
@@ -238,6 +260,8 @@ export class AsyncCalledFunctionInfo
 
     private getPlainCopy(): Record<keyof AsyncCalledFunctionInfo, any>
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncCalledFunctionInfo do LogStore", "getPlainCopy");
+
         return {
             ...this,
             functionWeakRef: undefined,

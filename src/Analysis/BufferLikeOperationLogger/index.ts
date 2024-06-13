@@ -6,10 +6,16 @@ import {BufferOperationLogger} from './BufferOperationLogger';
 import {DataViewOperationLogger} from './DataViewOperationLogger';
 import {TypedArrayOperationLogger} from './TypedArrayOperationLogger';
 
+import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 export class BufferLikeOperationLogger extends Analysis
 {
     constructor(sandbox: Sandbox)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("BufferLikeOperationLogger");
+
         super(sandbox);
         sandbox.addAnalysis(new ArrayBufferOperationLogger(sandbox));
         sandbox.addAnalysis(new BufferOperationLogger(sandbox));

@@ -14,6 +14,10 @@ import asyncHooks from 'async_hooks';
 import {AsyncContextLogStore} from '../../../LogStore/AsyncContextLogStore';
 import {willFileBeCreatedOrTruncated} from '../Util';
 
+import {GerenciadorRastrearChamadas} from '../../GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 interface RegistrationInfo
 {
     register: Function,
@@ -34,6 +38,8 @@ export class FsAsyncOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("FsAsyncOperationLogger");
+
         super(sandbox);
         this.callbackToRegistrationInfos = new WeakMap();
         this.timeConsumed = 0;
@@ -41,6 +47,8 @@ export class FsAsyncOperationLogger extends Analysis
 
     protected override registerHooks()
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("FsAsyncOperationLogger", "registerHooks");
+
         this.invokeFun = (iid, f, _base, args) =>
         {
             const startTimestamp = Date.now();
@@ -477,6 +485,7 @@ export class FsAsyncOperationLogger extends Analysis
 
     private addRegistrationInfo(callback: Function, registrationInfo: RegistrationInfo)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("FsAsyncOperationLogger", "addRegistrationInfo");
         // Function provided by functionEnter() is unbound, so we only log unbound version function
         const unboundCallback = getUnboundFunction(callback);
         const registrationInfos = this.callbackToRegistrationInfos.get(unboundCallback);

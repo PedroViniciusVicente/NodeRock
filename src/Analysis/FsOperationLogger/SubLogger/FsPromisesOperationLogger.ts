@@ -14,6 +14,10 @@ import assert from 'assert';
 import util from 'util';
 import {willFileBeCreatedOrTruncated} from '../Util';
 
+import {GerenciadorRastrearChamadas} from '../../GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 export class FsPromisesOperationLogger extends Analysis
 {
     public invokeFun: Hooks['invokeFun'] | undefined;
@@ -23,12 +27,16 @@ export class FsPromisesOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("FsPromisesOperationLogger");
+
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks()
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("FsPromisesOperationLogger", "registerHooks");
+
         this.invokeFun = (iid, f, _base, args, result) =>
         {
             const startTimestamp = Date.now();

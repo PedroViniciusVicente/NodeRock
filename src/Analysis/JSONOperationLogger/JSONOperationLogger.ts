@@ -5,6 +5,10 @@ import {ObjectLogStore} from '../../LogStore/ObjectLogStore';
 import {BufferLogStore} from '../../LogStore/BufferLogStore';
 import assert from 'assert';
 
+import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 export class JSONOperationLogger extends Analysis
 {
     public invokeFun: Hooks['invokeFun'] | undefined;
@@ -14,12 +18,16 @@ export class JSONOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("JSONOperationLogger");
+
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks()
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("JSONOperationLogger", "registerHooks");
+
         this.invokeFun = (iid, f, _base, args, result) =>
         {
             const startTimestamp = Date.now();

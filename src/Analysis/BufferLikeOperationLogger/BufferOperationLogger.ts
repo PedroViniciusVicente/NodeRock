@@ -11,6 +11,10 @@ import {ObjectLogStore} from '../../LogStore/ObjectLogStore';
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {getSourceCodeInfoFromIid, isArrayAccess, shouldBeVerbose} from '../../Util';
 
+import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 export class BufferOperationLogger extends Analysis
 {
     private static readonly read8OnlyApis: Set<Function> = new Set([
@@ -86,12 +90,16 @@ export class BufferOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("BufferOperationLogger");
+
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks(): void
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("BufferOperationLogger", "registerHooks");
+
         this.invokeFunPre = (iid, f, base, args) =>
         {
             const startTimestamp = Date.now();

@@ -5,6 +5,11 @@ import {SocketLogStore} from '../../../LogStore/SocketLogStore';
 import {Analysis, Hooks, Sandbox} from '../../../Type/nodeprof';
 import {shouldBeVerbose} from '../../../Util';
 
+import {GerenciadorRastrearChamadas} from '../../GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
+
 export class HttpIncomingMessageOperationLogger extends Analysis
 {
     public invokeFunPre: Hooks['invokeFunPre'] | undefined;
@@ -14,12 +19,16 @@ export class HttpIncomingMessageOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("HttpIncomingMessageOperationLogger");
+
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks()
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("HttpIncomingMessageOperationLogger", "registerHooks");
+
         this.invokeFunPre = (iid, f, base) =>
         {
             const startTimestamp = Date.now();

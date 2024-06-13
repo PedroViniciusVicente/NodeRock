@@ -10,6 +10,10 @@ import {ObjectLogStore} from '../../LogStore/ObjectLogStore';
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {getSourceCodeInfoFromIid, isArrayAccess, shouldBeVerbose} from '../../Util';
 
+import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 export class TypedArrayOperationLogger extends Analysis
 {
     private static readonly constructors = new Set([
@@ -43,12 +47,16 @@ export class TypedArrayOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("TypedArrayOperationLogger");
+
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks(): void
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("TypedArrayOperationLogger", "registerHooks");
+
         this.invokeFunPre = (iid, f, base, args) =>
         {
             const startTimestamp = Date.now();

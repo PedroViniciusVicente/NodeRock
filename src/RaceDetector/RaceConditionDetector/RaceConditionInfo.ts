@@ -3,6 +3,10 @@ import {ResourceInfo} from '../../LogStore/Class/ResourceInfo';
 import {AsyncCalledFunctionInfo} from '../../LogStore/Class/AsyncCalledFunctionInfo';
 import {ResourceOperation} from '../../LogStore/Class/ResourceOperation';
 
+import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 export class RaceConditionInfo extends Info
 {
     public readonly timeDiff: bigint;
@@ -17,6 +21,8 @@ export class RaceConditionInfo extends Info
                 asyncContextToOperations2: RaceConditionInfo['asyncContextToOperations2'],
                 timeDiff: bigint)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("RaceConditionInfo do RaceDetector");
+
         super(resourceInfo);
         this.timeDiff = timeDiff;
         this.asyncContextToOperations1 = asyncContextToOperations1;

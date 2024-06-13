@@ -5,6 +5,10 @@ import {BufferLogStore} from '../../LogStore/BufferLogStore';
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {getSourceCodeInfoFromIid, shouldBeVerbose} from '../../Util';
 
+import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
+const meuGerenciadorRastrearChamadas = new 
+GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+
 export class DataViewOperationLogger extends Analysis
 {
     private static readonly get8Apis: Set<Function> = new Set([
@@ -51,12 +55,16 @@ export class DataViewOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("DataViewOperationLogger");
+
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected registerHooks(): void
     {
+        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("DataViewOperationLogger", "registerHooks");
+
         this.invokeFun = (iid, f, base) =>
         {
             const startTimestamp = Date.now();
