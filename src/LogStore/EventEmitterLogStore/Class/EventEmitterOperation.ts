@@ -5,8 +5,7 @@ import {EventEmitterOperationKind} from '../Type/EventEmitterOperationKind';
 import {StatisticsStore} from '../../StatisticsStore';
 
 import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class EventEmitterOperation extends ResourceOperation
 {
@@ -15,7 +14,7 @@ export class EventEmitterOperation extends ResourceOperation
 
     constructor(type: 'read' | 'write', operationKind: EventEmitterOperation['operationKind'], affectedListeners: EventEmitterOperation['affectedListeners'], stackTrace: string[] | null, sourceCodeScopeInfo: SourceCodeInfo | null)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("EventEmitterOperation do LogStore");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("EventEmitterOperation do LogStore");
 
         super(type, stackTrace, sourceCodeScopeInfo);
         this.operationKind = operationKind;
@@ -25,14 +24,14 @@ export class EventEmitterOperation extends ResourceOperation
 
     public getOperationKind()
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterOperation do LogStore", "getOperationKind");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterOperation do LogStore", "getOperationKind");
 
         return this.operationKind;
     }
 
     public getAffectedListeners()
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterOperation do LogStore", "getAffectedListeners");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterOperation do LogStore", "getAffectedListeners");
 
         return this.affectedListeners;
     }

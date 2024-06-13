@@ -4,8 +4,7 @@ import {MemoryUsageLogStore} from '../../LogStore/MemoryUsageLogStore';
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 
 import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class MemoryUsageAnalysis extends Analysis
 {
@@ -15,7 +14,7 @@ export class MemoryUsageAnalysis extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("MemoryUsageAnalysis");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("MemoryUsageAnalysis");
 
         super(sandbox);
 
@@ -27,7 +26,7 @@ export class MemoryUsageAnalysis extends Analysis
 
     protected registerHooks(): void
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("MemoryUsageAnalysis", "registerHooks");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("MemoryUsageAnalysis", "registerHooks");
 
         this.endExecution = () =>
         {

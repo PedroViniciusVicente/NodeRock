@@ -12,8 +12,7 @@ import {BufferDeclaration} from './Class/BufferDeclaration';
 import {BufferOperation} from './Class/BufferOperation';
 
 import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 // Since buffer is used in many modules, we need to log its declarations in a shared object
 export class BufferLogStore
@@ -23,7 +22,7 @@ export class BufferLogStore
 
     public static getBufferDeclaration(buffer: ArrayBufferLike, sourceCodeInfo: SourceCodeInfo | null)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("BufferLogStore do LogStore", "getBufferDeclaration");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("BufferLogStore do LogStore", "getBufferDeclaration");
 
         const bufferDeclaration = BufferLogStore.bufferToBufferDeclaration.get(buffer);
         if (bufferDeclaration === undefined)
@@ -41,7 +40,7 @@ export class BufferLogStore
 
     public static getBufferDeclarations(): ReadonlyArray<BufferDeclaration>
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("BufferLogStore do LogStore", "getBufferDeclarations");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("BufferLogStore do LogStore", "getBufferDeclarations");
 
         return BufferLogStore.bufferDeclarations;
     }
@@ -50,7 +49,7 @@ export class BufferLogStore
     public static appendBufferOperation(buffer: ArrayBufferLike | ArrayBufferView, type: 'read' | 'write', accessStage: BufferOperation['accessStage'], accessRange: BufferOperation['accessRange'], sandbox: Sandbox, iid: number): void;
     public static appendBufferOperation(buffer: ArrayBufferLike | ArrayBufferView, type: 'read' | 'write', accessStage: BufferOperation['accessStage'], accessRange: BufferOperation['accessRange'], sandboxOrSourceCodeInfo: Sandbox | SourceCodeInfo | null, iid?: number): void
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("BufferLogStore do LogStore", "appendBufferOperation");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("BufferLogStore do LogStore", "appendBufferOperation");
 
         if (!util.types.isAnyArrayBuffer(buffer))
         {
@@ -90,7 +89,7 @@ export class BufferLogStore
      */
     public static getArrayBufferRangeOfArrayBufferView(arrayBufferView: ArrayBufferView | ArrayBufferLike, start = 0, end = arrayBufferView.byteLength): BufferOperation['accessRange']
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("BufferLogStore do LogStore", "getArrayBufferRangeOfArrayBufferView");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("BufferLogStore do LogStore", "getArrayBufferRangeOfArrayBufferView");
 
         if (util.types.isAnyArrayBuffer(arrayBufferView))
         {

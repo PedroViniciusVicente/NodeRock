@@ -3,8 +3,7 @@ import {outputSync, toJSON} from '../../Util';
 import {EventEmitterLogStore} from '../../LogStore/EventEmitterLogStore';
 
 import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class EventEmitterLogStoreAnalysis extends Analysis
 {
@@ -12,14 +11,14 @@ export class EventEmitterLogStoreAnalysis extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("EventEmitterLogStoreAnalysis");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("EventEmitterLogStoreAnalysis");
 
         super(sandbox);
     }
 
     protected registerHooks(): void
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterLogStoreAnalysis", "registerHooks");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterLogStoreAnalysis", "registerHooks");
 
         this.endExecution = () =>
         {

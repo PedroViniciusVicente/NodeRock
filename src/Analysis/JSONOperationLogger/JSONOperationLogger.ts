@@ -6,8 +6,7 @@ import {BufferLogStore} from '../../LogStore/BufferLogStore';
 import assert from 'assert';
 
 import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class JSONOperationLogger extends Analysis
 {
@@ -18,7 +17,7 @@ export class JSONOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("JSONOperationLogger");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("JSONOperationLogger");
 
         super(sandbox);
         this.timeConsumed = 0;
@@ -26,7 +25,7 @@ export class JSONOperationLogger extends Analysis
 
     protected override registerHooks()
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("JSONOperationLogger", "registerHooks");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("JSONOperationLogger", "registerHooks");
 
         this.invokeFun = (iid, f, _base, args, result) =>
         {

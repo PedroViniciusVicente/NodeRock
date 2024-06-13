@@ -1,8 +1,7 @@
 import {SourceCodeInfo} from './SourceCodeInfo';
 
 import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export abstract class ResourceInfo
 {
@@ -11,7 +10,7 @@ export abstract class ResourceInfo
 
     protected constructor(type: string, possibleDefineCodeScope: SourceCodeInfo | null)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("ResourceInfo do LogStore");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("ResourceInfo do LogStore");
 
         this.type = type;
         this.possibleDefineCodeScope = possibleDefineCodeScope;
@@ -19,14 +18,14 @@ export abstract class ResourceInfo
 
     public getType()
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("ResourceInfo do LogStore", "getType");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("ResourceInfo do LogStore", "getType");
 
         return this.type;
     };
 
     public getPossibleDefineCodeScope()
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("ResourceInfo do LogStore", "getPossibleDefineCodeScope");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("ResourceInfo do LogStore", "getPossibleDefineCodeScope");
 
         return this.possibleDefineCodeScope;
     }

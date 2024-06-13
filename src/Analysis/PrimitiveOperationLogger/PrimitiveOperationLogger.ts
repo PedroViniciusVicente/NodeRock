@@ -11,8 +11,7 @@ import {getSourceCodeInfoFromIid, shouldBeVerbose} from '../../Util';
 import {CallStackLogStore} from '../../LogStore/CallStackLogStore';
 
 import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class PrimitiveOperationLogger extends Analysis
 {
@@ -34,7 +33,7 @@ export class PrimitiveOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("PrimitiveOperationLogger");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("PrimitiveOperationLogger");
 
         super(sandbox);
         this.awaitIidToScopeQueue = new Map();
@@ -42,7 +41,7 @@ export class PrimitiveOperationLogger extends Analysis
 
     protected override registerHooks()
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("PrimitiveOperationLogger", "registerHooks");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("PrimitiveOperationLogger", "registerHooks");
 
         this.awaitPre = iid =>
         {
@@ -192,7 +191,7 @@ export class PrimitiveOperationLogger extends Analysis
 
     private onVariableOperation(type: 'read' | 'write', iid: number, name: string, valBefore: unknown, val: unknown, isGlobal: boolean)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("PrimitiveOperationLogger", "onVariableOperation");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("PrimitiveOperationLogger", "onVariableOperation");
 
         if (name === 'this')
         {

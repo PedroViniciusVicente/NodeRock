@@ -1,14 +1,13 @@
 import * as fs from 'fs';
 
 export class GerenciadorRastrearChamadas {
-    private pathDoArquivoLog: string; // Caminho do arquivo de log
+    // Caminho do arquivo de log
+    static pathDoArquivoLog: string 
+        = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/logRastrearChamadas.txt";
+    static rastrearApenasMinhaClasse: boolean = true;
 
-    constructor(pathDoArquivoLog: string) {
-        this.pathDoArquivoLog = pathDoArquivoLog;
-        //console.log("o construtor do registrador do log foi chamado!");
-    }
-
-    public criarArquivoVazio() {
+    
+    public static criarArquivoVazio() {
         try {
             fs.writeFileSync(this.pathDoArquivoLog, '', {flag: 'w'});
             const mensagemInicial = `-=+=- Log das chamadas de funcoes do \"${__dirname}\" -=+=- \n\n`;
@@ -20,7 +19,7 @@ export class GerenciadorRastrearChamadas {
         }
     }
 
-    public registrarChamadaConstrutor(nomeClasse: string) {
+    public static registrarChamadaConstrutor(nomeClasse: string) {
         //console.log("A funcao de registrar foi chamda!");
         const mensagem = `Construtor da classe \"${nomeClasse}\" foi chamado\n`;
 
@@ -33,7 +32,7 @@ export class GerenciadorRastrearChamadas {
         }
     }
 
-    public registrarChamadaFuncao(nomeClasse: string, nomeFuncao: string) {
+    public static registrarChamadaFuncao(nomeClasse: string, nomeFuncao: string) {
         const mensagem = `    Funcao \"${nomeFuncao}\" da classe \"${nomeClasse}\" foi chamado\n`;
 
         try {

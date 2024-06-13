@@ -6,8 +6,7 @@ import {Analysis, Hooks, Sandbox} from '../../../Type/nodeprof';
 import {shouldBeVerbose} from '../../../Util';
 
 import {GerenciadorRastrearChamadas} from '../../GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 
 export class HttpIncomingMessageOperationLogger extends Analysis
@@ -19,7 +18,7 @@ export class HttpIncomingMessageOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("HttpIncomingMessageOperationLogger");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("HttpIncomingMessageOperationLogger");
 
         super(sandbox);
         this.timeConsumed = 0;
@@ -27,7 +26,7 @@ export class HttpIncomingMessageOperationLogger extends Analysis
 
     protected override registerHooks()
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("HttpIncomingMessageOperationLogger", "registerHooks");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("HttpIncomingMessageOperationLogger", "registerHooks");
 
         this.invokeFunPre = (iid, f, base) =>
         {

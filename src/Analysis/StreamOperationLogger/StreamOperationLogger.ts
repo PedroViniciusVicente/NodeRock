@@ -9,8 +9,7 @@ import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {getSourceCodeInfoFromIid, isBufferLike, shouldBeVerbose} from '../../Util';
 
 import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class StreamOperationLogger extends Analysis
 {
@@ -21,7 +20,7 @@ export class StreamOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("StreamOperationLogger");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("StreamOperationLogger");
 
         super(sandbox);
         this.timeConsumed = 0;
@@ -29,7 +28,7 @@ export class StreamOperationLogger extends Analysis
 
     protected override doMonkeyPatch()
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("StreamOperationLogger", "doMonkeyPatch");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("StreamOperationLogger", "doMonkeyPatch");
 
         const loggerThis = this;
 
@@ -159,7 +158,7 @@ export class StreamOperationLogger extends Analysis
 
     protected override registerHooks()
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("StreamOperationLogger", "registerHooks");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("StreamOperationLogger", "registerHooks");
 
         this.invokeFun = (iid, f, _base, args) =>
         {

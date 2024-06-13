@@ -5,8 +5,7 @@ import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {shouldBeVerbose} from '../../Util';
 
 import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class LastExpressionValueLogger extends Analysis
 {
@@ -17,7 +16,7 @@ export class LastExpressionValueLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("LastExpressionValueLogger");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("LastExpressionValueLogger");
 
         super(sandbox);
         this.timeConsumed = 0;
@@ -25,7 +24,7 @@ export class LastExpressionValueLogger extends Analysis
 
     protected override registerHooks(): void
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("LastExpressionValueLogger", "registerHooks");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("LastExpressionValueLogger", "registerHooks");
 
         this.endExpression = (_iid, _type, value) =>
         {

@@ -5,8 +5,7 @@ import {SourceCodeInfo} from '../../Class/SourceCodeInfo';
 import {StatisticsStore} from '../../StatisticsStore';
 
 import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class BufferOperation extends ResourceOperation
 {
@@ -18,7 +17,7 @@ export class BufferOperation extends ResourceOperation
 
     constructor(type: 'read' | 'write', accessStage: BufferOperation['accessStage'], accessRange: BufferOperation['accessRange'], stackTrace: string[] | null, sourceCodeScopeInfo: SourceCodeInfo | null)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("BufferOperation do LogStore");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("BufferOperation do LogStore");
 
         super(type, stackTrace, sourceCodeScopeInfo);
         this.accessStage = accessStage;
@@ -29,14 +28,14 @@ export class BufferOperation extends ResourceOperation
 
     public getAccessStage()
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("BufferOperation do LogStore", "getAccessStage");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("BufferOperation do LogStore", "getAccessStage");
 
         return this.accessStage;
     }
 
     public getAccessRange()
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("BufferOperation do LogStore", "getAccessRange");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("BufferOperation do LogStore", "getAccessRange");
 
         return this.accessRange;
     }

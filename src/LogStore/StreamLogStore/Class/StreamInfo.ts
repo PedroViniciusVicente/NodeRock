@@ -5,8 +5,7 @@ import {StatisticsStore} from '../../StatisticsStore';
 import {isRunningUnitTests} from '../../../Util';
 
 import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class StreamInfo extends ResourceInfo
 {
@@ -14,7 +13,7 @@ export class StreamInfo extends ResourceInfo
 
     constructor(stream: Readable | Writable, possibleDefineCodeScope: SourceCodeInfo | null)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("StreamInfo do LogStore");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("StreamInfo do LogStore");
 
         super('stream', possibleDefineCodeScope);
         this.streamWeakRef = new WeakRef(stream);

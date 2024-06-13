@@ -14,8 +14,7 @@ import {ImmediateLogStore} from '../../LogStore/ImmediateLogStore';
 
 
 import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 /**
  * Logging all callback function content information into `AsyncContextLogStore`.
  * Should be run prior to other analysis. i.e. `--analysis AsyncContextLogStore --analysis otherAnalysis`
@@ -34,7 +33,7 @@ export class AsyncContextLogger extends Analysis
     constructor(sandbox: Sandbox)
     {
         // console.log("DEBUG: O construtor do AsyncContextLogger foi chamado");
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("AsyncContextLogger");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("AsyncContextLogger");
 
         super(sandbox);
         this.asyncContextChanged = false;
@@ -50,7 +49,7 @@ export class AsyncContextLogger extends Analysis
 
     protected override registerHooks()
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncContextLogger", "registerHooks");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncContextLogger", "registerHooks");
 
         this.endExecution = () =>
         {
@@ -145,7 +144,7 @@ export class AsyncContextLogger extends Analysis
     // must be an arrow function to fix `this`
     private asyncHookInit = (asyncId: number, type: string, triggerAsyncId: number) =>
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncContextLogger", "asyncHookInit");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncContextLogger", "asyncHookInit");
 
         const startTimestamp = Date.now();
 
@@ -167,7 +166,7 @@ export class AsyncContextLogger extends Analysis
     // must be an arrow function to fix `this`
     private asyncHookBefore = (asyncId: number) =>
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncContextLogger", "asyncHookBefore");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncContextLogger", "asyncHookBefore");
 
         const startTimestamp = Date.now();
 

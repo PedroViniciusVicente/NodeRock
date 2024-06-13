@@ -6,8 +6,7 @@ import {StatisticsStore} from '../../StatisticsStore';
 import {FileOperationOnType} from '../Type/FileOperationOnType';
 
 import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class FileOperation extends ResourceOperation
 {
@@ -16,7 +15,7 @@ export class FileOperation extends ResourceOperation
 
     constructor(type: 'read' | 'write', accessStage: FileOperation['accessStage'], operationOn: FileOperation['operationOn'], stackTrace: string[] | null, sourceCodeScopeInfo: SourceCodeInfo | null)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("FileInfo do FileOperation");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("FileInfo do FileOperation");
 
         super(type, stackTrace, sourceCodeScopeInfo);
         this.accessStage = accessStage;

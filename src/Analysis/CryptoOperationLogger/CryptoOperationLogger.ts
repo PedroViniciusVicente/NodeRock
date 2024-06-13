@@ -23,8 +23,7 @@ import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {getSourceCodeInfoFromIid, isBufferLike, shouldBeVerbose} from '../../Util';
 
 import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class CryptoOperationLogger extends Analysis
 {
@@ -38,7 +37,7 @@ export class CryptoOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("CryptoOperationLogger");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("CryptoOperationLogger");
 
         super(sandbox);
         this.timeConsumed = 0;
@@ -47,7 +46,7 @@ export class CryptoOperationLogger extends Analysis
 
     protected override registerHooks(): void
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("CryptoOperationLogger", "registerHooks");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("CryptoOperationLogger", "registerHooks");
 
         this.invokeFun = (iid, f, _base, args, result) =>
         {

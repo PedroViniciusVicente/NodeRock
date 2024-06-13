@@ -5,8 +5,7 @@ import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {outputSync, toJSON} from '../../Util';
 
 import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class SocketLogStoreAnalysis extends Analysis
 {
@@ -14,14 +13,14 @@ export class SocketLogStoreAnalysis extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("SocketLogStoreAnalysis");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("SocketLogStoreAnalysis");
 
         super(sandbox);
     }
 
     protected registerHooks(): void
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("SocketLogStoreAnalysis", "registerHooks");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("SocketLogStoreAnalysis", "registerHooks");
 
         this.endExecution = () =>
         {

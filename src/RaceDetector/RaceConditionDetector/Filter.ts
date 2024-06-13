@@ -18,8 +18,7 @@ import {EventEmitterOperation} from '../../LogStore/EventEmitterLogStore/Class/E
 import {isRunningUnitTests} from '../../Util';
 
 import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class Filter
 {
@@ -27,7 +26,7 @@ export class Filter
 
     public static isTruePositive(raceConditionInfo: RaceConditionInfo): boolean
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isTruePositive");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isTruePositive");
         
         const {resourceInfo} = raceConditionInfo;
         if (resourceInfo.getPossibleDefineCodeScope() === null)
@@ -95,7 +94,7 @@ export class Filter
      */
     public static isHttpIncomingMessagesOfTheSameServer(raceConditionInfo: RaceConditionInfo): boolean
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isHttpIncomingMessagesOfTheSameServer");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isHttpIncomingMessagesOfTheSameServer");
 
         const {asyncContextToOperations1, asyncContextToOperations2} = raceConditionInfo;
         let asyncContext1: AsyncCalledFunctionInfo | null = asyncContextToOperations1[0];
@@ -143,7 +142,7 @@ export class Filter
      */
     public static isInnerFunction(raceConditionInfo: RaceConditionInfo): boolean
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isInnerFunction");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isInnerFunction");
 
         const {asyncContextToOperations1, asyncContextToOperations2} = raceConditionInfo;
         const asyncContext1 = asyncContextToOperations1[0];
@@ -184,7 +183,7 @@ export class Filter
      */
     public static isNonAnalyzedCodeRaceCondition(raceConditionInfo: RaceConditionInfo): boolean
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isNonAnalyzedCodeRaceCondition");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isNonAnalyzedCodeRaceCondition");
 
         const {asyncContextToOperations1, asyncContextToOperations2} = raceConditionInfo;
         let asyncContext1 = asyncContextToOperations1[0];
@@ -204,7 +203,7 @@ export class Filter
 
     public static isTimerRaceConditionTP(raceConditionInfo: RaceConditionInfo): boolean
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isTimerRaceConditionTP");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isTimerRaceConditionTP");
 
         const {asyncContextToOperations1, asyncContextToOperations2} = raceConditionInfo;
         let asyncContext1 = asyncContextToOperations1[0];
@@ -246,7 +245,7 @@ export class Filter
 
     public static isImmediateRaceConditionTP(raceConditionInfo: RaceConditionInfo): boolean
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isImmediateRaceConditionTP");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isImmediateRaceConditionTP");
 
         const {asyncContextToOperations1, asyncContextToOperations2} = raceConditionInfo;
         let asyncContext1 = asyncContextToOperations1[0];
@@ -305,7 +304,7 @@ export class Filter
 
     public static isFileRaceConditionTP(raceConditionInfo: RaceConditionInfo): boolean
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isFileRaceConditionTP");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isFileRaceConditionTP");
 
         const {resourceInfo, asyncContextToOperations1, asyncContextToOperations2} = raceConditionInfo;
         assert.ok(resourceInfo instanceof FileInfo);
@@ -392,7 +391,7 @@ export class Filter
 
     public static isSocketRaceConditionTP(raceConditionInfo: RaceConditionInfo): boolean
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isSocketRaceConditionTP");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isSocketRaceConditionTP");
 
         const {resourceInfo, asyncContextToOperations1, asyncContextToOperations2} = raceConditionInfo;
         assert.ok(resourceInfo instanceof SocketInfo);
@@ -438,7 +437,7 @@ export class Filter
     private static objectWrittenFieldsCache: Map<AsyncCalledFunctionInfo, Map<ObjectInfo, EnhancedSet<unknown>>> = new Map();
     public static isObjectRaceConditionTP(raceConditionInfo: RaceConditionInfo): boolean
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isObjectRaceConditionTP");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isObjectRaceConditionTP");
 
         const {resourceInfo, asyncContextToOperations1, asyncContextToOperations2} = raceConditionInfo;
         assert.ok(resourceInfo instanceof ObjectInfo);
@@ -519,7 +518,7 @@ export class Filter
     private static bufferWrittenRangesCache: Map<AsyncCalledFunctionInfo, Map<BufferInfo, BufferOperation['accessRange'][]>> = new Map();
     public static isBufferRaceConditionTP(raceConditionInfo: RaceConditionInfo): boolean
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isBufferRaceConditionTP");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isBufferRaceConditionTP");
 
         const {resourceInfo, asyncContextToOperations1, asyncContextToOperations2} = raceConditionInfo;
         const asyncContext1 = asyncContextToOperations1[0];
@@ -595,7 +594,7 @@ export class Filter
 
     public static isPrimitiveRaceConditionTP(raceConditionInfo: RaceConditionInfo): boolean
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isPrimitiveRaceConditionTP");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isPrimitiveRaceConditionTP");
 
         assert.ok(raceConditionInfo.resourceInfo instanceof PrimitiveInfo);
         const {asyncContextToOperations1, asyncContextToOperations2, resourceInfo} = raceConditionInfo;
@@ -649,7 +648,7 @@ export class Filter
 
     public static isEventEmitterRaceConditionTP(raceConditionInfo: RaceConditionInfo): boolean
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isEventEmitterRaceConditionTP");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isEventEmitterRaceConditionTP");
 
         assert.ok(raceConditionInfo.resourceInfo instanceof EventEmitterInfo);
         const {asyncContextToOperations1, asyncContextToOperations2, resourceInfo} = raceConditionInfo;
@@ -703,7 +702,7 @@ export class Filter
      */
     public static hasReported(raceConditionInfo: RaceConditionInfo): boolean
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "hasReported");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "hasReported");
 
         const hashes = Filter.reportedRaceCondition.get(Filter.getResourceInfoHash(raceConditionInfo.resourceInfo));
         if (hashes === undefined)
@@ -723,7 +722,7 @@ export class Filter
 
     public static addReported(raceConditionInfo: RaceConditionInfo): void
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "addReported");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "addReported");
 
         const resourceInfoHash = Filter.getResourceInfoHash(raceConditionInfo.resourceInfo);
         let hashes = Filter.reportedRaceCondition.get(resourceInfoHash) ?? new Set();
@@ -738,7 +737,7 @@ export class Filter
 
     private static isPromiseViolationTP(raceConditionInfo: RaceConditionInfo): boolean
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isPromiseViolationTP");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "isPromiseViolationTP");
 
         const {
             asyncContextToOperations1: [asyncContext1],
@@ -781,7 +780,7 @@ export class Filter
 
     private static getRaceConditionInfoHashPair(raceConditionInfo: RaceConditionInfo): [string, string] | null
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "getRaceConditionInfoHashPair");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "getRaceConditionInfoHashPair");
 
         const {
             asyncContextToOperations1, asyncContextToOperations2,
@@ -801,7 +800,7 @@ export class Filter
 
     private static getResourceInfoHash(resourceInfo: ResourceInfo): string | object
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "getResourceInfoHash");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("Filter do RaceDetector", "getResourceInfoHash");
 
         return resourceInfo.getHash();
     }

@@ -7,8 +7,7 @@ import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {getSourceCodeInfoFromIid, isBufferLike, shouldBeVerbose} from '../../Util';
 
 import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class IteratorLogger extends Analysis
 {
@@ -19,7 +18,7 @@ export class IteratorLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("IteratorLogger");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("IteratorLogger");
 
         super(sandbox);
         this.timeConsumed = 0;
@@ -27,7 +26,7 @@ export class IteratorLogger extends Analysis
 
     protected override registerHooks()
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("IteratorLogger", "registerHooks");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("IteratorLogger", "registerHooks");
 
         this.invokeFun = (iid, _f, base) =>
         {

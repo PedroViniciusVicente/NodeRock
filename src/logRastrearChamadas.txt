@@ -1,0 +1,2 @@
+-=+=- Log das chamadas de funcoes do "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/dist" -=+=- 
+

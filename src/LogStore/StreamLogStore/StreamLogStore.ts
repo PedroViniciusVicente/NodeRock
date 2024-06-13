@@ -11,8 +11,7 @@ import {CallStackLogStore} from '../CallStackLogStore';
 import {SourceCodeInfo} from '../Class/SourceCodeInfo';
 
 import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class StreamLogStore
 {
@@ -21,14 +20,14 @@ export class StreamLogStore
 
     public static getStreamDeclarations(): ReadonlyArray<StreamDeclaration>
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("StreamLogStore do LogStore", "getStreamDeclarations");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("StreamLogStore do LogStore", "getStreamDeclarations");
 
         return StreamLogStore.streamDeclarations;
     }
 
     public static appendStreamOperation(stream: Readable | Writable, type: 'read' | 'write', operationKind: StreamOperation['operationKind'], sandbox: Sandbox, iid: number)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("StreamLogStore do LogStore", "appendStreamOperation");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("StreamLogStore do LogStore", "appendStreamOperation");
 
         const streamDeclaration = StreamLogStore.getStreamDeclaration(stream, getSourceCodeInfoFromIid(iid, sandbox));
         const asyncContext = AsyncContextLogStore.getAsyncContextFromAsyncId(asyncHooks.executionAsyncId());
@@ -42,7 +41,7 @@ export class StreamLogStore
 
     private static getStreamDeclaration(stream: Readable | Writable, sourceCodeInfo: SourceCodeInfo | null)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("StreamLogStore do LogStore", "getStreamDeclaration");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("StreamLogStore do LogStore", "getStreamDeclaration");
 
         const streamDeclaration = StreamLogStore.streamToStreamDeclarations.get(stream);
         if (streamDeclaration === undefined)

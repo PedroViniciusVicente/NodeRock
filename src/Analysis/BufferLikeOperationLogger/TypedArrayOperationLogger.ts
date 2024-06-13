@@ -11,8 +11,7 @@ import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {getSourceCodeInfoFromIid, isArrayAccess, shouldBeVerbose} from '../../Util';
 
 import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class TypedArrayOperationLogger extends Analysis
 {
@@ -47,7 +46,7 @@ export class TypedArrayOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("TypedArrayOperationLogger");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("TypedArrayOperationLogger");
 
         super(sandbox);
         this.timeConsumed = 0;
@@ -55,7 +54,7 @@ export class TypedArrayOperationLogger extends Analysis
 
     protected override registerHooks(): void
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("TypedArrayOperationLogger", "registerHooks");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("TypedArrayOperationLogger", "registerHooks");
 
         this.invokeFunPre = (iid, f, base, args) =>
         {

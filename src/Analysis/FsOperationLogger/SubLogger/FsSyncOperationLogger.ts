@@ -14,8 +14,7 @@ import {FileLogStoreAdaptor} from '../FileLogStoreAdaptor';
 import {willFileBeCreatedOrTruncated} from '../Util';
 
 import {GerenciadorRastrearChamadas} from '../../GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class FsSyncOperationLogger extends Analysis
 {
@@ -27,7 +26,7 @@ export class FsSyncOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("FsSyncOperationLogger");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("FsSyncOperationLogger");
 
         super(sandbox);
         this.timeConsumed = 0;
@@ -35,7 +34,7 @@ export class FsSyncOperationLogger extends Analysis
 
     protected override registerHooks()
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("FsSyncOperationLogger", "registerHooks");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("FsSyncOperationLogger", "registerHooks");
 
         this.invokeFunPre = (iid, f, _base, args) =>
         {

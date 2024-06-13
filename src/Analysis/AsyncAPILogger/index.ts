@@ -3,14 +3,13 @@ import {TimeoutLogger} from './TimeoutLogger';
 import {ImmediateLogger} from './ImmediateLogger';
 
 import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class AsyncAPILogger extends Analysis
 {
     constructor(sandbox: Sandbox)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("AsyncAPILogger");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("AsyncAPILogger");
 
         super(sandbox);
         sandbox.addAnalysis(new TimeoutLogger(sandbox));

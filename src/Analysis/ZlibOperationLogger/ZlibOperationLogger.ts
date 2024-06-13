@@ -7,8 +7,7 @@ import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {getSourceCodeInfoFromIid, isBufferLike, shouldBeVerbose} from '../../Util';
 
 import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class ZlibOperationLogger extends Analysis
 {
@@ -22,7 +21,7 @@ export class ZlibOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("ZlibOperationLogger");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("ZlibOperationLogger");
 
         super(sandbox);
         this.timeConsumed = 0;
@@ -31,7 +30,7 @@ export class ZlibOperationLogger extends Analysis
 
     protected override registerHooks()
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("ZlibOperationLogger", "registerHooks");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("ZlibOperationLogger", "registerHooks");
 
         this.invokeFun = (iid, f, _base, args, result) =>
         {

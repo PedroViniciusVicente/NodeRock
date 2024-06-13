@@ -8,8 +8,7 @@ import {FileInfo} from './FileInfo';
 import {FileOperation} from './FileOperation';
 
 import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class FileDeclaration extends ResourceDeclaration
 {
@@ -18,7 +17,7 @@ export class FileDeclaration extends ResourceDeclaration
 
     constructor(filePath: string, possibleDefineCodeScope: SourceCodeInfo | null)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("FileDeclaration do LogStore");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("FileDeclaration do LogStore");
 
         super();
         this.fileInfo = new FileInfo(filePath, possibleDefineCodeScope);

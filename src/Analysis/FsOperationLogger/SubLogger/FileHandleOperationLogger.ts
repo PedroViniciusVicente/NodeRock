@@ -13,8 +13,7 @@ import util from 'util';
 import {StreamLogStore} from '../../../LogStore/StreamLogStore';
 
 import {GerenciadorRastrearChamadas} from '../../GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class FileHandleOperationLogger extends Analysis
 {
@@ -26,7 +25,7 @@ export class FileHandleOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("FileHandleOperationLogger");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("FileHandleOperationLogger");
 
         super(sandbox);
         this.timeConsumed = 0;
@@ -34,7 +33,7 @@ export class FileHandleOperationLogger extends Analysis
 
     protected override registerHooks()
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("FileHandleOperationLogger", "registerHooks");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("FileHandleOperationLogger", "registerHooks");
 
         this.invokeFun = (iid, f, base, args, result) =>
         {

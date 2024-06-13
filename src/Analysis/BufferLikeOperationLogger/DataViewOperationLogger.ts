@@ -6,8 +6,7 @@ import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {getSourceCodeInfoFromIid, shouldBeVerbose} from '../../Util';
 
 import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class DataViewOperationLogger extends Analysis
 {
@@ -55,7 +54,7 @@ export class DataViewOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("DataViewOperationLogger");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("DataViewOperationLogger");
 
         super(sandbox);
         this.timeConsumed = 0;
@@ -63,7 +62,7 @@ export class DataViewOperationLogger extends Analysis
 
     protected registerHooks(): void
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("DataViewOperationLogger", "registerHooks");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("DataViewOperationLogger", "registerHooks");
 
         this.invokeFun = (iid, f, base) =>
         {

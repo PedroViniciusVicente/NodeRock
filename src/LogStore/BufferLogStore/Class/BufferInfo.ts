@@ -8,8 +8,7 @@ import {StatisticsStore} from '../../StatisticsStore';
 import {isRunningUnitTests} from '../../../Util';
 
 import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class BufferInfo extends ResourceInfo
 {
@@ -17,7 +16,7 @@ export class BufferInfo extends ResourceInfo
 
     constructor(buffer: ArrayBufferLike, possibleDefineCodeScope: SourceCodeInfo | null)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("BufferInfo do LogStore");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("BufferInfo do LogStore");
 
         super('buffer', possibleDefineCodeScope);
         assert.ok(util.types.isAnyArrayBuffer(buffer));
@@ -27,7 +26,7 @@ export class BufferInfo extends ResourceInfo
 
     public override getHash(): object | string
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("BufferInfo do LogStore", "getHash");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("BufferInfo do LogStore", "getHash");
         if (isRunningUnitTests())
         {
             return JSON.stringify({
@@ -43,7 +42,7 @@ export class BufferInfo extends ResourceInfo
 
     public is(otherBuffer: BufferLike): boolean
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("BufferInfo do LogStore", "is");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("BufferInfo do LogStore", "is");
 
         if (util.types.isAnyArrayBuffer(otherBuffer))
         {
@@ -57,7 +56,7 @@ export class BufferInfo extends ResourceInfo
 
     public toJSON()
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaFuncao("BufferInfo do LogStore", "toJSON");
+         GerenciadorRastrearChamadas.registrarChamadaFuncao("BufferInfo do LogStore", "toJSON");
 
         return {...this, bufferWeakRef: undefined};
     }

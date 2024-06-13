@@ -32,13 +32,13 @@ import {JSONOperationLogger} from './JSONOperationLogger';
 import {AsyncAPILogger} from './AsyncAPILogger';
 import {MemoryUsageAnalysis} from './LogStoreAnalysis/MemoryUsageAnalysis';
 
+import {MyFunctionCallAnalysis} from './MyFunctionCallAnalysis';
+
 import {GerenciadorRastrearChamadas} from './GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
 
 (function (sandbox: Sandbox)
 {
-    meuGerenciadorRastrearChamadas.criarArquivoVazio();
+    GerenciadorRastrearChamadas.criarArquivoVazio();
     
     const startTimestamp = Date.now();
 
@@ -95,61 +95,65 @@ GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/sr
     }
     else
     {
-        // basic
-        sandbox.addAnalysis(new AsyncContextLogger(sandbox));
-        sandbox.addAnalysis(new LastExpressionValueLogger(sandbox));
-        sandbox.addAnalysis(new IteratorLogger(sandbox));
-        sandbox.addAnalysis(new CallStackLogger(sandbox));
-        sandbox.addAnalysis(new AsyncAPILogger(sandbox));
+        if (GerenciadorRastrearChamadas.rastrearApenasMinhaClasse === true) {
+            sandbox.addAnalysis(new MyFunctionCallAnalysis(sandbox));
+        }
+        else {
+            // basic
+            sandbox.addAnalysis(new AsyncContextLogger(sandbox));
+            sandbox.addAnalysis(new LastExpressionValueLogger(sandbox));
+            sandbox.addAnalysis(new IteratorLogger(sandbox));
+            sandbox.addAnalysis(new CallStackLogger(sandbox));
+            sandbox.addAnalysis(new AsyncAPILogger(sandbox));
 
-        // object
-        sandbox.addAnalysis(new ArrayOperationLogger(sandbox));
-        sandbox.addAnalysis(new SetOperationLogger(sandbox));
-        sandbox.addAnalysis(new MapOperationLogger(sandbox));
-        sandbox.addAnalysis(new ObjectOperationLogger(sandbox));
+            // object
+            sandbox.addAnalysis(new ArrayOperationLogger(sandbox));
+            sandbox.addAnalysis(new SetOperationLogger(sandbox));
+            sandbox.addAnalysis(new MapOperationLogger(sandbox));
+            sandbox.addAnalysis(new ObjectOperationLogger(sandbox));
 
-        // sandbox.addAnalysis(new ObjectLogStoreAnalysis(sandbox));
+            // sandbox.addAnalysis(new ObjectLogStoreAnalysis(sandbox));
 
-        // file
-        sandbox.addAnalysis(new FsOperationLogger(sandbox));
+            // file
+            sandbox.addAnalysis(new FsOperationLogger(sandbox));
 
-        // sandbox.addAnalysis(new FileLogStoreAnalysis(sandbox));
+            // sandbox.addAnalysis(new FileLogStoreAnalysis(sandbox));
 
-        // buffer
-        sandbox.addAnalysis(new BufferLikeOperationLogger(sandbox));
+            // buffer
+            sandbox.addAnalysis(new BufferLikeOperationLogger(sandbox));
 
-        // sandbox.addAnalysis(new BufferLogStoreAnalysis(sandbox));
+            // sandbox.addAnalysis(new BufferLogStoreAnalysis(sandbox));
 
-        // primitive
-        sandbox.addAnalysis(new PrimitiveOperationLogger(sandbox));
+            // primitive
+            sandbox.addAnalysis(new PrimitiveOperationLogger(sandbox));
 
-        // sandbox.addAnalysis(new PrimitiveLogStoreAnalysis(sandbox));
+            // sandbox.addAnalysis(new PrimitiveLogStoreAnalysis(sandbox));
 
-        // socket
-        sandbox.addAnalysis(new HttpOperationLogger(sandbox));
-        sandbox.addAnalysis(new NetOperationLogger(sandbox));
+            // socket
+            sandbox.addAnalysis(new HttpOperationLogger(sandbox));
+            sandbox.addAnalysis(new NetOperationLogger(sandbox));
 
-        // sandbox.addAnalysis(new SocketLogStoreAnalysis(sandbox));
-        // sandbox.addAnalysis(new OutgoingMessageStoreAnalysis(sandbox));
+            // sandbox.addAnalysis(new SocketLogStoreAnalysis(sandbox));
+            // sandbox.addAnalysis(new OutgoingMessageStoreAnalysis(sandbox));
 
-        // stream
-        sandbox.addAnalysis(new StreamOperationLogger(sandbox));
+            // stream
+            sandbox.addAnalysis(new StreamOperationLogger(sandbox));
 
-        // sandbox.addAnalysis(new StreamLogStoreAnalysis(sandbox));
+            // sandbox.addAnalysis(new StreamLogStoreAnalysis(sandbox));
 
-        // eventEmitter
-        sandbox.addAnalysis(new EventEmitterOperationLogger(sandbox));
+            // eventEmitter
+            sandbox.addAnalysis(new EventEmitterOperationLogger(sandbox));
 
-        // sandbox.addAnalysis(new EventEmitterLogStoreAnalysis(sandbox));
+            // sandbox.addAnalysis(new EventEmitterLogStoreAnalysis(sandbox));
 
-        // misc
-        sandbox.addAnalysis(new CryptoOperationLogger(sandbox));
-        sandbox.addAnalysis(new ZlibOperationLogger(sandbox));
-        sandbox.addAnalysis(new StringDecoderOperationLogger(sandbox));
-        sandbox.addAnalysis(new JSONOperationLogger(sandbox));
+            // misc
+            sandbox.addAnalysis(new CryptoOperationLogger(sandbox));
+            sandbox.addAnalysis(new ZlibOperationLogger(sandbox));
+            sandbox.addAnalysis(new StringDecoderOperationLogger(sandbox));
+            sandbox.addAnalysis(new JSONOperationLogger(sandbox));
 
-        //sandbox.addAnalysis(new MemoryUsageAnalysis(sandbox));
-
+            //sandbox.addAnalysis(new MemoryUsageAnalysis(sandbox));
+        }
         const endTimestamp = Date.now() - startTimestamp;
 
         process.on('exit', () =>

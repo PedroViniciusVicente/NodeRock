@@ -4,8 +4,7 @@ import {AsyncCalledFunctionInfo} from '../../LogStore/Class/AsyncCalledFunctionI
 import {ResourceOperation} from '../../LogStore/Class/ResourceOperation';
 
 import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
-const meuGerenciadorRastrearChamadas = new 
-GerenciadorRastrearChamadas("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt");
+ 
 
 export class RaceConditionInfo extends Info
 {
@@ -21,7 +20,7 @@ export class RaceConditionInfo extends Info
                 asyncContextToOperations2: RaceConditionInfo['asyncContextToOperations2'],
                 timeDiff: bigint)
     {
-        meuGerenciadorRastrearChamadas.registrarChamadaConstrutor("RaceConditionInfo do RaceDetector");
+         GerenciadorRastrearChamadas.registrarChamadaConstrutor("RaceConditionInfo do RaceDetector");
 
         super(resourceInfo);
         this.timeDiff = timeDiff;
