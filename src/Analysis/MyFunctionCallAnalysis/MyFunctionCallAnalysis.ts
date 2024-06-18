@@ -33,6 +33,7 @@ export class MyFunctionCallAnalysis extends Analysis {
     public startStatement: Hooks['startStatement'] | undefined; //sempre antes e depois de um statement
     public endExecution: Hooks['endExecution'] | undefined; // sempre que uma execucao do node termina
 
+    private debugar: boolean = false;
     private timeConsumed: number;
 
     constructor(sandbox: Sandbox)
@@ -45,23 +46,163 @@ export class MyFunctionCallAnalysis extends Analysis {
 
     protected override registerHooks()
     {
-        console.log("testando funcoes do MyFunctionCallAnalysis");
+        console.log("\nTestando as funcoes do MyFunctionCallAnalysis:");
         console.log(this.timeConsumed);
         // GerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterOperationLogger", "registerHooks");
         
+        this.read = (iid, name, val, isGlobal) => {
+            console.log("[read] foi acionado!");
+            if (this.debugar) {
+                console.log(`Hook read detectou a leitura da variavel: ${name} de iid: ${iid}`);
+                console.log(`Valor lido: ${val}`);
+                console.log(`Variavel eh global? ${isGlobal}`);
+                console.log(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+            }
+        };
+
+        this.write = (iid, name, val, lhs, isGlobal) => {        
+            console.log("[write] foi acionado!");
+            if (this.debugar) {
+                console.log(`Hook write detectou a escrita da variavel: ${name} de iid: ${iid}`);
+                console.log(`Valor escrito: ${val}`);
+                console.log(`Valor anterior a escrita: ${lhs}`);
+                console.log(`Variavel eh global? ${isGlobal}`);
+                console.log(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+            }
+        };
+
+        this.getField = (iid, base, offset, _val, isComputed) => {
+            console.log("[getField] foi acionado!");
+            if(this.debugar) {
+                if(isComputed) {
+                    console.log(`Hook getField detectou o acesso da propriedade ${[offset]} do objeto ${base}`);
+                    //console.log(`Com a prop prop ${String(offset)}`); // ??
+                    //console.log(`Valor do val: ${_val}`);
+                }
+                console.log(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+            }
+        };
+
+        this.putFieldPre = (iid, base, offset, val, isComputed) => {
+            console.log("[putFieldPre] foi acionado!");
+            if(this.debugar) {
+                if(isComputed) {
+                    console.log(`Hook putFieldPre detectou a escrita propriedade ${[offset]} do objeto ${base}`);
+                    //console.log(`Ou a prop ${String(offset)}`); // ??
+                }
+                console.log(`Valor do val: ${val}`);
+                console.log(`Local ${this.getSandbox().iidToLocation(iid)}`);
+            }
+        };
+
+        this.functionEnter = (iid, f, dis, args) => {
+            console.log(`[functionEnter] foi acionado!`);
+            if(this.debugar) {
+                console.log(`Hook functionEnter detectou o comeco da execucao da funcao: ${f}`);
+                console.log(`Argumentos da funcao: ${args}`);
+                console.log(`Valor do dis: ${dis}`);
+                console.log(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+            }
+        };
+
+        this.functionExit = (iid, returnVal) => {
+            console.log(`[functionExit] foi acionado!`);
+            if(this.debugar) {
+                // esse hook nao especifica qual eh a funcao que terminou
+                console.log(`Hook functionExit detectou o fim da execucao de uma funcao`);
+                console.log(`Valor retornado por essa funcao ${returnVal}`);
+                console.log(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+            }
+        };
+
+
         // esses argumentos sao preenchidos pela propria funcao e usados no callback
         // o mais relevante eh esse "f", que nesse caso indentifica a funcao, metodo ou construtor invocado
         // e ele vai comparando esse f com as funcoes presentes em /node_modules/@types/node para saber
         // qual funcao dentre as catalogadas esta sendo usada
-        this.invokeFunPre = (iid, f, base, args) =>
-        {
-            console.log(`Hook invokeFunPre detectou a funcao: ${f} de iid: ${iid}`);
-            console.log(`base: ${base} args: ${args}`);
+        this.invokeFunPre = (iid, f, base, args) => {
+            console.log("[invokeFunPre] foi acionado!");
+            if (this.debugar) {
+                console.log(`Hook invokeFunPre detectou o inicio da execucao da funcao: ${f}`);
+                console.log(`Objeto base que recebera a funcao: ${base}`);
+                console.log(`Argumentos da funcao: ${args}`);
+                console.log(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+            }
         };
 
-        this.endExecution = () =>
-        {
-            console.log(`Hook endExecution foi acionado`);
+        this.invokeFun = (iid, f, _base, args, result) => {
+            console.log("[invokeFun] foi acionado!");
+            if (this.debugar) {
+                console.log(`Hook invokeFun detectou o termino da funcao: ${f}`);
+                console.log(`Objeto base que recebera a funcao: ${_base}`);
+                console.log(`Argumentos da funcao: ${args}`);
+                console.log(`Valor retornado pela funcao: ${result}`);
+                console.log(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+            }
+        };
+
+        this.startExpression = (iid, type) => {
+            console.log("[startExpression] foi acionado!");
+            if (this.debugar) {
+                console.log(`Hook startExpression detectou o incio da expressao de tipo: ${type}`);
+                console.log(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+            }
+        };
+
+        this.endExpression = (iid, type, value) => {
+            console.log("[endExpression] foi acionado!");
+            if (this.debugar) {
+                console.log(`Hook endExpression detectou o termino da expressao de tipo: ${type}`);
+                console.log(`Valor da expressao: ${value}`);
+                console.log(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+            }
+        };
+
+        // Esse _fakeHasGetterSetter eh apenas para a API do Jalangi
+        this.literal = (iid, val, _fakeHasGetterSetter, literalType) => {
+            console.log("[literal] foi acionado!");
+            if (this.debugar) {
+                console.log(`Hook literal detectou a criacao da literal: ${val}`);
+                console.log(`Tipo da literal: ${literalType}`);
+                console.log(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+            }
+        };
+
+        // REVER: Onde esta esse typeof detectado dentro da execucao do exemplo?? ele eh executado apenas 1 vez mesmo
+        this.unary = (iid, op, left, result) => {
+            console.log("[unary] foi acionado!");
+            if (this.debugar) {
+                console.log(`Hook unary detectou a execucao da operacao unaria: ${op}`);
+                console.log(`Operando da esquerda da operacao unaria: ${left}`);
+                console.log(`Resultado final da operacao unaria: ${result}`);
+                console.log(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+            }
+        };
+        
+        this.unaryPre = (iid, op, left) => {
+            console.log("[unaryPre] foi acionado!");
+            if (this.debugar) {
+                console.log(`Hook unaryPre detectou o inicio da operacao unaria: ${op}`);
+                console.log(`Operando da esquerda da operacao unaria: ${left}`);
+                console.log(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+            }
+        };
+        
+        this.startStatement = (iid, type) => {
+            console.log("[startStatement] foi acionado!");
+            if (this.debugar) {
+                console.log(`Hook startStatement detectou o inicio ou fim do statement: ${type}`);
+                console.log(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+            }
+        };
+
+        this.endExecution = () => {
+            console.log("[endExecution] foi acionado!");
+            if(this.debugar) {
+                console.log(`Hook endExecution detectou o fim da execucao node`);
+            }
         };
     }
+
 }
+
