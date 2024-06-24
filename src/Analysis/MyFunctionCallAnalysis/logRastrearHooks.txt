@@ -1,3328 +1,1881 @@
--=+=- Log das chamadas dos hooks -=+=- 
+-=+=- Log das chamadas de todos hooks -=+=- 
 
 [functionEnter] foi acionado!
+Hook functionEnter detectou o comeco da execucao da funcao: const incrementCounter = require('./raceCondition');
+
+(async () => {
+  const promises = [];
+    promises.push(incrementCounter("primeira"));
+    promises.push(incrementCounter("segunda"));
+
+    const results = await Promise.all(promises);
+    console.log(results);
+})();
+Argumentos da funcao: 
+Valor do dis: [object global]
+Local: (raceConditionNode.js:1:1:10:6)
 [startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: AutonomousFunctionExpression
+Local: (raceConditionNode.js:1:1:10:6)
 [startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: AutonomousFunctionExpression
+Local: (raceConditionNode.js:1:1:10:6)
 [literal] foi acionado!
+Hook literal detectou a criacao da literal: const incrementCounter = require('./raceCondition');
+
+(async () => {
+  const promises = [];
+    promises.push(incrementCounter("primeira"));
+    promises.push(incrementCounter("segunda"));
+
+    const results = await Promise.all(promises);
+    console.log(results);
+})();
+Tipo da literal: FunctionLiteral
+Local: (raceConditionNode.js:1:1:10:6)
 [endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: AutonomousFunctionExpression
+Valor da expressao: const incrementCounter = require('./raceCondition');
+
+(async () => {
+  const promises = [];
+    promises.push(incrementCounter("primeira"));
+    promises.push(incrementCounter("segunda"));
+
+    const results = await Promise.all(promises);
+    console.log(results);
+})();
+Local: (raceConditionNode.js:1:1:10:6)
 [functionExit] foi acionado!
+Hook functionExit detectou o fim da execucao de uma funcao
+Valor retornado por essa funcao const incrementCounter = require('./raceCondition');
+
+(async () => {
+  const promises = [];
+    promises.push(incrementCounter("primeira"));
+    promises.push(incrementCounter("segunda"));
+
+    const results = await Promise.all(promises);
+    console.log(results);
+})();
+Local: (raceConditionNode.js:1:1:10:6)
 [functionEnter] foi acionado!
-[literal] foi acionado!
-[write] foi acionado!
-[literal] foi acionado!
-[write] foi acionado!
+Hook functionEnter detectou o comeco da execucao da funcao: const incrementCounter = require('./raceCondition');
+
+(async () => {
+  const promises = [];
+    promises.push(incrementCounter("primeira"));
+    promises.push(incrementCounter("segunda"));
+
+    const results = await Promise.all(promises);
+    console.log(results);
+})();
+Argumentos da funcao: [object Object],function require(path) {
+      return mod.require(path);
+    },[object Object],/home/pedroubuntu/Desktop/exemplosRaceCondition/exemplo2MatheusOriginal/raceConditionNode.js,/home/pedroubuntu/Desktop/exemplosRaceCondition/exemplo2MatheusOriginal
+Valor do dis: [object Object]
+Local: (raceConditionNode.js:1:1:10:6)
 [startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: JSWriteCurrentFrameSlot
+Local: (raceConditionNode.js:1:1:1:52)
 [startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: Call1
+Local: (raceConditionNode.js:1:26:1:52)
 [startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[functionEnter] foi acionado!
-[literal] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSReadCurrentFrameSlot
+Local: (raceConditionNode.js:1:26:1:33)
 [read] foi acionado!
+Hook read detectou a leitura da variavel: require de iid: 4
+Valor lido: function require(path) {
+      return mod.require(path);
+    }
+Variavel eh global? false
+Local: (raceConditionNode.js:1:26:1:33)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSReadCurrentFrameSlot
+Valor da expressao: function require(path) {
+      return mod.require(path);
+    }
+Local: (raceConditionNode.js:1:26:1:33)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSConstantString
+Local: (raceConditionNode.js:1:34:1:51)
+[literal] foi acionado!
+Hook literal detectou a criacao da literal: ./raceCondition
+Tipo da literal: StringLiteral
+Local: (raceConditionNode.js:1:34:1:51)
+[invokeFunPre] foi acionado!
+Hook invokeFunPre detectou o inicio da execucao da funcao: function require(path) {
+      return mod.require(path);
+    }
+Objeto base que recebera a funcao: undefined
+Argumentos da funcao: ./raceCondition
+Local: (raceConditionNode.js:1:26:1:52)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSConstantString
+Valor da expressao: ./raceCondition
+Local: (raceConditionNode.js:1:34:1:51)
+[functionEnter] foi acionado!
+Hook functionEnter detectou o comeco da execucao da funcao: const fs = require('fs');
+let sharedCounter = 0;
+
+function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+
+module.exports = incrementCounter;
+
+/* Passo a passo da execucao:
+** Passo1: Chama a funcao 1
+** Passo2: Trava a funcao 1 no fs
+** Passo3: Chama a funcao 2
+** Passo4: Trava a funcao 2 no fs
+** Passo5: Atualiza a funcao 1
+** Passo6: Retorna a funcao 1
+** Passo7: Atualiza a funcao 2
+** Passo8: Retorna a funcao 2
+** Obs: Dependendo da disponibilidade da worker thread,
+**      por condicoes indeterministicas, eh capaz de os
+**      passos 5 e 6 ocorram depois dos passo 7 e 8 sem
+**      a necessidade de injetar delays para que o passo 2
+**      demore mais artificialmente
+*/
+Argumentos da funcao: 
+Valor do dis: [object global]
+Local: (raceCondition.js:1:1:30:3)
+[startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: AutonomousFunctionExpression
+Local: (raceCondition.js:1:1:30:3)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: AutonomousFunctionExpression
+Local: (raceCondition.js:1:1:30:3)
+[literal] foi acionado!
+Hook literal detectou a criacao da literal: const fs = require('fs');
+let sharedCounter = 0;
+
+function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+
+module.exports = incrementCounter;
+
+/* Passo a passo da execucao:
+** Passo1: Chama a funcao 1
+** Passo2: Trava a funcao 1 no fs
+** Passo3: Chama a funcao 2
+** Passo4: Trava a funcao 2 no fs
+** Passo5: Atualiza a funcao 1
+** Passo6: Retorna a funcao 1
+** Passo7: Atualiza a funcao 2
+** Passo8: Retorna a funcao 2
+** Obs: Dependendo da disponibilidade da worker thread,
+**      por condicoes indeterministicas, eh capaz de os
+**      passos 5 e 6 ocorram depois dos passo 7 e 8 sem
+**      a necessidade de injetar delays para que o passo 2
+**      demore mais artificialmente
+*/
+Tipo da literal: FunctionLiteral
+Local: (raceCondition.js:1:1:30:3)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: AutonomousFunctionExpression
+Valor da expressao: const fs = require('fs');
+let sharedCounter = 0;
+
+function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+
+module.exports = incrementCounter;
+
+/* Passo a passo da execucao:
+** Passo1: Chama a funcao 1
+** Passo2: Trava a funcao 1 no fs
+** Passo3: Chama a funcao 2
+** Passo4: Trava a funcao 2 no fs
+** Passo5: Atualiza a funcao 1
+** Passo6: Retorna a funcao 1
+** Passo7: Atualiza a funcao 2
+** Passo8: Retorna a funcao 2
+** Obs: Dependendo da disponibilidade da worker thread,
+**      por condicoes indeterministicas, eh capaz de os
+**      passos 5 e 6 ocorram depois dos passo 7 e 8 sem
+**      a necessidade de injetar delays para que o passo 2
+**      demore mais artificialmente
+*/
+Local: (raceCondition.js:1:1:30:3)
+[functionExit] foi acionado!
+Hook functionExit detectou o fim da execucao de uma funcao
+Valor retornado por essa funcao const fs = require('fs');
+let sharedCounter = 0;
+
+function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+
+module.exports = incrementCounter;
+
+/* Passo a passo da execucao:
+** Passo1: Chama a funcao 1
+** Passo2: Trava a funcao 1 no fs
+** Passo3: Chama a funcao 2
+** Passo4: Trava a funcao 2 no fs
+** Passo5: Atualiza a funcao 1
+** Passo6: Retorna a funcao 1
+** Passo7: Atualiza a funcao 2
+** Passo8: Retorna a funcao 2
+** Obs: Dependendo da disponibilidade da worker thread,
+**      por condicoes indeterministicas, eh capaz de os
+**      passos 5 e 6 ocorram depois dos passo 7 e 8 sem
+**      a necessidade de injetar delays para que o passo 2
+**      demore mais artificialmente
+*/
+Local: (raceCondition.js:1:1:30:3)
+[functionEnter] foi acionado!
+Hook functionEnter detectou o comeco da execucao da funcao: const fs = require('fs');
+let sharedCounter = 0;
+
+function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+
+module.exports = incrementCounter;
+
+/* Passo a passo da execucao:
+** Passo1: Chama a funcao 1
+** Passo2: Trava a funcao 1 no fs
+** Passo3: Chama a funcao 2
+** Passo4: Trava a funcao 2 no fs
+** Passo5: Atualiza a funcao 1
+** Passo6: Retorna a funcao 1
+** Passo7: Atualiza a funcao 2
+** Passo8: Retorna a funcao 2
+** Obs: Dependendo da disponibilidade da worker thread,
+**      por condicoes indeterministicas, eh capaz de os
+**      passos 5 e 6 ocorram depois dos passo 7 e 8 sem
+**      a necessidade de injetar delays para que o passo 2
+**      demore mais artificialmente
+*/
+Argumentos da funcao: [object Object],function require(path) {
+      return mod.require(path);
+    },[object Object],/home/pedroubuntu/Desktop/exemplosRaceCondition/exemplo2MatheusOriginal/raceCondition.js,/home/pedroubuntu/Desktop/exemplosRaceCondition/exemplo2MatheusOriginal
+Valor do dis: [object Object]
+Local: (raceCondition.js:1:1:30:3)
+[literal] foi acionado!
+Hook literal detectou a criacao da literal: function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+Tipo da literal: FunctionLiteral
+Local: (raceCondition.js:4:1:12:2)
+[write] foi acionado!
+Hook write detectou a escrita da variavel: incrementCounter de iid: 7
+Valor escrito: function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+Valor anterior a escrita: undefined
+Variavel eh global? false
+Local: (raceCondition.js:4:1:12:2)
+[startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: JSWriteCurrentFrameSlot
+Local: (raceCondition.js:1:1:1:25)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: Call1
+Local: (raceCondition.js:1:12:1:25)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSReadCurrentFrameSlot
+Local: (raceCondition.js:1:12:1:19)
+[read] foi acionado!
+Hook read detectou a leitura da variavel: require de iid: 10
+Valor lido: function require(path) {
+      return mod.require(path);
+    }
+Variavel eh global? false
+Local: (raceCondition.js:1:12:1:19)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSReadCurrentFrameSlot
+Valor da expressao: function require(path) {
+      return mod.require(path);
+    }
+Local: (raceCondition.js:1:12:1:19)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSConstantString
+Local: (raceCondition.js:1:20:1:24)
+[literal] foi acionado!
+Hook literal detectou a criacao da literal: fs
+Tipo da literal: StringLiteral
+Local: (raceCondition.js:1:20:1:24)
+[invokeFunPre] foi acionado!
+Hook invokeFunPre detectou o inicio da execucao da funcao: function require(path) {
+      return mod.require(path);
+    }
+Objeto base que recebera a funcao: undefined
+Argumentos da funcao: fs
+Local: (raceCondition.js:1:12:1:25)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSConstantString
+Valor da expressao: fs
+Local: (raceCondition.js:1:20:1:24)
+[invokeFun] foi acionado!
+Hook invokeFun detectou o termino da funcao: function require(path) {
+      return mod.require(path);
+    }
+Objeto base que recebera a funcao: undefined
+Argumentos da funcao: fs
+Valor retornado pela funcao: [object Object]
+Local: (raceCondition.js:1:12:1:25)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: Call1
+Valor da expressao: [object Object]
+Local: (raceCondition.js:1:12:1:25)
+[write] foi acionado!
+Hook write detectou a escrita da variavel: fs de iid: 8
+Valor escrito: [object Object]
+Valor anterior a escrita: undefined
+Variavel eh global? false
+Local: (raceCondition.js:1:1:1:25)
+[startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: JSWriteCurrentFrameSlot
+Local: (raceCondition.js:2:1:2:22)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSConstantInteger
+Local: (raceCondition.js:2:21:2:22)
+[literal] foi acionado!
+Hook literal detectou a criacao da literal: 0
+Tipo da literal: NumericLiteral
+Local: (raceCondition.js:2:21:2:22)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSConstantInteger
+Valor da expressao: 0
+Local: (raceCondition.js:2:21:2:22)
+[write] foi acionado!
+Hook write detectou a escrita da variavel: sharedCounter de iid: 12
+Valor escrito: 0
+Valor anterior a escrita: undefined
+Variavel eh global? false
+Local: (raceCondition.js:2:1:2:22)
+[startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: WriteProperty
+Local: (raceCondition.js:14:1:14:34)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: WriteProperty
+Local: (raceCondition.js:14:1:14:34)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSReadCurrentFrameSlot
+Local: (raceCondition.js:14:1:14:7)
+[read] foi acionado!
+Hook read detectou a leitura da variavel: module de iid: 15
+Valor lido: [object Object]
+Variavel eh global? false
+Local: (raceCondition.js:14:1:14:7)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSReadCurrentFrameSlot
+Valor da expressao: [object Object]
+Local: (raceCondition.js:14:1:14:7)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSReadCurrentFrameSlot
+Local: (raceCondition.js:14:18:14:34)
+[read] foi acionado!
+Hook read detectou a leitura da variavel: incrementCounter de iid: 16
+Valor lido: function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+Variavel eh global? false
+Local: (raceCondition.js:14:18:14:34)
+[putFieldPre] foi acionado!
+Valor do val: function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+Local (raceCondition.js:14:1:14:34)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSReadCurrentFrameSlot
+Valor da expressao: function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+Local: (raceCondition.js:14:18:14:34)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: WriteProperty
+Valor da expressao: function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+Local: (raceCondition.js:14:1:14:34)
+[functionExit] foi acionado!
+Hook functionExit detectou o fim da execucao de uma funcao
+Valor retornado por essa funcao undefined
+Local: (raceCondition.js:1:1:30:3)
+[invokeFun] foi acionado!
+Hook invokeFun detectou o termino da funcao: function require(path) {
+      return mod.require(path);
+    }
+Objeto base que recebera a funcao: undefined
+Argumentos da funcao: ./raceCondition
+Valor retornado pela funcao: function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+Local: (raceConditionNode.js:1:26:1:52)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: Call1
+Valor da expressao: function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+Local: (raceConditionNode.js:1:26:1:52)
+[write] foi acionado!
+Hook write detectou a escrita da variavel: incrementCounter de iid: 2
+Valor escrito: function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+Valor anterior a escrita: undefined
+Variavel eh global? false
+Local: (raceConditionNode.js:1:1:1:52)
+[startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: Call0
+Local: (raceConditionNode.js:3:1:10:5)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: Call0
+Local: (raceConditionNode.js:3:1:10:5)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: DefaultFunctionExpression
+Local: (raceConditionNode.js:3:1:10:3)
+[literal] foi acionado!
+Hook literal detectou a criacao da literal: async () => {
+  const promises = [];
+    promises.push(incrementCounter("primeira"));
+    promises.push(incrementCounter("segunda"));
+
+    const results = await Promise.all(promises);
+    console.log(results);
+}
+Tipo da literal: FunctionLiteral
+Local: (raceConditionNode.js:3:1:10:3)
+[invokeFunPre] foi acionado!
+Hook invokeFunPre detectou o inicio da execucao da funcao: async () => {
+  const promises = [];
+    promises.push(incrementCounter("primeira"));
+    promises.push(incrementCounter("segunda"));
+
+    const results = await Promise.all(promises);
+    console.log(results);
+}
+Objeto base que recebera a funcao: undefined
+Argumentos da funcao: 
+Local: (raceConditionNode.js:3:1:10:5)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: DefaultFunctionExpression
+Valor da expressao: async () => {
+  const promises = [];
+    promises.push(incrementCounter("primeira"));
+    promises.push(incrementCounter("segunda"));
+
+    const results = await Promise.all(promises);
+    console.log(results);
+}
+Local: (raceConditionNode.js:3:1:10:3)
+[asyncFunctionEnter] foi acionado!
+Hook asyncFunctionEnter detectou o inicio de uma funcao assincrona
+Local: (raceConditionNode.js:3:14:10:2)
+[functionEnter] foi acionado!
+Hook functionEnter detectou o comeco da execucao da funcao: async () => {
+  const promises = [];
+    promises.push(incrementCounter("primeira"));
+    promises.push(incrementCounter("segunda"));
+
+    const results = await Promise.all(promises);
+    console.log(results);
+}
+Argumentos da funcao: 
+Valor do dis: [object global]
+Local: (raceConditionNode.js:3:2:10:2)
+[startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: JSWriteCurrentFrameSlot
+Local: (raceConditionNode.js:4:3:4:22)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: ConstantEmptyArrayLiteral
+Local: (raceConditionNode.js:4:20:4:22)
+[literal] foi acionado!
+Hook literal detectou a criacao da literal: 
+Tipo da literal: ArrayLiteral
+Local: (raceConditionNode.js:4:20:4:22)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: ConstantEmptyArrayLiteral
+Valor da expressao: 
+Local: (raceConditionNode.js:4:20:4:22)
+[write] foi acionado!
+Hook write detectou a escrita da variavel: promises de iid: 21
+Valor escrito: 
+Valor anterior a escrita: undefined
+Variavel eh global? false
+Local: (raceConditionNode.js:4:3:4:22)
+[startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: Invoke1
+Local: (raceConditionNode.js:5:5:5:48)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: Invoke1
+Local: (raceConditionNode.js:5:5:5:48)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSReadCurrentFrameSlot
+Local: (raceConditionNode.js:5:5:5:13)
+[read] foi acionado!
+Hook read detectou a leitura da variavel: promises de iid: 24
+Valor lido: 
+Variavel eh global? false
+Local: (raceConditionNode.js:5:5:5:13)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSReadCurrentFrameSlot
+Valor da expressao: 
+Local: (raceConditionNode.js:5:5:5:13)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: MaterializedTargetableProperty
+Local: (raceConditionNode.js:5:5:5:18)
+[getField] foi acionado!
+Local: (raceConditionNode.js:5:5:5:18)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: MaterializedTargetableProperty
+Valor da expressao: function push() { [native code] }
+Local: (raceConditionNode.js:5:5:5:18)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: Call1
+Local: (raceConditionNode.js:5:19:5:47)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSReadScopeFrameSlotWithTDZ
+Local: (raceConditionNode.js:5:19:5:35)
+[read] foi acionado!
+Hook read detectou a leitura da variavel: incrementCounter de iid: 27
+Valor lido: function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+Variavel eh global? false
+Local: (raceConditionNode.js:5:19:5:35)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSReadScopeFrameSlotWithTDZ
+Valor da expressao: function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+Local: (raceConditionNode.js:5:19:5:35)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSConstantString
+Local: (raceConditionNode.js:5:36:5:46)
+[literal] foi acionado!
+Hook literal detectou a criacao da literal: primeira
+Tipo da literal: StringLiteral
+Local: (raceConditionNode.js:5:36:5:46)
+[invokeFunPre] foi acionado!
+Hook invokeFunPre detectou o inicio da execucao da funcao: function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+Objeto base que recebera a funcao: undefined
+Argumentos da funcao: primeira
+Local: (raceConditionNode.js:5:19:5:47)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSConstantString
+Valor da expressao: primeira
+Local: (raceConditionNode.js:5:36:5:46)
+[startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: TerminalPositionReturn
+Local: (raceCondition.js:5:3:11:6)
+[functionEnter] foi acionado!
+Hook functionEnter detectou o comeco da execucao da funcao: function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+Argumentos da funcao: primeira
+Valor do dis: [object global]
+Local: (raceCondition.js:4:1:12:2)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSNew
+Local: (raceCondition.js:5:10:11:5)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: GlobalProperty
+Local: (raceCondition.js:5:14:5:21)
+[read] foi acionado!
+Hook read detectou a leitura da variavel: Promise de iid: 31
+Valor lido: function Promise() { [native code] }
+Variavel eh global? true
+Local: (raceCondition.js:5:14:5:21)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: GlobalProperty
+Valor da expressao: function Promise() { [native code] }
+Local: (raceCondition.js:5:14:5:21)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: DefaultFunctionExpression
+Local: (raceCondition.js:5:22:11:4)
+[literal] foi acionado!
+Hook literal detectou a criacao da literal: (resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  }
+Tipo da literal: FunctionLiteral
+Local: (raceCondition.js:5:22:11:4)
+[invokeFunPre] foi acionado!
+Hook invokeFunPre detectou o inicio da execucao da funcao: function Promise() { [native code] }
+Objeto base que recebera a funcao: undefined
+Argumentos da funcao: (resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  }
+Local: (raceCondition.js:5:10:11:5)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: DefaultFunctionExpression
+Valor da expressao: (resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  }
+Local: (raceCondition.js:5:22:11:4)
+[functionEnter] foi acionado!
+Hook functionEnter detectou o comeco da execucao da funcao: (resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  }
+Argumentos da funcao: function () { [native code] },function () { [native code] }
+Valor do dis: [object global]
+Local: (raceCondition.js:5:22:11:4)
+[startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: InvokeN
+Local: (raceCondition.js:6:5:10:7)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: InvokeN
+Local: (raceCondition.js:6:5:10:7)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSReadScopeFrameSlotWithTDZ
+Local: (raceCondition.js:6:5:6:7)
+[read] foi acionado!
+Hook read detectou a leitura da variavel: fs de iid: 35
+Valor lido: [object Object]
+Variavel eh global? false
+Local: (raceCondition.js:6:5:6:7)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSReadScopeFrameSlotWithTDZ
+Valor da expressao: [object Object]
+Local: (raceCondition.js:6:5:6:7)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: MaterializedTargetableProperty
+Local: (raceCondition.js:6:5:6:16)
+[getField] foi acionado!
+Local: (raceCondition.js:6:5:6:16)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: MaterializedTargetableProperty
+Valor da expressao: function readFile(path, options, callback) {
+  callback = maybeCallback(callback || options);
+  options = getOptions(options, { flag: 'r' });
+  if (!ReadFileContext)
+    ReadFileContext = require('internal/fs/read_file_context');
+  const context = new ReadFileContext(callback, options.encoding);
+  context.isUserFd = isFd(path); // File descriptor ownership
+
+  if (context.isUserFd) {
+    process.nextTick(function tick(context) {
+      readFileAfterOpen.call({ context }, null, path);
+    }, context);
+    return;
+  }
+
+  const flagsNumber = stringToFlags(options.flag);
+  path = getValidatedPath(path);
+
+  const req = new FSReqCallback();
+  req.context = context;
+  req.oncomplete = readFileAfterOpen;
+  binding.open(pathModule.toNamespacedPath(path),
+               flagsNumber,
+               0o666,
+               req);
+}
+Local: (raceCondition.js:6:5:6:16)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSConstantString
+Local: (raceCondition.js:6:17:6:31)
+[literal] foi acionado!
+Hook literal detectou a criacao da literal: package.json
+Tipo da literal: StringLiteral
+Local: (raceCondition.js:6:17:6:31)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSConstantString
+Valor da expressao: package.json
+Local: (raceCondition.js:6:17:6:31)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: DefaultFunctionExpression
+Local: (raceCondition.js:6:33:10:6)
+[literal] foi acionado!
+Hook literal detectou a criacao da literal: () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    }
+Tipo da literal: FunctionLiteral
+Local: (raceCondition.js:6:33:10:6)
+[invokeFunPre] foi acionado!
+Hook invokeFunPre detectou o inicio da execucao da funcao: function readFile(path, options, callback) {
+  callback = maybeCallback(callback || options);
+  options = getOptions(options, { flag: 'r' });
+  if (!ReadFileContext)
+    ReadFileContext = require('internal/fs/read_file_context');
+  const context = new ReadFileContext(callback, options.encoding);
+  context.isUserFd = isFd(path); // File descriptor ownership
+
+  if (context.isUserFd) {
+    process.nextTick(function tick(context) {
+      readFileAfterOpen.call({ context }, null, path);
+    }, context);
+    return;
+  }
+
+  const flagsNumber = stringToFlags(options.flag);
+  path = getValidatedPath(path);
+
+  const req = new FSReqCallback();
+  req.context = context;
+  req.oncomplete = readFileAfterOpen;
+  binding.open(pathModule.toNamespacedPath(path),
+               flagsNumber,
+               0o666,
+               req);
+}
+Objeto base que recebera a funcao: [object Object]
+Argumentos da funcao: package.json,() => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    }
+Local: (raceCondition.js:6:5:10:7)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: DefaultFunctionExpression
+Valor da expressao: () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    }
+Local: (raceCondition.js:6:33:10:6)
+[invokeFun] foi acionado!
+Hook invokeFun detectou o termino da funcao: function readFile(path, options, callback) {
+  callback = maybeCallback(callback || options);
+  options = getOptions(options, { flag: 'r' });
+  if (!ReadFileContext)
+    ReadFileContext = require('internal/fs/read_file_context');
+  const context = new ReadFileContext(callback, options.encoding);
+  context.isUserFd = isFd(path); // File descriptor ownership
+
+  if (context.isUserFd) {
+    process.nextTick(function tick(context) {
+      readFileAfterOpen.call({ context }, null, path);
+    }, context);
+    return;
+  }
+
+  const flagsNumber = stringToFlags(options.flag);
+  path = getValidatedPath(path);
+
+  const req = new FSReqCallback();
+  req.context = context;
+  req.oncomplete = readFileAfterOpen;
+  binding.open(pathModule.toNamespacedPath(path),
+               flagsNumber,
+               0o666,
+               req);
+}
+Objeto base que recebera a funcao: [object Object]
+Argumentos da funcao: package.json,() => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    }
+Valor retornado pela funcao: undefined
+Local: (raceCondition.js:6:5:10:7)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: InvokeN
+Valor da expressao: undefined
+Local: (raceCondition.js:6:5:10:7)
+[functionExit] foi acionado!
+Hook functionExit detectou o fim da execucao de uma funcao
+Valor retornado por essa funcao undefined
+Local: (raceCondition.js:5:22:11:4)
+[invokeFun] foi acionado!
+Hook invokeFun detectou o termino da funcao: function Promise() { [native code] }
+Objeto base que recebera a funcao: undefined
+Argumentos da funcao: (resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  }
+Valor retornado pela funcao: [object Promise]
+Local: (raceCondition.js:5:10:11:5)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSNew
+Valor da expressao: [object Promise]
+Local: (raceCondition.js:5:10:11:5)
+[functionExit] foi acionado!
+Hook functionExit detectou o fim da execucao de uma funcao
+Valor retornado por essa funcao [object Promise]
+Local: (raceCondition.js:4:1:12:2)
+[invokeFun] foi acionado!
+Hook invokeFun detectou o termino da funcao: function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+Objeto base que recebera a funcao: undefined
+Argumentos da funcao: primeira
+Valor retornado pela funcao: [object Promise]
+Local: (raceConditionNode.js:5:19:5:47)
+[invokeFunPre] foi acionado!
+Hook invokeFunPre detectou o inicio da execucao da funcao: function push() { [native code] }
+Objeto base que recebera a funcao: 
+Argumentos da funcao: [object Promise]
+Local: (raceConditionNode.js:5:5:5:48)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: Call1
+Valor da expressao: [object Promise]
+Local: (raceConditionNode.js:5:19:5:47)
+[invokeFun] foi acionado!
+Hook invokeFun detectou o termino da funcao: function push() { [native code] }
+Objeto base que recebera a funcao: [object Promise]
+Argumentos da funcao: [object Promise]
+Valor retornado pela funcao: 1
+Local: (raceConditionNode.js:5:5:5:48)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: Invoke1
+Valor da expressao: 1
+Local: (raceConditionNode.js:5:5:5:48)
+[startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: Invoke1
+Local: (raceConditionNode.js:6:5:6:47)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: Invoke1
+Local: (raceConditionNode.js:6:5:6:47)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSReadCurrentFrameSlot
+Local: (raceConditionNode.js:6:5:6:13)
+[read] foi acionado!
+Hook read detectou a leitura da variavel: promises de iid: 40
+Valor lido: [object Promise]
+Variavel eh global? false
+Local: (raceConditionNode.js:6:5:6:13)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSReadCurrentFrameSlot
+Valor da expressao: [object Promise]
+Local: (raceConditionNode.js:6:5:6:13)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: MaterializedTargetableProperty
+Local: (raceConditionNode.js:6:5:6:18)
+[getField] foi acionado!
+Local: (raceConditionNode.js:6:5:6:18)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: MaterializedTargetableProperty
+Valor da expressao: function push() { [native code] }
+Local: (raceConditionNode.js:6:5:6:18)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: Call1
+Local: (raceConditionNode.js:6:19:6:46)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSReadScopeFrameSlotWithTDZ
+Local: (raceConditionNode.js:6:19:6:35)
+[read] foi acionado!
+Hook read detectou a leitura da variavel: incrementCounter de iid: 43
+Valor lido: function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+Variavel eh global? false
+Local: (raceConditionNode.js:6:19:6:35)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSReadScopeFrameSlotWithTDZ
+Valor da expressao: function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+Local: (raceConditionNode.js:6:19:6:35)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSConstantString
+Local: (raceConditionNode.js:6:36:6:45)
+[literal] foi acionado!
+Hook literal detectou a criacao da literal: segunda
+Tipo da literal: StringLiteral
+Local: (raceConditionNode.js:6:36:6:45)
+[invokeFunPre] foi acionado!
+Hook invokeFunPre detectou o inicio da execucao da funcao: function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+Objeto base que recebera a funcao: undefined
+Argumentos da funcao: segunda
+Local: (raceConditionNode.js:6:19:6:46)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSConstantString
+Valor da expressao: segunda
+Local: (raceConditionNode.js:6:36:6:45)
+[startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: TerminalPositionReturn
+Local: (raceCondition.js:5:3:11:6)
+[functionEnter] foi acionado!
+Hook functionEnter detectou o comeco da execucao da funcao: function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+Argumentos da funcao: segunda
+Valor do dis: [object global]
+Local: (raceCondition.js:4:1:12:2)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSNew
+Local: (raceCondition.js:5:10:11:5)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: GlobalProperty
+Local: (raceCondition.js:5:14:5:21)
+[read] foi acionado!
+Hook read detectou a leitura da variavel: Promise de iid: 31
+Valor lido: function Promise() { [native code] }
+Variavel eh global? true
+Local: (raceCondition.js:5:14:5:21)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: GlobalProperty
+Valor da expressao: function Promise() { [native code] }
+Local: (raceCondition.js:5:14:5:21)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: DefaultFunctionExpression
+Local: (raceCondition.js:5:22:11:4)
+[literal] foi acionado!
+Hook literal detectou a criacao da literal: (resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  }
+Tipo da literal: FunctionLiteral
+Local: (raceCondition.js:5:22:11:4)
+[invokeFunPre] foi acionado!
+Hook invokeFunPre detectou o inicio da execucao da funcao: function Promise() { [native code] }
+Objeto base que recebera a funcao: undefined
+Argumentos da funcao: (resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  }
+Local: (raceCondition.js:5:10:11:5)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: DefaultFunctionExpression
+Valor da expressao: (resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  }
+Local: (raceCondition.js:5:22:11:4)
+[functionEnter] foi acionado!
+Hook functionEnter detectou o comeco da execucao da funcao: (resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  }
+Argumentos da funcao: function () { [native code] },function () { [native code] }
+Valor do dis: [object global]
+Local: (raceCondition.js:5:22:11:4)
+[startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: InvokeN
+Local: (raceCondition.js:6:5:10:7)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: InvokeN
+Local: (raceCondition.js:6:5:10:7)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSReadScopeFrameSlotWithTDZ
+Local: (raceCondition.js:6:5:6:7)
+[read] foi acionado!
+Hook read detectou a leitura da variavel: fs de iid: 35
+Valor lido: [object Object]
+Variavel eh global? false
+Local: (raceCondition.js:6:5:6:7)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSReadScopeFrameSlotWithTDZ
+Valor da expressao: [object Object]
+Local: (raceCondition.js:6:5:6:7)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: MaterializedTargetableProperty
+Local: (raceCondition.js:6:5:6:16)
+[getField] foi acionado!
+Local: (raceCondition.js:6:5:6:16)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: MaterializedTargetableProperty
+Valor da expressao: function readFile(path, options, callback) {
+  callback = maybeCallback(callback || options);
+  options = getOptions(options, { flag: 'r' });
+  if (!ReadFileContext)
+    ReadFileContext = require('internal/fs/read_file_context');
+  const context = new ReadFileContext(callback, options.encoding);
+  context.isUserFd = isFd(path); // File descriptor ownership
+
+  if (context.isUserFd) {
+    process.nextTick(function tick(context) {
+      readFileAfterOpen.call({ context }, null, path);
+    }, context);
+    return;
+  }
+
+  const flagsNumber = stringToFlags(options.flag);
+  path = getValidatedPath(path);
+
+  const req = new FSReqCallback();
+  req.context = context;
+  req.oncomplete = readFileAfterOpen;
+  binding.open(pathModule.toNamespacedPath(path),
+               flagsNumber,
+               0o666,
+               req);
+}
+Local: (raceCondition.js:6:5:6:16)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSConstantString
+Local: (raceCondition.js:6:17:6:31)
+[literal] foi acionado!
+Hook literal detectou a criacao da literal: package.json
+Tipo da literal: StringLiteral
+Local: (raceCondition.js:6:17:6:31)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSConstantString
+Valor da expressao: package.json
+Local: (raceCondition.js:6:17:6:31)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: DefaultFunctionExpression
+Local: (raceCondition.js:6:33:10:6)
+[literal] foi acionado!
+Hook literal detectou a criacao da literal: () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    }
+Tipo da literal: FunctionLiteral
+Local: (raceCondition.js:6:33:10:6)
+[invokeFunPre] foi acionado!
+Hook invokeFunPre detectou o inicio da execucao da funcao: function readFile(path, options, callback) {
+  callback = maybeCallback(callback || options);
+  options = getOptions(options, { flag: 'r' });
+  if (!ReadFileContext)
+    ReadFileContext = require('internal/fs/read_file_context');
+  const context = new ReadFileContext(callback, options.encoding);
+  context.isUserFd = isFd(path); // File descriptor ownership
+
+  if (context.isUserFd) {
+    process.nextTick(function tick(context) {
+      readFileAfterOpen.call({ context }, null, path);
+    }, context);
+    return;
+  }
+
+  const flagsNumber = stringToFlags(options.flag);
+  path = getValidatedPath(path);
+
+  const req = new FSReqCallback();
+  req.context = context;
+  req.oncomplete = readFileAfterOpen;
+  binding.open(pathModule.toNamespacedPath(path),
+               flagsNumber,
+               0o666,
+               req);
+}
+Objeto base que recebera a funcao: [object Object]
+Argumentos da funcao: package.json,() => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    }
+Local: (raceCondition.js:6:5:10:7)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: DefaultFunctionExpression
+Valor da expressao: () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    }
+Local: (raceCondition.js:6:33:10:6)
+[invokeFun] foi acionado!
+Hook invokeFun detectou o termino da funcao: function readFile(path, options, callback) {
+  callback = maybeCallback(callback || options);
+  options = getOptions(options, { flag: 'r' });
+  if (!ReadFileContext)
+    ReadFileContext = require('internal/fs/read_file_context');
+  const context = new ReadFileContext(callback, options.encoding);
+  context.isUserFd = isFd(path); // File descriptor ownership
+
+  if (context.isUserFd) {
+    process.nextTick(function tick(context) {
+      readFileAfterOpen.call({ context }, null, path);
+    }, context);
+    return;
+  }
+
+  const flagsNumber = stringToFlags(options.flag);
+  path = getValidatedPath(path);
+
+  const req = new FSReqCallback();
+  req.context = context;
+  req.oncomplete = readFileAfterOpen;
+  binding.open(pathModule.toNamespacedPath(path),
+               flagsNumber,
+               0o666,
+               req);
+}
+Objeto base que recebera a funcao: [object Object]
+Argumentos da funcao: package.json,() => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    }
+Valor retornado pela funcao: undefined
+Local: (raceCondition.js:6:5:10:7)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: InvokeN
+Valor da expressao: undefined
+Local: (raceCondition.js:6:5:10:7)
+[functionExit] foi acionado!
+Hook functionExit detectou o fim da execucao de uma funcao
+Valor retornado por essa funcao undefined
+Local: (raceCondition.js:5:22:11:4)
+[invokeFun] foi acionado!
+Hook invokeFun detectou o termino da funcao: function Promise() { [native code] }
+Objeto base que recebera a funcao: undefined
+Argumentos da funcao: (resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  }
+Valor retornado pela funcao: [object Promise]
+Local: (raceCondition.js:5:10:11:5)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSNew
+Valor da expressao: [object Promise]
+Local: (raceCondition.js:5:10:11:5)
+[functionExit] foi acionado!
+Hook functionExit detectou o fim da execucao de uma funcao
+Valor retornado por essa funcao [object Promise]
+Local: (raceCondition.js:4:1:12:2)
+[invokeFun] foi acionado!
+Hook invokeFun detectou o termino da funcao: function incrementCounter(posicao) {
+  return new Promise((resolve) => {
+    fs.readFile('package.json', () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    });
+  });
+}
+Objeto base que recebera a funcao: undefined
+Argumentos da funcao: segunda
+Valor retornado pela funcao: [object Promise]
+Local: (raceConditionNode.js:6:19:6:46)
+[invokeFunPre] foi acionado!
+Hook invokeFunPre detectou o inicio da execucao da funcao: function push() { [native code] }
+Objeto base que recebera a funcao: [object Promise]
+Argumentos da funcao: [object Promise]
+Local: (raceConditionNode.js:6:5:6:47)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: Call1
+Valor da expressao: [object Promise]
+Local: (raceConditionNode.js:6:19:6:46)
+[invokeFun] foi acionado!
+Hook invokeFun detectou o termino da funcao: function push() { [native code] }
+Objeto base que recebera a funcao: [object Promise],[object Promise]
+Argumentos da funcao: [object Promise]
+Valor retornado pela funcao: 2
+Local: (raceConditionNode.js:6:5:6:47)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: Invoke1
+Valor da expressao: 2
+Local: (raceConditionNode.js:6:5:6:47)
+[startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: JSWriteCurrentFrameSlot
+Local: (raceConditionNode.js:8:5:8:48)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: GeneratorWrapper
+Local: (raceConditionNode.js:8:21:8:48)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: Invoke1
+Local: (raceConditionNode.js:8:27:8:48)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: GlobalProperty
+Local: (raceConditionNode.js:8:27:8:34)
+[read] foi acionado!
+Hook read detectou a leitura da variavel: Promise de iid: 48
+Valor lido: function Promise() { [native code] }
+Variavel eh global? true
+Local: (raceConditionNode.js:8:27:8:34)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: GlobalProperty
+Valor da expressao: function Promise() { [native code] }
+Local: (raceConditionNode.js:8:27:8:34)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: MaterializedTargetableProperty
+Local: (raceConditionNode.js:8:27:8:38)
+[getField] foi acionado!
+Local: (raceConditionNode.js:8:27:8:38)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: MaterializedTargetableProperty
+Valor da expressao: function all() { [native code] }
+Local: (raceConditionNode.js:8:27:8:38)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSReadCurrentFrameSlot
+Local: (raceConditionNode.js:8:39:8:47)
+[read] foi acionado!
+Hook read detectou a leitura da variavel: promises de iid: 50
+Valor lido: [object Promise],[object Promise]
+Variavel eh global? false
+Local: (raceConditionNode.js:8:39:8:47)
+[invokeFunPre] foi acionado!
+Hook invokeFunPre detectou o inicio da execucao da funcao: function all() { [native code] }
+Objeto base que recebera a funcao: function Promise() { [native code] }
+Argumentos da funcao: [object Promise],[object Promise]
+Local: (raceConditionNode.js:8:27:8:48)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSReadCurrentFrameSlot
+Valor da expressao: [object Promise],[object Promise]
+Local: (raceConditionNode.js:8:39:8:47)
+[invokeFun] foi acionado!
+Hook invokeFun detectou o termino da funcao: function all() { [native code] }
+Objeto base que recebera a funcao: function Promise() { [native code] }
+Argumentos da funcao: [object Promise],[object Promise]
+Valor retornado pela funcao: [object Promise]
+Local: (raceConditionNode.js:8:27:8:48)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: Invoke1
+Valor da expressao: [object Promise]
+Local: (raceConditionNode.js:8:27:8:48)
+[awaitPre] foi acionado!
+Hook awaitPre detectou o inicio de uma funcao com await
+Valor esperado pela funcao: [object Promise]
+Local: (raceConditionNode.js:8:21:8:48)
+[functionExit] foi acionado!
+Hook functionExit detectou o fim da execucao de uma funcao
+Valor retornado por essa funcao undefined
+Local: (raceConditionNode.js:3:2:10:2)
+[asyncFunctionExit] foi acionado!
+Hook asyncFunctionExit detectou o termino de uma funcao assincrona
+Valor retornado pela funcao: [object Promise]
+Local: (raceConditionNode.js:3:14:10:2)
+[invokeFun] foi acionado!
+Hook invokeFun detectou o termino da funcao: async () => {
+  const promises = [];
+    promises.push(incrementCounter("primeira"));
+    promises.push(incrementCounter("segunda"));
+
+    const results = await Promise.all(promises);
+    console.log(results);
+}
+Objeto base que recebera a funcao: undefined
+Argumentos da funcao: 
+Valor retornado pela funcao: [object Promise]
+Local: (raceConditionNode.js:3:1:10:5)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: Call0
+Valor da expressao: [object Promise]
+Local: (raceConditionNode.js:3:1:10:5)
+[functionExit] foi acionado!
+Hook functionExit detectou o fim da execucao de uma funcao
+Valor retornado por essa funcao undefined
+Local: (raceConditionNode.js:1:1:10:6)
+[functionEnter] foi acionado!
+Hook functionEnter detectou o comeco da execucao da funcao: () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    }
+Argumentos da funcao: ,{
+  "name": "exemplo2matheusoriginal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "raceCondition.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^29.7.0"
+  }
+}
+
+Valor do dis: [object global]
+Local: (raceCondition.js:6:33:10:6)
+[startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: LocalVarPostfixIncMaterialized
+Local: (raceCondition.js:7:7:7:22)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: LocalVarPostfixIncMaterialized
+Local: (raceCondition.js:7:7:7:22)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSWriteScopeFrameSlot
+Local: (raceCondition.js:7:7:7:22)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: TemporalDeadZoneCheck
+Local: (raceCondition.js:7:7:7:22)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSAddSubNumericUnit
+Local: (raceCondition.js:7:7:7:22)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSReadScopeFrameSlotWithTDZ
+Local: (raceCondition.js:7:7:7:22)
+[read] foi acionado!
+Hook read detectou a leitura da variavel: sharedCounter de iid: 52
+Valor lido: 0
+Variavel eh global? false
+Local: (raceCondition.js:7:7:7:22)
 [unaryPre] foi acionado!
+Hook unaryPre detectou o inicio da operacao unaria: ++
+Operando da esquerda da operacao unaria: 0
+Local: (raceCondition.js:7:7:7:22)
 [endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSReadScopeFrameSlotWithTDZ
+Valor da expressao: 0
+Local: (raceCondition.js:7:7:7:22)
 [unary] foi acionado!
+Hook unary detectou a execucao da operacao unaria: ++
+Operando da esquerda da operacao unaria: 0
+Resultado final da operacao unaria: 1
+Local: (raceCondition.js:7:7:7:22)
 [endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSAddSubNumericUnit
+Valor da expressao: 1
+Local: (raceCondition.js:7:7:7:22)
 [endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: TemporalDeadZoneCheck
+Valor da expressao: 1
+Local: (raceCondition.js:7:7:7:22)
+[write] foi acionado!
+Hook write detectou a escrita da variavel: sharedCounter de iid: 52
+Valor escrito: 1
+Valor anterior a escrita: undefined
+Variavel eh global? false
+Local: (raceCondition.js:7:7:7:22)
 [endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSWriteScopeFrameSlot
+Valor da expressao: 1
+Local: (raceCondition.js:7:7:7:22)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: LocalVarPostfixIncMaterialized
+Valor da expressao: 0
+Local: (raceCondition.js:7:7:7:22)
+[startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: Invoke1
+Local: (raceCondition.js:8:7:8:27)
 [startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: Invoke1
+Local: (raceCondition.js:8:7:8:27)
 [startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: GlobalProperty
+Local: (raceCondition.js:8:7:8:14)
 [read] foi acionado!
+Hook read detectou a leitura da variavel: console de iid: 54
+Valor lido: [object console]
+Variavel eh global? true
+Local: (raceCondition.js:8:7:8:14)
 [endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: GlobalProperty
+Valor da expressao: [object console]
+Local: (raceCondition.js:8:7:8:14)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: MaterializedTargetableProperty
+Local: (raceCondition.js:8:7:8:18)
 [getField] foi acionado!
+Local: (raceCondition.js:8:7:8:18)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: MaterializedTargetableProperty
+Valor da expressao: function () { [native code] }
+Local: (raceCondition.js:8:7:8:18)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSReadScopeFrameSlot
+Local: (raceCondition.js:8:19:8:26)
+[read] foi acionado!
+Hook read detectou a leitura da variavel: posicao de iid: 56
+Valor lido: primeira
+Variavel eh global? false
+Local: (raceCondition.js:8:19:8:26)
+[invokeFunPre] foi acionado!
+Hook invokeFunPre detectou o inicio da execucao da funcao: function () { [native code] }
+Objeto base que recebera a funcao: [object console]
+Argumentos da funcao: primeira
+Local: (raceCondition.js:8:7:8:27)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSReadScopeFrameSlot
+Valor da expressao: primeira
+Local: (raceCondition.js:8:19:8:26)
+[invokeFun] foi acionado!
+Hook invokeFun detectou o termino da funcao: function () { [native code] }
+Objeto base que recebera a funcao: [object console]
+Argumentos da funcao: primeira
+Valor retornado pela funcao: undefined
+Local: (raceCondition.js:8:7:8:27)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: Invoke1
+Valor da expressao: undefined
+Local: (raceCondition.js:8:7:8:27)
+[startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: Call1
+Local: (raceCondition.js:9:7:9:29)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: Call1
+Local: (raceCondition.js:9:7:9:29)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSReadScopeFrameSlot
+Local: (raceCondition.js:9:7:9:14)
+[read] foi acionado!
+Hook read detectou a leitura da variavel: resolve de iid: 58
+Valor lido: function () { [native code] }
+Variavel eh global? false
+Local: (raceCondition.js:9:7:9:14)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSReadScopeFrameSlot
+Valor da expressao: function () { [native code] }
+Local: (raceCondition.js:9:7:9:14)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSReadScopeFrameSlotWithTDZ
+Local: (raceCondition.js:9:15:9:28)
+[read] foi acionado!
+Hook read detectou a leitura da variavel: sharedCounter de iid: 59
+Valor lido: 1
+Variavel eh global? false
+Local: (raceCondition.js:9:15:9:28)
+[invokeFunPre] foi acionado!
+Hook invokeFunPre detectou o inicio da execucao da funcao: function () { [native code] }
+Objeto base que recebera a funcao: undefined
+Argumentos da funcao: 1
+Local: (raceCondition.js:9:7:9:29)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSReadScopeFrameSlotWithTDZ
+Valor da expressao: 1
+Local: (raceCondition.js:9:15:9:28)
+[invokeFun] foi acionado!
+Hook invokeFun detectou o termino da funcao: function () { [native code] }
+Objeto base que recebera a funcao: undefined
+Argumentos da funcao: 1
+Valor retornado pela funcao: undefined
+Local: (raceCondition.js:9:7:9:29)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: Call1
+Valor da expressao: undefined
+Local: (raceCondition.js:9:7:9:29)
+[functionExit] foi acionado!
+Hook functionExit detectou o fim da execucao de uma funcao
+Valor retornado por essa funcao undefined
+Local: (raceCondition.js:6:33:10:6)
+[functionEnter] foi acionado!
+Hook functionEnter detectou o comeco da execucao da funcao: () => {
+      sharedCounter++;
+      console.log(posicao);
+      resolve(sharedCounter);
+    }
+Argumentos da funcao: ,{
+  "name": "exemplo2matheusoriginal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "raceCondition.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^29.7.0"
+  }
+}
+
+Valor do dis: [object global]
+Local: (raceCondition.js:6:33:10:6)
+[startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: LocalVarPostfixIncMaterialized
+Local: (raceCondition.js:7:7:7:22)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: LocalVarPostfixIncMaterialized
+Local: (raceCondition.js:7:7:7:22)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSWriteScopeFrameSlot
+Local: (raceCondition.js:7:7:7:22)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: TemporalDeadZoneCheck
+Local: (raceCondition.js:7:7:7:22)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSAddSubNumericUnit
+Local: (raceCondition.js:7:7:7:22)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSReadScopeFrameSlotWithTDZ
+Local: (raceCondition.js:7:7:7:22)
+[read] foi acionado!
+Hook read detectou a leitura da variavel: sharedCounter de iid: 52
+Valor lido: 1
+Variavel eh global? false
+Local: (raceCondition.js:7:7:7:22)
 [unaryPre] foi acionado!
+Hook unaryPre detectou o inicio da operacao unaria: ++
+Operando da esquerda da operacao unaria: 1
+Local: (raceCondition.js:7:7:7:22)
 [endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSReadScopeFrameSlotWithTDZ
+Valor da expressao: 1
+Local: (raceCondition.js:7:7:7:22)
 [unary] foi acionado!
+Hook unary detectou a execucao da operacao unaria: ++
+Operando da esquerda da operacao unaria: 1
+Resultado final da operacao unaria: 2
+Local: (raceCondition.js:7:7:7:22)
 [endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSAddSubNumericUnit
+Valor da expressao: 2
+Local: (raceCondition.js:7:7:7:22)
 [endExpression] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: TemporalDeadZoneCheck
+Valor da expressao: 2
+Local: (raceCondition.js:7:7:7:22)
 [write] foi acionado!
+Hook write detectou a escrita da variavel: sharedCounter de iid: 52
+Valor escrito: 2
+Valor anterior a escrita: undefined
+Variavel eh global? false
+Local: (raceCondition.js:7:7:7:22)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSWriteScopeFrameSlot
+Valor da expressao: 2
+Local: (raceCondition.js:7:7:7:22)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: LocalVarPostfixIncMaterialized
+Valor da expressao: 1
+Local: (raceCondition.js:7:7:7:22)
 [startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: Invoke1
+Local: (raceCondition.js:8:7:8:27)
 [startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: Invoke1
+Local: (raceCondition.js:8:7:8:27)
 [startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: GlobalProperty
+Local: (raceCondition.js:8:7:8:14)
 [read] foi acionado!
+Hook read detectou a leitura da variavel: console de iid: 54
+Valor lido: [object console]
+Variavel eh global? true
+Local: (raceCondition.js:8:7:8:14)
 [endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: GlobalProperty
+Valor da expressao: [object console]
+Local: (raceCondition.js:8:7:8:14)
 [startExpression] foi acionado!
-[literal] foi acionado!
-[invokeFunPre] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: MaterializedTargetableProperty
+Local: (raceCondition.js:8:7:8:18)
+[getField] foi acionado!
+Local: (raceCondition.js:8:7:8:18)
 [endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: MaterializedTargetableProperty
+Valor da expressao: function () { [native code] }
+Local: (raceCondition.js:8:7:8:18)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSReadScopeFrameSlot
+Local: (raceCondition.js:8:19:8:26)
+[read] foi acionado!
+Hook read detectou a leitura da variavel: posicao de iid: 56
+Valor lido: segunda
+Variavel eh global? false
+Local: (raceCondition.js:8:19:8:26)
+[invokeFunPre] foi acionado!
+Hook invokeFunPre detectou o inicio da execucao da funcao: function () { [native code] }
+Objeto base que recebera a funcao: [object console]
+Argumentos da funcao: segunda
+Local: (raceCondition.js:8:7:8:27)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSReadScopeFrameSlot
+Valor da expressao: segunda
+Local: (raceCondition.js:8:19:8:26)
 [invokeFun] foi acionado!
+Hook invokeFun detectou o termino da funcao: function () { [native code] }
+Objeto base que recebera a funcao: [object console]
+Argumentos da funcao: segunda
+Valor retornado pela funcao: undefined
+Local: (raceCondition.js:8:7:8:27)
 [endExpression] foi acionado!
-[write] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: Invoke1
+Valor da expressao: undefined
+Local: (raceCondition.js:8:7:8:27)
 [startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: Call1
+Local: (raceCondition.js:9:7:9:29)
 [startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: Call1
+Local: (raceCondition.js:9:7:9:29)
 [startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSReadScopeFrameSlot
+Local: (raceCondition.js:9:7:9:14)
 [read] foi acionado!
+Hook read detectou a leitura da variavel: resolve de iid: 58
+Valor lido: function () { [native code] }
+Variavel eh global? false
+Local: (raceCondition.js:9:7:9:14)
 [endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSReadScopeFrameSlot
+Valor da expressao: function () { [native code] }
+Local: (raceCondition.js:9:7:9:14)
 [startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSReadScopeFrameSlotWithTDZ
+Local: (raceCondition.js:9:15:9:28)
 [read] foi acionado!
+Hook read detectou a leitura da variavel: sharedCounter de iid: 59
+Valor lido: 2
+Variavel eh global? false
+Local: (raceCondition.js:9:15:9:28)
 [invokeFunPre] foi acionado!
+Hook invokeFunPre detectou o inicio da execucao da funcao: function () { [native code] }
+Objeto base que recebera a funcao: undefined
+Argumentos da funcao: 2
+Local: (raceCondition.js:9:7:9:29)
 [endExpression] foi acionado!
-[startStatement] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSReadScopeFrameSlotWithTDZ
+Valor da expressao: 2
+Local: (raceCondition.js:9:15:9:28)
+[invokeFun] foi acionado!
+Hook invokeFun detectou o termino da funcao: function () { [native code] }
+Objeto base que recebera a funcao: undefined
+Argumentos da funcao: 2
+Valor retornado pela funcao: undefined
+Local: (raceCondition.js:9:7:9:29)
+[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: Call1
+Valor da expressao: undefined
+Local: (raceCondition.js:9:7:9:29)
+[functionExit] foi acionado!
+Hook functionExit detectou o fim da execucao de uma funcao
+Valor retornado por essa funcao undefined
+Local: (raceCondition.js:6:33:10:6)
 [functionEnter] foi acionado!
+Hook functionEnter detectou o comeco da execucao da funcao: async () => {
+  const promises = [];
+    promises.push(incrementCounter("primeira"));
+    promises.push(incrementCounter("segunda"));
+
+    const results = await Promise.all(promises);
+    console.log(results);
+}
+Argumentos da funcao: 
+Valor do dis: [object global]
+Local: (raceConditionNode.js:3:2:10:2)
+[startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: JSWriteCurrentFrameSlot
+Local: (raceConditionNode.js:8:5:8:48)
 [startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: GeneratorWrapper
+Local: (raceConditionNode.js:8:21:8:48)
+[awaitPost] foi acionado!
+Hook awaitPost detectou o termino de uma funcao com await
+Valor esperado pela funcao: [object Promise]
+Valor resolvid/rejetado obtido: 1,2
+A promise foi rejeitada? false
+Local: (raceConditionNode.js:8:21:8:48)
 [endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: GeneratorWrapper
+Valor da expressao: 1,2
+Local: (raceConditionNode.js:8:21:8:48)
+[write] foi acionado!
+Hook write detectou a escrita da variavel: results de iid: 45
+Valor escrito: 1,2
+Valor anterior a escrita: undefined
+Variavel eh global? false
+Local: (raceConditionNode.js:8:5:8:48)
+[startStatement] foi acionado!
+Hook startStatement detectou o inicio ou fim do statement: Invoke1
+Local: (raceConditionNode.js:9:5:9:25)
 [startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: Invoke1
+Local: (raceConditionNode.js:9:5:9:25)
 [startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: GlobalProperty
+Local: (raceConditionNode.js:9:5:9:12)
 [read] foi acionado!
+Hook read detectou a leitura da variavel: console de iid: 61
+Valor lido: [object console]
+Variavel eh global? true
+Local: (raceConditionNode.js:9:5:9:12)
 [endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: GlobalProperty
+Valor da expressao: [object console]
+Local: (raceConditionNode.js:9:5:9:12)
+[startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: MaterializedTargetableProperty
+Local: (raceConditionNode.js:9:5:9:16)
 [getField] foi acionado!
+Local: (raceConditionNode.js:9:5:9:16)
 [endExpression] foi acionado!
-[endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: MaterializedTargetableProperty
+Valor da expressao: function () { [native code] }
+Local: (raceConditionNode.js:9:5:9:16)
 [startExpression] foi acionado!
+Hook startExpression detectou o incio da expressao de tipo: JSReadCurrentFrameSlot
+Local: (raceConditionNode.js:9:17:9:24)
 [read] foi acionado!
+Hook read detectou a leitura da variavel: results de iid: 63
+Valor lido: 1,2
+Variavel eh global? false
+Local: (raceConditionNode.js:9:17:9:24)
+[invokeFunPre] foi acionado!
+Hook invokeFunPre detectou o inicio da execucao da funcao: function () { [native code] }
+Objeto base que recebera a funcao: [object console]
+Argumentos da funcao: 1,2
+Local: (raceConditionNode.js:9:5:9:25)
 [endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: JSReadCurrentFrameSlot
+Valor da expressao: 1,2
+Local: (raceConditionNode.js:9:17:9:24)
+[invokeFun] foi acionado!
+Hook invokeFun detectou o termino da funcao: function () { [native code] }
+Objeto base que recebera a funcao: [object console]
+Argumentos da funcao: 1,2
+Valor retornado pela funcao: undefined
+Local: (raceConditionNode.js:9:5:9:25)
 [endExpression] foi acionado!
+Hook endExpression detectou o termino da expressao de tipo: Invoke1
+Valor da expressao: undefined
+Local: (raceConditionNode.js:9:5:9:25)
 [functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[functionEnter] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[functionEnter] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[functionEnter] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[functionEnter] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[functionEnter] foi acionado!
-[literal] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[literal] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[functionEnter] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[functionEnter] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[functionEnter] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[functionEnter] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[functionEnter] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[functionEnter] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[functionEnter] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[functionEnter] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[functionEnter] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[functionEnter] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[functionEnter] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[functionEnter] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[functionEnter] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[functionEnter] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[functionEnter] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[functionEnter] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[functionEnter] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[functionEnter] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[functionEnter] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[functionEnter] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[functionEnter] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[write] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[functionEnter] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[functionEnter] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[functionEnter] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[functionEnter] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[functionEnter] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[functionEnter] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[functionEnter] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[startStatement] foi acionado!
-[functionEnter] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[putFieldPre] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
-[functionEnter] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[endExpression] foi acionado!
-[getField] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[startStatement] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[unaryPre] foi acionado!
-[endExpression] foi acionado!
-[unary] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[literal] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[startExpression] foi acionado!
-[startExpression] foi acionado!
-[read] foi acionado!
-[invokeFunPre] foi acionado!
-[endExpression] foi acionado!
-[invokeFun] foi acionado!
-[endExpression] foi acionado!
-[endExpression] foi acionado!
-[functionExit] foi acionado!
+Hook functionExit detectou o fim da execucao de uma funcao
+Valor retornado por essa funcao undefined
+Local: (raceConditionNode.js:3:2:10:2)
 [endExecution] foi acionado!
+Hook endExecution detectou o fim da execucao node

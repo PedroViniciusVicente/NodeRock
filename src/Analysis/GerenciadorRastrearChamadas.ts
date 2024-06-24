@@ -3,7 +3,7 @@ import * as fs from 'fs';
 export class GerenciadorRastrearChamadas {
     // Caminho do arquivo de log
     static pathDoArquivoLog: string 
-        = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/logRastrearChamadas.txt";
+        = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/logRastrearChamadas.txt";
     static rastrearApenasMinhaClasse: boolean = true;
 
     
