@@ -126,6 +126,8 @@ export function outputSync(message: string | object, filePath: string)
     {
         output = message;
     }
+    //console.log(`Escrita foi chamada para o local: ${filePath}`);
+    //console.log(`Output eh: ${output}`);
     fs.writeFileSync(filePath, output + '\n');
 }
 

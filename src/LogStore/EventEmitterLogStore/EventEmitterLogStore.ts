@@ -7,9 +7,6 @@ import {SourceCodeInfo} from '../Class/SourceCodeInfo';
 import {EventEmitterDeclaration} from './Class/EventEmitterDeclaration';
 import {EventEmitterOperation} from './Class/EventEmitterOperation';
 
-import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
- 
-
 export class EventEmitterLogStore
 {
     private static readonly eventEmitterToEventEmitterDeclaration:
@@ -18,8 +15,6 @@ export class EventEmitterLogStore
 
     public static getEventEmitterDeclaration(eventEmitter: EventEmitter, event: string | symbol, sourceCodeInfo: SourceCodeInfo | null): EventEmitterDeclaration
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterLogStore do LogStore", "getEventEmitterDeclaration");
-
         const eventToEventEmitterDeclaration = EventEmitterLogStore.eventEmitterToEventEmitterDeclaration.get(eventEmitter);
         if (eventToEventEmitterDeclaration === undefined)
         {
@@ -47,16 +42,12 @@ export class EventEmitterLogStore
 
     public static getEventEmitterDeclarations(): readonly EventEmitterDeclaration[]
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterLogStore do LogStore", "getEventEmitterDeclarations");
-
         return this.eventEmitterDeclarations;
     }
 
     public static appendOperation(eventEmitter: EventEmitter, event: string | symbol,
                                   type: 'read' | 'write', operationKind: EventEmitterOperation['operationKind'], affectedListeners: Iterable<Function>, sourceCodeInfo: SourceCodeInfo | null)
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterLogStore do LogStore", "appendOperation");
-
         const eventDeclaration = EventEmitterLogStore.getEventEmitterDeclaration(eventEmitter, event, sourceCodeInfo);
         const asyncContext = AsyncContextLogStore.getAsyncContextFromAsyncId(asyncHooks.executionAsyncId());
         if (type === 'write')

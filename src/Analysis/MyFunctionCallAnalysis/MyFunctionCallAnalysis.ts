@@ -1,3 +1,5 @@
+// DO NOT INSTRUMENT
+
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import * as fs from 'fs';
 
@@ -39,6 +41,10 @@ export class MyFunctionCallAnalysis extends Analysis {
     static debugar: boolean = true;
     static apenasHooksPrincipais: boolean = true;
     static pathLogHooks: string;
+
+    // Esse atributo eh um vetor que vai armazenando os logs dos hooks na memoria RAM e escreve no final
+    static logsDosHooks: string[] = [];
+    // Obs: Na implementação do NodeRT, esse vetor era do tipo object[] = []; para armazenar no formato JSON
     
     constructor(sandbox: Sandbox)
     {
@@ -46,164 +52,185 @@ export class MyFunctionCallAnalysis extends Analysis {
         this.timeConsumed = 0;
         
     }
-    
+
+    // Funcao que sera chamada ao final: Com o process.on('exit', ...) 
+    //   para escrever tudo do vetor logsDosHooks para o arquivo de logs desejado
+    public static escreverHooksNoLog(): void {
+        //console.log("O escreverHooksNoLog foi chamado!");
+        //fs.writeFileSync(MyFunctionCallAnalysis.pathLogHooks, MyFunctionCallAnalysis.logsDosHooks + '\n');
+        
+        fs.writeFileSync(MyFunctionCallAnalysis.pathLogHooks, ''); // Gerar o arquivo zerado
+        for (const hookRegistrado of MyFunctionCallAnalysis.logsDosHooks) {
+            fs.writeFileSync(MyFunctionCallAnalysis.pathLogHooks, hookRegistrado + '\n', {flag:'a'});
+        }
+    }
+
+    public static adicionarHookAoLog(hookAdicionar: string): void {
+        //console.log("O adicionarHooksAoLog foi chamado!");
+        MyFunctionCallAnalysis.logsDosHooks.push(hookAdicionar);
+    }
+
     protected override registerHooks()
     {
-        console.log("\nChamou o registerHooks do MyFunctionCallAnalysis:");
+        
+        // -=+=- Inicializacao do path para o endereco correto -=+=-
+        
+        console.log("Chamou o registerHooks do MyFunctionCallAnalysis:");
         if(MyFunctionCallAnalysis.apenasHooksPrincipais) {
             //console.log("Path do apenas hooks principais!");
             MyFunctionCallAnalysis.pathLogHooks = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/MyFunctionCallAnalysis/logRastrearPrincipaisHooks.txt";
-            const mensagemInicial = `-=+=- Log das chamadas dos hooks principais -=+=- \n\n`;
-            fs.writeFileSync(MyFunctionCallAnalysis.pathLogHooks, mensagemInicial, {flag: 'w'});
+            const mensagemInicial = `-=+=- Log das chamadas dos hooks principais -=+=- \n`;
+            MyFunctionCallAnalysis.adicionarHookAoLog(mensagemInicial);
         }
         else {
             //console.log("Path de todos os hooks!");
             MyFunctionCallAnalysis.pathLogHooks = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/MyFunctionCallAnalysis/logRastrearHooks.txt";
-            const mensagemInicial = `-=+=- Log das chamadas de todos hooks -=+=- \n\n`;
-            fs.writeFileSync(MyFunctionCallAnalysis.pathLogHooks, mensagemInicial, {flag: 'w'});
+            const mensagemInicial = `-=+=- Log das chamadas de todos hooks -=+=- \n`;
+            MyFunctionCallAnalysis.adicionarHookAoLog(mensagemInicial);
         }
-        console.log(`pathlog eh: ${MyFunctionCallAnalysis.pathLogHooks}`);
+        //console.log(`pathlog eh: ${MyFunctionCallAnalysis.pathLogHooks}`);
         console.log(this.timeConsumed);
 
 
-        // GerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterOperationLogger", "registerHooks");
+        // -=+=- Deteccao e registro dos hooks -=+=-
+
         if (MyFunctionCallAnalysis.apenasHooksPrincipais) {
             // Registro apenas dos hooks principais, para ficar mais facil de entender
             console.log("Testando apenas os hooks principais!");
 
             this.read = (_iid, name, _val, _isGlobal) => {
                 if(name === "fs") {
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `[read] Leitura do arquivo da primeira/segunda funcao\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`[read] Leitura do arquivo da primeira/segunda funcao`);
                 }
                 else if(name === "resolve") {
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `[read] Resolve da primeira/segunda funcao\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`[read] Resolve da primeira/segunda funcao`);
                 }
             };
 
             this.write = (_iid, name, val, _lhs, _isGlobal) => {
                 if(name === "sharedCounter" && (val === 1 || val === 2)) {      
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `[write] Aumento do sharedCounter para ${val}\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`[write] Aumento do sharedCounter para ${val}`);
                 }
             };
 
             this.functionEnter = (_iid, f, _dis, _args) => {
                 if(f.name === "incrementCounter") {
                     //console.log(`O nome eh: ${f.name}`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `[functionEnter] Inicio da primeira/segunda funcao\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`[functionEnter] Inicio da primeira/segunda funcao`);
                 }   
 
             };
 
             this.invokeFunPre = (_iid, f, _base, _args) => {
                 if (f === setImmediate) {
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[invokeFunPre] Funcao setImmediate foi detectada!\n");
+                    MyFunctionCallAnalysis.adicionarHookAoLog("[invokeFunPre] Funcao setImmediate foi detectada!");
                 }
                 else if (f === setTimeout) {
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[invokeFunPre] Funcao setTimeout foi detectada!\n");
+                    MyFunctionCallAnalysis.adicionarHookAoLog("[invokeFunPre] Funcao setTimeout foi detectada!");
                 }
                 else if (f === setInterval) {
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[invokeFunPre] Funcao setInterval foi detectada!\n");
+                    MyFunctionCallAnalysis.adicionarHookAoLog("[invokeFunPre] Funcao setInterval foi detectada!");
                 }
                 //else {
-                //    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[invokeFunPre] Funcao indefinida foi detectada!\n");
+                //    MyFunctionCallAnalysis.adicionarHookAoLog("[invokeFunPre] Funcao indefinida foi detectada!");
                 //}
             };
          
             this.invokeFun = (_iid, f, _base, _args) => {
                 if (f === setImmediate) {
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[invokeFun] Funcao setImmediate foi detectada!\n");
+                    MyFunctionCallAnalysis.adicionarHookAoLog("[invokeFun] Funcao setImmediate foi detectada!");
                 }
                 else if (f === setTimeout) {
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[invokeFun] Funcao setTimeout foi detectada!\n");
+                    MyFunctionCallAnalysis.adicionarHookAoLog("[invokeFun] Funcao setTimeout foi detectada!");
                 }
                 else if (f === setInterval) {
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[invokeFun] Funcao setInterval foi detectada!\n");
+                    MyFunctionCallAnalysis.adicionarHookAoLog("[invokeFun] Funcao setInterval foi detectada!");
                 }
                 //else {
-                //    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[invokeFun] Funcao indefinida foi detectada!\n");
+                //    MyFunctionCallAnalysis.adicionarHookAoLog("[invokeFun] Funcao indefinida foi detectada!");
                 //}
             };
          
             this.asyncFunctionEnter = (_iid) => {
-                fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[asyncFunctionEnter] Funcao async do raceConditionNode foi iniciada!\n");
+                MyFunctionCallAnalysis.adicionarHookAoLog("[asyncFunctionEnter] Funcao async do raceConditionNode foi iniciada!");
             };
          
             //this.asyncFunctionExit = (_iid, result, _wrappedExceptionVal) => {
-            //    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `[asyncFunctionExit] Funcao async foi detectada! (retornando ${result})\n`);
+            //    MyFunctionCallAnalysis.adicionarHookAoLog(`[asyncFunctionExit] Funcao async foi detectada! (retornando ${result})`);
             //};
 
             //this.awaitPre = (_iid, _promiseOrValAwaited) => {
-            //    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[awaitPre] Promise foi inciada!\n");
+            //    MyFunctionCallAnalysis.adicionarHookAoLog("[awaitPre] Promise foi inciada!");
             //};
     
             this.awaitPost = (_iid, _promiseOrValAwaited, valResolveOrRejected, _isPromiseRejected) => {
-                fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `[awaitPost] Promise.all foi finalizada! (retornando ${valResolveOrRejected})\n`);
+                MyFunctionCallAnalysis.adicionarHookAoLog(`[awaitPost] Promise.all foi finalizada! (retornando ${valResolveOrRejected})`);
             };
         }
         else {
             console.log("Testando todos os hooks!");
             this.read = (iid, name, val, isGlobal) => {
-                fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[read] foi acionado!\n");
+                MyFunctionCallAnalysis.adicionarHookAoLog("[read] foi acionado!");
                 if (MyFunctionCallAnalysis.debugar) {
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Hook read detectou a leitura da variavel: ${name} de iid: ${iid}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Valor lido: ${val}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Variavel eh global? ${isGlobal}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Local: ${this.getSandbox().iidToLocation(iid)}\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook read detectou a leitura da variavel: ${name} de iid: ${iid}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor lido: ${val}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Variavel eh global? ${isGlobal}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
                 }
             };
     
             this.write = (iid, name, val, lhs, isGlobal) => {        
-                fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[write] foi acionado!\n");
+                MyFunctionCallAnalysis.adicionarHookAoLog("[write] foi acionado!");
                 if (MyFunctionCallAnalysis.debugar) {
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Hook write detectou a escrita da variavel: ${name} de iid: ${iid}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Valor escrito: ${val}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Valor anterior a escrita: ${lhs}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Variavel eh global? ${isGlobal}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Local: ${this.getSandbox().iidToLocation(iid)}\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook write detectou a escrita da variavel: ${name} de iid: ${iid}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor escrito: ${val}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor anterior a escrita: ${lhs}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Variavel eh global? ${isGlobal}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
                 }
             };
     
             this.getField = (iid, base, offset, _val, isComputed) => {
-                fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[getField] foi acionado!\n");
+                MyFunctionCallAnalysis.adicionarHookAoLog("[getField] foi acionado!");
                 if(MyFunctionCallAnalysis.debugar) {
                     if(isComputed) {
-                        fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Hook getField detectou o acesso da propriedade ${[offset]} do objeto ${base}\n`);
-                        //fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Com a prop prop ${String(offset)}\n`); // ??
-                        //fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Valor do val: ${_val}\n`);
+                        MyFunctionCallAnalysis.adicionarHookAoLog(`Hook getField detectou o acesso da propriedade ${[offset]} do objeto ${base}`);
+                        //MyFunctionCallAnalysis.adicionarHookAoLog(`Com a prop prop ${String(offset)}`); // ??
+                        //MyFunctionCallAnalysis.adicionarHookAoLog(`Valor do val: ${_val}`);
                     }
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Local: ${this.getSandbox().iidToLocation(iid)}\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
                 }
             };
     
             this.putFieldPre = (iid, base, offset, val, isComputed) => {
-                fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[putFieldPre] foi acionado!\n");
+                MyFunctionCallAnalysis.adicionarHookAoLog("[putFieldPre] foi acionado!");
                 if(MyFunctionCallAnalysis.debugar) {
                     if(isComputed) {
-                        fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Hook putFieldPre detectou a escrita propriedade ${[offset]} do objeto ${base}\n`);
-                        //fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Ou a prop ${String(offset)}\n`); // ??
+                        MyFunctionCallAnalysis.adicionarHookAoLog(`Hook putFieldPre detectou a escrita propriedade ${[offset]} do objeto ${base}`);
+                        //MyFunctionCallAnalysis.adicionarHookAoLog(`Ou a prop ${String(offset)}`); // ??
                     }
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Valor do val: ${val}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Local ${this.getSandbox().iidToLocation(iid)}\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor do val: ${val}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local ${this.getSandbox().iidToLocation(iid)}`);
                 }
             };
     
             this.functionEnter = (iid, f, dis, args) => {
-                fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `[functionEnter] foi acionado!\n`);
+                MyFunctionCallAnalysis.adicionarHookAoLog(`[functionEnter] foi acionado!`);
                 if(MyFunctionCallAnalysis.debugar) {
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Hook functionEnter detectou o comeco da execucao da funcao: ${f}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Argumentos da funcao: ${args}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Valor do dis: ${dis}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Local: ${this.getSandbox().iidToLocation(iid)}\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook functionEnter detectou o comeco da execucao da funcao: ${f}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Argumentos da funcao: ${args}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor do dis: ${dis}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
                 }
             };
     
             this.functionExit = (iid, returnVal) => {
-                fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `[functionExit] foi acionado!\n`);
+                MyFunctionCallAnalysis.adicionarHookAoLog(`[functionExit] foi acionado!`);
                 if(MyFunctionCallAnalysis.debugar) {
                     // esse hook nao especifica qual eh a funcao que terminou
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Hook functionExit detectou o fim da execucao de uma funcao\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Valor retornado por essa funcao ${returnVal}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Local: ${this.getSandbox().iidToLocation(iid)}\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook functionExit detectou o fim da execucao de uma funcao`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor retornado por essa funcao ${returnVal}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
                 }
             };
     
@@ -213,129 +240,134 @@ export class MyFunctionCallAnalysis extends Analysis {
             // e ele vai comparando esse f com as funcoes presentes em /node_modules/@types/node para saber
             // qual funcao dentre as catalogadas esta sendo usada
             this.invokeFunPre = (iid, f, base, args) => {
-                fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[invokeFunPre] foi acionado!\n");
+                MyFunctionCallAnalysis.adicionarHookAoLog("[invokeFunPre] foi acionado!");
                 if (MyFunctionCallAnalysis.debugar) {
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Hook invokeFunPre detectou o inicio da execucao da funcao: ${f}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Objeto base que recebera a funcao: ${base}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Argumentos da funcao: ${args}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Local: ${this.getSandbox().iidToLocation(iid)}\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook invokeFunPre detectou o inicio da execucao da funcao: ${f}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Objeto base que recebera a funcao: ${base}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Argumentos da funcao: ${args}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
                 }
             };
     
             this.invokeFun = (iid, f, _base, args, result) => {
-                fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[invokeFun] foi acionado!\n");
+                MyFunctionCallAnalysis.adicionarHookAoLog("[invokeFun] foi acionado!");
                 if (MyFunctionCallAnalysis.debugar) {
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Hook invokeFun detectou o termino da funcao: ${f}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Objeto base que recebera a funcao: ${_base}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Argumentos da funcao: ${args}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Valor retornado pela funcao: ${result}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Local: ${this.getSandbox().iidToLocation(iid)}\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook invokeFun detectou o termino da funcao: ${f}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Objeto base que recebera a funcao: ${_base}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Argumentos da funcao: ${args}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor retornado pela funcao: ${result}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
                 }
             };
     
             this.startExpression = (iid, type) => {
-                fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[startExpression] foi acionado!\n");
+                MyFunctionCallAnalysis.adicionarHookAoLog("[startExpression] foi acionado!");
                 if (MyFunctionCallAnalysis.debugar) {
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Hook startExpression detectou o incio da expressao de tipo: ${type}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Local: ${this.getSandbox().iidToLocation(iid)}\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook startExpression detectou o incio da expressao de tipo: ${type}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
                 }
             };
     
             this.endExpression = (iid, type, value) => {
-                fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[endExpression] foi acionado!\n");
+                MyFunctionCallAnalysis.adicionarHookAoLog("[endExpression] foi acionado!");
                 if (MyFunctionCallAnalysis.debugar) {
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Hook endExpression detectou o termino da expressao de tipo: ${type}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Valor da expressao: ${value}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Local: ${this.getSandbox().iidToLocation(iid)}\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook endExpression detectou o termino da expressao de tipo: ${type}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor da expressao: ${value}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
                 }
             };
     
             // Esse _fakeHasGetterSetter eh apenas para a API do Jalangi
             this.literal = (iid, val, _fakeHasGetterSetter, literalType) => {
-                fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[literal] foi acionado!\n");
+                MyFunctionCallAnalysis.adicionarHookAoLog("[literal] foi acionado!");
                 if (MyFunctionCallAnalysis.debugar) {
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Hook literal detectou a criacao da literal: ${val}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Tipo da literal: ${literalType}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Local: ${this.getSandbox().iidToLocation(iid)}\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook literal detectou a criacao da literal: ${val}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Tipo da literal: ${literalType}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
                 }
             };
     
             // REVER: Onde esta esse typeof detectado dentro da execucao do exemplo?? ele eh executado apenas 1 vez mesmo
             this.unary = (iid, op, left, result) => {
-                fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[unary] foi acionado!\n");
+                MyFunctionCallAnalysis.adicionarHookAoLog("[unary] foi acionado!");
                 if (MyFunctionCallAnalysis.debugar) {
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Hook unary detectou a execucao da operacao unaria: ${op}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Operando da esquerda da operacao unaria: ${left}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Resultado final da operacao unaria: ${result}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Local: ${this.getSandbox().iidToLocation(iid)}\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook unary detectou a execucao da operacao unaria: ${op}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Operando da esquerda da operacao unaria: ${left}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Resultado final da operacao unaria: ${result}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
                 }
             };
             
             this.unaryPre = (iid, op, left) => {
-                fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[unaryPre] foi acionado!\n");
+                MyFunctionCallAnalysis.adicionarHookAoLog("[unaryPre] foi acionado!");
                 if (MyFunctionCallAnalysis.debugar) {
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Hook unaryPre detectou o inicio da operacao unaria: ${op}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Operando da esquerda da operacao unaria: ${left}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Local: ${this.getSandbox().iidToLocation(iid)}\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook unaryPre detectou o inicio da operacao unaria: ${op}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Operando da esquerda da operacao unaria: ${left}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
                 }
             };
     
             this.asyncFunctionEnter = (iid) => {
-                fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[asyncFunctionEnter] foi acionado!\n");
+                MyFunctionCallAnalysis.adicionarHookAoLog("[asyncFunctionEnter] foi acionado!");
                 if (MyFunctionCallAnalysis.debugar) {
                     // nao tem como saber qual a funcao??
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Hook asyncFunctionEnter detectou o inicio de uma funcao assincrona\n`); 
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Local: ${this.getSandbox().iidToLocation(iid)}\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook asyncFunctionEnter detectou o inicio de uma funcao assincrona`); 
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
                 }
             };
     
             this.asyncFunctionExit = (iid, result, _wrappedExceptionVal) => {
-                fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[asyncFunctionExit] foi acionado!\n");
+                MyFunctionCallAnalysis.adicionarHookAoLog("[asyncFunctionExit] foi acionado!");
                 if (MyFunctionCallAnalysis.debugar) {
                     // nao tem como saber qual a funcao??
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Hook asyncFunctionExit detectou o termino de uma funcao assincrona\n`); 
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Valor retornado pela funcao: ${result}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Local: ${this.getSandbox().iidToLocation(iid)}\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook asyncFunctionExit detectou o termino de uma funcao assincrona`); 
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor retornado pela funcao: ${result}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
                 }
             };
     
             this.awaitPre = (iid, promiseOrValAwaited) => {
-                fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[awaitPre] foi acionado!\n");
+                MyFunctionCallAnalysis.adicionarHookAoLog("[awaitPre] foi acionado!");
                 if (MyFunctionCallAnalysis.debugar) {
                     // nao tem como saber qual a funcao??
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Hook awaitPre detectou o inicio de uma funcao com await\n`); 
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Valor esperado pela funcao: ${promiseOrValAwaited}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Local: ${this.getSandbox().iidToLocation(iid)}\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook awaitPre detectou o inicio de uma funcao com await`); 
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor esperado pela funcao: ${promiseOrValAwaited}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
                 }
             };
     
             this.awaitPost = (iid, promiseOrValAwaited, valResolveOrRejected, isPromiseRejected) => {
-                fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[awaitPost] foi acionado!\n");
+                MyFunctionCallAnalysis.adicionarHookAoLog("[awaitPost] foi acionado!");
                 if (MyFunctionCallAnalysis.debugar) {
                     // nao tem como saber qual a funcao??
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Hook awaitPost detectou o termino de uma funcao com await\n`); 
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Valor esperado pela funcao: ${promiseOrValAwaited}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Valor resolvid/rejetado obtido: ${valResolveOrRejected}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `A promise foi rejeitada? ${isPromiseRejected}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Local: ${this.getSandbox().iidToLocation(iid)}\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook awaitPost detectou o termino de uma funcao com await`); 
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor esperado pela funcao: ${promiseOrValAwaited}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor resolvid/rejetado obtido: ${valResolveOrRejected}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`A promise foi rejeitada? ${isPromiseRejected}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
                 }
             };
             
             this.startStatement = (iid, type) => {
-                fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[startStatement] foi acionado!\n");
+                MyFunctionCallAnalysis.adicionarHookAoLog("[startStatement] foi acionado!");
                 if (MyFunctionCallAnalysis.debugar) {
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Hook startStatement detectou o inicio ou fim do statement: ${type}\n`);
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Local: ${this.getSandbox().iidToLocation(iid)}\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook startStatement detectou o inicio ou fim do statement: ${type}`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
                 }
             };
     
             this.endExecution = () => {
-                fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, "[endExecution] foi acionado!\n");
+                MyFunctionCallAnalysis.adicionarHookAoLog("[endExecution] foi acionado!");
                 if(MyFunctionCallAnalysis.debugar) {
-                    fs.appendFileSync(MyFunctionCallAnalysis.pathLogHooks, `Hook endExecution detectou o fim da execucao node\n`);
+                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook endExecution detectou o fim da execucao node`);
                 }
             };
         }
     }
 }
+
+process.on('exit', () => {
+    //console.log("O process.on(exit) foi detectado!");
+    MyFunctionCallAnalysis.escreverHooksNoLog();
+});
 
