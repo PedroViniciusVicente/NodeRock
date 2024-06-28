@@ -136,9 +136,9 @@ module.exports = incrementCounter;
 ** Passo2: Trava a funcao 1 no fs
 ** Passo3: Chama a funcao 2
 ** Passo4: Trava a funcao 2 no fs
-** Passo5: Atualiza a funcao 1
+** Passo5: Atualiza o counter pela funcao 1
 ** Passo6: Retorna a funcao 1
-** Passo7: Atualiza a funcao 2
+** Passo7: Atualiza o counter pela funcao 2
 ** Passo8: Retorna a funcao 2
 ** Obs: Dependendo da disponibilidade da worker thread,
 **      por condicoes indeterministicas, eh capaz de os
@@ -146,15 +146,16 @@ module.exports = incrementCounter;
 **      a necessidade de injetar delays para que o passo 2
 **      demore mais artificialmente
 */
+
 Argumentos da funcao: 
 Valor do dis: [object global]
-Local: (raceCondition.js:1:1:30:3)
+Local: (raceCondition.js:1:1:30:4)
 [startStatement] foi acionado!
 Hook startStatement detectou o inicio ou fim do statement: AutonomousFunctionExpression
-Local: (raceCondition.js:1:1:30:3)
+Local: (raceCondition.js:1:1:30:4)
 [startExpression] foi acionado!
 Hook startExpression detectou o incio da expressao de tipo: AutonomousFunctionExpression
-Local: (raceCondition.js:1:1:30:3)
+Local: (raceCondition.js:1:1:30:4)
 [literal] foi acionado!
 Hook literal detectou a criacao da literal: const fs = require('fs');
 let sharedCounter = 0;
@@ -176,9 +177,9 @@ module.exports = incrementCounter;
 ** Passo2: Trava a funcao 1 no fs
 ** Passo3: Chama a funcao 2
 ** Passo4: Trava a funcao 2 no fs
-** Passo5: Atualiza a funcao 1
+** Passo5: Atualiza o counter pela funcao 1
 ** Passo6: Retorna a funcao 1
-** Passo7: Atualiza a funcao 2
+** Passo7: Atualiza o counter pela funcao 2
 ** Passo8: Retorna a funcao 2
 ** Obs: Dependendo da disponibilidade da worker thread,
 **      por condicoes indeterministicas, eh capaz de os
@@ -186,8 +187,9 @@ module.exports = incrementCounter;
 **      a necessidade de injetar delays para que o passo 2
 **      demore mais artificialmente
 */
+
 Tipo da literal: FunctionLiteral
-Local: (raceCondition.js:1:1:30:3)
+Local: (raceCondition.js:1:1:30:4)
 [endExpression] foi acionado!
 Hook endExpression detectou o termino da expressao de tipo: AutonomousFunctionExpression
 Valor da expressao: const fs = require('fs');
@@ -210,9 +212,9 @@ module.exports = incrementCounter;
 ** Passo2: Trava a funcao 1 no fs
 ** Passo3: Chama a funcao 2
 ** Passo4: Trava a funcao 2 no fs
-** Passo5: Atualiza a funcao 1
+** Passo5: Atualiza o counter pela funcao 1
 ** Passo6: Retorna a funcao 1
-** Passo7: Atualiza a funcao 2
+** Passo7: Atualiza o counter pela funcao 2
 ** Passo8: Retorna a funcao 2
 ** Obs: Dependendo da disponibilidade da worker thread,
 **      por condicoes indeterministicas, eh capaz de os
@@ -220,7 +222,8 @@ module.exports = incrementCounter;
 **      a necessidade de injetar delays para que o passo 2
 **      demore mais artificialmente
 */
-Local: (raceCondition.js:1:1:30:3)
+
+Local: (raceCondition.js:1:1:30:4)
 [functionExit] foi acionado!
 Hook functionExit detectou o fim da execucao de uma funcao
 Valor retornado por essa funcao const fs = require('fs');
@@ -243,9 +246,9 @@ module.exports = incrementCounter;
 ** Passo2: Trava a funcao 1 no fs
 ** Passo3: Chama a funcao 2
 ** Passo4: Trava a funcao 2 no fs
-** Passo5: Atualiza a funcao 1
+** Passo5: Atualiza o counter pela funcao 1
 ** Passo6: Retorna a funcao 1
-** Passo7: Atualiza a funcao 2
+** Passo7: Atualiza o counter pela funcao 2
 ** Passo8: Retorna a funcao 2
 ** Obs: Dependendo da disponibilidade da worker thread,
 **      por condicoes indeterministicas, eh capaz de os
@@ -253,7 +256,8 @@ module.exports = incrementCounter;
 **      a necessidade de injetar delays para que o passo 2
 **      demore mais artificialmente
 */
-Local: (raceCondition.js:1:1:30:3)
+
+Local: (raceCondition.js:1:1:30:4)
 [functionEnter] foi acionado!
 Hook functionEnter detectou o comeco da execucao da funcao: const fs = require('fs');
 let sharedCounter = 0;
@@ -275,9 +279,9 @@ module.exports = incrementCounter;
 ** Passo2: Trava a funcao 1 no fs
 ** Passo3: Chama a funcao 2
 ** Passo4: Trava a funcao 2 no fs
-** Passo5: Atualiza a funcao 1
+** Passo5: Atualiza o counter pela funcao 1
 ** Passo6: Retorna a funcao 1
-** Passo7: Atualiza a funcao 2
+** Passo7: Atualiza o counter pela funcao 2
 ** Passo8: Retorna a funcao 2
 ** Obs: Dependendo da disponibilidade da worker thread,
 **      por condicoes indeterministicas, eh capaz de os
@@ -285,11 +289,12 @@ module.exports = incrementCounter;
 **      a necessidade de injetar delays para que o passo 2
 **      demore mais artificialmente
 */
+
 Argumentos da funcao: [object Object],function require(path) {
       return mod.require(path);
     },[object Object],/home/pedroubuntu/Desktop/exemplosRaceCondition/exemplo2MatheusOriginal/raceCondition.js,/home/pedroubuntu/Desktop/exemplosRaceCondition/exemplo2MatheusOriginal
 Valor do dis: [object Object]
-Local: (raceCondition.js:1:1:30:3)
+Local: (raceCondition.js:1:1:30:4)
 [literal] foi acionado!
 Hook literal detectou a criacao da literal: function incrementCounter(posicao) {
   return new Promise((resolve) => {
@@ -466,7 +471,7 @@ Local: (raceCondition.js:14:1:14:34)
 [functionExit] foi acionado!
 Hook functionExit detectou o fim da execucao de uma funcao
 Valor retornado por essa funcao undefined
-Local: (raceCondition.js:1:1:30:3)
+Local: (raceCondition.js:1:1:30:4)
 [invokeFun] foi acionado!
 Hook invokeFun detectou o termino da funcao: function require(path) {
       return mod.require(path);

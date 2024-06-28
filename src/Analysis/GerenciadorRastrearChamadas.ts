@@ -1,3 +1,5 @@
+// DO NOT INSTRUMENT
+
 import * as fs from 'fs';
 
 export class GerenciadorRastrearChamadas {

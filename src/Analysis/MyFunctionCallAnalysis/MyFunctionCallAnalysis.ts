@@ -1,6 +1,7 @@
 // DO NOT INSTRUMENT
 
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
+import {EventEmitter} from 'events';
 import * as fs from 'fs';
 
 export class MyFunctionCallAnalysis extends Analysis {
@@ -39,18 +40,22 @@ export class MyFunctionCallAnalysis extends Analysis {
     private timeConsumed: number;
     
     static debugar: boolean = true;
-    static apenasHooksPrincipais: boolean = true;
+    static apenasHooksPrincipais: boolean = false;
     static pathLogHooks: string;
 
     // Esse atributo eh um vetor que vai armazenando os logs dos hooks na memoria RAM e escreve no final
     static logsDosHooks: string[] = [];
     // Obs: Na implementação do NodeRT, esse vetor era do tipo object[] = []; para armazenar no formato JSON
+
+    static eventEmitter: EventEmitter = new EventEmitter();
     
     constructor(sandbox: Sandbox)
     {
+        // Declaracao para chamar o adicionarHookAoLog sempre que o evento 'AdicionarLogAoVetor' for detectado
+        MyFunctionCallAnalysis.eventEmitter.on('AdicionarLogAoVetor', MyFunctionCallAnalysis.adicionarHookAoLog);
         super(sandbox); // Chamada para o construtor de Analysis, que armazena o sandbox e chama o registerHooks
         this.timeConsumed = 0;
-        
+
     }
 
     // Funcao que sera chamada ao final: Com o process.on('exit', ...) 
@@ -72,7 +77,6 @@ export class MyFunctionCallAnalysis extends Analysis {
 
     protected override registerHooks()
     {
-        
         // -=+=- Inicializacao do path para o endereco correto -=+=-
         
         console.log("Chamou o registerHooks do MyFunctionCallAnalysis:");
@@ -80,16 +84,17 @@ export class MyFunctionCallAnalysis extends Analysis {
             //console.log("Path do apenas hooks principais!");
             MyFunctionCallAnalysis.pathLogHooks = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/MyFunctionCallAnalysis/logRastrearPrincipaisHooks.txt";
             const mensagemInicial = `-=+=- Log das chamadas dos hooks principais -=+=- \n`;
-            MyFunctionCallAnalysis.adicionarHookAoLog(mensagemInicial);
+            //const mensagemLog = mensagemInicial);
+            MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemInicial);
         }
         else {
             //console.log("Path de todos os hooks!");
             MyFunctionCallAnalysis.pathLogHooks = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/MyFunctionCallAnalysis/logRastrearHooks.txt";
             const mensagemInicial = `-=+=- Log das chamadas de todos hooks -=+=- \n`;
-            MyFunctionCallAnalysis.adicionarHookAoLog(mensagemInicial);
+            //const mensagemLog = mensagemInicial);
+            MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemInicial);
         }
         //console.log(`pathlog eh: ${MyFunctionCallAnalysis.pathLogHooks}`);
-        console.log(this.timeConsumed);
 
 
         // -=+=- Deteccao e registro dos hooks -=+=-
@@ -100,137 +105,200 @@ export class MyFunctionCallAnalysis extends Analysis {
 
             this.read = (_iid, name, _val, _isGlobal) => {
                 if(name === "fs") {
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`[read] Leitura do arquivo da primeira/segunda funcao`);
+                    const mensagemLog = `[read] Leitura do arquivo da primeira/segunda funcao`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
                 else if(name === "resolve") {
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`[read] Resolve da primeira/segunda funcao`);
+                    const mensagemLog = `[read] Resolve da primeira/segunda funcao`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
             };
 
             this.write = (_iid, name, val, _lhs, _isGlobal) => {
                 if(name === "sharedCounter" && (val === 1 || val === 2)) {      
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`[write] Aumento do sharedCounter para ${val}`);
+                    const mensagemLog = `[write] Aumento do sharedCounter para ${val}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
             };
 
             this.functionEnter = (_iid, f, _dis, _args) => {
                 if(f.name === "incrementCounter") {
                     //console.log(`O nome eh: ${f.name}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`[functionEnter] Inicio da primeira/segunda funcao`);
+                    const mensagemLog = `[functionEnter] Inicio da primeira/segunda funcao`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }   
 
             };
 
             this.invokeFunPre = (_iid, f, _base, _args) => {
                 if (f === setImmediate) {
-                    MyFunctionCallAnalysis.adicionarHookAoLog("[invokeFunPre] Funcao setImmediate foi detectada!");
+                    const mensagemLog = "[invokeFunPre] Funcao setImmediate foi detectada!";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
                 else if (f === setTimeout) {
-                    MyFunctionCallAnalysis.adicionarHookAoLog("[invokeFunPre] Funcao setTimeout foi detectada!");
+                    const mensagemLog = "[invokeFunPre] Funcao setTimeout foi detectada!";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
                 else if (f === setInterval) {
-                    MyFunctionCallAnalysis.adicionarHookAoLog("[invokeFunPre] Funcao setInterval foi detectada!");
+                    const mensagemLog = "[invokeFunPre] Funcao setInterval foi detectada!";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
                 //else {
-                //    MyFunctionCallAnalysis.adicionarHookAoLog("[invokeFunPre] Funcao indefinida foi detectada!");
+                //    const mensagemLog = "[invokeFunPre] Funcao indefinida foi detectada!";
+                // MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 //}
             };
          
             this.invokeFun = (_iid, f, _base, _args) => {
                 if (f === setImmediate) {
-                    MyFunctionCallAnalysis.adicionarHookAoLog("[invokeFun] Funcao setImmediate foi detectada!");
+                    const mensagemLog = "[invokeFun] Funcao setImmediate foi detectada!";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
                 else if (f === setTimeout) {
-                    MyFunctionCallAnalysis.adicionarHookAoLog("[invokeFun] Funcao setTimeout foi detectada!");
+                    const mensagemLog = "[invokeFun] Funcao setTimeout foi detectada!";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
                 else if (f === setInterval) {
-                    MyFunctionCallAnalysis.adicionarHookAoLog("[invokeFun] Funcao setInterval foi detectada!");
+                    const mensagemLog = "[invokeFun] Funcao setInterval foi detectada!";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
                 //else {
-                //    MyFunctionCallAnalysis.adicionarHookAoLog("[invokeFun] Funcao indefinida foi detectada!");
+                //    const mensagemLog = "[invokeFun] Funcao indefinida foi detectada!";
+                //    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 //}
             };
          
             this.asyncFunctionEnter = (_iid) => {
-                MyFunctionCallAnalysis.adicionarHookAoLog("[asyncFunctionEnter] Funcao async do raceConditionNode foi iniciada!");
+                const mensagemLog = "[asyncFunctionEnter] Funcao async do raceConditionNode foi iniciada!";
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
             };
          
             //this.asyncFunctionExit = (_iid, result, _wrappedExceptionVal) => {
-            //    MyFunctionCallAnalysis.adicionarHookAoLog(`[asyncFunctionExit] Funcao async foi detectada! (retornando ${result})`);
+            //    const mensagemLog = `[asyncFunctionExit] Funcao async foi detectada! (retornando ${result})`;
+            //    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
             //};
 
             //this.awaitPre = (_iid, _promiseOrValAwaited) => {
-            //    MyFunctionCallAnalysis.adicionarHookAoLog("[awaitPre] Promise foi inciada!");
+            //    const mensagemLog = "[awaitPre] Promise foi inciada!";
+            //    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
             //};
     
             this.awaitPost = (_iid, _promiseOrValAwaited, valResolveOrRejected, _isPromiseRejected) => {
-                MyFunctionCallAnalysis.adicionarHookAoLog(`[awaitPost] Promise.all foi finalizada! (retornando ${valResolveOrRejected})`);
+                const mensagemLog = `[awaitPost] Promise.all foi finalizada! (retornando ${valResolveOrRejected})`;
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
             };
         }
         else {
             console.log("Testando todos os hooks!");
             this.read = (iid, name, val, isGlobal) => {
-                MyFunctionCallAnalysis.adicionarHookAoLog("[read] foi acionado!");
+                const mensagemLog = "[read] foi acionado!";
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 if (MyFunctionCallAnalysis.debugar) {
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook read detectou a leitura da variavel: ${name} de iid: ${iid}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor lido: ${val}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Variavel eh global? ${isGlobal}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+                    let mensagemLog = `Hook read detectou a leitura da variavel: ${name} de iid: ${iid}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Valor lido: ${val}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Variavel eh global? ${isGlobal}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Local: ${this.getSandbox().iidToLocation(iid)}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
             };
     
             this.write = (iid, name, val, lhs, isGlobal) => {        
-                MyFunctionCallAnalysis.adicionarHookAoLog("[write] foi acionado!");
+                const mensagemLog = "[write] foi acionado!";
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 if (MyFunctionCallAnalysis.debugar) {
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook write detectou a escrita da variavel: ${name} de iid: ${iid}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor escrito: ${val}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor anterior a escrita: ${lhs}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Variavel eh global? ${isGlobal}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+                    let mensagemLog = `Hook write detectou a escrita da variavel: ${name} de iid: ${iid}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Valor escrito: ${val}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Valor anterior a escrita: ${lhs}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Variavel eh global? ${isGlobal}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Local: ${this.getSandbox().iidToLocation(iid)}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
             };
     
             this.getField = (iid, base, offset, _val, isComputed) => {
-                MyFunctionCallAnalysis.adicionarHookAoLog("[getField] foi acionado!");
+                const mensagemLog = "[getField] foi acionado!";
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 if(MyFunctionCallAnalysis.debugar) {
                     if(isComputed) {
-                        MyFunctionCallAnalysis.adicionarHookAoLog(`Hook getField detectou o acesso da propriedade ${[offset]} do objeto ${base}`);
-                        //MyFunctionCallAnalysis.adicionarHookAoLog(`Com a prop prop ${String(offset)}`); // ??
-                        //MyFunctionCallAnalysis.adicionarHookAoLog(`Valor do val: ${_val}`);
+                        let mensagemLog = `Hook getField detectou o acesso da propriedade ${[offset]} do objeto ${base}`;
+                        MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                        //mensagemLog = `Com a prop prop ${String(offset)}`; // ??
+                        //MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                        //mensagemLog = `Valor do val: ${_val}`;
+                        //MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                     }
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+                    const mensagemLog = `Local: ${this.getSandbox().iidToLocation(iid)}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 }
             };
     
             this.putFieldPre = (iid, base, offset, val, isComputed) => {
-                MyFunctionCallAnalysis.adicionarHookAoLog("[putFieldPre] foi acionado!");
+                const mensagemLog = "[putFieldPre] foi acionado!";
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 if(MyFunctionCallAnalysis.debugar) {
                     if(isComputed) {
-                        MyFunctionCallAnalysis.adicionarHookAoLog(`Hook putFieldPre detectou a escrita propriedade ${[offset]} do objeto ${base}`);
-                        //MyFunctionCallAnalysis.adicionarHookAoLog(`Ou a prop ${String(offset)}`); // ??
+                        let mensagemLog = `Hook putFieldPre detectou a escrita propriedade ${[offset]} do objeto ${base}`;
+                        MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                        //mensagemLog = `Ou a prop ${String(offset)}`; // ??
+                        //MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                     }
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor do val: ${val}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local ${this.getSandbox().iidToLocation(iid)}`);
+                    let mensagemLog = `Valor do val: ${val}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Local ${this.getSandbox().iidToLocation(iid)}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
             };
     
             this.functionEnter = (iid, f, dis, args) => {
-                MyFunctionCallAnalysis.adicionarHookAoLog(`[functionEnter] foi acionado!`);
+                const mensagemLog = `[functionEnter] foi acionado!`;
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 if(MyFunctionCallAnalysis.debugar) {
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook functionEnter detectou o comeco da execucao da funcao: ${f}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Argumentos da funcao: ${args}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor do dis: ${dis}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+                    let mensagemLog = `Hook functionEnter detectou o comeco da execucao da funcao: ${f}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Argumentos da funcao: ${args}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Valor do dis: ${dis}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Local: ${this.getSandbox().iidToLocation(iid)}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
             };
     
             this.functionExit = (iid, returnVal) => {
-                MyFunctionCallAnalysis.adicionarHookAoLog(`[functionExit] foi acionado!`);
+                const mensagemLog = `[functionExit] foi acionado!`;
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 if(MyFunctionCallAnalysis.debugar) {
                     // esse hook nao especifica qual eh a funcao que terminou
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook functionExit detectou o fim da execucao de uma funcao`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor retornado por essa funcao ${returnVal}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+                    let mensagemLog = `Hook functionExit detectou o fim da execucao de uma funcao`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Valor retornado por essa funcao ${returnVal}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Local: ${this.getSandbox().iidToLocation(iid)}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
             };
     
@@ -240,129 +308,231 @@ export class MyFunctionCallAnalysis extends Analysis {
             // e ele vai comparando esse f com as funcoes presentes em /node_modules/@types/node para saber
             // qual funcao dentre as catalogadas esta sendo usada
             this.invokeFunPre = (iid, f, base, args) => {
-                MyFunctionCallAnalysis.adicionarHookAoLog("[invokeFunPre] foi acionado!");
+                const mensagemLog = "[invokeFunPre] foi acionado!";
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 if (MyFunctionCallAnalysis.debugar) {
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook invokeFunPre detectou o inicio da execucao da funcao: ${f}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Objeto base que recebera a funcao: ${base}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Argumentos da funcao: ${args}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+                    let mensagemLog = `Hook invokeFunPre detectou o inicio da execucao da funcao: ${f}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Objeto base que recebera a funcao: ${base}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Argumentos da funcao: ${args}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Local: ${this.getSandbox().iidToLocation(iid)}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
             };
     
             this.invokeFun = (iid, f, _base, args, result) => {
-                MyFunctionCallAnalysis.adicionarHookAoLog("[invokeFun] foi acionado!");
+                const mensagemLog = "[invokeFun] foi acionado!";
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 if (MyFunctionCallAnalysis.debugar) {
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook invokeFun detectou o termino da funcao: ${f}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Objeto base que recebera a funcao: ${_base}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Argumentos da funcao: ${args}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor retornado pela funcao: ${result}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+                    let mensagemLog = `Hook invokeFun detectou o termino da funcao: ${f}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Objeto base que recebera a funcao: ${_base}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Argumentos da funcao: ${args}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Valor retornado pela funcao: ${result}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Local: ${this.getSandbox().iidToLocation(iid)}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 }
             };
     
             this.startExpression = (iid, type) => {
-                MyFunctionCallAnalysis.adicionarHookAoLog("[startExpression] foi acionado!");
+                const mensagemLog = "[startExpression] foi acionado!";
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 if (MyFunctionCallAnalysis.debugar) {
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook startExpression detectou o incio da expressao de tipo: ${type}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+                    let mensagemLog = `Hook startExpression detectou o incio da expressao de tipo: ${type}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Local: ${this.getSandbox().iidToLocation(iid)}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
             };
     
             this.endExpression = (iid, type, value) => {
-                MyFunctionCallAnalysis.adicionarHookAoLog("[endExpression] foi acionado!");
+                const mensagemLog = "[endExpression] foi acionado!";
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 if (MyFunctionCallAnalysis.debugar) {
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook endExpression detectou o termino da expressao de tipo: ${type}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor da expressao: ${value}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+                    let mensagemLog = `Hook endExpression detectou o termino da expressao de tipo: ${type}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Valor da expressao: ${value}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Local: ${this.getSandbox().iidToLocation(iid)}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
             };
     
             // Esse _fakeHasGetterSetter eh apenas para a API do Jalangi
             this.literal = (iid, val, _fakeHasGetterSetter, literalType) => {
-                MyFunctionCallAnalysis.adicionarHookAoLog("[literal] foi acionado!");
+                const mensagemLog = "[literal] foi acionado!";
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 if (MyFunctionCallAnalysis.debugar) {
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook literal detectou a criacao da literal: ${val}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Tipo da literal: ${literalType}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+                    let mensagemLog = `Hook literal detectou a criacao da literal: ${val}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Tipo da literal: ${literalType}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Local: ${this.getSandbox().iidToLocation(iid)}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 }
             };
     
             // REVER: Onde esta esse typeof detectado dentro da execucao do exemplo?? ele eh executado apenas 1 vez mesmo
             this.unary = (iid, op, left, result) => {
-                MyFunctionCallAnalysis.adicionarHookAoLog("[unary] foi acionado!");
+                const mensagemLog = "[unary] foi acionado!";
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 if (MyFunctionCallAnalysis.debugar) {
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook unary detectou a execucao da operacao unaria: ${op}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Operando da esquerda da operacao unaria: ${left}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Resultado final da operacao unaria: ${result}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+                    let mensagemLog = `Hook unary detectou a execucao da operacao unaria: ${op}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Operando da esquerda da operacao unaria: ${left}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Resultado final da operacao unaria: ${result}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Local: ${this.getSandbox().iidToLocation(iid)}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 }
             };
             
             this.unaryPre = (iid, op, left) => {
-                MyFunctionCallAnalysis.adicionarHookAoLog("[unaryPre] foi acionado!");
+                const mensagemLog = "[unaryPre] foi acionado!";
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 if (MyFunctionCallAnalysis.debugar) {
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook unaryPre detectou o inicio da operacao unaria: ${op}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Operando da esquerda da operacao unaria: ${left}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+                    let mensagemLog = `Hook unaryPre detectou o inicio da operacao unaria: ${op}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Operando da esquerda da operacao unaria: ${left}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Local: ${this.getSandbox().iidToLocation(iid)}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 }
             };
     
             this.asyncFunctionEnter = (iid) => {
-                MyFunctionCallAnalysis.adicionarHookAoLog("[asyncFunctionEnter] foi acionado!");
+                const mensagemLog = "[asyncFunctionEnter] foi acionado!";
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 if (MyFunctionCallAnalysis.debugar) {
                     // nao tem como saber qual a funcao??
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook asyncFunctionEnter detectou o inicio de uma funcao assincrona`); 
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+                    let mensagemLog = `Hook asyncFunctionEnter detectou o inicio de uma funcao assincrona`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Local: ${this.getSandbox().iidToLocation(iid)}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 }
             };
     
             this.asyncFunctionExit = (iid, result, _wrappedExceptionVal) => {
-                MyFunctionCallAnalysis.adicionarHookAoLog("[asyncFunctionExit] foi acionado!");
+                const mensagemLog = "[asyncFunctionExit] foi acionado!";
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 if (MyFunctionCallAnalysis.debugar) {
                     // nao tem como saber qual a funcao??
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook asyncFunctionExit detectou o termino de uma funcao assincrona`); 
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor retornado pela funcao: ${result}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+                    let mensagemLog = `Hook asyncFunctionExit detectou o termino de uma funcao assincrona`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+ 
+                    mensagemLog = `Valor retornado pela funcao: ${result}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Local: ${this.getSandbox().iidToLocation(iid)}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 }
             };
     
             this.awaitPre = (iid, promiseOrValAwaited) => {
-                MyFunctionCallAnalysis.adicionarHookAoLog("[awaitPre] foi acionado!");
+                const mensagemLog = "[awaitPre] foi acionado!";
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 if (MyFunctionCallAnalysis.debugar) {
                     // nao tem como saber qual a funcao??
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook awaitPre detectou o inicio de uma funcao com await`); 
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor esperado pela funcao: ${promiseOrValAwaited}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+                    let mensagemLog = `Hook awaitPre detectou o inicio de uma funcao com await`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+ 
+                    mensagemLog = `Valor esperado pela funcao: ${promiseOrValAwaited}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Local: ${this.getSandbox().iidToLocation(iid)}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 }
             };
     
             this.awaitPost = (iid, promiseOrValAwaited, valResolveOrRejected, isPromiseRejected) => {
-                MyFunctionCallAnalysis.adicionarHookAoLog("[awaitPost] foi acionado!");
+                const mensagemLog = "[awaitPost] foi acionado!";
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 if (MyFunctionCallAnalysis.debugar) {
                     // nao tem como saber qual a funcao??
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook awaitPost detectou o termino de uma funcao com await`); 
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor esperado pela funcao: ${promiseOrValAwaited}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Valor resolvid/rejetado obtido: ${valResolveOrRejected}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`A promise foi rejeitada? ${isPromiseRejected}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+                    let mensagemLog = `Hook awaitPost detectou o termino de uma funcao com await`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+ 
+                    mensagemLog = `Valor esperado pela funcao: ${promiseOrValAwaited}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Valor resolvid/rejetado obtido: ${valResolveOrRejected}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `A promise foi rejeitada? ${isPromiseRejected}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Local: ${this.getSandbox().iidToLocation(iid)}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 }
             };
             
             this.startStatement = (iid, type) => {
-                MyFunctionCallAnalysis.adicionarHookAoLog("[startStatement] foi acionado!");
+                const mensagemLog = "[startStatement] foi acionado!";
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 if (MyFunctionCallAnalysis.debugar) {
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook startStatement detectou o inicio ou fim do statement: ${type}`);
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Local: ${this.getSandbox().iidToLocation(iid)}`);
+                    let mensagemLog = `Hook startStatement detectou o inicio ou fim do statement: ${type}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
+                    mensagemLog = `Local: ${this.getSandbox().iidToLocation(iid)}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 }
             };
     
             this.endExecution = () => {
-                MyFunctionCallAnalysis.adicionarHookAoLog("[endExecution] foi acionado!");
+                const mensagemLog = "[endExecution] foi acionado!";
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 if(MyFunctionCallAnalysis.debugar) {
-                    MyFunctionCallAnalysis.adicionarHookAoLog(`Hook endExecution detectou o fim da execucao node`);
+                    const mensagemLog = `Hook endExecution detectou o fim da execucao node`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+
                 }
             };
         }
+        console.log(this.timeConsumed);
     }
 }
 

@@ -16,7 +16,7 @@ export class EventEmitterOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("EventEmitterOperationLogger");
+        GerenciadorRastrearChamadas.registrarChamadaConstrutor("EventEmitterOperationLogger");
 
         super(sandbox);
         this.timeConsumed = 0;
