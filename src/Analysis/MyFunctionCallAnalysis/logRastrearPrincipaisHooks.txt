@@ -1,12 +1,7 @@
 -=+=- Log das chamadas dos hooks principais -=+=- 
 
-[asyncFunctionEnter] Funcao async do raceConditionNode foi iniciada!
-[functionEnter] Inicio da primeira/segunda funcao
-[read] Leitura do arquivo da primeira/segunda funcao
-[functionEnter] Inicio da primeira/segunda funcao
-[read] Leitura do arquivo da primeira/segunda funcao
-[write] Aumento do sharedCounter para 1
-[read] Resolve da primeira/segunda funcao
-[write] Aumento do sharedCounter para 2
-[read] Resolve da primeira/segunda funcao
-[awaitPost] Promise.all foi finalizada! (retornando 1,2)
+[asyncFunctionEnter] Funcao async foi iniciada
+[invokeFun]          Arquivo com promises foi acessado
+[awaitPre]           Execucao parou no await
+[asyncFunctionExit]  Execucao saiu do escopo da funcao async (retornando: [object Promise])
+[awaitPost]          Execucao do await foi finalizada (retornando: [object JSTransferable])

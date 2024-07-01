@@ -3,6 +3,9 @@
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {EventEmitter} from 'events';
 import * as fs from 'fs';
+import http from 'http';
+import net from 'net';
+
 
 export class MyFunctionCallAnalysis extends Analysis {
 
@@ -40,7 +43,7 @@ export class MyFunctionCallAnalysis extends Analysis {
     private timeConsumed: number;
     
     static debugar: boolean = true;
-    static apenasHooksPrincipais: boolean = false;
+    static apenasHooksPrincipais: boolean = true;
     static pathLogHooks: string;
 
     // Esse atributo eh um vetor que vai armazenando os logs dos hooks na memoria RAM e escreve no final
@@ -102,91 +105,182 @@ export class MyFunctionCallAnalysis extends Analysis {
         if (MyFunctionCallAnalysis.apenasHooksPrincipais) {
             // Registro apenas dos hooks principais, para ficar mais facil de entender
             console.log("Testando apenas os hooks principais!");
-
+            
             this.read = (_iid, name, _val, _isGlobal) => {
-                if(name === "fs") {
-                    const mensagemLog = `[read] Leitura do arquivo da primeira/segunda funcao`;
-                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
-                }
-                else if(name === "resolve") {
-                    const mensagemLog = `[read] Resolve da primeira/segunda funcao`;
+                //if(name === "fs") {
+                //    const mensagemLog = `[read] Acesso de arquivo`;
+                //    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                //}
+                //else if(name === "openFile") {
+                //    const mensagemLog = `[read] Acesso de arquivo com openFile`;
+                //    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                //}
+                //else if(name === "resolve") {
+                if(name === "resolve") {
+                    const mensagemLog = `[read]               Resolve de Promise`;
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
             };
 
-            this.write = (_iid, name, val, _lhs, _isGlobal) => {
-                if(name === "sharedCounter" && (val === 1 || val === 2)) {      
-                    const mensagemLog = `[write] Aumento do sharedCounter para ${val}`;
-                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
-                }
-            };
+            //this.write = (_iid, name, val, _lhs, _isGlobal) => {
+            //    if(name === "sharedCounter" && (val === 1 || val === 2)) {      
+            //        const mensagemLog = `[write] Aumento do sharedCounter para ${val}`;
+            //        MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+            //    }
+            //};
 
-            this.functionEnter = (_iid, f, _dis, _args) => {
-                if(f.name === "incrementCounter") {
-                    //console.log(`O nome eh: ${f.name}`);
-                    const mensagemLog = `[functionEnter] Inicio da primeira/segunda funcao`;
-                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
-                }   
+            //this.functionEnter = (_iid, f, _dis, _args) => {
+            //    if (f === setImmediate) {
+            //        const mensagemLog = "[functionEnter] Funcao setImmediate entrou em execucao";
+            //        MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+            //    }
+            //    else if (f === setTimeout) {
+            //        const mensagemLog = "[functionEnter] Funcao setTimeout entrou em execucao";
+            //        MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+            //    }
+            //    else if (f === setInterval) {
+            //        const mensagemLog = "[functionEnter] Funcao setInterval entrou em execucao";
+            //        MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+            //    }
+            //};
 
-            };
+            //this.functionExit = (_iid, _returnVal) => {
+            //    
+            //    const mensagemLog = "[functionExit] Funcao finalizou a execucao";
+            //    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+            //};
 
             this.invokeFunPre = (_iid, f, _base, _args) => {
                 if (f === setImmediate) {
-                    const mensagemLog = "[invokeFunPre] Funcao setImmediate foi detectada!";
+                    const mensagemLog = "[invokeFunPre]       Funcao setImmediate foi invocada";
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
                 else if (f === setTimeout) {
-                    const mensagemLog = "[invokeFunPre] Funcao setTimeout foi detectada!";
+                    const mensagemLog = "[invokeFunPre]       Funcao setTimeout foi invocada";
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
                 else if (f === setInterval) {
-                    const mensagemLog = "[invokeFunPre] Funcao setInterval foi detectada!";
+                    const mensagemLog = "[invokeFunPre]       Funcao setInterval foi invocada";
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
-                //else {
-                //    const mensagemLog = "[invokeFunPre] Funcao indefinida foi detectada!";
-                // MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
-                //}
+                // Testando para operacoes do http:
+                else if (f === http.request || f === http.get) {
+                    const mensagemLog = "[invokeFunPre]       Requisicao ao servidor foi invocada";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                }
+                else if (f === http.createServer) {
+                    const mensagemLog = "[invokeFunPre]       Criacao do servidor foi invocada";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                }
+                // Testando para operacoes dos eventEmmiters:
+                else if (f === EventEmitter.prototype.addListener
+                    || f === EventEmitter.prototype.on
+                    || f === EventEmitter.prototype.prependListener)
+                {
+                    const mensagemLog = "[invokeFunPre]       Criacao do Listener foi invocada";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                }
+                else if (f === EventEmitter.prototype.off
+                    || f === EventEmitter.prototype.removeListener
+                    || f === EventEmitter.prototype.removeAllListeners)
+                {
+                    const mensagemLog = "[invokeFunPre]       Remocao do Listener foi invocada";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                }
+                else if (f === EventEmitter.prototype.emit) {
+                    const mensagemLog = "[invokeFunPre]       Evento emitido foi invocado";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                }
+                // Testando as operacoes do net
+                if (f === net.createServer) {
+                    const mensagemLog = "[invokeFunPre]       Servidor Net foi invocada";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                }
+                else if (f === net.createConnection || f === net.connect || f === net.Socket) {
+                    const mensagemLog = "[invokeFunPre]       Conexao Net foi invocada";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                }
+
             };
          
             this.invokeFun = (_iid, f, _base, _args) => {
                 if (f === setImmediate) {
-                    const mensagemLog = "[invokeFun] Funcao setImmediate foi detectada!";
+                    const mensagemLog = "[invokeFun]          Funcao setImmediate terminou sua execucao";
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
                 else if (f === setTimeout) {
-                    const mensagemLog = "[invokeFun] Funcao setTimeout foi detectada!";
+                    const mensagemLog = "[invokeFun]          Funcao setTimeout terminou sua execucao";
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
                 else if (f === setInterval) {
-                    const mensagemLog = "[invokeFun] Funcao setInterval foi detectada!";
+                    const mensagemLog = "[invokeFun]          Funcao setInterval terminou sua execucao";
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
-                //else {
-                //    const mensagemLog = "[invokeFun] Funcao indefinida foi detectada!";
-                //    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
-                //}
+                // Testando para operacoes do http:
+                else if (f === http.request || f === http.get) {
+                    const mensagemLog = "[invokeFun]          Requisicao ao servidor foi finalizada";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                }
+                else if (f === http.createServer) {
+                    const mensagemLog = "[invokeFun]          Criacao do servidor foi finalizada";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                }
+                
+                // Testando com arquivo com fs
+                else if ( f === fs.open || f === fs.read || f === fs.write 
+                    || f === fs.readFile || f === fs.writeFile || f === fs.appendFile) {
+                    const mensagemLog = "[invokeFun]          Arquivo Assincrono foi acessado";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                }
+                else if (f === fs.close) {
+                    const mensagemLog = "[invokeFun]          Arquivo Assincrono foi fechado";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                }
+                else if (f === fs.openSync || f === fs.readSync || f === fs.writeSync 
+                    || f === fs.appendFileSync || f === fs.readFileSync || f === fs.writeFileSync 
+                    || f === fs.createReadStream || f === fs.createWriteStream ) {
+                    const mensagemLog = "[invokeFun]          Arquivo Sincrono foi acessado";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                }
+                else if (f === fs.closeSync) {
+                    const mensagemLog = "[invokeFun]          Arquivo Sincrono foi fechado";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                }
+
+                // Testando com arquivos do FileHandle e FsPromises
+                else if (f === fs.promises.open || f === fs.promises.readFile || f === fs.promises.writeFile 
+                    || f === fs.promises.appendFile) {
+                    const mensagemLog = "[invokeFun]          Arquivo com promises foi acessado";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                }
             };
          
             this.asyncFunctionEnter = (_iid) => {
-                const mensagemLog = "[asyncFunctionEnter] Funcao async do raceConditionNode foi iniciada!";
+                const mensagemLog = "[asyncFunctionEnter] Funcao async foi iniciada";
                 MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
             };
-         
-            //this.asyncFunctionExit = (_iid, result, _wrappedExceptionVal) => {
-            //    const mensagemLog = `[asyncFunctionExit] Funcao async foi detectada! (retornando ${result})`;
-            //    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
-            //};
+            // Quando esse asyncFunctionExit eh acionado, significa que agora ele vai executar tambem os comandos
+            // depois da funcao async, mas os comandos de dentro da funcao async que foram levadas aos
+            // worker threads ainda podem estar executando mesmo depois do asyncFunctionExit
+            this.asyncFunctionExit = (_iid, result, _wrappedExceptionVal) => {
+                const mensagemLog = `[asyncFunctionExit]  Execucao saiu do escopo da funcao async (retornando: ${result})`;
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+            };
 
-            //this.awaitPre = (_iid, _promiseOrValAwaited) => {
-            //    const mensagemLog = "[awaitPre] Promise foi inciada!";
-            //    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
-            //};
+            this.awaitPre = (_iid, _promiseOrValAwaited) => {
+                const mensagemLog = "[awaitPre]           Execucao parou no await";
+                MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+            };
     
             this.awaitPost = (_iid, _promiseOrValAwaited, valResolveOrRejected, _isPromiseRejected) => {
-                const mensagemLog = `[awaitPost] Promise.all foi finalizada! (retornando ${valResolveOrRejected})`;
+                const mensagemLog = `[awaitPost]          Execucao do await foi finalizada (retornando: ${valResolveOrRejected})`;
                 MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
             };
+
+            // TODO:
+            // verificar se tem algum exemplo de paralelismo que usa a biblioteca bluebird, workerpool, net, child_process e como detectalo
+            // Testar com os exemplos da tabela e registrar os seus logs
+
         }
         else {
             console.log("Testando todos os hooks!");
