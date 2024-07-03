@@ -6089,3 +6089,11 @@ Construtor da classe "AsyncCalledFunctionInfo do LogStore" foi chamado
 Construtor da classe "AsyncCalledFunctionInfo do LogStore" foi chamado
 Construtor da classe "AsyncCalledFunctionInfo do LogStore" foi chamado
 Construtor da classe "AsyncCalledFunctionInfo do LogStore" foi chamado
+Construtor da classe "AsyncCalledFunctionInfo do LogStore" foi chamado
+Construtor da classe "AsyncCalledFunctionInfo do LogStore" foi chamado
+Construtor da classe "AsyncCalledFunctionInfo do LogStore" foi chamado
+Construtor da classe "AsyncCalledFunctionInfo do LogStore" foi chamado
+Construtor da classe "AsyncCalledFunctionInfo do LogStore" foi chamado
+Construtor da classe "AsyncCalledFunctionInfo do LogStore" foi chamado
+Construtor da classe "AsyncCalledFunctionInfo do LogStore" foi chamado
+Construtor da classe "AsyncCalledFunctionInfo do LogStore" foi chamado

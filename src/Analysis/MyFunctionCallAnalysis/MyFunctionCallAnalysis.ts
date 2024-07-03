@@ -228,22 +228,34 @@ export class MyFunctionCallAnalysis extends Analysis {
                 
                 // Testando com arquivo com fs
                 else if ( f === fs.open || f === fs.read || f === fs.write 
-                    || f === fs.readFile || f === fs.writeFile || f === fs.appendFile) {
-                    const mensagemLog = "[invokeFun]          Arquivo Assincrono foi acessado";
+                    || f === fs.readFile || f === fs.writeFile || f === fs.appendFile
+                    || f === fs.rename || f === fs.access || f === fs.stat || f === fs.lstat
+                    || f === fs.copyFile || f === fs.cp || f === fs.truncate) {
+                    const mensagemLog = `[invokeFun]          Arquivo Assincrono foi acessado com a operacao: ${f.name}`;
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
                 else if (f === fs.close) {
                     const mensagemLog = "[invokeFun]          Arquivo Assincrono foi fechado";
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
+                else if(f === fs.rm) {
+                    const mensagemLog = "[invokeFun]          Arquivo foi removido de modo Assincrono";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                }
                 else if (f === fs.openSync || f === fs.readSync || f === fs.writeSync 
-                    || f === fs.appendFileSync || f === fs.readFileSync || f === fs.writeFileSync 
+                    || f === fs.appendFileSync || f === fs.readFileSync || f === fs.writeFileSync
+                    || f === fs.renameSync || f === fs.accessSync || f === fs.statSync || f === fs.lstatSync
+                    || f === fs.copyFileSync || f === fs.cpSync || f === fs.truncateSync
                     || f === fs.createReadStream || f === fs.createWriteStream ) {
-                    const mensagemLog = "[invokeFun]          Arquivo Sincrono foi acessado";
+                    const mensagemLog = `[invokeFun]          Arquivo Sincrono foi acessado com a operacao: ${f.name}`;
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
                 else if (f === fs.closeSync) {
                     const mensagemLog = "[invokeFun]          Arquivo Sincrono foi fechado";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                }
+                else if(f === fs.rmSync) {
+                    const mensagemLog = "[invokeFun]          Arquivo foi removido de modo Sincrono";
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
 

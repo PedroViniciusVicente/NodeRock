@@ -1,7 +1,12 @@
 -=+=- Log das chamadas dos hooks principais -=+=- 
 
-[asyncFunctionEnter] Funcao async foi iniciada
-[invokeFun]          Arquivo com promises foi acessado
-[awaitPre]           Execucao parou no await
-[asyncFunctionExit]  Execucao saiu do escopo da funcao async (retornando: [object Promise])
-[awaitPost]          Execucao do await foi finalizada (retornando: [object JSTransferable])
+[invokeFun]          Arquivo Sincrono foi acessado com a operacao: writeFileSync
+[invokeFun]          Arquivo Sincrono foi acessado com a operacao: readFileSync
+[invokeFun]          Arquivo Assincrono foi acessado com a operacao: access
+[invokeFun]          Arquivo Assincrono foi acessado com a operacao: access
+[invokeFun]          Arquivo Assincrono foi acessado com a operacao: access
+[invokeFun]          Arquivo Assincrono foi acessado com a operacao: access
+[invokeFun]          Arquivo Assincrono foi acessado com a operacao: writeFile
+[invokeFun]          Arquivo Assincrono foi acessado com a operacao: writeFile
+[invokeFun]          Arquivo Assincrono foi acessado com a operacao: rename
+[invokeFun]          Arquivo Assincrono foi acessado com a operacao: rename
