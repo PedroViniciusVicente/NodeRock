@@ -163,19 +163,34 @@ export class MyFunctionCallAnalysis extends Analysis {
                     const mensagemLog = "[invokeFunPre]       Funcao setInterval foi invocada";
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
+                else if (f === clearImmediate || f === clearInterval || f === clearTimeout) {
+                    const mensagemLog = `[invokeFunPre]       Funcao ${f.name} foi invocada`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                }
                 // Testando para operacoes do http:
-                else if (f === http.request || f === http.get) {
-                    const mensagemLog = "[invokeFunPre]       Requisicao ao servidor foi invocada";
+                else if (f === http.request || f === http.get
+                    || f === http.ClientRequest || f === http.ServerResponse
+                ) {
+                    const mensagemLog = "[invokeFunPre]       Requisicao ao servidor http foi invocada";
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
                 else if (f === http.createServer) {
-                    const mensagemLog = "[invokeFunPre]       Criacao do servidor foi invocada";
+                    const mensagemLog = "[invokeFunPre]       Criacao do servidor http foi invocada";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                }
+                else if(f === http.OutgoingMessage.prototype.destroy
+                    || f === http.OutgoingMessage.prototype.write
+                    || f === http.OutgoingMessage.prototype.end) {
+                    const mensagemLog = `[invokeFunPre]       Mensagem ao servidor http foi enviada: ${f.name}`;
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
                 // Testando para operacoes dos eventEmmiters:
                 else if (f === EventEmitter.prototype.addListener
                     || f === EventEmitter.prototype.on
-                    || f === EventEmitter.prototype.prependListener)
+                    || f === EventEmitter.prototype.prependListener
+                    || f === EventEmitter.prototype.once // Ouve apenas 1 evento emitido e ja eh destruido
+                    || f === EventEmitter.prototype.prependOnceListener
+                    )
                 {
                     const mensagemLog = "[invokeFunPre]       Criacao do Listener foi invocada";
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
@@ -192,12 +207,12 @@ export class MyFunctionCallAnalysis extends Analysis {
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
                 // Testando as operacoes do net
-                if (f === net.createServer) {
-                    const mensagemLog = "[invokeFunPre]       Servidor Net foi invocada";
+                else if (f === net.createServer) {
+                    const mensagemLog = "[invokeFunPre]       Criacao Servidor Net foi invocada";
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
                 else if (f === net.createConnection || f === net.connect || f === net.Socket) {
-                    const mensagemLog = "[invokeFunPre]       Conexao Net foi invocada";
+                    const mensagemLog = `[invokeFunPre]       Conexao Net foi invocada com a operacao: ${f.name}`;
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
 
@@ -217,7 +232,9 @@ export class MyFunctionCallAnalysis extends Analysis {
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
                 // Testando para operacoes do http:
-                else if (f === http.request || f === http.get) {
+                else if (f === http.request || f === http.get
+                    || f === http.ClientRequest || f === http.ServerResponse
+                ) {
                     const mensagemLog = "[invokeFun]          Requisicao ao servidor foi finalizada";
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
@@ -258,11 +275,22 @@ export class MyFunctionCallAnalysis extends Analysis {
                     const mensagemLog = "[invokeFun]          Arquivo foi removido de modo Sincrono";
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
-
                 // Testando com arquivos do FileHandle e FsPromises
                 else if (f === fs.promises.open || f === fs.promises.readFile || f === fs.promises.writeFile 
                     || f === fs.promises.appendFile) {
                     const mensagemLog = "[invokeFun]          Arquivo com promises foi acessado";
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                }
+                // Testando fs com folders
+                else if (f === fs.mkdir || f === fs.mkdirSync 
+                    || f === fs.promises.mkdir  || f === fs.promises.mkdtemp
+                    || f === fs.mkdtemp || f === fs.mkdtempSync) {
+                    const mensagemLog = `[invokeFun]          Folder foi criado com: ${f.name}`;
+                    MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
+                }
+                else if (f === fs.rmdir || f === fs.rmdirSync 
+                    || f === fs.promises.rmdir  || f === fs.rm) {
+                    const mensagemLog = `[invokeFun]          Folder foi removido com: ${f.name}`;
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 }
             };
@@ -417,7 +445,13 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const mensagemLog = "[invokeFunPre] foi acionado!";
                 MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 if (MyFunctionCallAnalysis.debugar) {
-                    let mensagemLog = `Hook invokeFunPre detectou o inicio da execucao da funcao: ${f}`;
+                    let mensagemLog;
+                    if (f.name) {
+                        mensagemLog = `Hook invokeFunPre detectou o inicio da execucao da funcao de nome: ${f.name}\n${f}`;
+                    }
+                    else {
+                        mensagemLog = `Hook invokeFunPre detectou o inicio da execucao da funcao de nome: (funcao anonima)\n${f}`;
+                    }
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
 
                     mensagemLog = `Objeto base que recebera a funcao: ${base}`;
@@ -435,7 +469,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const mensagemLog = "[invokeFun] foi acionado!";
                 MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
                 if (MyFunctionCallAnalysis.debugar) {
-                    let mensagemLog = `Hook invokeFun detectou o termino da funcao: ${f}`;
+                    let mensagemLog = `Hook invokeFun detectou o termino da funcao de nome: ${f.name}\n${f}`;
                     MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemLog);
 
                     mensagemLog = `Objeto base que recebera a funcao: ${_base}`;

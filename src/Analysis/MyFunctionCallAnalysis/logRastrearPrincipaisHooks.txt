@@ -1,7 +1,5 @@
 -=+=- Log das chamadas dos hooks principais -=+=- 
 
-[invokeFun]          Arquivo Sincrono foi acessado com a operacao: writeFileSync
-[invokeFun]          Arquivo Sincrono foi acessado com a operacao: readFileSync
 [invokeFun]          Arquivo Assincrono foi acessado com a operacao: access
 [invokeFun]          Arquivo Assincrono foi acessado com a operacao: access
 [invokeFun]          Arquivo Assincrono foi acessado com a operacao: access
