@@ -1,11 +1,10 @@
 // DO NOT INSTRUMENT
 
 // TODO:
-// 1.5) Corrigir esse problema do circular ao dar o JSON.stringify
-// 3) Verificar as funcoes do iidToSource/location
-// 4) Corrigir para aparecer "funcao anonima" ao inves de (espaço vazio) em caso de funcoes anonimas
-// 6) Testar a leitura do arquivo JSON depois
-// 7) Adicionar esse || "Variavel anonima", para as variaveis que podem dar erro/serem vazias
+// - Refinar os parametros do getField e putField e invokeFun e invokeFunPre
+// - Testar a leitura e recuperacao dos objetos do arquivo JSON depois
+// - Dar o install com a versao correta do node nos exemplos do noderacer (e garantir que todas dependencias tao baixadas)
+// - Testar os exemplos com os entry points corretos
 
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {EventEmitter} from 'events';
@@ -40,7 +39,7 @@ export class MyFunctionCallAnalysis extends Analysis {
     public startExpression: Hooks['startExpression'] | undefined; // sempre antes de uma expressao
     public endExpression: Hooks['endExpression'] | undefined; // sempre depois de uma expressao
     public literal: Hooks['literal'] | undefined; // sempre depois da criacao de uma literal
-    public unary: Hooks['unary'] | undefined; // sempre depois de uma operacao unaria (+, -, !, typeof, etc)
+    public unary: Hooks['unary'] | undefined; // sempre depois de uma operacao unaria (+, -, !, typeof, delete, etc)
     public unaryPre: Hooks['unaryPre'] | undefined; // sempre antes de uma operacao unaria
     public asyncFunctionEnter: Hooks['asyncFunctionEnter'] | undefined; //sempre que uma funcao assincrona comeca
     public asyncFunctionExit: Hooks['asyncFunctionExit'] | undefined; //sempre que uma funcao assincrona termina
@@ -162,7 +161,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 let novoVal: String;
                 isFunction(val) ? novoVal = "Function" : novoVal = "Variable";
                 let novoLhs: String
-                lhs === undefined ? novoLhs = "Undefined" : isFunction(lhs) ? novoLhs = "Function" : novoLhs = "Variable";
+                lhs === undefined ? novoLhs = "Undefined" : isFunction(lhs) ? novoLhs = "Function" : novoLhs = "Variable/Objeto";
 
                 const objMensagemLog = {
                     "Hook_Detectado": "write",
@@ -234,11 +233,11 @@ export class MyFunctionCallAnalysis extends Analysis {
             };
             
            
-            this.functionEnter = (iid, f, _dis, _args) => {
+            this.functionEnter = (iid, f, _dis, args) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                
+
 
                 let novoNomeFuncao: String;
                 f.name ? novoNomeFuncao = f.name : novoNomeFuncao = "funcao anonima";
@@ -248,34 +247,55 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "Arquivo": fileName,
                     "loc": loc,
                     "Nome_da_Funcao": novoNomeFuncao,
-                    //"Argumentos_da_Funcao": args,
-                    //"Valor_do_this???": dis,
+                    // esse join() transforma a lista de argumentos em uma string para nao dar erro de circular reference
+                    "Argumentos_da_Funcao": args.join(", "),
+
+                    // Acho que esse dis nao eh importante, pois ele eh o valor do this no corpo da funcao: (?)
+                    // "@param {*} dis - The value of the <tt>this</tt> variable in the function body"
+                    //"Valor_do_this???": dis, 
                 };
             
                 MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', objMensagemLog);
+                // -=+=- prints para debugar o functionEnter: -=+=-
+                //console.log("O nome da funcao eh: ", novoNomeFuncao);
+                //console.log("O args eh:", args.join(", "));
+                // Obs: O args eh um vetor que contem as variaveis/funcoes/objetos que foram usadas como argumentos
+                //         da funcao chamada, entretanto, no caso das funcoes de callback usadas como argumento, ele
+                //         armazena o corpo da funcao inteira, mas se usar o typeof em cada elemento do vetor, voce
+                //         consegue visualizar facilmente se ele eh function / object / variavel(string, int, etc)
+                //for (const elemento of args) {
+                //    console.log(`O tipo do elemento "${elemento}" é: ${typeof elemento}`);
+                //}
+                //console.log(`o dis ${dis} eh do tipo do dis: ${typeof dis}`);
+                //console.log("dis", dis);
             };
             
-            this.functionExit = (iid, _returnVal, _wrappedExceptionVal) => {
+            this.functionExit = (iid, returnVal, wrappedExceptionVal) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                
 
                 const objMensagemLog = {
                     "Hook_Detectado": "functionExit",
                     "Arquivo": fileName,
                     "loc": loc,
-                    //"Nome_da_Funcao": 
                     // para saber o nome provavelmente vai ter de colocar uma pilha que da o push no functionEnter e pop no functionExit
-                    //"Valor_Retornado": returnVal,
-                    //"Ocorreu_Excessao": wrappedExceptionVal,
+                    //"Nome_da_Funcao": 
+                    // OBS: se ele for Objeto/Funcao e vc tentar escrever o returnVal no arquivo, ele da erro "Circular Reference"
+                    "Tipo_Retorno" : typeof returnVal,
+                    "Valor_Retornado": (typeof returnVal === 'number' 
+                        || typeof returnVal === 'string'
+                        || typeof returnVal === 'boolean') ? returnVal : "(Valor nao mostrado para evitar erro)",
+                    "Ocorreu_Excessao": wrappedExceptionVal,
                 };
             
                 MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', objMensagemLog);
+                // Obs: Por algum motivo o functionExit consegue chamar o arguments.length sem ter esse parametro (???)
+                //console.log(arguments.length);
             };
                     
             
-            this.invokeFunPre = (iid, f, _base, _args) => {
+            this.invokeFunPre = (iid, f, base, args) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
@@ -289,14 +309,15 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "Arquivo": fileName,
                     "loc": loc,
                     "Nome_da_Funcao": novoNomeFuncao,
-                    //"Argumentos_da_Funcao": args,
+                    "Argumentos_da_Funcao": args.join(", "),
                     //"Objeto_Base": base, // objeto base que vai receber a funcao
                 };
             
                 MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', objMensagemLog);
+                console.log("Essa base eh: ", base);
             }
             
-            this.invokeFun = (iid, f, _base, _args, _result) => {
+            this.invokeFun = (iid, f, base, args, result) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
@@ -310,12 +331,18 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "Arquivo": fileName,
                     "loc": loc,
                     "Nome_da_Funcao": novoNomeFuncao,
-                    //"Argumentos_da_Funcao": args,
+                    "Argumentos_da_Funcao": args.join(", "),
                     //"Objeto_Base": base, // objeto base que vai receber a funcao
+                    "Tipo_Valor_Retornado": typeof result
                     //"Valor_Retornado": result,
+                    // Adicionar esse aqui para o valor_retornado:
+                    //(typeof returnVal === 'number' 
+                    //    || typeof returnVal === 'string'
+                    //    || typeof returnVal === 'boolean') ? returnVal : "(Valor nao mostrado para evitar erro)",
                 };
             
                 MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', objMensagemLog);
+                console.log("Essa base eh: ", base);
             };
     
             this.startExpression = (iid, type) => {
@@ -349,10 +376,11 @@ export class MyFunctionCallAnalysis extends Analysis {
                 };
 
                 MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', objMensagemLog);
+                //console.log(`valor da expressao de tipo ${type} eh: ${value}`);
             };
     
             // Esse _fakeHasGetterSetter eh apenas para a API do Jalangi
-            this.literal = (iid, _val, _fakeHasGetterSetter, literalType) => {
+            this.literal = (iid, val, _fakeHasGetterSetter, literalType) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
@@ -364,9 +392,14 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "loc": loc,
                     "Tipo_Literal": literalType,
                     //"Valor_da_Literal": val,
+                    // Obs: eu filtrei para esses 3 tipos de literal pois com alguns objetos/funcao dava erro circular reference
+                    "Valor_Literal": (literalType === 'NumericLiteral' 
+                        || literalType === 'StringLiteral' 
+                        || literalType === 'BooleanLiteral') ? val : "(Valor nao mostrado para evitar erro)",
                 };
 
                 MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', objMensagemLog);
+                //console.log("literal eh: ", val);
             };
     
             // REVER: Onde esta esse typeof detectado dentro da execucao do exemplo?? ele eh executado apenas 1 vez mesmo
@@ -467,6 +500,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "Arquivo": fileName,
                     "loc": loc,
                     "Promise_Rejeitada?": isPromiseRejected,
+                    // !!! Por algum motivo esses valores esperados/resolvidos nao estao sendo armazenados no arquivo !!!
                     "Valor_Esperado": promiseOrValAwaited,
                     "Valor_Resolvido": valResolveOrRejected,
                 };
