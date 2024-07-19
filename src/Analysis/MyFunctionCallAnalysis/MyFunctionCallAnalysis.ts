@@ -1,12 +1,9 @@
 // DO NOT INSTRUMENT
 
 // TODO:
-// 1) Testar a escrita com apenas 1 objMensagemLog
 // 1.5) Corrigir esse problema do circular ao dar o JSON.stringify
-// 2) Colocar o formato JSON para todas as demais funcoes
 // 3) Verificar as funcoes do iidToSource/location
 // 4) Corrigir para aparecer "funcao anonima" ao inves de (espaço vazio) em caso de funcoes anonimas
-// 5) Tentar adicionar o loc que o prof quer (acredito que seja em this.getSandbox().iidToSourceObject(iid).loc
 // 6) Testar a leitura do arquivo JSON depois
 // 7) Adicionar esse || "Variavel anonima", para as variaveis que podem dar erro/serem vazias
 
@@ -21,14 +18,15 @@ import {isFunction} from 'lodash';
 export class MyFunctionCallAnalysis extends Analysis {
 
     /*
-    ** Obs1: Aqui sao declarados os hooks que serão usados nessa analise
-    ** Obs2: Cada hook tem a funcao de chamar o callback (implementado logo abaixo) quando uma
-    **       acao especifica acontecer
-    ** Obs3: esse "| undefined;" serve para não ficar dando erro se a funcao ainda nao estiver
+    ** Aqui sao declarados os hooks que serão usados nessa analise
+    ** Cada hook tem a funcao de chamar o callback (implementado logo abaixo) quando uma
+    **    acao especifica acontecer
+    ** Esse "| undefined;" serve para não ficar dando erro se a funcao ainda nao estiver
     **       implementada (aparentemente so eh usada na fase de desenvolvimento)
     **
     ** Veja a lista com todos os hooks possiveis e suas funcoes:
     ** (interface original em: src/Type/nodeprof/Hooks.ts)
+    ** ou em  /coisasNodeRT/NodeRT-OpenSource/emptyTemplate.js que tem hooks adicionais
     */
     public read: Hooks['read'] | undefined; //sempre que um valor eh lido em uma variavel; Obs: esse valor tambem pode ser uma funcao
     public write: Hooks['write'] | undefined; //sempre que um valor eh escrito em uma variavel; Obs: esse valor tambem pode ser uma funcao
@@ -74,17 +72,23 @@ export class MyFunctionCallAnalysis extends Analysis {
 
     }
 
-    // Funcao que sera chamada ao final: Com o process.on('exit', ...) 
-    //   para escrever tudo do vetor logsDosHooks para o arquivo de logs desejado
+    // Funcao chamada ao final: Com o process.on('exit', ...) para escrever o vetor logsDosHooks no arquivo de logs
     public static escreverHooksNoLog(): void {
         //console.log("O escreverHooksNoLog foi chamado!");
 
-        fs.writeFileSync(MyFunctionCallAnalysis.pathLogHooks, ''); // Gerar o arquivo zerado
-        // escreve os hooks depois de transforma-los propriamente em JSON 
-        for (const hookRegistrado of MyFunctionCallAnalysis.logsDosHooks) {
-            //console.log("Registrou o hook: ", hookRegistrado);
-            fs.writeFileSync(MyFunctionCallAnalysis.pathLogHooks, JSON.stringify(hookRegistrado, null, 2) + '\n', {flag:'a'});
+        // Escrita do vetor de objetos do tipo JSON
+        fs.writeFileSync(MyFunctionCallAnalysis.pathLogHooks, '[\n');
+        // Itera apenas sobre os n-1 elementos, deixando o ultimo de fora
+        for (let i = 0; i < MyFunctionCallAnalysis.logsDosHooks.length - 1; i++) {
+            const hookRegistrado = MyFunctionCallAnalysis.logsDosHooks[i];
+            const stringJSON = JSON.stringify(hookRegistrado, null, 4);
+            fs.writeFileSync(MyFunctionCallAnalysis.pathLogHooks, stringJSON + ',\n', {flag:'a'});
         }
+        // Escrita do ultimo elemento do vetor (o ultimo objeto nao pode finalizar com , para o .json funncionar)
+        const stringJSON = JSON.stringify(MyFunctionCallAnalysis.logsDosHooks[MyFunctionCallAnalysis.logsDosHooks.length - 1], null, 4);
+        fs.writeFileSync(MyFunctionCallAnalysis.pathLogHooks, stringJSON + '\n', {flag:'a'});
+        
+        fs.writeFileSync(MyFunctionCallAnalysis.pathLogHooks, ']', {flag:'a'});
     }
 
     public static adicionarHookAoLog(hookAdicionar: object): void {
@@ -104,14 +108,12 @@ export class MyFunctionCallAnalysis extends Analysis {
             //console.log("Path do apenas hooks principais!");
             MyFunctionCallAnalysis.pathLogHooks = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/MyFunctionCallAnalysis/logRastrearPrincipaisHooks.txt";
             //const mensagemInicial = `-=+=- Log das chamadas dos hooks principais -=+=- \n`;
-            //const mensagemLog = mensagemInicial);
             //MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemInicial);
         }
         else {
             //console.log("Path de todos os hooks!");
             MyFunctionCallAnalysis.pathLogHooks = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/MyFunctionCallAnalysis/logHooks.json";
             //const mensagemInicial = `-=+=- Log das chamadas de todos hooks -=+=- \n`;
-            //const mensagemLog = mensagemInicial);
             //MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', mensagemInicial);
         }
         //console.log(`pathlog eh: ${MyFunctionCallAnalysis.pathLogHooks}`);
@@ -126,8 +128,6 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                const intervaloStart = [loc.start.line, loc.start.column];
-                const intervaloEnd = [loc.end.line, loc.end.column];
 
                 // Obs: Dependendo do val, ele pode dar erro de TypeError: Converting circular structure to JSON
                 // pois o val eh o valor que vai ser atribuido a nossa variavel
@@ -137,8 +137,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const objMensagemLog = {
                     "Hook_Detectado": "read",
                     "Arquivo": fileName,
-                    "Linha_Coluna_Start": intervaloStart,
-                    "Linha_Coluna_End": intervaloEnd,
+                    "loc": loc,
                     "Nome_da_Variavel": name || "Variavel Anonima",
                     "Tipo_Valor_Lido": novoVal,
                     //"isGlobal": isGlobal
@@ -157,9 +156,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                const intervaloStart = [loc.start.line, loc.start.column];
-                const intervaloEnd = [loc.end.line, loc.end.column];
-
+                
                 // Obs: Dependendo do val, ele pode dar erro de TypeError: Converting circular structure to JSON
                 // pois o val eh o valor que vai ser atribuido a nossa variavel
                 let novoVal: String;
@@ -170,8 +167,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const objMensagemLog = {
                     "Hook_Detectado": "write",
                     "Arquivo": fileName,
-                    "Linha_Coluna_Start": intervaloStart,
-                    "Linha_Coluna_End": intervaloEnd,
+                    "loc": loc,
                     "Nome_da_Variavel": name || "Variavel Anonima",
                     "Tipo_Valor_Escrito": novoVal,
                     "Tipo_Valor_Antes_da_Escrita": novoLhs,
@@ -185,15 +181,12 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                const intervaloStart = [loc.start.line, loc.start.column];
-                const intervaloEnd = [loc.end.line, loc.end.column];
+                
 
                 const objMensagemLog = {
                     "Hook_Detectado": "write",
                     "Arquivo": fileName,
-                    "Linha_Coluna_Start": intervaloStart,
-                    "Linha_Coluna_End": intervaloEnd,
-                    "Nome_da_Variavel": name,
+                    "loc": loc,
                     //"Base?": base,
                     //"Offset?": offset,
                     //"Val?": val,
@@ -208,16 +201,13 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                const intervaloStart = [loc.start.line, loc.start.column];
-                const intervaloEnd = [loc.end.line, loc.end.column];
+                
 
 
                 const objMensagemLog = {
                     "Hook_Detectado": "write",
                     "Arquivo": fileName,
-                    "Linha_Coluna_Start": intervaloStart,
-                    "Linha_Coluna_End": intervaloEnd,
-                    "Nome_da_Variavel": name,
+                    "loc": loc,
                     //"Base?": base,
                     //"Offset?": offset,
                     //"Val?": val,
@@ -248,8 +238,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                const intervaloStart = [loc.start.line, loc.start.column];
-                const intervaloEnd = [loc.end.line, loc.end.column];
+                
 
                 let novoNomeFuncao: String;
                 f.name ? novoNomeFuncao = f.name : novoNomeFuncao = "funcao anonima";
@@ -257,8 +246,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const objMensagemLog = {
                     "Hook_Detectado": "functionEnter",
                     "Arquivo": fileName,
-                    "Linha_Coluna_Start": intervaloStart,
-                    "Linha_Coluna_End": intervaloEnd,
+                    "loc": loc,
                     "Nome_da_Funcao": novoNomeFuncao,
                     //"Argumentos_da_Funcao": args,
                     //"Valor_do_this???": dis,
@@ -271,14 +259,12 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                const intervaloStart = [loc.start.line, loc.start.column];
-                const intervaloEnd = [loc.end.line, loc.end.column];
+                
 
                 const objMensagemLog = {
                     "Hook_Detectado": "functionExit",
                     "Arquivo": fileName,
-                    "Linha_Coluna_Start": intervaloStart,
-                    "Linha_Coluna_End": intervaloEnd,
+                    "loc": loc,
                     //"Nome_da_Funcao": 
                     // para saber o nome provavelmente vai ter de colocar uma pilha que da o push no functionEnter e pop no functionExit
                     //"Valor_Retornado": returnVal,
@@ -293,8 +279,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                const intervaloStart = [loc.start.line, loc.start.column];
-                const intervaloEnd = [loc.end.line, loc.end.column];
+                
 
                 let novoNomeFuncao: String;
                 f.name ? novoNomeFuncao = f.name : novoNomeFuncao = "funcao anonima";
@@ -302,8 +287,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const objMensagemLog = {
                     "Hook_Detectado": "invokeFunPre",
                     "Arquivo": fileName,
-                    "Linha_Coluna_Start": intervaloStart,
-                    "Linha_Coluna_End": intervaloEnd,
+                    "loc": loc,
                     "Nome_da_Funcao": novoNomeFuncao,
                     //"Argumentos_da_Funcao": args,
                     //"Objeto_Base": base, // objeto base que vai receber a funcao
@@ -316,8 +300,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                const intervaloStart = [loc.start.line, loc.start.column];
-                const intervaloEnd = [loc.end.line, loc.end.column];
+                
 
                 let novoNomeFuncao: String;
                 f.name ? novoNomeFuncao = f.name : novoNomeFuncao = "funcao anonima";
@@ -325,8 +308,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const objMensagemLog = {
                     "Hook_Detectado": "invokeFun",
                     "Arquivo": fileName,
-                    "Linha_Coluna_Start": intervaloStart,
-                    "Linha_Coluna_End": intervaloEnd,
+                    "loc": loc,
                     "Nome_da_Funcao": novoNomeFuncao,
                     //"Argumentos_da_Funcao": args,
                     //"Objeto_Base": base, // objeto base que vai receber a funcao
@@ -340,14 +322,12 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                const intervaloStart = [loc.start.line, loc.start.column];
-                const intervaloEnd = [loc.end.line, loc.end.column];
+                
 
                 const objMensagemLog = {
                     "Hook_Detectado": "startExpression",
                     "Arquivo": fileName,
-                    "Linha_Coluna_Start": intervaloStart,
-                    "Linha_Coluna_End": intervaloEnd,
+                    "loc": loc,
                     "Tipo_Expressao": type,
                 };
 
@@ -358,14 +338,12 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                const intervaloStart = [loc.start.line, loc.start.column];
-                const intervaloEnd = [loc.end.line, loc.end.column];
+                
 
                 const objMensagemLog = {
                     "Hook_Detectado": "endExpression",
                     "Arquivo": fileName,
-                    "Linha_Coluna_Start": intervaloStart,
-                    "Linha_Coluna_End": intervaloEnd,
+                    "loc": loc,
                     "Tipo_Expressao": type,
                     //"Valor_da_Expressao": value,
                 };
@@ -378,14 +356,12 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                const intervaloStart = [loc.start.line, loc.start.column];
-                const intervaloEnd = [loc.end.line, loc.end.column];
+                
 
                 const objMensagemLog = {
                     "Hook_Detectado": "literal",
                     "Arquivo": fileName,
-                    "Linha_Coluna_Start": intervaloStart,
-                    "Linha_Coluna_End": intervaloEnd,
+                    "loc": loc,
                     "Tipo_Literal": literalType,
                     //"Valor_da_Literal": val,
                 };
@@ -394,40 +370,36 @@ export class MyFunctionCallAnalysis extends Analysis {
             };
     
             // REVER: Onde esta esse typeof detectado dentro da execucao do exemplo?? ele eh executado apenas 1 vez mesmo
-            this.unary = (iid, _op, _left, _result) => {
+            this.unary = (iid, op, left, result) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                const intervaloStart = [loc.start.line, loc.start.column];
-                const intervaloEnd = [loc.end.line, loc.end.column];
+                
 
                 const objMensagemLog = {
                     "Hook_Detectado": "unary",
                     "Arquivo": fileName,
-                    "Linha_Coluna_Start": intervaloStart,
-                    "Linha_Coluna_End": intervaloEnd,
-                    //"Operacao_Unaria_Executada": op,
-                    //"Operando_da_Esquerda": left,
-                    //"Resultado_unario": result,
+                    "loc": loc,
+                    "Operacao_Unaria_Executada": op,
+                    "Operando_da_Esquerda": left,
+                    "Resultado_unario": result,
                 };
 
                 MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', objMensagemLog);
             };
             
-            this.unaryPre = (iid, _op, _left) => {
+            this.unaryPre = (iid, op, left) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                const intervaloStart = [loc.start.line, loc.start.column];
-                const intervaloEnd = [loc.end.line, loc.end.column];
+                
 
                 const objMensagemLog = {
                     "Hook_Detectado": "unaryPre",
                     "Arquivo": fileName,
-                    "Linha_Coluna_Start": intervaloStart,
-                    "Linha_Coluna_End": intervaloEnd,
-                    //"Operacao_Unaria_Executada": op,
-                    //"Operando_da_Esquerda": left,
+                    "loc": loc,
+                    "Operacao_Unaria_Executada": op,
+                    "Operando_da_Esquerda": left,
                 };
 
                 MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', objMensagemLog);
@@ -437,34 +409,30 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                const intervaloStart = [loc.start.line, loc.start.column];
-                const intervaloEnd = [loc.end.line, loc.end.column];
+                
 
                 // nao tem como saber qual a funcao??
                 const objMensagemLog = {
                     "Hook_Detectado": "asyncFunctionEnter",
                     "Arquivo": fileName,
-                    "Linha_Coluna_Start": intervaloStart,
-                    "Linha_Coluna_End": intervaloEnd,
+                    "loc": loc,
                 };
                 MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', objMensagemLog);
             };
     
-            this.asyncFunctionExit = (iid, _result, _wrappedExceptionVal) => {
+            this.asyncFunctionExit = (iid, result, wrappedExceptionVal) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                const intervaloStart = [loc.start.line, loc.start.column];
-                const intervaloEnd = [loc.end.line, loc.end.column];
+                
 
                 // nao tem como saber qual a funcao??
                 const objMensagemLog = {
                     "Hook_Detectado": "asyncFunctionExit",
                     "Arquivo": fileName,
-                    "Linha_Coluna_Start": intervaloStart,
-                    "Linha_Coluna_End": intervaloEnd,
-                    //"Valor_Retornado": result,
-                    //"Ocorreu_Excessao": wrappedExceptionVal,
+                    "loc": loc,
+                    "Valor_Retornado": result,
+                    "Ocorreu_Excessao": wrappedExceptionVal,
                 };
 
                 MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', objMensagemLog);
@@ -474,15 +442,13 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                const intervaloStart = [loc.start.line, loc.start.column];
-                const intervaloEnd = [loc.end.line, loc.end.column];
+                
 
                 // nao tem como saber qual a funcao??
                 const objMensagemLog = {
                     "Hook_Detectado": "awaitPre",
                     "Arquivo": fileName,
-                    "Linha_Coluna_Start": intervaloStart,
-                    "Linha_Coluna_End": intervaloEnd,
+                    "loc": loc,
                     "Valor_Esperado": promiseOrValAwaited,
                 };
 
@@ -493,15 +459,13 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                const intervaloStart = [loc.start.line, loc.start.column];
-                const intervaloEnd = [loc.end.line, loc.end.column];
+                
 
                 // nao tem como saber qual a funcao??
                 const objMensagemLog = {
                     "Hook_Detectado": "awaitPost",
                     "Arquivo": fileName,
-                    "Linha_Coluna_Start": intervaloStart,
-                    "Linha_Coluna_End": intervaloEnd,
+                    "loc": loc,
                     "Promise_Rejeitada?": isPromiseRejected,
                     "Valor_Esperado": promiseOrValAwaited,
                     "Valor_Resolvido": valResolveOrRejected,
@@ -514,15 +478,13 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                const intervaloStart = [loc.start.line, loc.start.column];
-                const intervaloEnd = [loc.end.line, loc.end.column];
+                
 
                 // nao tem como saber qual a funcao??
                 const objMensagemLog = {
                     "Hook_Detectado": "awaitPost",
                     "Arquivo": fileName,
-                    "Linha_Coluna_Start": intervaloStart,
-                    "Linha_Coluna_End": intervaloEnd,
+                    "loc": loc,
                     "Tipo_Statement": type,
                 };
 
