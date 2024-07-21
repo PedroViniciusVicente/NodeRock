@@ -1,7 +1,7 @@
 // DO NOT INSTRUMENT
 
 // TODO:
-// - Refinar os parametros do getField e putField e invokeFun e invokeFunPre
+// - Talvez refinar o getField e putFieldPre
 // - Testar a leitura e recuperacao dos objetos do arquivo JSON depois
 // - Dar o install com a versao correta do node nos exemplos do noderacer (e garantir que todas dependencias tao baixadas)
 // - Testar os exemplos com os entry points corretos
@@ -13,6 +13,7 @@ import http from 'http';
 import net from 'net';
 
 import {isFunction} from 'lodash';
+import {isArrayAccess} from '../../Util';
 
 export class MyFunctionCallAnalysis extends Analysis {
 
@@ -26,6 +27,7 @@ export class MyFunctionCallAnalysis extends Analysis {
     ** Veja a lista com todos os hooks possiveis e suas funcoes:
     ** (interface original em: src/Type/nodeprof/Hooks.ts)
     ** ou em  /coisasNodeRT/NodeRT-OpenSource/emptyTemplate.js que tem hooks adicionais
+    ** ou em /coisasNodeRT/NodeRT-OpenSource/nodeprof.js/nodeprof.js/tutorial.md (na real esse eh meio inutil)
     */
     public read: Hooks['read'] | undefined; //sempre que um valor eh lido em uma variavel; Obs: esse valor tambem pode ser uma funcao
     public write: Hooks['write'] | undefined; //sempre que um valor eh escrito em uma variavel; Obs: esse valor tambem pode ser uma funcao
@@ -176,41 +178,49 @@ export class MyFunctionCallAnalysis extends Analysis {
             };
             
             
-            this.getField = (iid, _base, _offset, _val, _isComputed) => {
+            this.getField = (iid, base, offset, val, isComputed) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                
+
 
                 const objMensagemLog = {
-                    "Hook_Detectado": "write",
+                    "Hook_Detectado": "getField",
                     "Arquivo": fileName,
                     "loc": loc,
-                    //"Base?": base,
-                    //"Offset?": offset,
-                    //"Val?": val,
-                    //"IsComputed?": isComputed,
+                    "Objeto_Acessado": Buffer.isBuffer(base) && isArrayAccess(isComputed, offset) ? base[offset as number] : "nao foi possivel acessar a base",
+                    "Valor_Acessado": (typeof val === 'number' 
+                        || typeof val === 'string'
+                        || typeof val === 'boolean') ? val : "(Valor nao mostrado para evitar erro)",
+
                 };
                 
                 MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', objMensagemLog);
                 //let mensagemLog = `Hook getField detectou o acesso da propriedade ${[offset]} do objeto ${base}`;
+                //console.log("Offset eh: ", offset);
+                //console.log("isComputed eh: ", isComputed);
+                //console.log("val eh: ", val);
+                //console.log("base eh: ", base);
+
             };
             
-            this.putFieldPre = (iid, _base, _offset, _val, _isComputed) => {
+            this.putFieldPre = (iid, base, offset, val, isComputed) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
                 
-
+                //offset = typeof offset === 'number' ? offset : Number.parseInt(offset);
+    
 
                 const objMensagemLog = {
-                    "Hook_Detectado": "write",
+                    "Hook_Detectado": "putFieldPre",
                     "Arquivo": fileName,
                     "loc": loc,
-                    //"Base?": base,
-                    //"Offset?": offset,
-                    //"Val?": val,
-                    //"IsComputed?": isComputed,
+                    "Objeto_Escrito": Buffer.isBuffer(base) && isArrayAccess(isComputed, offset) ? base[offset as number] : "nao foi possivel acessar a base",
+                    "Novo_Valor": (typeof val === 'number' 
+                        || typeof val === 'string'
+                        || typeof val === 'boolean') ? val : "(Valor nao mostrado para evitar erro)",
+
                 };
                 
                 MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', objMensagemLog);
@@ -295,7 +305,7 @@ export class MyFunctionCallAnalysis extends Analysis {
             };
                     
             
-            this.invokeFunPre = (iid, f, base, args) => {
+            this.invokeFunPre = (iid, f, _base, args) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
@@ -310,14 +320,15 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "loc": loc,
                     "Nome_da_Funcao": novoNomeFuncao,
                     "Argumentos_da_Funcao": args.join(", "),
-                    //"Objeto_Base": base, // objeto base que vai receber a funcao
+                    //"Objeto_Base": base, // objeto base que vai receber a funcao, julgo que nao eh mt necessaria
                 };
             
                 MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', objMensagemLog);
-                console.log("Essa base eh: ", base);
+                //console.log("Essa base eh: ", base);
             }
-            
-            this.invokeFun = (iid, f, base, args, result) => {
+
+
+            this.invokeFun = (iid, f, _base, args, result) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
@@ -332,17 +343,15 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "loc": loc,
                     "Nome_da_Funcao": novoNomeFuncao,
                     "Argumentos_da_Funcao": args.join(", "),
-                    //"Objeto_Base": base, // objeto base que vai receber a funcao
-                    "Tipo_Valor_Retornado": typeof result
-                    //"Valor_Retornado": result,
-                    // Adicionar esse aqui para o valor_retornado:
-                    //(typeof returnVal === 'number' 
-                    //    || typeof returnVal === 'string'
-                    //    || typeof returnVal === 'boolean') ? returnVal : "(Valor nao mostrado para evitar erro)",
+                    "Tipo_Valor_Retornado": typeof result,
+                    "Valor_Retornado": (typeof result === 'number' 
+                        || typeof result === 'string'
+                        || typeof result === 'boolean') ? result : "(Valor nao mostrado para evitar erro)",
+                        //"Objeto_Base": base, // objeto base que vai receber a funcao, julgo que nao eh mt necessario
                 };
             
                 MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', objMensagemLog);
-                console.log("Essa base eh: ", base);
+                //console.log("Essa base eh: ", base);
             };
     
             this.startExpression = (iid, type) => {
@@ -372,7 +381,9 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "Arquivo": fileName,
                     "loc": loc,
                     "Tipo_Expressao": type,
-                    //"Valor_da_Expressao": value,
+                    //"Valor_da_Expressao": value, 
+                    // acredito que esse value nao eh mt importante, pois ele quase sempre
+                    // vai ser o nome e implementacao de uma funcao
                 };
 
                 MyFunctionCallAnalysis.eventEmitter.emit('AdicionarLogAoVetor', objMensagemLog);
