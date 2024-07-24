@@ -7,7 +7,6 @@ import {ObjectLogStore} from '../../LogStore/ObjectLogStore';
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {shouldBeVerbose} from '../../Util';
 
-import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
  
 
 export class SetOperationLogger extends Analysis
@@ -20,16 +19,12 @@ export class SetOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("SetOperationLogger");
-
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("SetOperationLogger", "registerHooks");
-
         this.invokeFunPre = (iid, f, base, args) =>
         {
             const startTimestamp = Date.now();

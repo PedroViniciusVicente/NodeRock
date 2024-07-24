@@ -7,7 +7,6 @@ import {SourceCodeInfo} from '../../Class/SourceCodeInfo';
 import {StatisticsStore} from '../../StatisticsStore';
 import {isRunningUnitTests} from '../../../Util';
 
-import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
  
 
 export class BufferInfo extends ResourceInfo
@@ -16,8 +15,6 @@ export class BufferInfo extends ResourceInfo
 
     constructor(buffer: ArrayBufferLike, possibleDefineCodeScope: SourceCodeInfo | null)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("BufferInfo do LogStore");
-
         super('buffer', possibleDefineCodeScope);
         assert.ok(util.types.isAnyArrayBuffer(buffer));
         this.bufferWeakRef = new WeakRef(buffer);
@@ -26,7 +23,6 @@ export class BufferInfo extends ResourceInfo
 
     public override getHash(): object | string
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("BufferInfo do LogStore", "getHash");
         if (isRunningUnitTests())
         {
             return JSON.stringify({
@@ -42,8 +38,6 @@ export class BufferInfo extends ResourceInfo
 
     public is(otherBuffer: BufferLike): boolean
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("BufferInfo do LogStore", "is");
-
         if (util.types.isAnyArrayBuffer(otherBuffer))
         {
             return this.bufferWeakRef.deref() === otherBuffer;
@@ -56,8 +50,6 @@ export class BufferInfo extends ResourceInfo
 
     public toJSON()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("BufferInfo do LogStore", "toJSON");
-
         return {...this, bufferWeakRef: undefined};
     }
 }

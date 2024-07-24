@@ -6,7 +6,6 @@ import {StreamLogStore} from '../../LogStore/StreamLogStore';
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {getSourceCodeInfoFromIid, isBufferLike, shouldBeVerbose} from '../../Util';
 
-import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
  
 
 export class ZlibOperationLogger extends Analysis
@@ -21,8 +20,6 @@ export class ZlibOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("ZlibOperationLogger");
-
         super(sandbox);
         this.timeConsumed = 0;
         this.pendingCallbacks = new WeakSet();
@@ -30,8 +27,6 @@ export class ZlibOperationLogger extends Analysis
 
     protected override registerHooks()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("ZlibOperationLogger", "registerHooks");
-
         this.invokeFun = (iid, f, _base, args, result) =>
         {
             const startTimestamp = Date.now();

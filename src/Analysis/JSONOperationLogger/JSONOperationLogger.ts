@@ -5,7 +5,6 @@ import {ObjectLogStore} from '../../LogStore/ObjectLogStore';
 import {BufferLogStore} from '../../LogStore/BufferLogStore';
 import assert from 'assert';
 
-import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
  
 
 export class JSONOperationLogger extends Analysis
@@ -17,16 +16,12 @@ export class JSONOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("JSONOperationLogger");
-
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("JSONOperationLogger", "registerHooks");
-
         this.invokeFun = (iid, f, _base, args, result) =>
         {
             const startTimestamp = Date.now();

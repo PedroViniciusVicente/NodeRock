@@ -3,7 +3,6 @@
 import {strict as assert} from 'assert';
 import {AsyncCalledFunctionInfo} from './Class/AsyncCalledFunctionInfo';
 
-import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
  
 
 /**
@@ -20,8 +19,6 @@ export class AsyncContextLogStore
 
     public static setAsyncIdToAsyncContext(asyncId: number, asyncCalledFunctionInfo: AsyncCalledFunctionInfo)
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncContextLogStore do LogStore", "setAsyncIdToAsyncContext");
-
         const asyncCalledFunctionInfos = AsyncContextLogStore.asyncIdToAsyncCalledFunctionInfo.get(asyncId);
         if (asyncCalledFunctionInfos === undefined)
         {
@@ -35,8 +32,6 @@ export class AsyncContextLogStore
 
     public static getAsyncContextFromAsyncId(asyncId: number): AsyncCalledFunctionInfo
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncContextLogStore do LogStore", "getAsyncContextFromAsyncId");
-
         const asyncCalledFunctionInfos = AsyncContextLogStore.asyncIdToAsyncCalledFunctionInfo.get(asyncId);
         assert.ok(asyncCalledFunctionInfos !== undefined);
         return asyncCalledFunctionInfos[asyncCalledFunctionInfos.length - 1]!;
@@ -44,8 +39,6 @@ export class AsyncContextLogStore
 
     public static getNonTickObjectAsyncContextFromAsyncId(asyncId: number): AsyncCalledFunctionInfo
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncContextLogStore do LogStore", "getNonTickObjectAsyncContextFromAsyncId");
-
         const asyncCalledFunctionInfos = AsyncContextLogStore.asyncIdToAsyncCalledFunctionInfo.get(asyncId);
         assert.ok(asyncCalledFunctionInfos !== undefined);
         let asyncContext = asyncCalledFunctionInfos[asyncCalledFunctionInfos.length - 1]!;

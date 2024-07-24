@@ -10,7 +10,6 @@ import asyncHooks from 'async_hooks';
 import {CallStackLogStore} from '../CallStackLogStore';
 import {SourceCodeInfo} from '../Class/SourceCodeInfo';
 
-import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
  
 
 export class StreamLogStore
@@ -20,15 +19,11 @@ export class StreamLogStore
 
     public static getStreamDeclarations(): ReadonlyArray<StreamDeclaration>
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("StreamLogStore do LogStore", "getStreamDeclarations");
-
         return StreamLogStore.streamDeclarations;
     }
 
     public static appendStreamOperation(stream: Readable | Writable, type: 'read' | 'write', operationKind: StreamOperation['operationKind'], sandbox: Sandbox, iid: number)
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("StreamLogStore do LogStore", "appendStreamOperation");
-
         const streamDeclaration = StreamLogStore.getStreamDeclaration(stream, getSourceCodeInfoFromIid(iid, sandbox));
         const asyncContext = AsyncContextLogStore.getAsyncContextFromAsyncId(asyncHooks.executionAsyncId());
         if (type === 'write')
@@ -41,8 +36,6 @@ export class StreamLogStore
 
     private static getStreamDeclaration(stream: Readable | Writable, sourceCodeInfo: SourceCodeInfo | null)
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("StreamLogStore do LogStore", "getStreamDeclaration");
-
         const streamDeclaration = StreamLogStore.streamToStreamDeclarations.get(stream);
         if (streamDeclaration === undefined)
         {

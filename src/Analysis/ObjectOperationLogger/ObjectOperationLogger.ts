@@ -7,7 +7,6 @@ import {ObjectLogStore} from '../../LogStore/ObjectLogStore';
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {isArrayAccess, isBufferLike, logUnboundFunction, shouldBeVerbose} from '../../Util';
 
-import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
  
 
 export class ObjectOperationLogger extends Analysis
@@ -26,8 +25,6 @@ export class ObjectOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("ObjectOperationLogger");
-
         super(sandbox);
         this.constructorStack = [];
         this.timeConsumed = 0;
@@ -35,7 +32,6 @@ export class ObjectOperationLogger extends Analysis
 
     protected override registerHooks(): void
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("ObjectOperationLogger", "registerHooks");
 
         this.endExecution = () =>
         {

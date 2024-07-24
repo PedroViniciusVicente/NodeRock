@@ -6,7 +6,6 @@ import {ObjectLogStore} from '../../LogStore/ObjectLogStore';
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {getSourceCodeInfoFromIid, isBufferLike, shouldBeVerbose} from '../../Util';
 
-import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
  
 
 export class IteratorLogger extends Analysis
@@ -18,16 +17,12 @@ export class IteratorLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("IteratorLogger");
-
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("IteratorLogger", "registerHooks");
-
         this.invokeFun = (iid, _f, base) =>
         {
             const startTimestamp = Date.now();

@@ -6,7 +6,6 @@ import {ImmediateLogStore} from '../../LogStore/ImmediateLogStore';
 import {ImmediateInfo} from '../../LogStore/Class/ImmediateInfo';
 import {getUnboundFunction} from '../../Util';
 
-import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
  
 
 export class ImmediateLogger extends Analysis
@@ -18,16 +17,12 @@ export class ImmediateLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("ImmediateLogger");
-
         super(sandbox);
         this.immediateIdToCallbackInfo = new WeakMap();
     }
 
     protected override registerHooks()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("ImmediateLogger", "registerHooks");
-
         this.invokeFunPre = (_iid, f, _base, args) =>
         {
             if (f === setImmediate)

@@ -10,7 +10,6 @@ import {ObjectLogStore} from '../../LogStore/ObjectLogStore';
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {getSourceCodeInfoFromIid, isArrayAccess, shouldBeVerbose} from '../../Util';
 
-import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
  
 
 export class TypedArrayOperationLogger extends Analysis
@@ -46,16 +45,12 @@ export class TypedArrayOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("TypedArrayOperationLogger");
-
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks(): void
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("TypedArrayOperationLogger", "registerHooks");
-
         this.invokeFunPre = (iid, f, base, args) =>
         {
             const startTimestamp = Date.now();

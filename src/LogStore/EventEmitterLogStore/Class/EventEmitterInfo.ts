@@ -4,7 +4,6 @@ import {SourceCodeInfo} from '../../Class/SourceCodeInfo';
 import {StatisticsStore} from '../../StatisticsStore';
 import {isRunningUnitTests} from '../../../Util';
 
-import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
  
 
 export class EventEmitterInfo extends ResourceInfo
@@ -14,8 +13,6 @@ export class EventEmitterInfo extends ResourceInfo
 
     constructor(eventEmitter: EventEmitter, event: string | symbol, possibleDefineCodeScope: SourceCodeInfo | null)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("EventEmitterInfo do LogStore");
-
         super('eventEmitter', possibleDefineCodeScope);
         this.eventEmitter = new WeakRef(eventEmitter);
         this.event = event;
@@ -24,8 +21,6 @@ export class EventEmitterInfo extends ResourceInfo
 
     public override getHash(): object | string
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterInfo do LogStore", "getHash");
-
         if (isRunningUnitTests() && typeof this.event === 'string')
         {
             return JSON.stringify({
@@ -41,15 +36,11 @@ export class EventEmitterInfo extends ResourceInfo
 
     public is(other: unknown, event?: string | symbol): boolean
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterInfo do LogStore", "is");
-
         return this.eventEmitter.deref() === other && event === this.event;
     }
 
     public toJSON()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterInfo do LogStore", "toJSON");
-
         return {
             ...this,
             eventEmitter: undefined,

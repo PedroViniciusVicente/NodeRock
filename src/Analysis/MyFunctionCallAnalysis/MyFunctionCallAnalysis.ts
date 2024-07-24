@@ -16,6 +16,10 @@ import {isFunction} from 'lodash';
 import {isArrayAccess} from '../../Util';
 
 export class MyFunctionCallAnalysis extends Analysis {
+    
+    static rastrearApenasMinhaClasse: boolean = true;
+    static apenasHooksPrincipais: boolean = false;
+    static pathLogHooks: string;
 
     /*
     ** Aqui sao declarados os hooks que serão usados nessa analise
@@ -50,14 +54,11 @@ export class MyFunctionCallAnalysis extends Analysis {
     public startStatement: Hooks['startStatement'] | undefined; //sempre antes e depois de um statement
     public endExecution: Hooks['endExecution'] | undefined; // sempre que uma execucao do node termina
     
-    private timeConsumed: number;
     
-    static debugar: boolean = true;
-    static apenasHooksPrincipais: boolean = false;
-    static pathLogHooks: string;
-
+    
     // Esse atributo eh um vetor que vai armazenando os logs dos hooks na memoria RAM e escreve no final
     //static logsDosHooks: string[] = [];
+    private timeConsumed: number;
     static logsDosHooks: object[] = [];
 
     // Obs: Na implementação do NodeRT, esse vetor era do tipo object[] = []; para armazenar no formato JSON

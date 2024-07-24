@@ -14,7 +14,6 @@ import assert from 'assert';
 import util from 'util';
 import {willFileBeCreatedOrTruncated} from '../Util';
 
-import {GerenciadorRastrearChamadas} from '../../GerenciadorRastrearChamadas';
  
 
 export class FsPromisesOperationLogger extends Analysis
@@ -26,16 +25,12 @@ export class FsPromisesOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("FsPromisesOperationLogger");
-
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("FsPromisesOperationLogger", "registerHooks");
-
         this.invokeFun = (iid, f, _base, args, result) =>
         {
             const startTimestamp = Date.now();

@@ -4,7 +4,6 @@ import {SourceCodeInfo} from '../../Class/SourceCodeInfo';
 import {StatisticsStore} from '../../StatisticsStore';
 import {isRunningUnitTests} from '../../../Util';
 
-import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
  
 
 export class StreamInfo extends ResourceInfo
@@ -13,8 +12,6 @@ export class StreamInfo extends ResourceInfo
 
     constructor(stream: Readable | Writable, possibleDefineCodeScope: SourceCodeInfo | null)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("StreamInfo do LogStore");
-
         super('stream', possibleDefineCodeScope);
         this.streamWeakRef = new WeakRef(stream);
         StatisticsStore.addStreamCount();

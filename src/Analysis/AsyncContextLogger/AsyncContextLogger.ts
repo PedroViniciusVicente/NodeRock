@@ -13,7 +13,6 @@ import {TimerInfo} from '../../LogStore/Class/TimerInfo';
 import {ImmediateLogStore} from '../../LogStore/ImmediateLogStore';
 
 
-import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
  
 /**
  * Logging all callback function content information into `AsyncContextLogStore`.
@@ -33,8 +32,6 @@ export class AsyncContextLogger extends Analysis
     constructor(sandbox: Sandbox)
     {
         // console.log("DEBUG: O construtor do AsyncContextLogger foi chamado");
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("AsyncContextLogger");
-
         super(sandbox);
         this.asyncContextChanged = false;
         this.lastAsyncId = -1;
@@ -49,8 +46,6 @@ export class AsyncContextLogger extends Analysis
 
     protected override registerHooks()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncContextLogger", "registerHooks");
-
         this.endExecution = () =>
         {
             if (shouldBeVerbose())
@@ -144,8 +139,6 @@ export class AsyncContextLogger extends Analysis
     // must be an arrow function to fix `this`
     private asyncHookInit = (asyncId: number, type: string, triggerAsyncId: number) =>
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncContextLogger", "asyncHookInit");
-
         const startTimestamp = Date.now();
 
         let triggerAsyncFunction = AsyncContextLogStore.getAsyncContextFromAsyncId(triggerAsyncId);
@@ -166,8 +159,6 @@ export class AsyncContextLogger extends Analysis
     // must be an arrow function to fix `this`
     private asyncHookBefore = (asyncId: number) =>
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("AsyncContextLogger", "asyncHookBefore");
-
         const startTimestamp = Date.now();
 
         this.asyncContextChanged = true;

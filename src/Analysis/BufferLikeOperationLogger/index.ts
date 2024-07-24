@@ -6,15 +6,12 @@ import {BufferOperationLogger} from './BufferOperationLogger';
 import {DataViewOperationLogger} from './DataViewOperationLogger';
 import {TypedArrayOperationLogger} from './TypedArrayOperationLogger';
 
-import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
  
 
 export class BufferLikeOperationLogger extends Analysis
 {
     constructor(sandbox: Sandbox)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("BufferLikeOperationLogger");
-
         super(sandbox);
         sandbox.addAnalysis(new ArrayBufferOperationLogger(sandbox));
         sandbox.addAnalysis(new BufferOperationLogger(sandbox));

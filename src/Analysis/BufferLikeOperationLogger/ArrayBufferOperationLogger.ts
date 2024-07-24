@@ -6,7 +6,6 @@ import {BufferLogStore} from '../../LogStore/BufferLogStore';
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {getSourceCodeInfoFromIid, shouldBeVerbose} from '../../Util';
 
-import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
  
 
 export class ArrayBufferOperationLogger extends Analysis
@@ -18,16 +17,12 @@ export class ArrayBufferOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("ArrayBufferOperationLogger");
-
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks(): void
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("ArrayBufferOperationLogger", "registerHooks");
-
         this.invokeFun = (iid, f, base, args, result) =>
         {
             const startTimestamp = Date.now();

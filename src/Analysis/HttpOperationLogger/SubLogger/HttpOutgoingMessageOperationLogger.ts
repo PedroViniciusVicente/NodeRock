@@ -8,7 +8,6 @@ import {SocketLogStore} from '../../../LogStore/SocketLogStore';
 import {Analysis, Hooks, Sandbox} from '../../../Type/nodeprof';
 import {getSourceCodeInfoFromIid, isBufferLike, shouldBeVerbose} from '../../../Util';
 
-import {GerenciadorRastrearChamadas} from '../../GerenciadorRastrearChamadas';
  
 
 export class HttpOutgoingMessageOperationLogger extends Analysis
@@ -20,16 +19,12 @@ export class HttpOutgoingMessageOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("HttpOutgoingMessageOperationLogger");
-
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks()
-    {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("HttpOutgoingMessageOperationLogger", "registerHooks");
-        
+    {        
         this.invokeFun = (iid, f, base, args, result) =>
         {
             const startTimestamp = Date.now();

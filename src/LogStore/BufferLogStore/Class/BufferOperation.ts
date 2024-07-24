@@ -4,7 +4,6 @@ import {ResourceOperation} from '../../Class/ResourceOperation';
 import {SourceCodeInfo} from '../../Class/SourceCodeInfo';
 import {StatisticsStore} from '../../StatisticsStore';
 
-import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
  
 
 export class BufferOperation extends ResourceOperation
@@ -17,8 +16,6 @@ export class BufferOperation extends ResourceOperation
 
     constructor(type: 'read' | 'write', accessStage: BufferOperation['accessStage'], accessRange: BufferOperation['accessRange'], stackTrace: string[] | null, sourceCodeScopeInfo: SourceCodeInfo | null)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("BufferOperation do LogStore");
-
         super(type, stackTrace, sourceCodeScopeInfo);
         this.accessStage = accessStage;
         const {start, end} = accessRange;
@@ -28,15 +25,11 @@ export class BufferOperation extends ResourceOperation
 
     public getAccessStage()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("BufferOperation do LogStore", "getAccessStage");
-
         return this.accessStage;
     }
 
     public getAccessRange()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("BufferOperation do LogStore", "getAccessRange");
-
         return this.accessRange;
     }
 }

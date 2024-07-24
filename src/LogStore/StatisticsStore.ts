@@ -1,4 +1,3 @@
-import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
  
 
 export class StatisticsStore
@@ -66,19 +65,16 @@ export class StatisticsStore
 
     public static addEventCount()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("StatisticsStore do LogStore", "***addEventCount***");
         StatisticsStore.eventCount++;
     }
 
     public static addRaceCount()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("StatisticsStore do LogStore", "***addRaceCount***");
         StatisticsStore.raceCount++;
     }
 
     public static addFilteredFPCount()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("StatisticsStore do LogStore", "***addFilteredFPCount***");
         StatisticsStore.filteredFPCount++;
     }
 

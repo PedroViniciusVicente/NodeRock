@@ -3,7 +3,6 @@
 import {MemoryUsageLogStore} from '../../LogStore/MemoryUsageLogStore';
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 
-import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
  
 
 export class MemoryUsageAnalysis extends Analysis
@@ -14,8 +13,6 @@ export class MemoryUsageAnalysis extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("MemoryUsageAnalysis");
-
         super(sandbox);
 
         this.interval = setInterval(() =>
@@ -26,8 +23,6 @@ export class MemoryUsageAnalysis extends Analysis
 
     protected registerHooks(): void
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("MemoryUsageAnalysis", "registerHooks");
-
         this.endExecution = () =>
         {
             clearInterval(this.interval);

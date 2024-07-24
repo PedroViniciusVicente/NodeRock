@@ -10,7 +10,6 @@ import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {getSourceCodeInfoFromIid, shouldBeVerbose} from '../../Util';
 import {CallStackLogStore} from '../../LogStore/CallStackLogStore';
 
-import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
  
 
 export class PrimitiveOperationLogger extends Analysis
@@ -33,16 +32,12 @@ export class PrimitiveOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("PrimitiveOperationLogger");
-
         super(sandbox);
         this.awaitIidToScopeQueue = new Map();
     }
 
     protected override registerHooks()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("PrimitiveOperationLogger", "registerHooks");
-
         this.awaitPre = iid =>
         {
             const startTimestamp = Date.now();
@@ -191,8 +186,6 @@ export class PrimitiveOperationLogger extends Analysis
 
     private onVariableOperation(type: 'read' | 'write', iid: number, name: string, valBefore: unknown, val: unknown, isGlobal: boolean)
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("PrimitiveOperationLogger", "onVariableOperation");
-
         if (name === 'this')
         {
             return;

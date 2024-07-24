@@ -6,7 +6,6 @@ import {EventEmitterInfo} from './EventEmitterInfo';
 import {EventEmitterOperation} from './EventEmitterOperation';
 import {EventEmitter} from 'events';
 
-import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
  
 
 export class EventEmitterDeclaration extends ResourceDeclaration
@@ -16,8 +15,6 @@ export class EventEmitterDeclaration extends ResourceDeclaration
 
     constructor(eventEmitter: EventEmitter, event: EventEmitterInfo['event'], possibleDefineCodeScope: SourceCodeInfo | null)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("EventEmitterDeclaration do LogStore");
-
         super();
         this.eventEmitterInfo = new EventEmitterInfo(eventEmitter, event, possibleDefineCodeScope);
         this.asyncContextToOperations = new Map();
@@ -25,8 +22,6 @@ export class EventEmitterDeclaration extends ResourceDeclaration
 
     public appendOperation(currentCallbackFunction: AsyncCalledFunctionInfo, eventEmitterOperation: EventEmitterOperation): void
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterDeclaration do LogStore", "appendOperation");
-
         const operations = this.asyncContextToOperations.get(currentCallbackFunction);
         if (operations === undefined)
         {
@@ -41,22 +36,16 @@ export class EventEmitterDeclaration extends ResourceDeclaration
 
     public getAsyncContextToOperations(): ReadonlyMap<AsyncCalledFunctionInfo, ReadonlyArray<EventEmitterOperation>>
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterDeclaration do LogStore", "getAsyncContextToOperations");
-
         return this.asyncContextToOperations;
     }
 
     public getResourceInfo(): EventEmitterInfo
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterDeclaration do LogStore", "getResourceInfo");
-
         return this.eventEmitterInfo;
     }
 
     public is(other: unknown, event?: string | symbol): boolean
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("EventEmitterDeclaration do LogStore", "is");
-
         return this.eventEmitterInfo.is(other, event);
     }
 }

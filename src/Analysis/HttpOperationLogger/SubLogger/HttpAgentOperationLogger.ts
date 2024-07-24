@@ -5,7 +5,6 @@ import {SocketLogStore} from '../../../LogStore/SocketLogStore';
 import {Analysis, Hooks, Sandbox} from '../../../Type/nodeprof';
 import {shouldBeVerbose} from '../../../Util';
 
-import {GerenciadorRastrearChamadas} from '../../GerenciadorRastrearChamadas';
  
 
 export class HttpAgentOperationLogger extends Analysis
@@ -17,16 +16,12 @@ export class HttpAgentOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("HttpAgentOperationLogger");
-
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("HttpAgentOperationLogger", "registerHooks");
-
         this.invokeFun = (iid, f, base) =>
         {
             const startTimestamp = Date.now();

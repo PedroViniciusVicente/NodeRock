@@ -11,7 +11,6 @@ import {SourceCodeInfo} from '../Class/SourceCodeInfo';
 import {BufferDeclaration} from './Class/BufferDeclaration';
 import {BufferOperation} from './Class/BufferOperation';
 
-import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
  
 
 // Since buffer is used in many modules, we need to log its declarations in a shared object
@@ -22,8 +21,6 @@ export class BufferLogStore
 
     public static getBufferDeclaration(buffer: ArrayBufferLike, sourceCodeInfo: SourceCodeInfo | null)
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("BufferLogStore do LogStore", "getBufferDeclaration");
-
         const bufferDeclaration = BufferLogStore.bufferToBufferDeclaration.get(buffer);
         if (bufferDeclaration === undefined)
         {
@@ -40,8 +37,6 @@ export class BufferLogStore
 
     public static getBufferDeclarations(): ReadonlyArray<BufferDeclaration>
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("BufferLogStore do LogStore", "getBufferDeclarations");
-
         return BufferLogStore.bufferDeclarations;
     }
 
@@ -49,8 +44,6 @@ export class BufferLogStore
     public static appendBufferOperation(buffer: ArrayBufferLike | ArrayBufferView, type: 'read' | 'write', accessStage: BufferOperation['accessStage'], accessRange: BufferOperation['accessRange'], sandbox: Sandbox, iid: number): void;
     public static appendBufferOperation(buffer: ArrayBufferLike | ArrayBufferView, type: 'read' | 'write', accessStage: BufferOperation['accessStage'], accessRange: BufferOperation['accessRange'], sandboxOrSourceCodeInfo: Sandbox | SourceCodeInfo | null, iid?: number): void
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("BufferLogStore do LogStore", "appendBufferOperation");
-
         if (!util.types.isAnyArrayBuffer(buffer))
         {
             buffer = buffer.buffer;
@@ -89,8 +82,6 @@ export class BufferLogStore
      */
     public static getArrayBufferRangeOfArrayBufferView(arrayBufferView: ArrayBufferView | ArrayBufferLike, start = 0, end = arrayBufferView.byteLength): BufferOperation['accessRange']
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("BufferLogStore do LogStore", "getArrayBufferRangeOfArrayBufferView");
-
         if (util.types.isAnyArrayBuffer(arrayBufferView))
         {
             arrayBufferView = new DataView(arrayBufferView);

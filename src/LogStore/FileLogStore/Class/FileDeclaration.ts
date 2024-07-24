@@ -7,7 +7,6 @@ import {SourceCodeInfo} from '../../Class/SourceCodeInfo';
 import {FileInfo} from './FileInfo';
 import {FileOperation} from './FileOperation';
 
-import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
  
 
 export class FileDeclaration extends ResourceDeclaration
@@ -17,8 +16,6 @@ export class FileDeclaration extends ResourceDeclaration
 
     constructor(filePath: string, possibleDefineCodeScope: SourceCodeInfo | null)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("FileDeclaration do LogStore");
-
         super();
         this.fileInfo = new FileInfo(filePath, possibleDefineCodeScope);
         this.asyncContextToOperations = new Map();

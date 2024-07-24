@@ -13,7 +13,6 @@ import {getSourceCodeInfoFromIid, isBufferLike, shouldBeVerbose} from '../../../
 import {FileLogStoreAdaptor} from '../FileLogStoreAdaptor';
 import {willFileBeCreatedOrTruncated} from '../Util';
 
-import {GerenciadorRastrearChamadas} from '../../GerenciadorRastrearChamadas';
  
 
 export class FsSyncOperationLogger extends Analysis
@@ -26,16 +25,12 @@ export class FsSyncOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("FsSyncOperationLogger");
-
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("FsSyncOperationLogger", "registerHooks");
-
         this.invokeFunPre = (iid, f, _base, args) =>
         {
             const startTimestamp = Date.now();

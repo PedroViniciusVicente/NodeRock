@@ -8,7 +8,6 @@ import {SourceCodeInfo} from '../../Class/SourceCodeInfo';
 import {StreamInfo} from './StreamInfo';
 import {StreamOperation} from './StreamOperation';
 
-import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
  
 
 export class StreamDeclaration extends ResourceDeclaration
@@ -18,8 +17,6 @@ export class StreamDeclaration extends ResourceDeclaration
 
     constructor(stream: Readable | Writable, possibleDefineCodeScope: SourceCodeInfo | null)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("StreamDeclaration do LogStore");
-
         super();
         this.streamInfo = new StreamInfo(stream, possibleDefineCodeScope);
         this.asyncContextToOperations = new Map();

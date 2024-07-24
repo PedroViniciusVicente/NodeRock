@@ -5,7 +5,6 @@ import {BufferLogStore} from '../../LogStore/BufferLogStore';
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {getSourceCodeInfoFromIid, isBufferLike, shouldBeVerbose} from '../../Util';
 
-import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
  
 
 export class StringDecoderOperationLogger extends Analysis
@@ -17,16 +16,12 @@ export class StringDecoderOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("StringDecoderOperationLogger");
-
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("StringDecoderOperationLogger", "registerHooks");
-
         this.invokeFun = (iid, f, base, args) =>
         {
             const startTimestamp = Date.now();

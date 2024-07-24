@@ -12,7 +12,6 @@ import assert from 'assert';
 import util from 'util';
 import {StreamLogStore} from '../../../LogStore/StreamLogStore';
 
-import {GerenciadorRastrearChamadas} from '../../GerenciadorRastrearChamadas';
  
 
 export class FileHandleOperationLogger extends Analysis
@@ -25,16 +24,12 @@ export class FileHandleOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("FileHandleOperationLogger");
-
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("FileHandleOperationLogger", "registerHooks");
-
         this.invokeFun = (iid, f, base, args, result) =>
         {
             const startTimestamp = Date.now();

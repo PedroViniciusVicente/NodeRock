@@ -5,7 +5,6 @@ import {BufferLogStore} from '../../LogStore/BufferLogStore';
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {getSourceCodeInfoFromIid, shouldBeVerbose} from '../../Util';
 
-import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
  
 
 export class DataViewOperationLogger extends Analysis
@@ -54,16 +53,12 @@ export class DataViewOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("DataViewOperationLogger");
-
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected registerHooks(): void
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("DataViewOperationLogger", "registerHooks");
-
         this.invokeFun = (iid, f, base) =>
         {
             const startTimestamp = Date.now();

@@ -34,7 +34,6 @@ import {MemoryUsageAnalysis} from './LogStoreAnalysis/MemoryUsageAnalysis';
 
 import {MyFunctionCallAnalysis} from './MyFunctionCallAnalysis';
 
-import {GerenciadorRastrearChamadas} from './GerenciadorRastrearChamadas';
 
 (function (sandbox: Sandbox)
 {
@@ -93,13 +92,10 @@ import {GerenciadorRastrearChamadas} from './GerenciadorRastrearChamadas';
     }
     else
     {
-        if (GerenciadorRastrearChamadas.rastrearApenasMinhaClasse === true) {
+        if (MyFunctionCallAnalysis.rastrearApenasMinhaClasse === true) {
             sandbox.addAnalysis(new MyFunctionCallAnalysis(sandbox));
         }
         else {
-
-            GerenciadorRastrearChamadas.criarArquivoVazio();
-
             // basic
             sandbox.addAnalysis(new AsyncContextLogger(sandbox));
             sandbox.addAnalysis(new LastExpressionValueLogger(sandbox));

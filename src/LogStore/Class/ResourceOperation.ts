@@ -2,7 +2,6 @@
 
 import {SourceCodeInfo} from './SourceCodeInfo';
 
-import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
  
 
 export abstract class ResourceOperation
@@ -16,8 +15,6 @@ export abstract class ResourceOperation
 
     protected constructor(type: 'read' | 'write', stackTrace: string[] | null, sourceCodeScopeInfo: SourceCodeInfo | null)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("ResourceOperation do LogStore");
-
         this.type = type;
         this.stackTrace = stackTrace;
         this.scopeCodeInfo = sourceCodeScopeInfo;
@@ -27,36 +24,26 @@ export abstract class ResourceOperation
 
     public getType()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("ResourceOperation do LogStore", "getType");
-
         return this.type;
     }
 
     public getScopeCodeInfo()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("ResourceOperation do LogStore", "getScopeCodeInfo");
-
         return this.scopeCodeInfo;
     }
 
     public getStackTrace()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("ResourceOperation do LogStore", "getStackTrace");
-
         return this.stackTrace;
     }
 
     public getIndex()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("ResourceOperation do LogStore", "getIndex");
-
         return this.index;
     }
 
     public getTimestamp()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("ResourceOperation do LogStore", "getTimestamp");
-
         return this.timestamp;
     }
 }

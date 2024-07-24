@@ -5,7 +5,6 @@ import {SocketLogStore} from '../../../LogStore/SocketLogStore';
 import {Analysis, Hooks, Sandbox} from '../../../Type/nodeprof';
 import {shouldBeVerbose} from '../../../Util';
 
-import {GerenciadorRastrearChamadas} from '../../GerenciadorRastrearChamadas';
  
 
 
@@ -18,16 +17,12 @@ export class HttpIncomingMessageOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("HttpIncomingMessageOperationLogger");
-
         super(sandbox);
         this.timeConsumed = 0;
     }
 
     protected override registerHooks()
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("HttpIncomingMessageOperationLogger", "registerHooks");
-
         this.invokeFunPre = (iid, f, base) =>
         {
             const startTimestamp = Date.now();

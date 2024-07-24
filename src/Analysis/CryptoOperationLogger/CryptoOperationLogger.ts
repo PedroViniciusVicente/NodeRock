@@ -22,8 +22,7 @@ import {StreamLogStore} from '../../LogStore/StreamLogStore';
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {getSourceCodeInfoFromIid, isBufferLike, shouldBeVerbose} from '../../Util';
 
-import {GerenciadorRastrearChamadas} from '../GerenciadorRastrearChamadas';
- 
+
 
 export class CryptoOperationLogger extends Analysis
 {
@@ -37,8 +36,6 @@ export class CryptoOperationLogger extends Analysis
 
     constructor(sandbox: Sandbox)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("CryptoOperationLogger");
-
         super(sandbox);
         this.timeConsumed = 0;
         this.callbackToRegisterFunction = new WeakMap();
@@ -46,8 +43,6 @@ export class CryptoOperationLogger extends Analysis
 
     protected override registerHooks(): void
     {
-         GerenciadorRastrearChamadas.registrarChamadaFuncao("CryptoOperationLogger", "registerHooks");
-
         this.invokeFun = (iid, f, _base, args, result) =>
         {
             const startTimestamp = Date.now();

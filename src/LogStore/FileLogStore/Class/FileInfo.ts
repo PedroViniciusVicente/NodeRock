@@ -3,7 +3,6 @@ import {SourceCodeInfo} from '../../Class/SourceCodeInfo';
 import {StatisticsStore} from '../../StatisticsStore';
 import {isRunningUnitTests} from '../../../Util';
 
-import {GerenciadorRastrearChamadas} from '/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/GerenciadorRastrearChamadas';
  
 
 export class FileInfo extends ResourceInfo
@@ -12,8 +11,6 @@ export class FileInfo extends ResourceInfo
 
     constructor(filePath: string, possibleDefineCodeScope: SourceCodeInfo | null)
     {
-         GerenciadorRastrearChamadas.registrarChamadaConstrutor("FileInfo do LogStore");
-
         super('file', possibleDefineCodeScope);
         this.filePath = filePath;
         StatisticsStore.addFileCount();
