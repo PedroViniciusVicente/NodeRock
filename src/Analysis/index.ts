@@ -92,7 +92,7 @@ import {MyFunctionCallAnalysis} from './MyFunctionCallAnalysis';
     }
     else
     {
-        if (MyFunctionCallAnalysis.rastrearApenasMinhaClasse === true) {
+        if (MyFunctionCallAnalysis.monitorOnlyMyFunctionCallAnalysis === true) {
             sandbox.addAnalysis(new MyFunctionCallAnalysis(sandbox));
         }
         else {
