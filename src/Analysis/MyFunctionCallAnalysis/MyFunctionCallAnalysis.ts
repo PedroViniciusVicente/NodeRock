@@ -9,13 +9,15 @@
 //      (mas o tojson do utils.ts parece resolver essa circular reference)
 
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
-import {EventEmitter} from 'events';
+import {isArrayAccess} from '../../Util';
+
 import * as fs from 'fs';
+import EventEmitter from 'events';
 import http from 'http';
 import net from 'net';
+import isFunction from 'lodash';
+import async_hooks from 'async_hooks';
 
-import {isFunction} from 'lodash';
-import {isArrayAccess} from '../../Util';
 
 export class MyFunctionCallAnalysis extends Analysis {
     
@@ -24,13 +26,7 @@ export class MyFunctionCallAnalysis extends Analysis {
     static pathLogHooks: string;
 
     /*
-    ** Aqui sao declarados os hooks que serão usados nessa analise
-    ** Cada hook tem a funcao de chamar o callback (implementado logo abaixo) quando uma
-    **    acao especifica acontecer
-    ** Esse "| undefined;" serve para não ficar dando erro se a funcao ainda nao estiver
-    **       implementada (aparentemente so eh usada na fase de desenvolvimento)
-    **
-    ** Veja a lista com todos os hooks possiveis e suas funcoes:
+    ** Lista com todos os hooks possiveis e suas funcoes:
     ** (interface original em: src/Type/nodeprof/Hooks.ts)
     ** ou em  /coisasNodeRT/NodeRT-OpenSource/emptyTemplate.js que tem hooks adicionais
     ** ou em /coisasNodeRT/NodeRT-OpenSource/nodeprof.js/nodeprof.js/tutorial.md (na real esse eh meio inutil)
@@ -57,8 +53,7 @@ export class MyFunctionCallAnalysis extends Analysis {
     public endExecution: Hooks['endExecution'] | undefined; // sempre que uma execucao do node termina
     
     
-    // array that stores hooks log on RAM and writes to logHooks.json in the end
-    //static logHooks: object[] = [];
+    // Array that stores hooks log on RAM and writes to logHooks.json in the end
     static logHooks: string[] = [];
 
     //private timeConsumed: number;
@@ -116,7 +111,6 @@ export class MyFunctionCallAnalysis extends Analysis {
         if (MyFunctionCallAnalysis.monitorAllHooks) {
             console.log("Calling all hooks!");
             
-
             // In this Hook, the attribute "val" can result in TypeError: Converting circular structure to JSON
             // Obs: This error only occur when  trying to stringify the object, but no when you do console.log
             this.read = (iid, name, val, _isGlobal) => {
@@ -130,6 +124,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const ObjectLogMessage = {
                     "Detected_Hook": "read",
                     "File_Name": fileName,
+                    "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "loc": loc,
                     "Variable_Name": name || "anonymous variable",
                     "Type_Value_Read": newVal,
@@ -159,6 +154,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const ObjectLogMessage = {
                     "Detected_Hook": "write",
                     "File_Name": fileName,
+                    "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "loc": loc,
                     "Variable_Name": name || "anonymous variable",
                     "Value_Type_After_Write": newVal,
@@ -179,6 +175,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const ObjectLogMessage = {
                     "Detected_Hook": "getField",
                     "File_Name": fileName,
+                    "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "loc": loc,
                     "Accessed_Object": Buffer.isBuffer(base) && isArrayAccess(isComputed, offset) ? base[offset as number] : "couldnt access base",
                     "Accessed_Value": (typeof val === 'number' 
@@ -209,6 +206,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const ObjectLogMessage = {
                     "Detected_Hook": "putFieldPre",
                     "File_Name": fileName,
+                    "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "loc": loc,
                     "Written_Object": Buffer.isBuffer(base) && isArrayAccess(isComputed, offset) ? base[offset as number] : "couldnt access base",
                     "New_Value": (typeof val === 'number' 
@@ -234,6 +232,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const ObjectLogMessage = {
                     "Detected_Hook": "functionEnter",
                     "File_Name": fileName,
+                    "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "loc": loc,
                     "Function_Name": newFunctionName,
                     // esse join() transforma a lista de argumentos em uma string para nao dar erro de circular reference
@@ -269,6 +268,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const ObjectLogMessage = {
                     "Detected_Hook": "functionExit",
                     "File_Name": fileName,
+                    "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "loc": loc,
                     // para saber o nome provavelmente vai ter de colocar uma pilha que da o push no functionEnter e pop no functionExit
                     //"Function_Name": 
@@ -299,6 +299,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const ObjectLogMessage = {
                     "Detected_Hook": "invokeFunPre",
                     "File_Name": fileName,
+                    "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "loc": loc,
                     "Function_Name": newFunctionName,
                     "Function_Arguments": args.join(", "),
@@ -323,6 +324,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const ObjectLogMessage = {
                     "Detected_Hook": "invokeFun",
                     "File_Name": fileName,
+                    "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "loc": loc,
                     "Function_Name": newFunctionName,
                     "Function_Arguments": args.join(", "),
@@ -347,6 +349,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const ObjectLogMessage = {
                     "Detected_Hook": "startExpression",
                     "File_Name": fileName,
+                    "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "loc": loc,
                     "Expression_Type": type,
                 };
@@ -364,6 +367,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const ObjectLogMessage = {
                     "Detected_Hook": "endExpression",
                     "File_Name": fileName,
+                    "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "loc": loc,
                     "Expression_Type": type,
                     //"Valor_da_Expressao": value, 
@@ -387,6 +391,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const ObjectLogMessage = {
                     "Detected_Hook": "literal",
                     "File_Name": fileName,
+                    "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "loc": loc,
                     "Literal_Type": literalType,
                     //"Valor_da_Literal": val,
@@ -411,6 +416,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const ObjectLogMessage = {
                     "Detected_Hook": "unary",
                     "File_Name": fileName,
+                    "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "loc": loc,
                     "Unary_Operation_Executed": op,
                     "Unary_Left_Operand": left,
@@ -430,6 +436,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const ObjectLogMessage = {
                     "Detected_Hook": "unaryPre",
                     "File_Name": fileName,
+                    "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "loc": loc,
                     "Unary_Operation_Executed": op,
                     "Unary_Left_Operand": left,
@@ -449,6 +456,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const ObjectLogMessage = {
                     "Detected_Hook": "asyncFunctionEnter",
                     "File_Name": fileName,
+                    "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "loc": loc,
                 };
                 const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
@@ -465,6 +473,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const ObjectLogMessage = {
                     "Detected_Hook": "asyncFunctionExit",
                     "File_Name": fileName,
+                    "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "loc": loc,
                     "Returned_Value": result,
                     "Excession_Occurred": wrappedExceptionVal,
@@ -484,6 +493,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const ObjectLogMessage = {
                     "Detected_Hook": "awaitPre",
                     "File_Name": fileName,
+                    "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "loc": loc,
                     "Expected_Value": promiseOrValAwaited,
                 };
@@ -502,6 +512,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const ObjectLogMessage = {
                     "Detected_Hook": "awaitPost",
                     "File_Name": fileName,
+                    "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "loc": loc,
                     "Is_Promise_Rejected": isPromiseRejected,
                     // !!! Por algum motivo esses valores esperados/resolvidos nao estao sendo armazenados no arquivo !!!
@@ -523,6 +534,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const ObjectLogMessage = {
                     "Detected_Hook": "awaitPost",
                     "File_Name": fileName,
+                    "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "loc": loc,
                     "Statement_Type": type,
                 };
@@ -535,6 +547,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 // Hook endExecution detectou o fim da execucao node.
                 const ObjectLogMessage = {
                     "Detected_Hook": "endExecution",
+                    "Async_Hook_Id": async_hooks.executionAsyncId(),
                 };
             
                 const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
