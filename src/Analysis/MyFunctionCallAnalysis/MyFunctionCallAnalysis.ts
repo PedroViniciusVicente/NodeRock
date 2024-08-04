@@ -111,6 +111,7 @@ export class MyFunctionCallAnalysis extends Analysis {
         if (MyFunctionCallAnalysis.monitorAllHooks) {
             console.log("Calling all hooks!");
             
+
             // In this Hook, the attribute "val" can result in TypeError: Converting circular structure to JSON
             // Obs: This error only occur when  trying to stringify the object, but no when you do console.log
             this.read = (iid, name, val, _isGlobal) => {
@@ -128,14 +129,12 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "loc": loc,
                     "Variable_Name": name || "anonymous variable",
                     "Type_Value_Read": newVal,
-                    //"isGlobal": isGlobal
-                    //"iidToLocation": this.getSandbox().iidToLocation(iid),
-                    //"iidToSource": this.getSandbox().iidToSourceObject(iid),
-                    //"Local3": this.getSandbox().iidToCode(iid),
-                    //"getSource": getSourceCodeInfoFromIid(iid, this.getSandbox()),
+                    "val": val,
                 };
 
-                const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
+                const stringJSON = JSON.stringify(ObjectLogMessage, null, 4); // Resulta no circular reference
+                //const stringJSON = toJSON(ObjectLogMessage); // Resulta no circular reference
+                //const stringJSON = ObjectLogMessage; // Nao resulta no circular reference, mas ao adicionar o arquivo .json nao fica formatado certinho
                 MyFunctionCallAnalysis.eventEmitter.emit('addLogToVector', stringJSON);
             };
 
