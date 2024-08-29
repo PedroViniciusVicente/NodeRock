@@ -1,0 +1,1015 @@
+[ (lib registrada na linha 438)
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 10,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Function_Name": "Anonymous Function ",
+    "Function_Arguments": ""
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "awaitPost",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 10,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Statement_Type": "AutonomousFunctionExpression"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "startExpression",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 10,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Expression_Type": "AutonomousFunctionExpression"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "literal",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 10,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Literal_Type": "FunctionLiteral",
+    "Literal_Value_Type": "function",
+    "Literal_Value": "{\"val\":\"const fs = require('fs');\\n\\nfs.writeFile('exemplo.txt', 'dados escritos no exemplo.txt', (err) => {\\n    if (err) {\\n        console.error('Erro ao escrever o arquivo:', err);\\n    } else {\\n        console.log('Arquivo escrito com sucesso!');\\n    }\\n});\\n\\n\"}"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "endExpression",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 10,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Expression_Type": "AutonomousFunctionExpression"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 10,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Returned_Type": "function",
+    "Returned_Value": "{\"returnVal\":\"const fs = require('fs');\\n\\nfs.writeFile('exemplo.txt', 'dados escritos no exemplo.txt', (err) => {\\n    if (err) {\\n        console.error('Erro ao escrever o arquivo:', err);\\n    } else {\\n        console.log('Arquivo escrito com sucesso!');\\n    }\\n});\\n\\n\"}",
+    "Excession_Occurred": {}
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 10,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Function_Name": "Anonymous Function ",
+    "Function_Arguments": "[object Object], function require(path) {\n      return mod.require(path);\n    }, [object Object], /home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js, /home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "awaitPost",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 1,
+            "column": 24
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Statement_Type": "JSWriteCurrentFrameSlot"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "startExpression",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 12
+        },
+        "end": {
+            "line": 1,
+            "column": 24
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Expression_Type": "Call1"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "startExpression",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 12
+        },
+        "end": {
+            "line": 1,
+            "column": 18
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Expression_Type": "JSReadCurrentFrameSlot"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "read",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 12
+        },
+        "end": {
+            "line": 1,
+            "column": 18
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Variable_Name": "require",
+    "Type_Value_Read": "function",
+    "val": "{\"val\":\"function require(path) {\\n      return mod.require(path);\\n    }\"}"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "endExpression",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 12
+        },
+        "end": {
+            "line": 1,
+            "column": 18
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Expression_Type": "JSReadCurrentFrameSlot"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "startExpression",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 20
+        },
+        "end": {
+            "line": 1,
+            "column": 23
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Expression_Type": "JSConstantString"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "literal",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 20
+        },
+        "end": {
+            "line": 1,
+            "column": 23
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Literal_Type": "StringLiteral",
+    "Literal_Value_Type": "string",
+    "Literal_Value": "[\"fs\"]"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 12
+        },
+        "end": {
+            "line": 1,
+            "column": 24
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Function_Name": "require",
+    "Function_Arguments": "fs"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "endExpression",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 20
+        },
+        "end": {
+            "line": 1,
+            "column": 23
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Expression_Type": "JSConstantString"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 12
+        },
+        "end": {
+            "line": 1,
+            "column": 24
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Function_Name": "require",
+    "Function_Arguments": "fs",
+    "Tipo_Returned_Value": "object",
+    "Returned_Value": "[{\"F_OK\":0,\"R_OK\":4,\"W_OK\":2,\"X_OK\":1,\"constants\":\"1\",\"promises\":\"2\"},{\"UV_FS_SYMLINK_DIR\":1,\"UV_FS_SYMLINK_JUNCTION\":2,\"O_RDONLY\":0,\"O_WRONLY\":1,\"O_RDWR\":2,\"UV_DIRENT_UNKNOWN\":0,\"UV_DIRENT_FILE\":1,\"UV_DIRENT_DIR\":2,\"UV_DIRENT_LINK\":3,\"UV_DIRENT_FIFO\":4,\"UV_DIRENT_SOCKET\":5,\"UV_DIRENT_CHAR\":6,\"UV_DIRENT_BLOCK\":7,\"S_IFMT\":61440,\"S_IFREG\":32768,\"S_IFDIR\":16384,\"S_IFCHR\":8192,\"S_IFBLK\":24576,\"S_IFIFO\":4096,\"S_IFLNK\":40960,\"S_IFSOCK\":49152,\"O_CREAT\":64,\"O_EXCL\":128,\"UV_FS_O_FILEMAP\":0,\"O_NOCTTY\":256,\"O_TRUNC\":512,\"O_APPEND\":1024,\"O_DIRECTORY\":65536,\"O_NOATIME\":262144,\"O_NOFOLLOW\":131072,\"O_SYNC\":1052672,\"O_DSYNC\":4096,\"O_DIRECT\":16384,\"O_NONBLOCK\":2048,\"S_IRWXU\":448,\"S_IRUSR\":256,\"S_IWUSR\":128,\"S_IXUSR\":64,\"S_IRWXG\":56,\"S_IRGRP\":32,\"S_IWGRP\":16,\"S_IXGRP\":8,\"S_IRWXO\":7,\"S_IROTH\":4,\"S_IWOTH\":2,\"S_IXOTH\":1,\"F_OK\":0,\"R_OK\":4,\"W_OK\":2,\"X_OK\":1,\"UV_FS_COPYFILE_EXCL\":1,\"COPYFILE_EXCL\":1,\"UV_FS_COPYFILE_FICLONE\":2,\"COPYFILE_FICLONE\":2,\"UV_FS_COPYFILE_FICLONE_FORCE\":4,\"COPYFILE_FICLONE_FORCE\":4},{}]"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "endExpression",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 12
+        },
+        "end": {
+            "line": 1,
+            "column": 24
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Expression_Type": "Call1"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "write",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 1,
+            "column": 24
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Variable_Name": "fs",
+    "Value_Type_Before_Write": "undefined",
+    "Value_Before_Write": "[]",
+    "Value_Type_After_Write": "object",
+    "Value_After_Write": "[{\"F_OK\":0,\"R_OK\":4,\"W_OK\":2,\"X_OK\":1,\"constants\":\"1\",\"promises\":\"2\"},{\"UV_FS_SYMLINK_DIR\":1,\"UV_FS_SYMLINK_JUNCTION\":2,\"O_RDONLY\":0,\"O_WRONLY\":1,\"O_RDWR\":2,\"UV_DIRENT_UNKNOWN\":0,\"UV_DIRENT_FILE\":1,\"UV_DIRENT_DIR\":2,\"UV_DIRENT_LINK\":3,\"UV_DIRENT_FIFO\":4,\"UV_DIRENT_SOCKET\":5,\"UV_DIRENT_CHAR\":6,\"UV_DIRENT_BLOCK\":7,\"S_IFMT\":61440,\"S_IFREG\":32768,\"S_IFDIR\":16384,\"S_IFCHR\":8192,\"S_IFBLK\":24576,\"S_IFIFO\":4096,\"S_IFLNK\":40960,\"S_IFSOCK\":49152,\"O_CREAT\":64,\"O_EXCL\":128,\"UV_FS_O_FILEMAP\":0,\"O_NOCTTY\":256,\"O_TRUNC\":512,\"O_APPEND\":1024,\"O_DIRECTORY\":65536,\"O_NOATIME\":262144,\"O_NOFOLLOW\":131072,\"O_SYNC\":1052672,\"O_DSYNC\":4096,\"O_DIRECT\":16384,\"O_NONBLOCK\":2048,\"S_IRWXU\":448,\"S_IRUSR\":256,\"S_IWUSR\":128,\"S_IXUSR\":64,\"S_IRWXG\":56,\"S_IRGRP\":32,\"S_IWGRP\":16,\"S_IXGRP\":8,\"S_IRWXO\":7,\"S_IROTH\":4,\"S_IWOTH\":2,\"S_IXOTH\":1,\"F_OK\":0,\"R_OK\":4,\"W_OK\":2,\"X_OK\":1,\"UV_FS_COPYFILE_EXCL\":1,\"COPYFILE_EXCL\":1,\"UV_FS_COPYFILE_FICLONE\":2,\"COPYFILE_FICLONE\":2,\"UV_FS_COPYFILE_FICLONE_FORCE\":4,\"COPYFILE_FICLONE_FORCE\":4},{}]"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "awaitPost",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 1
+        },
+        "end": {
+            "line": 9,
+            "column": 2
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Statement_Type": "InvokeN"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "startExpression",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 1
+        },
+        "end": {
+            "line": 9,
+            "column": 2
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Expression_Type": "InvokeN"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "startExpression",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 1
+        },
+        "end": {
+            "line": 3,
+            "column": 2
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Expression_Type": "JSReadCurrentFrameSlot"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "read",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 1
+        },
+        "end": {
+            "line": 3,
+            "column": 2
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Variable_Name": "fs",
+    "Type_Value_Read": "object",
+    "val": "[{\"F_OK\":0,\"R_OK\":4,\"W_OK\":2,\"X_OK\":1,\"constants\":\"1\",\"promises\":\"2\"},{\"UV_FS_SYMLINK_DIR\":1,\"UV_FS_SYMLINK_JUNCTION\":2,\"O_RDONLY\":0,\"O_WRONLY\":1,\"O_RDWR\":2,\"UV_DIRENT_UNKNOWN\":0,\"UV_DIRENT_FILE\":1,\"UV_DIRENT_DIR\":2,\"UV_DIRENT_LINK\":3,\"UV_DIRENT_FIFO\":4,\"UV_DIRENT_SOCKET\":5,\"UV_DIRENT_CHAR\":6,\"UV_DIRENT_BLOCK\":7,\"S_IFMT\":61440,\"S_IFREG\":32768,\"S_IFDIR\":16384,\"S_IFCHR\":8192,\"S_IFBLK\":24576,\"S_IFIFO\":4096,\"S_IFLNK\":40960,\"S_IFSOCK\":49152,\"O_CREAT\":64,\"O_EXCL\":128,\"UV_FS_O_FILEMAP\":0,\"O_NOCTTY\":256,\"O_TRUNC\":512,\"O_APPEND\":1024,\"O_DIRECTORY\":65536,\"O_NOATIME\":262144,\"O_NOFOLLOW\":131072,\"O_SYNC\":1052672,\"O_DSYNC\":4096,\"O_DIRECT\":16384,\"O_NONBLOCK\":2048,\"S_IRWXU\":448,\"S_IRUSR\":256,\"S_IWUSR\":128,\"S_IXUSR\":64,\"S_IRWXG\":56,\"S_IRGRP\":32,\"S_IWGRP\":16,\"S_IXGRP\":8,\"S_IRWXO\":7,\"S_IROTH\":4,\"S_IWOTH\":2,\"S_IXOTH\":1,\"F_OK\":0,\"R_OK\":4,\"W_OK\":2,\"X_OK\":1,\"UV_FS_COPYFILE_EXCL\":1,\"COPYFILE_EXCL\":1,\"UV_FS_COPYFILE_FICLONE\":2,\"COPYFILE_FICLONE\":2,\"UV_FS_COPYFILE_FICLONE_FORCE\":4,\"COPYFILE_FICLONE_FORCE\":4},{}]"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "endExpression",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 1
+        },
+        "end": {
+            "line": 3,
+            "column": 2
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Expression_Type": "JSReadCurrentFrameSlot"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "startExpression",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 1
+        },
+        "end": {
+            "line": 3,
+            "column": 12
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Expression_Type": "MaterializedTargetableProperty"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "getField",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 1
+        },
+        "end": {
+            "line": 3,
+            "column": 12
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Accessed_Object": "couldnt access base",
+    "Accessed_Value_Type": "function",
+    "Accessed_Value": "{\"val\":\"function writeFile(path, data, options, callback) {\\n  callback = maybeCallback(callback || options);\\n  options = getOptions(options, { encoding: 'utf8', mode: 0o666, flag: 'w' });\\n  const flag = options.flag || 'w';\\n\\n  if (!isArrayBufferView(data)) {\\n    validateStringAfterArrayBufferView(data, 'data');\\n    data = Buffer.from(String(data), options.encoding || 'utf8');\\n  }\\n\\n  if (isFd(path)) {\\n    const isUserFd = true;\\n    writeAll(path, isUserFd, data, 0, data.byteLength, callback);\\n    return;\\n  }\\n\\n  fs.open(path, flag, options.mode, (openErr, fd) => {\\n    if (openErr) {\\n      callback(openErr);\\n    } else {\\n      const isUserFd = false;\\n      writeAll(fd, isUserFd, data, 0, data.byteLength, callback);\\n    }\\n  });\\n}\"}"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "endExpression",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 1
+        },
+        "end": {
+            "line": 3,
+            "column": 12
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Expression_Type": "MaterializedTargetableProperty"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "startExpression",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 14
+        },
+        "end": {
+            "line": 3,
+            "column": 26
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Expression_Type": "JSConstantString"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "literal",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 14
+        },
+        "end": {
+            "line": 3,
+            "column": 26
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Literal_Type": "StringLiteral",
+    "Literal_Value_Type": "string",
+    "Literal_Value": "[\"exemplo.txt\"]"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "endExpression",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 14
+        },
+        "end": {
+            "line": 3,
+            "column": 26
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Expression_Type": "JSConstantString"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "startExpression",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 29
+        },
+        "end": {
+            "line": 3,
+            "column": 59
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Expression_Type": "JSConstantString"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "literal",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 29
+        },
+        "end": {
+            "line": 3,
+            "column": 59
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Literal_Type": "StringLiteral",
+    "Literal_Value_Type": "string",
+    "Literal_Value": "[\"dados escritos no exemplo.txt\"]"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "endExpression",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 29
+        },
+        "end": {
+            "line": 3,
+            "column": 59
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Expression_Type": "JSConstantString"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "startExpression",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 62
+        },
+        "end": {
+            "line": 9,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Expression_Type": "AutonomousFunctionExpression"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "literal",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 62
+        },
+        "end": {
+            "line": 9,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Literal_Type": "FunctionLiteral",
+    "Literal_Value_Type": "function",
+    "Literal_Value": "{\"val\":\"(err) => {\\n    if (err) {\\n        console.error('Erro ao escrever o arquivo:', err);\\n    } else {\\n        console.log('Arquivo escrito com sucesso!');\\n    }\\n}\"}"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 1
+        },
+        "end": {
+            "line": 9,
+            "column": 2
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Function_Name": "writeFile",
+    "Function_Arguments": "exemplo.txt, dados escritos no exemplo.txt, (err) => {\n    if (err) {\n        console.error('Erro ao escrever o arquivo:', err);\n    } else {\n        console.log('Arquivo escrito com sucesso!');\n    }\n}"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "endExpression",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 62
+        },
+        "end": {
+            "line": 9,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Expression_Type": "AutonomousFunctionExpression"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 1
+        },
+        "end": {
+            "line": 9,
+            "column": 2
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Function_Name": "writeFile",
+    "Function_Arguments": "exemplo.txt, dados escritos no exemplo.txt, (err) => {\n    if (err) {\n        console.error('Erro ao escrever o arquivo:', err);\n    } else {\n        console.log('Arquivo escrito com sucesso!');\n    }\n}",
+    "Tipo_Returned_Value": "undefined",
+    "Returned_Value": "[]"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "endExpression",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 1
+        },
+        "end": {
+            "line": 9,
+            "column": 2
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Expression_Type": "InvokeN"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 10,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 1,
+    "Returned_Type": "undefined",
+    "Returned_Value": "[]",
+    "Excession_Occurred": {}
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "awaitPost",
+    "loc": {
+        "start": {
+            "line": 4,
+            "column": 5
+        },
+        "end": {
+            "line": 8,
+            "column": 5
+        }
+    },
+    "Async_Hook_Id": 8,
+    "Statement_Type": "If"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 62
+        },
+        "end": {
+            "line": 9,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 8,
+    "Function_Name": "Anonymous Function ",
+    "Function_Arguments": ""
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "startExpression",
+    "loc": {
+        "start": {
+            "line": 4,
+            "column": 9
+        },
+        "end": {
+            "line": 4,
+            "column": 11
+        }
+    },
+    "Async_Hook_Id": 8,
+    "Expression_Type": "JSReadCurrentFrameSlot"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "read",
+    "loc": {
+        "start": {
+            "line": 4,
+            "column": 9
+        },
+        "end": {
+            "line": 4,
+            "column": 11
+        }
+    },
+    "Async_Hook_Id": 8,
+    "Variable_Name": "err",
+    "Type_Value_Read": "object",
+    "val": "[null]"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "endExpression",
+    "loc": {
+        "start": {
+            "line": 4,
+            "column": 9
+        },
+        "end": {
+            "line": 4,
+            "column": 11
+        }
+    },
+    "Async_Hook_Id": 8,
+    "Expression_Type": "JSReadCurrentFrameSlot"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "awaitPost",
+    "loc": {
+        "start": {
+            "line": 7,
+            "column": 9
+        },
+        "end": {
+            "line": 7,
+            "column": 51
+        }
+    },
+    "Async_Hook_Id": 8,
+    "Statement_Type": "Invoke1"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "startExpression",
+    "loc": {
+        "start": {
+            "line": 7,
+            "column": 9
+        },
+        "end": {
+            "line": 7,
+            "column": 51
+        }
+    },
+    "Async_Hook_Id": 8,
+    "Expression_Type": "Invoke1"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "startExpression",
+    "loc": {
+        "start": {
+            "line": 7,
+            "column": 9
+        },
+        "end": {
+            "line": 7,
+            "column": 15
+        }
+    },
+    "Async_Hook_Id": 8,
+    "Expression_Type": "GlobalProperty"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "read",
+    "loc": {
+        "start": {
+            "line": 7,
+            "column": 9
+        },
+        "end": {
+            "line": 7,
+            "column": 15
+        }
+    },
+    "Async_Hook_Id": 8,
+    "Variable_Name": "console",
+    "Type_Value_Read": "object",
+    "val": "[{}]"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "endExpression",
+    "loc": {
+        "start": {
+            "line": 7,
+            "column": 9
+        },
+        "end": {
+            "line": 7,
+            "column": 15
+        }
+    },
+    "Async_Hook_Id": 8,
+    "Expression_Type": "GlobalProperty"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "startExpression",
+    "loc": {
+        "start": {
+            "line": 7,
+            "column": 9
+        },
+        "end": {
+            "line": 7,
+            "column": 19
+        }
+    },
+    "Async_Hook_Id": 8,
+    "Expression_Type": "MaterializedTargetableProperty"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "getField",
+    "loc": {
+        "start": {
+            "line": 7,
+            "column": 9
+        },
+        "end": {
+            "line": 7,
+            "column": 19
+        }
+    },
+    "Async_Hook_Id": 8,
+    "Accessed_Object": "couldnt access base",
+    "Accessed_Value_Type": "function",
+    "Accessed_Value": "{\"val\":\"function () { [native code] }\"}"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "endExpression",
+    "loc": {
+        "start": {
+            "line": 7,
+            "column": 9
+        },
+        "end": {
+            "line": 7,
+            "column": 19
+        }
+    },
+    "Async_Hook_Id": 8,
+    "Expression_Type": "MaterializedTargetableProperty"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "startExpression",
+    "loc": {
+        "start": {
+            "line": 7,
+            "column": 21
+        },
+        "end": {
+            "line": 7,
+            "column": 50
+        }
+    },
+    "Async_Hook_Id": 8,
+    "Expression_Type": "JSConstantString"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "literal",
+    "loc": {
+        "start": {
+            "line": 7,
+            "column": 21
+        },
+        "end": {
+            "line": 7,
+            "column": 50
+        }
+    },
+    "Async_Hook_Id": 8,
+    "Literal_Type": "StringLiteral",
+    "Literal_Value_Type": "string",
+    "Literal_Value": "[\"Arquivo escrito com sucesso!\"]"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 7,
+            "column": 9
+        },
+        "end": {
+            "line": 7,
+            "column": 51
+        }
+    },
+    "Async_Hook_Id": 8,
+    "Function_Name": "log",
+    "Function_Arguments": "Arquivo escrito com sucesso!"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "endExpression",
+    "loc": {
+        "start": {
+            "line": 7,
+            "column": 21
+        },
+        "end": {
+            "line": 7,
+            "column": 50
+        }
+    },
+    "Async_Hook_Id": 8,
+    "Expression_Type": "JSConstantString"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 7,
+            "column": 9
+        },
+        "end": {
+            "line": 7,
+            "column": 51
+        }
+    },
+    "Async_Hook_Id": 8,
+    "Function_Name": "log",
+    "Function_Arguments": "Arquivo escrito com sucesso!",
+    "Tipo_Returned_Value": "undefined",
+    "Returned_Value": "[]"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "endExpression",
+    "loc": {
+        "start": {
+            "line": 7,
+            "column": 9
+        },
+        "end": {
+            "line": 7,
+            "column": 51
+        }
+    },
+    "Async_Hook_Id": 8,
+    "Expression_Type": "Invoke1"
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoApenasWrite.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 62
+        },
+        "end": {
+            "line": 9,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 8,
+    "Returned_Type": "undefined",
+    "Returned_Value": "[]",
+    "Excession_Occurred": {}
+},
+{
+    "Detected_Hook": "endExecution",
+    "Async_Hook_Id": 0
+}
+]

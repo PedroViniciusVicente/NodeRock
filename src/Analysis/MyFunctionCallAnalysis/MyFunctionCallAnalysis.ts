@@ -1,16 +1,17 @@
 // DO NOT INSTRUMENT
 
 // TODO: remover a isfunction e trocar por apenas typeof(val)
+// verificar se precisa mesmo dar o stringify nesses val, ou se só de adicionar no objeto e dar o stringify depois já é suficiente
 
 /* Hooks that can result in TypeError: Converting circular structure to JSON
 ** (Obs: This error only occur when trying to stringify the object, but no when you do console.log)
-** 1) Attribute "val" from hook read;
-** 2) Atribute "val" from hook write;
-** 3) Atribute "val" from hook getField;
-** 4) Atribute "val" from hook putFieldPre;
-** 5) Atribute "returnVal" from hook functionExit;
-** 6) Atribute "result" from hook invokeFun;
-** 7) Atribute "val" from hook literal;
+** 1) Attribute "val" from hook read; Ok
+** 2) Atribute "val" from hook write; Ok
+** 3) Atribute "val" from hook getField; Ok
+** 4) Atribute "val" from hook putFieldPre; Ok
+** 5) Atribute "returnVal" from hook functionExit; Ok
+** 6) Atribute "result" from hook invokeFun; Ok
+** 7) Atribute "val" from hook literal; Ok
 */
 
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
@@ -20,17 +21,27 @@ import * as fs from 'fs';
 import EventEmitter from 'events';
 import http from 'http';
 import net from 'net';
-import isFunction from 'lodash';
 import async_hooks from 'async_hooks';
 
-const path = require('path');
+const { performance } = require('perf_hooks'); // lib to calculate runtime in invokefun
 
+import path from 'path'; // lib to get full path in file name
+import { stringify, parse } from 'flatted'; // lib to remove json circular reference with objects
+
+if(false) { // temporary instructions to remember to try later the use of parse from 'flatted'
+    const jsonString = 'object that received stringify';
+    const parsedObj = parse(jsonString);
+    console.log(parsedObj);
+}
 
 export class MyFunctionCallAnalysis extends Analysis {
     
     static monitorOnlyMyFunctionCallAnalysis: boolean = true;
     static monitorAllHooks: boolean = true;
     static pathLogHooks: string;
+
+    // Map to calculate the runtime of the functions detected in invokeFunPre and invokeFun
+    static functionStartTimes: Map<number, number> = new Map();
 
     /*
     ** Lista com todos os hooks possiveis e suas funcoes:
@@ -123,14 +134,14 @@ export class MyFunctionCallAnalysis extends Analysis {
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
 
-                //let newVal: String;
-                //isFunction(val) ? newVal = "Function" : newVal = "Variable";
+                let stringJSONdoVal : string;
+                if(typeof(val) === 'function') {
+                    stringJSONdoVal = JSON.stringify({ val: val.toString() });
+                }
+                else {
+                    stringJSONdoVal = stringify(val);
+                }
 
-                //const stringJSONdoVal = JSON.stringify(val, null, 4); // Results in circular reference
-                //if(false) {
-                //    console.log(stringJSONdoVal);
-                //}
-                //console.log(typeof(val));
                 const ObjectLogMessage = {
                     "File_Path": path.resolve(fileName),
                     "Detected_Hook": "read",
@@ -138,12 +149,10 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "Variable_Name": name || "anonymous variable",
                     "Type_Value_Read": typeof(val),
-                    //"val": val,
+                    "val": stringJSONdoVal,
                 };
 
                 const stringJSON = JSON.stringify(ObjectLogMessage, null, 4); // Results in circular reference
-                //const stringJSON = toJSON(ObjectLogMessage); // Results in circular reference
-                //const stringJSON = ObjectLogMessage; // Doesnt result in circular reference, but it doesnt save in the correct .json file format
                 MyFunctionCallAnalysis.eventEmitter.emit('addLogToVector', stringJSON);
             };
 
@@ -153,10 +162,21 @@ export class MyFunctionCallAnalysis extends Analysis {
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
                 
-                let newVal: String;
-                isFunction(val) ? newVal = "Function" : newVal = "Variable";
+
+                let stringJSONdoVal : string;
+                if(typeof(val) === 'function') {
+                    stringJSONdoVal = JSON.stringify({ val: val.toString() });
+                }
+                else {
+                    stringJSONdoVal = stringify(val);
+                }
                 let newLhs: String
-                lhs === undefined ? newLhs = "Undefined" : isFunction(lhs) ? newLhs = "Function" : newLhs = "Variable/Objeto";
+                if(typeof(lhs) === 'function') {
+                    newLhs = JSON.stringify({lhs: lhs.toString() });
+                }
+                else {
+                    newLhs = stringify(lhs);
+                }
 
                 const ObjectLogMessage = {
                     "File_Path": path.resolve(fileName),
@@ -164,8 +184,10 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "loc": loc,
                     "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "Variable_Name": name || "anonymous variable",
-                    "Value_Type_After_Write": newVal,
-                    "Value_Type_Before_Write": newLhs,
+                    "Value_Type_Before_Write": typeof(lhs),
+                    "Value_Before_Write": newLhs,
+                    "Value_Type_After_Write": typeof(val),
+                    "Value_After_Write": stringJSONdoVal,
                 };
                 
                 const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
@@ -178,6 +200,13 @@ export class MyFunctionCallAnalysis extends Analysis {
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
 
+                let stringJSONdoVal : string;
+                if(typeof(val) === 'function') {
+                    stringJSONdoVal = JSON.stringify({ val: val.toString() });
+                }
+                else {
+                    stringJSONdoVal = stringify(val);
+                }
 
                 const ObjectLogMessage = {
                     "File_Path": path.resolve(fileName),
@@ -185,11 +214,8 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "loc": loc,
                     "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "Accessed_Object": Buffer.isBuffer(base) && isArrayAccess(isComputed, offset) ? base[offset as number] : "couldnt access base",
-                    "Accessed_Value": (typeof val === 'number' 
-                         || typeof val === 'string'
-                         || typeof val === 'boolean') ? val : "(Value not shown to avoid TypeError)",
-                    // "Accessed_Value": val,
-
+                    "Accessed_Value_Type": typeof(val),
+                    "Accessed_Value": stringJSONdoVal,
                 };
 
                 const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
@@ -209,6 +235,13 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const {name: fileName, loc} = sourceObject;
                 
                 //offset = typeof offset === 'number' ? offset : Number.parseInt(offset);
+                let stringJSONdoVal : string;
+                if(typeof(val) === 'function') {
+                    stringJSONdoVal = JSON.stringify({ val: val.toString() });
+                }
+                else {
+                    stringJSONdoVal = stringify(val);
+                }
 
                 const ObjectLogMessage = {
                     "File_Path": path.resolve(fileName),
@@ -216,9 +249,8 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "loc": loc,
                     "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "Written_Object": Buffer.isBuffer(base) && isArrayAccess(isComputed, offset) ? base[offset as number] : "couldnt access base",
-                    "New_Value": (typeof val === 'number' 
-                        || typeof val === 'string'
-                        || typeof val === 'boolean') ? val : "(Value not shown to avoid TypeError)",
+                    "New_Value_Type": typeof(val),
+                    "New_Value": stringJSONdoVal,
 
                 };
                 
@@ -273,6 +305,14 @@ export class MyFunctionCallAnalysis extends Analysis {
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
 
+                let stringJSONdoreturnVal : string;
+                if(typeof(returnVal) === 'function') {
+                    stringJSONdoreturnVal = JSON.stringify({ returnVal: returnVal.toString() });
+                }
+                else {
+                    stringJSONdoreturnVal = stringify(returnVal);
+                }
+
                 const ObjectLogMessage = {
                     "File_Path": path.resolve(fileName),
                     "Detected_Hook": "functionExit",
@@ -280,10 +320,8 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "Async_Hook_Id": async_hooks.executionAsyncId(),
                     // para saber o nome provavelmente vai ter de colocar uma pilha que da o push no functionEnter e pop no functionExit
                     //"Function_Name": 
-                    "Returned_Type" : typeof returnVal,
-                    "Returned_Value": (typeof returnVal === 'number' 
-                        || typeof returnVal === 'string'
-                        || typeof returnVal === 'boolean') ? returnVal : "(Value not shown to avoid TypeError)",
+                    "Returned_Type" : typeof(returnVal),
+                    "Returned_Value": stringJSONdoreturnVal,
                     "Excession_Occurred": wrappedExceptionVal,
                 };
             
@@ -299,6 +337,8 @@ export class MyFunctionCallAnalysis extends Analysis {
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
                 
+                // Registering the starttime of this function
+                MyFunctionCallAnalysis.functionStartTimes.set(iid, performance.now());
 
                 let newFunctionName: String;
                 f.name ? newFunctionName = f.name : newFunctionName = "Anonymous Function ";
@@ -310,6 +350,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "Function_Name": newFunctionName,
                     "Function_Arguments": args.join(", "),
+                    "iid": iid,
                     //"Objeto_Base": base, // objeto base que vai receber a funcao, julgo que nao eh mt necessaria
                 };
             
@@ -324,9 +365,24 @@ export class MyFunctionCallAnalysis extends Analysis {
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
                 
+                // Calculating runTime
+                const startTime = MyFunctionCallAnalysis.functionStartTimes.get(iid);
+                const endTime = performance.now();
+                const runtime = startTime ? endTime - startTime : null;
+
+                // Removing startTime from the map
+                MyFunctionCallAnalysis.functionStartTimes.delete(iid);
 
                 let newFunctionName: String;
                 f.name ? newFunctionName = f.name : newFunctionName = "Anonymous Function ";
+
+                let stringJSONdoResult : string;
+                if(typeof(result) === 'function') {
+                    stringJSONdoResult = JSON.stringify({ result: result.toString() });
+                }
+                else {
+                    stringJSONdoResult = stringify(result);
+                }
 
                 const ObjectLogMessage = {
                     "File_Path": path.resolve(fileName),
@@ -336,10 +392,10 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "Function_Name": newFunctionName,
                     "Function_Arguments": args.join(", "),
                     "Tipo_Returned_Value": typeof result,
-                    "Returned_Value": (typeof result === 'number' 
-                        || typeof result === 'string'
-                        || typeof result === 'boolean') ? result : "(Value not shown to avoid TypeError)",
-                        //"Objeto_Base": base, // objeto base que vai receber a funcao, julgo que nao eh mt necessario
+                    "Returned_Value": stringJSONdoResult,
+                    "iid": iid,
+                    "Runtime_ms": runtime,
+                    //"Objeto_Base": base, // objeto base que vai receber a funcao, julgo que nao eh mt necessario
                 };
             
                 const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
@@ -387,13 +443,22 @@ export class MyFunctionCallAnalysis extends Analysis {
                 //console.log(`valor da expressao de tipo ${type} eh: ${value}`);
             };
 
-    
+
             // Esse _fakeHasGetterSetter eh apenas para a API do Jalangi
             this.literal = (iid, val, _fakeHasGetterSetter, literalType) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
-                
+
+
+                let stringJSONdoVal : string;
+                if(typeof(val) === 'function') {
+                    stringJSONdoVal = JSON.stringify({ val: val.toString() });
+                }
+                else {
+                    stringJSONdoVal = stringify(val);
+                }
+
 
                 const ObjectLogMessage = {
                     "File_Path": path.resolve(fileName),
@@ -401,18 +466,14 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "loc": loc,
                     "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "Literal_Type": literalType,
-                    //"Valor_da_Literal": val,
-                    // Obs: eu filtrei para esses 3 tipos de literal pois com alguns objetos/funcao dava erro circular reference
-                    "Literal_Value": (literalType === 'NumericLiteral' 
-                        || literalType === 'StringLiteral' 
-                        || literalType === 'BooleanLiteral') ? val : "(Value not shown to avoid TypeError)",
+                    "Literal_Value_Type": typeof(val),
+                    "Literal_Value": stringJSONdoVal,
                 };
 
                 const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
                 MyFunctionCallAnalysis.eventEmitter.emit('addLogToVector', stringJSON);
-                //console.log("literal eh: ", val);
             };
-    
+
             // REVER: Onde esta esse typeof detectado dentro da execucao do exemplo?? ele eh executado apenas 1 vez mesmo
             this.unary = (iid, op, left, result) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
@@ -514,6 +575,20 @@ export class MyFunctionCallAnalysis extends Analysis {
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
                 
+                let stringJSONdopromiseOrValAwaited : string;
+                if(typeof(promiseOrValAwaited) === 'function') {
+                    stringJSONdopromiseOrValAwaited = JSON.stringify({ promiseOrValAwaited: promiseOrValAwaited.toString() });
+                }
+                else {
+                    stringJSONdopromiseOrValAwaited = stringify(promiseOrValAwaited);
+                }
+                let stringJSONdovalResolveOrRejected : string;
+                if(typeof(valResolveOrRejected) === 'function') {
+                    stringJSONdovalResolveOrRejected = JSON.stringify({ valResolveOrRejected: valResolveOrRejected.toString() });
+                }
+                else {
+                    stringJSONdovalResolveOrRejected = stringify(valResolveOrRejected);
+                }
 
                 // nao tem como saber qual a funcao??
                 const ObjectLogMessage = {
@@ -523,8 +598,10 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "Is_Promise_Rejected": isPromiseRejected,
                     // !!! Por algum motivo esses valores esperados/resolvidos nao estao sendo armazenados no arquivo !!!
-                    "Expected_Value": promiseOrValAwaited,
-                    "Resolved_Value": valResolveOrRejected,
+                    "Expected_Value_Type": typeof(promiseOrValAwaited),
+                    "Expected_Value": stringJSONdopromiseOrValAwaited,
+                    "Resolved_Value_Type": typeof(valResolveOrRejected),
+                    "Resolved_Value": stringJSONdovalResolveOrRejected,
                 };
 
                 const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
@@ -790,4 +867,3 @@ process.on('exit', () => {
     //console.log("O process.on(exit) foi detectado!");
     MyFunctionCallAnalysis.writeHooksOnLog();
 });
-
