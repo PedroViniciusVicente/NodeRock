@@ -1,21 +1,9 @@
 // DO NOT INSTRUMENT
 
-// TODO: remover a isfunction e trocar por apenas typeof(val)
-// verificar se precisa mesmo dar o stringify nesses val, ou se só de adicionar no objeto e dar o stringify depois já é suficiente
-
-/* Hooks that can result in TypeError: Converting circular structure to JSON
-** (Obs: This error only occur when trying to stringify the object, but no when you do console.log)
-** 1) Attribute "val" from hook read; Ok
-** 2) Atribute "val" from hook write; Ok
-** 3) Atribute "val" from hook getField; Ok
-** 4) Atribute "val" from hook putFieldPre; Ok
-** 5) Atribute "returnVal" from hook functionExit; Ok
-** 6) Atribute "result" from hook invokeFun; Ok
-** 7) Atribute "val" from hook literal; Ok
-*/
-
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {isArrayAccess} from '../../Util';
+
+import { divideMochaTests } from './divideMochaTests';
 
 import * as fs from 'fs';
 import EventEmitter from 'events';
@@ -23,6 +11,7 @@ import http from 'http';
 import net from 'net';
 import async_hooks from 'async_hooks';
 
+//import * as shell from 'shelljs';
 const { performance } = require('perf_hooks'); // lib to calculate runtime in invokefun
 
 import path from 'path'; // lib to get full path in file name
@@ -32,6 +21,7 @@ if(false) { // temporary instructions to remember to try later the use of parse 
     const jsonString = 'object that received stringify';
     const parsedObj = parse(jsonString);
     console.log(parsedObj);
+    //shell.echo('Hello, world!');
 }
 
 export class MyFunctionCallAnalysis extends Analysis {
@@ -866,4 +856,5 @@ export class MyFunctionCallAnalysis extends Analysis {
 process.on('exit', () => {
     //console.log("O process.on(exit) foi detectado!");
     MyFunctionCallAnalysis.writeHooksOnLog();
+    divideMochaTests(MyFunctionCallAnalysis.logHooks);
 });
