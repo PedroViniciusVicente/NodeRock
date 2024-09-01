@@ -3,8 +3,6 @@
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
 import {isArrayAccess} from '../../Util';
 
-import { divideMochaTests } from './divideMochaTests';
-
 import * as fs from 'fs';
 import EventEmitter from 'events';
 import http from 'http';
@@ -856,5 +854,4 @@ export class MyFunctionCallAnalysis extends Analysis {
 process.on('exit', () => {
     //console.log("O process.on(exit) foi detectado!");
     MyFunctionCallAnalysis.writeHooksOnLog();
-    divideMochaTests(MyFunctionCallAnalysis.logHooks);
 });
