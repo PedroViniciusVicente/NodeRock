@@ -4,45 +4,29 @@ const fs = require('fs');
 shell.echo("COMECOU!");
 
 
-// 1) EXECUTING THE FIRST TIME WITH THE ENTIRE MOCHA FILE TO GET THE NAME OF THE ITs Tests
-shell.exec("node ./dist/bin/nodeprof.js /home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/  node_modules/.bin/_mocha teste/testeMenor.js");
+// 1) EXECUTING THE FIRST TIME WITH THE ENTIRE MOCHA FILE TO SEE THE NAME OF THE ITs Tests
+const pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/";
+const testFile = "teste/testeMenor.js";
 
-// 2) COLLECTING THE NAME OF THE ITs Tests
-// a) collecting the generated json objects
-//try {
-    
-  //const data = fs.readFileSync('src/Analysis/MyFunctionCallAnalysis/logHooks.json', 'utf8');
-  //const logHooks = fs.readFileSync('src/Analysis/MyFunctionCallAnalysis/logHooks.json', 'utf8');
+let completCommand = "node ./dist/bin/nodeprof.js " + pathProjectFolder + " node_modules/.bin/_mocha " + testFile;
+//console.log(completCommand);
 
-  // Converting the JSON content  to JavaScript object
-  //const logHooks = JSON.parse(data);
+shell.exec(completCommand);
 
-  
-// Verifica se é um vetor
-
-//   if (Array.isArray(objetos)) {
-//     console.log('Objetos recuperados:', objetos[2]);
-//   } else {
-//     console.log('O arquivo JSON não contém um vetor.');
-//   }
-
-//} catch (err) {
-//  console.error('Erro ao ler o arquivo JSON:', err);
-//}
 try {
+    // 2) COLLECTING THE NAME OF THE ITs Tests
     const logHooks = fs.readFileSync('src/Analysis/MyFunctionCallAnalysis/logHooks.json', 'utf8');
-    // Parse cada string para um objeto JSON
-    const elementosParseados = logHooks.map(elementoStr => JSON.parse(elementoStr));
 
-    //nomesDosIts = getTestsName(elementosParseados);
+    // Converting the JSON content  to JavaScript object
+    const elementosParseados = JSON.parse(logHooks);
 
     // Filtrar os elemtos pra pegar as linhas dos its
     const elementosFiltrados = elementosParseados.filter(elemento => (elemento.Detected_Hook === "read" && elemento.Variable_Name === "it"));
-    console.log(elementosFiltrados);
+    //console.log(elementosFiltrados);
 
     // Obter os valores de startline dos its filtrados
     const linhasDosIts = elementosFiltrados.map(elemento => elemento.loc.start.line);
-    console.log(linhasDosIts);
+    //console.log(linhasDosIts);
 
     // Pegar o nome dos testes its encontrados
     const nomesDosIts = elementosParseados.filter(elemento => {
@@ -51,20 +35,24 @@ try {
         //console.log("Verificando elemento:", linhaDoLiteral);
         return linhasDosIts.includes(linhaDoLiteral) && elemento.Detected_Hook === "literal" && elemento.Literal_Value_Type === "string";
     });
-
-    // for(let elemento of nomesDosIts) {
-    // 	console.log("Nomes dos its eh: ", elemento.Literal_Value);
-    // }
         
     for(let i = 0; i < nomesDosIts.length; i++) {
-        nomesDosIts[i] = nomesDosIts[i].Literal_Value;//.replace(/[, "");
+        nomesDosIts[i] = nomesDosIts[i].Literal_Value;
         nomesDosIts[i] = nomesDosIts[i].replace(/\[|\]/g, "");
     }
 
     console.log("Os nomes dos its detectados sao: ")
     console.log(nomesDosIts);
 
-    //executeEachTest();
+    // 3) EXECUTING ALL THE IT TESTS INDIVIDUALLY
+    for(let i = 0; i < nomesDosIts.length; i++) {
+        completCommand = completCommand + " -g " + nomesDosIts[i];
+        shell.exec(completCommand);
+        // TODO: AQUI FAZER UM NEGOCIO PRA COPIAR O AQRUIVO LOGHOOKS.JSON PARA O COLLECTEDTRACERSFOLDER
+    }
+
+
+
 
     // Executar um comando
     //shell.echo('Hello, world!'); // Imprime "Hello, world!" no terminal
