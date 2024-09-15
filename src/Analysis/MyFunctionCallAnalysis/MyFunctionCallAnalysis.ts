@@ -9,11 +9,11 @@ import http from 'http';
 import net from 'net';
 import async_hooks from 'async_hooks';
 
-//import * as shell from 'shelljs';
 const { performance } = require('perf_hooks'); // lib to calculate runtime in invokefun
 
 import path from 'path'; // lib to get full path in file name
-import { stringify, parse } from 'flatted'; // lib to remove json circular reference with objects
+import { stringify } from 'flatted'; // lib to remove json circular reference with objects
+import { parse } from 'flatted';
 
 if(false) { // temporary instructions to remember to try later the use of parse from 'flatted'
     const jsonString = 'object that received stringify';
@@ -125,11 +125,20 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const {name: fileName, loc} = sourceObject;
 
                 let stringJSONdoVal : string;
-                if(typeof(val) === 'function') {
-                    stringJSONdoVal = JSON.stringify({ val: val.toString() });
-                }
-                else {
-                    stringJSONdoVal = stringify(val);
+                try {
+                    if (typeof(val) === 'function') {
+                        stringJSONdoVal = JSON.stringify({ val: val.toString() });
+                    }
+                    else if (typeof(val) === 'bigint') {
+                        stringJSONdoVal = JSON.stringify({ val: val.toString() });
+                    }
+                    else {
+                        stringJSONdoVal = stringify(val);
+                    }
+                } catch (err) {
+                    stringJSONdoVal = err instanceof Error
+                    ? `{ "error": "Failed to stringify value", "details": "${err.message}" }`
+                    : `{ "error": "Failed to stringify value", "details": "Unknown error" }`;
                 }
 
                 const ObjectLogMessage = {
@@ -142,7 +151,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "val": stringJSONdoVal,
                 };
 
-                const stringJSON = JSON.stringify(ObjectLogMessage, null, 4); // Results in circular reference
+                const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
                 MyFunctionCallAnalysis.eventEmitter.emit('addLogToVector', stringJSON);
             };
 
@@ -154,18 +163,37 @@ export class MyFunctionCallAnalysis extends Analysis {
                 
 
                 let stringJSONdoVal : string;
-                if(typeof(val) === 'function') {
-                    stringJSONdoVal = JSON.stringify({ val: val.toString() });
+                try {
+                    if (typeof(val) === 'function') {
+                        stringJSONdoVal = JSON.stringify({ val: val.toString() });
+                    }
+                    else if (typeof(val) === 'bigint') {
+                        stringJSONdoVal = JSON.stringify({ val: val.toString() });
+                    }
+                    else {
+                        stringJSONdoVal = stringify(val);
+                    }
+                } catch (err) {
+                    stringJSONdoVal = err instanceof Error
+                    ? `{ "error": "Failed to stringify value", "details": "${err.message}" }`
+                    : `{ "error": "Failed to stringify value", "details": "Unknown error" }`;
                 }
-                else {
-                    stringJSONdoVal = stringify(val);
-                }
+
                 let newLhs: String
-                if(typeof(lhs) === 'function') {
-                    newLhs = JSON.stringify({lhs: lhs.toString() });
-                }
-                else {
-                    newLhs = stringify(lhs);
+                try {
+                    if (typeof(lhs) === 'function') {
+                        newLhs = JSON.stringify({ lhs: lhs.toString() });
+                    }
+                    else if (typeof(lhs) === 'bigint') {
+                        newLhs = JSON.stringify({ lhs: lhs.toString() });
+                    }
+                    else {
+                        newLhs = stringify(lhs);
+                    }
+                } catch (err) {
+                    newLhs = err instanceof Error
+                    ? `{ "error": "Failed to stringify value", "details": "${err.message}" }`
+                    : `{ "error": "Failed to stringify value", "details": "Unknown error" }`;
                 }
 
                 const ObjectLogMessage = {
@@ -191,11 +219,20 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const {name: fileName, loc} = sourceObject;
 
                 let stringJSONdoVal : string;
-                if(typeof(val) === 'function') {
-                    stringJSONdoVal = JSON.stringify({ val: val.toString() });
-                }
-                else {
-                    stringJSONdoVal = stringify(val);
+                try {
+                    if (typeof(val) === 'function') {
+                        stringJSONdoVal = JSON.stringify({ val: val.toString() });
+                    }
+                    else if (typeof(val) === 'bigint') {
+                        stringJSONdoVal = JSON.stringify({ val: val.toString() });
+                    }
+                    else {
+                        stringJSONdoVal = stringify(val);
+                    }
+                } catch (err) {
+                    stringJSONdoVal = err instanceof Error
+                    ? `{ "error": "Failed to stringify value", "details": "${err.message}" }`
+                    : `{ "error": "Failed to stringify value", "details": "Unknown error" }`;
                 }
 
                 const ObjectLogMessage = {
@@ -226,11 +263,20 @@ export class MyFunctionCallAnalysis extends Analysis {
                 
                 //offset = typeof offset === 'number' ? offset : Number.parseInt(offset);
                 let stringJSONdoVal : string;
-                if(typeof(val) === 'function') {
-                    stringJSONdoVal = JSON.stringify({ val: val.toString() });
-                }
-                else {
-                    stringJSONdoVal = stringify(val);
+                try {
+                    if (typeof(val) === 'function') {
+                        stringJSONdoVal = JSON.stringify({ val: val.toString() });
+                    }
+                    else if (typeof(val) === 'bigint') {
+                        stringJSONdoVal = JSON.stringify({ val: val.toString() });
+                    }
+                    else {
+                        stringJSONdoVal = stringify(val);
+                    }
+                } catch (err) {
+                    stringJSONdoVal = err instanceof Error
+                    ? `{ "error": "Failed to stringify value", "details": "${err.message}" }`
+                    : `{ "error": "Failed to stringify value", "details": "Unknown error" }`;
                 }
 
                 const ObjectLogMessage = {
@@ -308,11 +354,20 @@ export class MyFunctionCallAnalysis extends Analysis {
                 MyFunctionCallAnalysis.startTimesFunctionEnter.delete(iid);
 
                 let stringJSONdoreturnVal : string;
-                if(typeof(returnVal) === 'function') {
-                    stringJSONdoreturnVal = JSON.stringify({ returnVal: returnVal.toString() });
-                }
-                else {
-                    stringJSONdoreturnVal = stringify(returnVal);
+                try {
+                    if (typeof(returnVal) === 'function') {
+                        stringJSONdoreturnVal = JSON.stringify({ returnVal: returnVal.toString() });
+                    }
+                    else if (typeof(returnVal) === 'bigint') {
+                        stringJSONdoreturnVal = JSON.stringify({ returnVal: returnVal.toString() });
+                    }
+                    else {
+                        stringJSONdoreturnVal = stringify(returnVal);
+                    }
+                } catch (err) {
+                    stringJSONdoreturnVal = err instanceof Error
+                    ? `{ "error": "Failed to stringify value", "details": "${err.message}" }`
+                    : `{ "error": "Failed to stringify value", "details": "Unknown error" }`;
                 }
 
                 const ObjectLogMessage = {
@@ -381,11 +436,20 @@ export class MyFunctionCallAnalysis extends Analysis {
                 f.name ? newFunctionName = f.name : newFunctionName = "Anonymous Function ";
 
                 let stringJSONdoResult : string;
-                if(typeof(result) === 'function') {
-                    stringJSONdoResult = JSON.stringify({ result: result.toString() });
-                }
-                else {
-                    stringJSONdoResult = stringify(result);
+                try {
+                    if (typeof(result) === 'function') {
+                        stringJSONdoResult = JSON.stringify({ result: result.toString() });
+                    }
+                    else if (typeof(result) === 'bigint') {
+                        stringJSONdoResult = JSON.stringify({ result: result.toString() });
+                    }
+                    else {
+                        stringJSONdoResult = stringify(result);
+                    }
+                } catch (err) {
+                    stringJSONdoResult = err instanceof Error
+                    ? `{ "error": "Failed to stringify value", "details": "${err.message}" }`
+                    : `{ "error": "Failed to stringify value", "details": "Unknown error" }`;
                 }
 
                 const ObjectLogMessage = {
@@ -456,11 +520,20 @@ export class MyFunctionCallAnalysis extends Analysis {
 
 
                 let stringJSONdoVal : string;
-                if(typeof(val) === 'function') {
-                    stringJSONdoVal = JSON.stringify({ val: val.toString() });
-                }
-                else {
-                    stringJSONdoVal = stringify(val);
+                try {
+                    if (typeof(val) === 'function') {
+                        stringJSONdoVal = JSON.stringify({ val: val.toString() });
+                    }
+                    else if (typeof(val) === 'bigint') {
+                        stringJSONdoVal = JSON.stringify({ val: val.toString() });
+                    }
+                    else {
+                        stringJSONdoVal = stringify(val);
+                    }
+                } catch (err) {
+                    stringJSONdoVal = err instanceof Error
+                    ? `{ "error": "Failed to stringify value", "details": "${err.message}" }`
+                    : `{ "error": "Failed to stringify value", "details": "Unknown error" }`;
                 }
 
 
@@ -580,18 +653,37 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const {name: fileName, loc} = sourceObject;
                 
                 let stringJSONdopromiseOrValAwaited : string;
-                if(typeof(promiseOrValAwaited) === 'function') {
-                    stringJSONdopromiseOrValAwaited = JSON.stringify({ promiseOrValAwaited: promiseOrValAwaited.toString() });
+                try {
+                    if (typeof(promiseOrValAwaited) === 'function') {
+                        stringJSONdopromiseOrValAwaited = JSON.stringify({ promiseOrValAwaited: promiseOrValAwaited.toString() });
+                    }
+                    else if (typeof(promiseOrValAwaited) === 'bigint') {
+                        stringJSONdopromiseOrValAwaited = JSON.stringify({ promiseOrValAwaited: promiseOrValAwaited.toString() });
+                    }
+                    else {
+                        stringJSONdopromiseOrValAwaited = stringify(promiseOrValAwaited);
+                    }
+                } catch (err) {
+                    stringJSONdopromiseOrValAwaited = err instanceof Error
+                    ? `{ "error": "Failed to stringify value", "details": "${err.message}" }`
+                    : `{ "error": "Failed to stringify value", "details": "Unknown error" }`;
                 }
-                else {
-                    stringJSONdopromiseOrValAwaited = stringify(promiseOrValAwaited);
-                }
+
                 let stringJSONdovalResolveOrRejected : string;
-                if(typeof(valResolveOrRejected) === 'function') {
-                    stringJSONdovalResolveOrRejected = JSON.stringify({ valResolveOrRejected: valResolveOrRejected.toString() });
-                }
-                else {
-                    stringJSONdovalResolveOrRejected = stringify(valResolveOrRejected);
+                try {
+                    if (typeof(valResolveOrRejected) === 'function') {
+                        stringJSONdovalResolveOrRejected = JSON.stringify({ valResolveOrRejected: valResolveOrRejected.toString() });
+                    }
+                    else if (typeof(valResolveOrRejected) === 'bigint') {
+                        stringJSONdovalResolveOrRejected = JSON.stringify({ valResolveOrRejected: valResolveOrRejected.toString() });
+                    }
+                    else {
+                        stringJSONdovalResolveOrRejected = stringify(valResolveOrRejected);
+                    }
+                } catch (err) {
+                    stringJSONdovalResolveOrRejected = err instanceof Error
+                    ? `{ "error": "Failed to stringify value", "details": "${err.message}" }`
+                    : `{ "error": "Failed to stringify value", "details": "Unknown error" }`;
                 }
 
                 // nao tem como saber qual a funcao??
