@@ -168,3 +168,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# My Log Files that are too big to go to github
+src/Analysis/MyFunctionCallAnalysis/logHooks.json
+src/Analysis/MyFunctionCallAnalysis/logExpress.json
+src/Analysis/MyFunctionCallAnalysis/logHooksComScopeModule.json
