@@ -5,10 +5,14 @@ shell.echo("COMECOU!");
 
 
 // 1) EXECUTING THE FIRST TIME WITH THE ENTIRE MOCHA FILE TO SEE THE NAME OF THE ITs Tests
+
 const pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/";
 const testFile = "teste/testeMenor.js";
 
-let completCommand = "node ./dist/bin/nodeprof.js " + pathProjectFolder + " node_modules/.bin/_mocha " + testFile;
+// const pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/";
+// const testFile = "test.js";
+
+let completCommand = "node ./dist/bin/nodeprof.js " + pathProjectFolder + " node_modules/.bin/_mocha " /*colocar aqui paraemtros*/ + testFile;
 //console.log(completCommand);
 
 shell.exec(completCommand);

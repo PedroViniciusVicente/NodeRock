@@ -29,7 +29,9 @@ export class MyFunctionCallAnalysis extends Analysis {
     static pathLogHooks: string;
 
     // Map to calculate the runtime of the functions detected in invokeFunPre and invokeFun
-    static functionStartTimes: Map<number, number> = new Map();
+    static startTimesInvokeFunPre: Map<number, number> = new Map();
+    static startTimesFunctionEnter: Map<number, number> = new Map();
+
 
     /*
     ** Lista com todos os hooks possiveis e suas funcoes:
@@ -252,6 +254,9 @@ export class MyFunctionCallAnalysis extends Analysis {
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
 
+                // Registering the starttime of this function
+                MyFunctionCallAnalysis.startTimesFunctionEnter.set(iid, performance.now());
+
 
                 let newFunctionName: String;
                 f.name ? newFunctionName = f.name : newFunctionName = "Anonymous Function ";
@@ -264,6 +269,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "Function_Name": newFunctionName,
                     // esse join() transforma a lista de argumentos em uma string para nao dar erro de circular reference
                     "Function_Arguments": args.join(", "),
+                    "iid": iid,
 
                     // Acho que esse dis nao eh importante, pois ele eh o valor do this no corpo da funcao: (?)
                     // "@param {*} dis - The value of the <tt>this</tt> variable in the function body"
@@ -293,6 +299,14 @@ export class MyFunctionCallAnalysis extends Analysis {
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
 
+                // Calculating runTime
+                const startTime = MyFunctionCallAnalysis.startTimesFunctionEnter.get(iid);
+                const endTime = performance.now();
+                const runtime = startTime ? endTime - startTime : null;
+
+                // Removing startTime from the map
+                MyFunctionCallAnalysis.startTimesFunctionEnter.delete(iid);
+
                 let stringJSONdoreturnVal : string;
                 if(typeof(returnVal) === 'function') {
                     stringJSONdoreturnVal = JSON.stringify({ returnVal: returnVal.toString() });
@@ -311,6 +325,8 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "Returned_Type" : typeof(returnVal),
                     "Returned_Value": stringJSONdoreturnVal,
                     "Excession_Occurred": wrappedExceptionVal,
+                    "iid": iid,
+                    "Runtime_ms": runtime,
                 };
             
                 const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
@@ -326,7 +342,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const {name: fileName, loc} = sourceObject;
                 
                 // Registering the starttime of this function
-                MyFunctionCallAnalysis.functionStartTimes.set(iid, performance.now());
+                MyFunctionCallAnalysis.startTimesInvokeFunPre.set(iid, performance.now());
 
                 let newFunctionName: String;
                 f.name ? newFunctionName = f.name : newFunctionName = "Anonymous Function ";
@@ -354,12 +370,12 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const {name: fileName, loc} = sourceObject;
                 
                 // Calculating runTime
-                const startTime = MyFunctionCallAnalysis.functionStartTimes.get(iid);
+                const startTime = MyFunctionCallAnalysis.startTimesInvokeFunPre.get(iid);
                 const endTime = performance.now();
                 const runtime = startTime ? endTime - startTime : null;
 
                 // Removing startTime from the map
-                MyFunctionCallAnalysis.functionStartTimes.delete(iid);
+                MyFunctionCallAnalysis.startTimesInvokeFunPre.delete(iid);
 
                 let newFunctionName: String;
                 f.name ? newFunctionName = f.name : newFunctionName = "Anonymous Function ";
