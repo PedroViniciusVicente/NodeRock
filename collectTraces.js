@@ -3,19 +3,79 @@ const fs = require('fs');
 
 shell.echo("COMECOU!");
 
+let pathProjectFolder = "";
+let testFile = "";
+let parameters = "";
 
-// 1) EXECUTING THE FIRST TIME WITH THE ENTIRE MOCHA FILE TO SEE THE NAME OF THE ITs Tests
+// 0) CHOOSING THE TEST FILE THAT YOU WANT TO ANALYSE
+let chosenProject = "MeuTestMocha";
 
-//const pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/";
-//const testFile = "teste/testeMenor.js";
+switch (chosenProject) {
+    case "MeuTestMocha":
+        console.log("Executando analise do meu teste simples em Mocha");
+        pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/";
+        testFile = "teste/testeMenor.js";
+        break;
 
-const pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/";
-const testFile = "test.js";
-const parameters = "";
+    // case "MeuTestJest":
+    //     console.log("Executando analise do Jest");
+
+    //     break;
+
+    case "FPS": // known-bugs
+        console.log("Executando analise do fiware-pep-steelskin");
+        pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/fiware-pep-steelskin/";
+        testFile = "test/unit/race_simple.js";
+        parameters = "--timeout 50000";
+        break;
+
+    // case "NES": // known-bugs
+    //     console.log("Executando analise do nes");
+    //     pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/nes/";
+    //     testFile = "test/client_TP.js";
+    //     break;
+
+    case "DEL": // known-bugs, porem estou usando outro arquivo como entrypoint para teste
+        console.log("Executando analise do del");
+        pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/";
+        testFile = "test.js";
+        break;
+
+    // case "XLS": // known-bugs
+
+    //     break;
+
+    // case "ME1": // known-bugs
+    //     break;
+    // case "ME2": // known-bugs
+    //     break;
+    // case "ME3": // known-bugs
+    //     break;
+    // case "ME4": // known-bugs
+    //     break;
+    // case "NEDB1": // known-bugs
+    //     break;
+    // case "NEDB2": // known-bugs
+    //     break;
+
+    case "ARC": // exploratory
+        pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver/";
+        testFile = "test/archiver.js";
+        parameters = `--exit -t 10000 - g "archiver\ api\ #errors\ should\ allow\ continue\ on\ stat\ failing"`;
+        break;
+
+    case "OBJ": // exploratory
+        break;
+    default:
+        console.log("Esse projeto ainda nao esta nesse switch case!");
+}
 
 const entryFile = pathProjectFolder+testFile;
 
-let completCommand = "node ./dist/bin/nodeprof.js " + pathProjectFolder + " node_modules/.bin/_mocha " + testFile + " " + parameters;
+const completCommand = "node ./dist/bin/nodeprof.js " + pathProjectFolder + " node_modules/.bin/_mocha " + testFile + " " + parameters;
+
+// 1) EXECUTING THE FIRST TIME WITH THE ENTIRE MOCHA FILE TO SEE THE NAME OF THE ITs Tests
+
 //console.log(completCommand);
 
 shell.exec(completCommand);
@@ -74,9 +134,20 @@ try {
         console.log("executou com i = ", i);
         console.log("comando com o -g eh: ", completCommand + " -g " + vetorNomesDosIts[i]);
     }
+
 } catch (error) {
     console.error('Erro ao processar os elementos:', error);
 }
+
+// 4) COLLECT STATISTICS FROM THE LOGS OBTAINED (EXTRACT FEATURES)
+try {
+
+} catch (error) {
+    console.error('Erro ao processar os elementos:', error);
+}
+
+
+
 
 //shell.exec("pwd");
 //shell.exec("VERBOSE=1 yarn nodeprof /home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/ arquivoPrincipal.js");

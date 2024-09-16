@@ -175,4 +175,4 @@ src/Analysis/MyFunctionCallAnalysis/logHooksComScopeModule.json
 src/Analysis/MyFunctionCallAnalysis/logHooksComScopeAll.json
 src/Analysis/MyFunctionCallAnalysis/logHooksComScopeModuleEExcludeSource.json
 
-collectedTracesFolder
+collectedTracesFolder/
