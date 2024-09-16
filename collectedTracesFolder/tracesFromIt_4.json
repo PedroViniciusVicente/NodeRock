@@ -14,7 +14,7 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": ""
+    "iid": 1
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -98,7 +98,9 @@
     "Async_Hook_Id": 1,
     "Returned_Type": "function",
     "Returned_Value": "{\"returnVal\":\"'use strict';\\nvar assert = require('assert');\\nvar fs = require('fs-extra');\\nvar path = require('path');\\nvar pathExists = require('path-exists');\\nvar del = require('./');\\n\\nvar fixtures = [\\n\\t'1.tmp',\\n\\t'2.tmp',\\n\\t'3.tmp',\\n\\t'4.tmp',\\n\\t'.dot.tmp'\\n];\\n\\nbeforeEach(function () {\\n\\tfixtures.forEach(fs.ensureFileSync);\\n});\\n\\nafterEach(function () {\\n\\tfixtures.forEach(fs.removeSync);\\n});\\n\\nit('should delete files - async', function () {\\n\\treturn del(['*.tmp', '!1*']).then(function () {\\n\\t\\tassert(pathExists.sync('1.tmp'));\\n\\t\\tassert(!pathExists.sync('2.tmp'));\\n\\t\\tassert(!pathExists.sync('3.tmp'));\\n\\t\\tassert(!pathExists.sync('4.tmp'));\\n\\t\\tassert(pathExists.sync('.dot.tmp'));\\n\\t});\\n});\\n\\nit('should delete files - sync', function () {\\n\\tdel.sync(['*.tmp', '!1*']);\\n\\tassert(pathExists.sync('1.tmp'));\\n\\tassert(!pathExists.sync('2.tmp'));\\n\\tassert(!pathExists.sync('3.tmp'));\\n\\tassert(!pathExists.sync('4.tmp'));\\n\\tassert(pathExists.sync('.dot.tmp'));\\n});\\n\\nit('should take account of options - async', function () {\\n\\treturn del(['*.tmp', '!1*'], {dot: true}).then(function () {\\n\\t\\tassert(pathExists.sync('1.tmp'));\\n\\t\\tassert(!pathExists.sync('2.tmp'));\\n\\t\\tassert(!pathExists.sync('3.tmp'));\\n\\t\\tassert(!pathExists.sync('4.tmp'));\\n\\t\\tassert(!pathExists.sync('.dot.tmp'));\\n\\t});\\n});\\n\\nit('should take account of options - sync', function () {\\n\\tdel.sync(['*.tmp', '!1*'], {dot: true});\\n\\tassert(pathExists.sync('1.tmp'));\\n\\tassert(!pathExists.sync('2.tmp'));\\n\\tassert(!pathExists.sync('3.tmp'));\\n\\tassert(!pathExists.sync('4.tmp'));\\n\\tassert(!pathExists.sync('.dot.tmp'));\\n});\\n\\nit('cwd option - sync', function () {\\n\\tvar f = 'tmp/tmp.txt';\\n\\tfs.ensureFileSync(f);\\n\\tdel.sync('tmp.txt', {cwd: 'tmp'});\\n\\tassert(!pathExists.sync(f));\\n\\tfs.remove(f);\\n});\\n\\nit('cwd option - async', function () {\\n\\tvar f = 'tmp/tmp.txt';\\n\\tfs.ensureFileSync(f);\\n\\n\\treturn del('tmp.txt', {cwd: 'tmp'}).then(function () {\\n\\t\\tassert(!pathExists.sync(f));\\n\\t\\tfs.remove(f);\\n\\t});\\n});\\n\\nit('return deleted files - sync', function () {\\n\\tfs.ensureFileSync('tmp/tmp.txt');\\n\\tassert.deepEqual(del.sync('tmp.txt', {cwd: 'tmp'}), [path.resolve('tmp/tmp.txt')]);\\n});\\n\\nit('return deleted files - async', function () {\\n\\tfs.ensureFileSync('tmp/tmp.txt');\\n\\treturn del('tmp.txt', {cwd: 'tmp'}).then(function (deletedFiles) {\\n\\t\\tassert.deepEqual(deletedFiles, [path.resolve('tmp/tmp.txt')]);\\n\\t});\\n});\\n\\nit('options are optional', function () {\\n\\tdel.sync('1.tmp');\\n\\treturn del('1.tmp');\\n});\\n\"}",
-    "Excession_Occurred": {}
+    "Excession_Occurred": {},
+    "iid": 1,
+    "Runtime_ms": 27.34515899978578
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -115,7 +117,7 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "[object Object], function require(path) {\n      return mod.require(path);\n    }, [object Object], /home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js, /home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del"
+    "iid": 1
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -314,7 +316,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "assert",
     "iid": 4
 },
 {
@@ -348,11 +349,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "assert",
     "Tipo_Returned_Value": "function",
     "Returned_Value": "{\"result\":\"function ok(...args) {\\n  innerOk(ok, args.length, ...args);\\n}\"}",
     "iid": 4,
-    "Runtime_ms": 2.56275599822402
+    "Runtime_ms": 7.641361000016332
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -521,7 +521,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "fs-extra",
     "iid": 8
 },
 {
@@ -555,11 +554,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "fs-extra",
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"F_OK\":0,\"R_OK\":4,\"W_OK\":2,\"X_OK\":1,\"constants\":\"1\",\"promises\":\"2\",\"spaces\":2,\"jsonfile\":\"3\"},{\"UV_FS_SYMLINK_DIR\":1,\"UV_FS_SYMLINK_JUNCTION\":2,\"O_RDONLY\":0,\"O_WRONLY\":1,\"O_RDWR\":2,\"UV_DIRENT_UNKNOWN\":0,\"UV_DIRENT_FILE\":1,\"UV_DIRENT_DIR\":2,\"UV_DIRENT_LINK\":3,\"UV_DIRENT_FIFO\":4,\"UV_DIRENT_SOCKET\":5,\"UV_DIRENT_CHAR\":6,\"UV_DIRENT_BLOCK\":7,\"S_IFMT\":61440,\"S_IFREG\":32768,\"S_IFDIR\":16384,\"S_IFCHR\":8192,\"S_IFBLK\":24576,\"S_IFIFO\":4096,\"S_IFLNK\":40960,\"S_IFSOCK\":49152,\"O_CREAT\":64,\"O_EXCL\":128,\"UV_FS_O_FILEMAP\":0,\"O_NOCTTY\":256,\"O_TRUNC\":512,\"O_APPEND\":1024,\"O_DIRECTORY\":65536,\"O_NOATIME\":262144,\"O_NOFOLLOW\":131072,\"O_SYNC\":1052672,\"O_DSYNC\":4096,\"O_DIRECT\":16384,\"O_NONBLOCK\":2048,\"S_IRWXU\":448,\"S_IRUSR\":256,\"S_IWUSR\":128,\"S_IXUSR\":64,\"S_IRWXG\":56,\"S_IRGRP\":32,\"S_IWGRP\":16,\"S_IXGRP\":8,\"S_IRWXO\":7,\"S_IROTH\":4,\"S_IWOTH\":2,\"S_IXOTH\":1,\"F_OK\":0,\"R_OK\":4,\"W_OK\":2,\"X_OK\":1,\"UV_FS_COPYFILE_EXCL\":1,\"COPYFILE_EXCL\":1,\"UV_FS_COPYFILE_FICLONE\":2,\"COPYFILE_FICLONE\":2,\"UV_FS_COPYFILE_FICLONE_FORCE\":4,\"COPYFILE_FICLONE_FORCE\":4},{},{}]",
     "iid": 8,
-    "Runtime_ms": 319.349539000541
+    "Runtime_ms": 356.68324299994856
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -728,7 +726,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "path",
     "iid": 12
 },
 {
@@ -762,11 +759,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "path",
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"sep\":\"1\",\"delimiter\":\"2\",\"win32\":\"3\",\"posix\":\"0\"},\"/\",\":\",{\"sep\":\"4\",\"delimiter\":\"5\",\"win32\":\"3\",\"posix\":\"0\"},\"\\\\\",\";\"]",
     "iid": 12,
-    "Runtime_ms": 0.8494840003550053
+    "Runtime_ms": 0.9296399997547269
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -935,7 +931,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "path-exists",
     "iid": 16
 },
 {
@@ -969,11 +964,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "path-exists",
     "Tipo_Returned_Value": "function",
     "Returned_Value": "{\"result\":\"function (fp) {\\n\\tvar fn = typeof fs.access === 'function' ? fs.access : fs.stat;\\n\\n\\treturn new Promise(function (resolve) {\\n\\t\\tfn(fp, function (err) {\\n\\t\\t\\tresolve(!err);\\n\\t\\t});\\n\\t});\\n}\"}",
     "iid": 16,
-    "Runtime_ms": 10.18155099824071
+    "Runtime_ms": 9.770124000497162
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -1142,7 +1136,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "./",
     "iid": 20
 },
 {
@@ -1176,7 +1169,7 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": ""
+    "iid": 23
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -1260,7 +1253,9 @@
     "Async_Hook_Id": 1,
     "Returned_Type": "function",
     "Returned_Value": "{\"returnVal\":\"'use strict';\\nvar path = require('path');\\nvar globby = require('globby');\\nvar isPathCwd = require('is-path-cwd');\\nvar isPathInCwd = require('is-path-in-cwd');\\nvar objectAssign = require('object-assign');\\nvar Promise = require('pinkie-promise');\\nvar pify = require('pify');\\nvar rimraf = require('rimraf');\\nvar rimrafP = pify(rimraf, Promise);\\n\\nfunction safeCheck(file) {\\n\\tif (isPathCwd(file)) {\\n\\t\\tthrow new Error('Cannot delete the current working directory. Can be overriden with the `force` option.');\\n\\t}\\n\\n\\tif (!isPathInCwd(file)) {\\n\\t\\tthrow new Error('Cannot delete files/folders outside the current working directory. Can be overriden with the `force` option.');\\n\\t}\\n}\\n\\nmodule.exports = function (patterns, opts) {\\n\\topts = objectAssign({}, opts);\\n\\n\\tvar force = opts.force;\\n\\tdelete opts.force;\\n\\n\\treturn globby(patterns, opts).then(function (files) {\\n\\t\\treturn Promise.all(files.map(function (file) {\\n\\t\\t\\tif (!force) {\\n\\t\\t\\t\\tsafeCheck(file);\\n\\t\\t\\t}\\n\\n\\t\\t\\tfile = path.resolve(opts.cwd || '', file);\\n\\n\\t\\t\\treturn rimrafP(file).then(function () {\\n\\t\\t\\t\\treturn file;\\n\\t\\t\\t});\\n\\t\\t}));\\n\\t});\\n};\\n\\nmodule.exports.sync = function (patterns, opts) {\\n\\topts = objectAssign({}, opts);\\n\\n\\tvar force = opts.force;\\n\\tdelete opts.force;\\n\\n\\treturn globby.sync(patterns, opts).map(function (file) {\\n\\t\\tif (!force) {\\n\\t\\t\\tsafeCheck(file);\\n\\t\\t}\\n\\n\\t\\tfile = path.resolve(opts.cwd || '', file);\\n\\t\\trimraf.sync(file);\\n\\n\\t\\treturn file;\\n\\t});\\n};\\n\"}",
-    "Excession_Occurred": {}
+    "Excession_Occurred": {},
+    "iid": 23,
+    "Runtime_ms": 2.030469000339508
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -1277,7 +1272,7 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "[object Object], function require(path) {\n      return mod.require(path);\n    }, [object Object], /home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js, /home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del"
+    "iid": 23
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -1514,7 +1509,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "path",
     "iid": 27
 },
 {
@@ -1548,11 +1542,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "path",
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"sep\":\"1\",\"delimiter\":\"2\",\"win32\":\"3\",\"posix\":\"0\"},\"/\",\":\",{\"sep\":\"4\",\"delimiter\":\"5\",\"win32\":\"3\",\"posix\":\"0\"},\"\\\\\",\";\"]",
     "iid": 27,
-    "Runtime_ms": 0.8018009997904301
+    "Runtime_ms": 3.560376999899745
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -1721,7 +1714,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "globby",
     "iid": 31
 },
 {
@@ -1755,11 +1747,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "globby",
     "Tipo_Returned_Value": "function",
     "Returned_Value": "{\"result\":\"function (patterns, opts) {\\n\\tvar sortedPatterns = sortPatterns(patterns);\\n\\topts = opts || {};\\n\\n\\tif (sortedPatterns.positives.length === 0) {\\n\\t\\treturn Promise.resolve([]);\\n\\t}\\n\\n\\treturn Promise.all(sortedPatterns.positives.map(function (positive) {\\n\\t\\tvar globOpts = setIgnore(opts, sortedPatterns.negatives, positive.index);\\n\\t\\treturn pify(glob, Promise)(positive.pattern, globOpts);\\n\\t})).then(function (paths) {\\n\\t\\treturn arrayUnion.apply(null, paths);\\n\\t});\\n}\"}",
     "iid": 31,
-    "Runtime_ms": 65.35205199941993
+    "Runtime_ms": 79.61524799931794
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -1928,7 +1919,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "is-path-cwd",
     "iid": 35
 },
 {
@@ -1962,11 +1952,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "is-path-cwd",
     "Tipo_Returned_Value": "function",
     "Returned_Value": "{\"result\":\"function (str) {\\n\\treturn path.resolve(str) === path.resolve(process.cwd());\\n}\"}",
     "iid": 35,
-    "Runtime_ms": 4.52793800085783
+    "Runtime_ms": 11.11659299954772
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -2135,7 +2124,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "is-path-in-cwd",
     "iid": 39
 },
 {
@@ -2169,11 +2157,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "is-path-in-cwd",
     "Tipo_Returned_Value": "function",
     "Returned_Value": "{\"result\":\"function (str) {\\n\\treturn isPathInside(str, process.cwd());\\n}\"}",
     "iid": 39,
-    "Runtime_ms": 12.476796999573708
+    "Runtime_ms": 13.057250999845564
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -2342,7 +2329,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "object-assign",
     "iid": 43
 },
 {
@@ -2376,11 +2362,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "object-assign",
     "Tipo_Returned_Value": "function",
     "Returned_Value": "{\"result\":\"function assign() { [native code] }\"}",
     "iid": 43,
-    "Runtime_ms": 2.1408660002052784
+    "Runtime_ms": 1.5536839999258518
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -2549,7 +2534,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "pinkie-promise",
     "iid": 47
 },
 {
@@ -2583,11 +2567,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "pinkie-promise",
     "Tipo_Returned_Value": "function",
     "Returned_Value": "{\"result\":\"function Promise() { [native code] }\"}",
     "iid": 47,
-    "Runtime_ms": 2.0960629992187023
+    "Runtime_ms": 1.5444990005344152
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -2756,7 +2739,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "pify",
     "iid": 51
 },
 {
@@ -2790,11 +2772,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "pify",
     "Tipo_Returned_Value": "function",
     "Returned_Value": "{\"result\":\"function (fn, P, opts) {\\n\\tif (typeof P !== 'function') {\\n\\t\\topts = P;\\n\\t\\tP = Promise;\\n\\t}\\n\\n\\topts = opts || {};\\n\\n\\tif (typeof fn !== 'function') {\\n\\t\\treturn P.reject(new TypeError('Expected a function'));\\n\\t}\\n\\n\\treturn function () {\\n\\t\\tvar that = this;\\n\\t\\tvar args = [].slice.call(arguments);\\n\\n\\t\\treturn new P(function (resolve, reject) {\\n\\t\\t\\targs.push(function (err, result) {\\n\\t\\t\\t\\tif (err) {\\n\\t\\t\\t\\t\\treject(err);\\n\\t\\t\\t\\t} else if (opts.multiArgs) {\\n\\t\\t\\t\\t\\tresolve([].slice.call(arguments, 1));\\n\\t\\t\\t\\t} else {\\n\\t\\t\\t\\t\\tresolve(result);\\n\\t\\t\\t\\t}\\n\\t\\t\\t});\\n\\n\\t\\t\\tfn.apply(that, args);\\n\\t\\t});\\n\\t};\\n}\"}",
     "iid": 51,
-    "Runtime_ms": 4.697015002369881
+    "Runtime_ms": 5.070760999806225
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -2963,7 +2944,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "rimraf",
     "iid": 55
 },
 {
@@ -2997,11 +2977,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "rimraf",
     "Tipo_Returned_Value": "function",
     "Returned_Value": "{\"result\":\"function rimraf (p, cb_) {\\n  rimraf_(p, function cb (er) {\\n    if (er) {\\n      if (er.message.match(/^EBUSY/)) {\\n        // windows is annoying.\\n        if (!waitBusy.hasOwnProperty(p)) waitBusy[p] = maxBusyTries\\n        if (waitBusy[p]) {\\n          waitBusy[p] --\\n          // give it 100ms more each time\\n          var time = (maxBusyTries - waitBusy[p]) * 100\\n          return setTimeout(function () { rimraf_(p, cb) }, time)\\n        }\\n      }\\n      if (er.message.match(/^EMFILE/)) {\\n        setTimeout(function () {\\n          rimraf_(p, cb)\\n        }, timeout ++)\\n        return\\n      }\\n    }\\n    timeout = 0\\n    cb_(er)\\n  })\\n}\"}",
     "iid": 55,
-    "Runtime_ms": 8.340954001992941
+    "Runtime_ms": 3.8135879999026656
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -3220,7 +3199,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "function rimraf (p, cb_) {\n  rimraf_(p, function cb (er) {\n    if (er) {\n      if (er.message.match(/^EBUSY/)) {\n        // windows is annoying.\n        if (!waitBusy.hasOwnProperty(p)) waitBusy[p] = maxBusyTries\n        if (waitBusy[p]) {\n          waitBusy[p] --\n          // give it 100ms more each time\n          var time = (maxBusyTries - waitBusy[p]) * 100\n          return setTimeout(function () { rimraf_(p, cb) }, time)\n        }\n      }\n      if (er.message.match(/^EMFILE/)) {\n        setTimeout(function () {\n          rimraf_(p, cb)\n        }, timeout ++)\n        return\n      }\n    }\n    timeout = 0\n    cb_(er)\n  })\n}, function Promise() { [native code] }",
     "iid": 59
 },
 {
@@ -3254,11 +3232,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "function rimraf (p, cb_) {\n  rimraf_(p, function cb (er) {\n    if (er) {\n      if (er.message.match(/^EBUSY/)) {\n        // windows is annoying.\n        if (!waitBusy.hasOwnProperty(p)) waitBusy[p] = maxBusyTries\n        if (waitBusy[p]) {\n          waitBusy[p] --\n          // give it 100ms more each time\n          var time = (maxBusyTries - waitBusy[p]) * 100\n          return setTimeout(function () { rimraf_(p, cb) }, time)\n        }\n      }\n      if (er.message.match(/^EMFILE/)) {\n        setTimeout(function () {\n          rimraf_(p, cb)\n        }, timeout ++)\n        return\n      }\n    }\n    timeout = 0\n    cb_(er)\n  })\n}, function Promise() { [native code] }",
     "Tipo_Returned_Value": "function",
     "Returned_Value": "{\"result\":\"function () {\\n\\t\\tvar that = this;\\n\\t\\tvar args = [].slice.call(arguments);\\n\\n\\t\\treturn new P(function (resolve, reject) {\\n\\t\\t\\targs.push(function (err, result) {\\n\\t\\t\\t\\tif (err) {\\n\\t\\t\\t\\t\\treject(err);\\n\\t\\t\\t\\t} else if (opts.multiArgs) {\\n\\t\\t\\t\\t\\tresolve([].slice.call(arguments, 1));\\n\\t\\t\\t\\t} else {\\n\\t\\t\\t\\t\\tresolve(result);\\n\\t\\t\\t\\t}\\n\\t\\t\\t});\\n\\n\\t\\t\\tfn.apply(that, args);\\n\\t\\t});\\n\\t}\"}",
     "iid": 59,
-    "Runtime_ms": 1.5326279997825623
+    "Runtime_ms": 0.8842839999124408
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -3694,7 +3671,9 @@
     "Async_Hook_Id": 1,
     "Returned_Type": "undefined",
     "Returned_Value": "[]",
-    "Excession_Occurred": {}
+    "Excession_Occurred": {},
+    "iid": 23,
+    "Runtime_ms": 464.0533119998872
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -3711,11 +3690,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "require",
-    "Function_Arguments": "./",
     "Tipo_Returned_Value": "function",
     "Returned_Value": "{\"result\":\"function (patterns, opts) {\\n\\topts = objectAssign({}, opts);\\n\\n\\tvar force = opts.force;\\n\\tdelete opts.force;\\n\\n\\treturn globby(patterns, opts).then(function (files) {\\n\\t\\treturn Promise.all(files.map(function (file) {\\n\\t\\t\\tif (!force) {\\n\\t\\t\\t\\tsafeCheck(file);\\n\\t\\t\\t}\\n\\n\\t\\t\\tfile = path.resolve(opts.cwd || '', file);\\n\\n\\t\\t\\treturn rimrafP(file).then(function () {\\n\\t\\t\\t\\treturn file;\\n\\t\\t\\t});\\n\\t\\t}));\\n\\t});\\n}\"}",
     "iid": 20,
-    "Runtime_ms": 400.89386999979615
+    "Runtime_ms": 471.9793989993632
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -3970,7 +3948,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "beforeEach",
-    "Function_Arguments": "function () {\n\tfixtures.forEach(fs.ensureFileSync);\n}",
     "iid": 72
 },
 {
@@ -4004,11 +3981,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "beforeEach",
-    "Function_Arguments": "function () {\n\tfixtures.forEach(fs.ensureFileSync);\n}",
     "Tipo_Returned_Value": "undefined",
     "Returned_Value": "[]",
     "iid": 72,
-    "Runtime_ms": 5.20524499937892
+    "Runtime_ms": 6.062905999831855
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -4157,7 +4133,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "afterEach",
-    "Function_Arguments": "function () {\n\tfixtures.forEach(fs.removeSync);\n}",
     "iid": 75
 },
 {
@@ -4191,11 +4166,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "afterEach",
-    "Function_Arguments": "function () {\n\tfixtures.forEach(fs.removeSync);\n}",
     "Tipo_Returned_Value": "undefined",
     "Returned_Value": "[]",
     "iid": 75,
-    "Runtime_ms": 1.4411710016429424
+    "Runtime_ms": 1.616173000074923
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -4394,7 +4368,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "should delete files - async, function () {\n\treturn del(['*.tmp', '!1*']).then(function () {\n\t\tassert(pathExists.sync('1.tmp'));\n\t\tassert(!pathExists.sync('2.tmp'));\n\t\tassert(!pathExists.sync('3.tmp'));\n\t\tassert(!pathExists.sync('4.tmp'));\n\t\tassert(pathExists.sync('.dot.tmp'));\n\t});\n}",
     "iid": 78
 },
 {
@@ -4428,11 +4401,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "should delete files - async, function () {\n\treturn del(['*.tmp', '!1*']).then(function () {\n\t\tassert(pathExists.sync('1.tmp'));\n\t\tassert(!pathExists.sync('2.tmp'));\n\t\tassert(!pathExists.sync('3.tmp'));\n\t\tassert(!pathExists.sync('4.tmp'));\n\t\tassert(pathExists.sync('.dot.tmp'));\n\t});\n}",
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"title\":\"1\",\"body\":\"2\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},\"should delete files - async\",\"function () {\\n\\treturn del(['*.tmp', '!1*']).then(function () {\\n\\t\\tassert(pathExists.sync('1.tmp'));\\n\\t\\tassert(!pathExists.sync('2.tmp'));\\n\\t\\tassert(!pathExists.sync('3.tmp'));\\n\\t\\tassert(!pathExists.sync('4.tmp'));\\n\\t\\tassert(pathExists.sync('.dot.tmp'));\\n\\t});\\n}\",\"test\",\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js\",{\"title\":\"7\",\"ctx\":\"6\",\"suites\":\"8\",\"tests\":\"9\",\"pending\":false,\"_beforeEach\":\"10\",\"_beforeAll\":\"11\",\"_afterEach\":\"12\",\"_afterAll\":\"13\",\"root\":true,\"_timeout\":2000,\"_enableTimeouts\":true,\"_slow\":75,\"_retries\":-1,\"_onlyTests\":\"14\",\"_onlySuites\":\"15\",\"delayed\":false,\"_events\":\"16\",\"_eventsCount\":2},{},\"\",[],[\"0\"],[\"17\"],[],[\"18\"],[],[],[],{\"pre-require\":\"19\"},{\"title\":\"20\",\"body\":\"21\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"22\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"23\",\"body\":\"24\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"22\",\"parent\":\"5\",\"ctx\":\"6\"},[null,null],\"\\\"before each\\\" hook\",\"function () {\\n\\tfixtures.forEach(fs.ensureFileSync);\\n}\",\"hook\",\"\\\"after each\\\" hook\",\"function () {\\n\\tfixtures.forEach(fs.removeSync);\\n}\"]",
     "iid": 78,
-    "Runtime_ms": 1.46628899872303
+    "Runtime_ms": 1.5719450004398823
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -4631,7 +4603,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "should delete files - sync, function () {\n\tdel.sync(['*.tmp', '!1*']);\n\tassert(pathExists.sync('1.tmp'));\n\tassert(!pathExists.sync('2.tmp'));\n\tassert(!pathExists.sync('3.tmp'));\n\tassert(!pathExists.sync('4.tmp'));\n\tassert(pathExists.sync('.dot.tmp'));\n}",
     "iid": 82
 },
 {
@@ -4665,11 +4636,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "should delete files - sync, function () {\n\tdel.sync(['*.tmp', '!1*']);\n\tassert(pathExists.sync('1.tmp'));\n\tassert(!pathExists.sync('2.tmp'));\n\tassert(!pathExists.sync('3.tmp'));\n\tassert(!pathExists.sync('4.tmp'));\n\tassert(pathExists.sync('.dot.tmp'));\n}",
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"title\":\"1\",\"body\":\"2\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},\"should delete files - sync\",\"function () {\\n\\tdel.sync(['*.tmp', '!1*']);\\n\\tassert(pathExists.sync('1.tmp'));\\n\\tassert(!pathExists.sync('2.tmp'));\\n\\tassert(!pathExists.sync('3.tmp'));\\n\\tassert(!pathExists.sync('4.tmp'));\\n\\tassert(pathExists.sync('.dot.tmp'));\\n}\",\"test\",\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js\",{\"title\":\"7\",\"ctx\":\"6\",\"suites\":\"8\",\"tests\":\"9\",\"pending\":false,\"_beforeEach\":\"10\",\"_beforeAll\":\"11\",\"_afterEach\":\"12\",\"_afterAll\":\"13\",\"root\":true,\"_timeout\":2000,\"_enableTimeouts\":true,\"_slow\":75,\"_retries\":-1,\"_onlyTests\":\"14\",\"_onlySuites\":\"15\",\"delayed\":false,\"_events\":\"16\",\"_eventsCount\":2},{},\"\",[],[\"17\",\"0\"],[\"18\"],[],[\"19\"],[],[],[],{\"pre-require\":\"20\"},{\"title\":\"21\",\"body\":\"22\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"23\",\"body\":\"24\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"25\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"26\",\"body\":\"27\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"25\",\"parent\":\"5\",\"ctx\":\"6\"},[null,null],\"should delete files - async\",\"function () {\\n\\treturn del(['*.tmp', '!1*']).then(function () {\\n\\t\\tassert(pathExists.sync('1.tmp'));\\n\\t\\tassert(!pathExists.sync('2.tmp'));\\n\\t\\tassert(!pathExists.sync('3.tmp'));\\n\\t\\tassert(!pathExists.sync('4.tmp'));\\n\\t\\tassert(pathExists.sync('.dot.tmp'));\\n\\t});\\n}\",\"\\\"before each\\\" hook\",\"function () {\\n\\tfixtures.forEach(fs.ensureFileSync);\\n}\",\"hook\",\"\\\"after each\\\" hook\",\"function () {\\n\\tfixtures.forEach(fs.removeSync);\\n}\"]",
     "iid": 82,
-    "Runtime_ms": 0.7843459993600845
+    "Runtime_ms": 0.523390999995172
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -4868,7 +4838,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "should take account of options - async, function () {\n\treturn del(['*.tmp', '!1*'], {dot: true}).then(function () {\n\t\tassert(pathExists.sync('1.tmp'));\n\t\tassert(!pathExists.sync('2.tmp'));\n\t\tassert(!pathExists.sync('3.tmp'));\n\t\tassert(!pathExists.sync('4.tmp'));\n\t\tassert(!pathExists.sync('.dot.tmp'));\n\t});\n}",
     "iid": 86
 },
 {
@@ -4902,11 +4871,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "should take account of options - async, function () {\n\treturn del(['*.tmp', '!1*'], {dot: true}).then(function () {\n\t\tassert(pathExists.sync('1.tmp'));\n\t\tassert(!pathExists.sync('2.tmp'));\n\t\tassert(!pathExists.sync('3.tmp'));\n\t\tassert(!pathExists.sync('4.tmp'));\n\t\tassert(!pathExists.sync('.dot.tmp'));\n\t});\n}",
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"title\":\"1\",\"body\":\"2\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},\"should take account of options - async\",\"function () {\\n\\treturn del(['*.tmp', '!1*'], {dot: true}).then(function () {\\n\\t\\tassert(pathExists.sync('1.tmp'));\\n\\t\\tassert(!pathExists.sync('2.tmp'));\\n\\t\\tassert(!pathExists.sync('3.tmp'));\\n\\t\\tassert(!pathExists.sync('4.tmp'));\\n\\t\\tassert(!pathExists.sync('.dot.tmp'));\\n\\t});\\n}\",\"test\",\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js\",{\"title\":\"7\",\"ctx\":\"6\",\"suites\":\"8\",\"tests\":\"9\",\"pending\":false,\"_beforeEach\":\"10\",\"_beforeAll\":\"11\",\"_afterEach\":\"12\",\"_afterAll\":\"13\",\"root\":true,\"_timeout\":2000,\"_enableTimeouts\":true,\"_slow\":75,\"_retries\":-1,\"_onlyTests\":\"14\",\"_onlySuites\":\"15\",\"delayed\":false,\"_events\":\"16\",\"_eventsCount\":2},{},\"\",[],[\"17\",\"18\",\"0\"],[\"19\"],[],[\"20\"],[],[],[],{\"pre-require\":\"21\"},{\"title\":\"22\",\"body\":\"23\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"24\",\"body\":\"25\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"26\",\"body\":\"27\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"28\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"29\",\"body\":\"30\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"28\",\"parent\":\"5\",\"ctx\":\"6\"},[null,null],\"should delete files - async\",\"function () {\\n\\treturn del(['*.tmp', '!1*']).then(function () {\\n\\t\\tassert(pathExists.sync('1.tmp'));\\n\\t\\tassert(!pathExists.sync('2.tmp'));\\n\\t\\tassert(!pathExists.sync('3.tmp'));\\n\\t\\tassert(!pathExists.sync('4.tmp'));\\n\\t\\tassert(pathExists.sync('.dot.tmp'));\\n\\t});\\n}\",\"should delete files - sync\",\"function () {\\n\\tdel.sync(['*.tmp', '!1*']);\\n\\tassert(pathExists.sync('1.tmp'));\\n\\tassert(!pathExists.sync('2.tmp'));\\n\\tassert(!pathExists.sync('3.tmp'));\\n\\tassert(!pathExists.sync('4.tmp'));\\n\\tassert(pathExists.sync('.dot.tmp'));\\n}\",\"\\\"before each\\\" hook\",\"function () {\\n\\tfixtures.forEach(fs.ensureFileSync);\\n}\",\"hook\",\"\\\"after each\\\" hook\",\"function () {\\n\\tfixtures.forEach(fs.removeSync);\\n}\"]",
     "iid": 86,
-    "Runtime_ms": 0.7538920007646084
+    "Runtime_ms": 0.5008430005982518
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -5105,7 +5073,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "should take account of options - sync, function () {\n\tdel.sync(['*.tmp', '!1*'], {dot: true});\n\tassert(pathExists.sync('1.tmp'));\n\tassert(!pathExists.sync('2.tmp'));\n\tassert(!pathExists.sync('3.tmp'));\n\tassert(!pathExists.sync('4.tmp'));\n\tassert(!pathExists.sync('.dot.tmp'));\n}",
     "iid": 90
 },
 {
@@ -5139,11 +5106,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "should take account of options - sync, function () {\n\tdel.sync(['*.tmp', '!1*'], {dot: true});\n\tassert(pathExists.sync('1.tmp'));\n\tassert(!pathExists.sync('2.tmp'));\n\tassert(!pathExists.sync('3.tmp'));\n\tassert(!pathExists.sync('4.tmp'));\n\tassert(!pathExists.sync('.dot.tmp'));\n}",
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"title\":\"1\",\"body\":\"2\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},\"should take account of options - sync\",\"function () {\\n\\tdel.sync(['*.tmp', '!1*'], {dot: true});\\n\\tassert(pathExists.sync('1.tmp'));\\n\\tassert(!pathExists.sync('2.tmp'));\\n\\tassert(!pathExists.sync('3.tmp'));\\n\\tassert(!pathExists.sync('4.tmp'));\\n\\tassert(!pathExists.sync('.dot.tmp'));\\n}\",\"test\",\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js\",{\"title\":\"7\",\"ctx\":\"6\",\"suites\":\"8\",\"tests\":\"9\",\"pending\":false,\"_beforeEach\":\"10\",\"_beforeAll\":\"11\",\"_afterEach\":\"12\",\"_afterAll\":\"13\",\"root\":true,\"_timeout\":2000,\"_enableTimeouts\":true,\"_slow\":75,\"_retries\":-1,\"_onlyTests\":\"14\",\"_onlySuites\":\"15\",\"delayed\":false,\"_events\":\"16\",\"_eventsCount\":2},{},\"\",[],[\"17\",\"18\",\"19\",\"0\"],[\"20\"],[],[\"21\"],[],[],[],{\"pre-require\":\"22\"},{\"title\":\"23\",\"body\":\"24\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"25\",\"body\":\"26\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"27\",\"body\":\"28\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"29\",\"body\":\"30\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"31\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"32\",\"body\":\"33\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"31\",\"parent\":\"5\",\"ctx\":\"6\"},[null,null],\"should delete files - async\",\"function () {\\n\\treturn del(['*.tmp', '!1*']).then(function () {\\n\\t\\tassert(pathExists.sync('1.tmp'));\\n\\t\\tassert(!pathExists.sync('2.tmp'));\\n\\t\\tassert(!pathExists.sync('3.tmp'));\\n\\t\\tassert(!pathExists.sync('4.tmp'));\\n\\t\\tassert(pathExists.sync('.dot.tmp'));\\n\\t});\\n}\",\"should delete files - sync\",\"function () {\\n\\tdel.sync(['*.tmp', '!1*']);\\n\\tassert(pathExists.sync('1.tmp'));\\n\\tassert(!pathExists.sync('2.tmp'));\\n\\tassert(!pathExists.sync('3.tmp'));\\n\\tassert(!pathExists.sync('4.tmp'));\\n\\tassert(pathExists.sync('.dot.tmp'));\\n}\",\"should take account of options - async\",\"function () {\\n\\treturn del(['*.tmp', '!1*'], {dot: true}).then(function () {\\n\\t\\tassert(pathExists.sync('1.tmp'));\\n\\t\\tassert(!pathExists.sync('2.tmp'));\\n\\t\\tassert(!pathExists.sync('3.tmp'));\\n\\t\\tassert(!pathExists.sync('4.tmp'));\\n\\t\\tassert(!pathExists.sync('.dot.tmp'));\\n\\t});\\n}\",\"\\\"before each\\\" hook\",\"function () {\\n\\tfixtures.forEach(fs.ensureFileSync);\\n}\",\"hook\",\"\\\"after each\\\" hook\",\"function () {\\n\\tfixtures.forEach(fs.removeSync);\\n}\"]",
     "iid": 90,
-    "Runtime_ms": 0.7707460001111031
+    "Runtime_ms": 0.4866399997845292
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -5342,7 +5308,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "cwd option - sync, function () {\n\tvar f = 'tmp/tmp.txt';\n\tfs.ensureFileSync(f);\n\tdel.sync('tmp.txt', {cwd: 'tmp'});\n\tassert(!pathExists.sync(f));\n\tfs.remove(f);\n}",
     "iid": 94
 },
 {
@@ -5376,11 +5341,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "cwd option - sync, function () {\n\tvar f = 'tmp/tmp.txt';\n\tfs.ensureFileSync(f);\n\tdel.sync('tmp.txt', {cwd: 'tmp'});\n\tassert(!pathExists.sync(f));\n\tfs.remove(f);\n}",
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"title\":\"1\",\"body\":\"2\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},\"cwd option - sync\",\"function () {\\n\\tvar f = 'tmp/tmp.txt';\\n\\tfs.ensureFileSync(f);\\n\\tdel.sync('tmp.txt', {cwd: 'tmp'});\\n\\tassert(!pathExists.sync(f));\\n\\tfs.remove(f);\\n}\",\"test\",\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js\",{\"title\":\"7\",\"ctx\":\"6\",\"suites\":\"8\",\"tests\":\"9\",\"pending\":false,\"_beforeEach\":\"10\",\"_beforeAll\":\"11\",\"_afterEach\":\"12\",\"_afterAll\":\"13\",\"root\":true,\"_timeout\":2000,\"_enableTimeouts\":true,\"_slow\":75,\"_retries\":-1,\"_onlyTests\":\"14\",\"_onlySuites\":\"15\",\"delayed\":false,\"_events\":\"16\",\"_eventsCount\":2},{},\"\",[],[\"17\",\"18\",\"19\",\"20\",\"0\"],[\"21\"],[],[\"22\"],[],[],[],{\"pre-require\":\"23\"},{\"title\":\"24\",\"body\":\"25\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"26\",\"body\":\"27\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"28\",\"body\":\"29\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"30\",\"body\":\"31\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"32\",\"body\":\"33\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"34\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"35\",\"body\":\"36\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"34\",\"parent\":\"5\",\"ctx\":\"6\"},[null,null],\"should delete files - async\",\"function () {\\n\\treturn del(['*.tmp', '!1*']).then(function () {\\n\\t\\tassert(pathExists.sync('1.tmp'));\\n\\t\\tassert(!pathExists.sync('2.tmp'));\\n\\t\\tassert(!pathExists.sync('3.tmp'));\\n\\t\\tassert(!pathExists.sync('4.tmp'));\\n\\t\\tassert(pathExists.sync('.dot.tmp'));\\n\\t});\\n}\",\"should delete files - sync\",\"function () {\\n\\tdel.sync(['*.tmp', '!1*']);\\n\\tassert(pathExists.sync('1.tmp'));\\n\\tassert(!pathExists.sync('2.tmp'));\\n\\tassert(!pathExists.sync('3.tmp'));\\n\\tassert(!pathExists.sync('4.tmp'));\\n\\tassert(pathExists.sync('.dot.tmp'));\\n}\",\"should take account of options - async\",\"function () {\\n\\treturn del(['*.tmp', '!1*'], {dot: true}).then(function () {\\n\\t\\tassert(pathExists.sync('1.tmp'));\\n\\t\\tassert(!pathExists.sync('2.tmp'));\\n\\t\\tassert(!pathExists.sync('3.tmp'));\\n\\t\\tassert(!pathExists.sync('4.tmp'));\\n\\t\\tassert(!pathExists.sync('.dot.tmp'));\\n\\t});\\n}\",\"should take account of options - sync\",\"function () {\\n\\tdel.sync(['*.tmp', '!1*'], {dot: true});\\n\\tassert(pathExists.sync('1.tmp'));\\n\\tassert(!pathExists.sync('2.tmp'));\\n\\tassert(!pathExists.sync('3.tmp'));\\n\\tassert(!pathExists.sync('4.tmp'));\\n\\tassert(!pathExists.sync('.dot.tmp'));\\n}\",\"\\\"before each\\\" hook\",\"function () {\\n\\tfixtures.forEach(fs.ensureFileSync);\\n}\",\"hook\",\"\\\"after each\\\" hook\",\"function () {\\n\\tfixtures.forEach(fs.removeSync);\\n}\"]",
     "iid": 94,
-    "Runtime_ms": 0.7420339994132519
+    "Runtime_ms": 0.33089599944651127
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -5579,7 +5543,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "cwd option - async, function () {\n\tvar f = 'tmp/tmp.txt';\n\tfs.ensureFileSync(f);\n\n\treturn del('tmp.txt', {cwd: 'tmp'}).then(function () {\n\t\tassert(!pathExists.sync(f));\n\t\tfs.remove(f);\n\t});\n}",
     "iid": 98
 },
 {
@@ -5613,11 +5576,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "cwd option - async, function () {\n\tvar f = 'tmp/tmp.txt';\n\tfs.ensureFileSync(f);\n\n\treturn del('tmp.txt', {cwd: 'tmp'}).then(function () {\n\t\tassert(!pathExists.sync(f));\n\t\tfs.remove(f);\n\t});\n}",
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"title\":\"1\",\"body\":\"2\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},\"cwd option - async\",\"function () {\\n\\tvar f = 'tmp/tmp.txt';\\n\\tfs.ensureFileSync(f);\\n\\n\\treturn del('tmp.txt', {cwd: 'tmp'}).then(function () {\\n\\t\\tassert(!pathExists.sync(f));\\n\\t\\tfs.remove(f);\\n\\t});\\n}\",\"test\",\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js\",{\"title\":\"7\",\"ctx\":\"6\",\"suites\":\"8\",\"tests\":\"9\",\"pending\":false,\"_beforeEach\":\"10\",\"_beforeAll\":\"11\",\"_afterEach\":\"12\",\"_afterAll\":\"13\",\"root\":true,\"_timeout\":2000,\"_enableTimeouts\":true,\"_slow\":75,\"_retries\":-1,\"_onlyTests\":\"14\",\"_onlySuites\":\"15\",\"delayed\":false,\"_events\":\"16\",\"_eventsCount\":2},{},\"\",[],[\"17\",\"18\",\"19\",\"20\",\"21\",\"0\"],[\"22\"],[],[\"23\"],[],[],[],{\"pre-require\":\"24\"},{\"title\":\"25\",\"body\":\"26\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"27\",\"body\":\"28\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"29\",\"body\":\"30\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"31\",\"body\":\"32\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"33\",\"body\":\"34\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"35\",\"body\":\"36\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"37\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"38\",\"body\":\"39\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"37\",\"parent\":\"5\",\"ctx\":\"6\"},[null,null],\"should delete files - async\",\"function () {\\n\\treturn del(['*.tmp', '!1*']).then(function () {\\n\\t\\tassert(pathExists.sync('1.tmp'));\\n\\t\\tassert(!pathExists.sync('2.tmp'));\\n\\t\\tassert(!pathExists.sync('3.tmp'));\\n\\t\\tassert(!pathExists.sync('4.tmp'));\\n\\t\\tassert(pathExists.sync('.dot.tmp'));\\n\\t});\\n}\",\"should delete files - sync\",\"function () {\\n\\tdel.sync(['*.tmp', '!1*']);\\n\\tassert(pathExists.sync('1.tmp'));\\n\\tassert(!pathExists.sync('2.tmp'));\\n\\tassert(!pathExists.sync('3.tmp'));\\n\\tassert(!pathExists.sync('4.tmp'));\\n\\tassert(pathExists.sync('.dot.tmp'));\\n}\",\"should take account of options - async\",\"function () {\\n\\treturn del(['*.tmp', '!1*'], {dot: true}).then(function () {\\n\\t\\tassert(pathExists.sync('1.tmp'));\\n\\t\\tassert(!pathExists.sync('2.tmp'));\\n\\t\\tassert(!pathExists.sync('3.tmp'));\\n\\t\\tassert(!pathExists.sync('4.tmp'));\\n\\t\\tassert(!pathExists.sync('.dot.tmp'));\\n\\t});\\n}\",\"should take account of options - sync\",\"function () {\\n\\tdel.sync(['*.tmp', '!1*'], {dot: true});\\n\\tassert(pathExists.sync('1.tmp'));\\n\\tassert(!pathExists.sync('2.tmp'));\\n\\tassert(!pathExists.sync('3.tmp'));\\n\\tassert(!pathExists.sync('4.tmp'));\\n\\tassert(!pathExists.sync('.dot.tmp'));\\n}\",\"cwd option - sync\",\"function () {\\n\\tvar f = 'tmp/tmp.txt';\\n\\tfs.ensureFileSync(f);\\n\\tdel.sync('tmp.txt', {cwd: 'tmp'});\\n\\tassert(!pathExists.sync(f));\\n\\tfs.remove(f);\\n}\",\"\\\"before each\\\" hook\",\"function () {\\n\\tfixtures.forEach(fs.ensureFileSync);\\n}\",\"hook\",\"\\\"after each\\\" hook\",\"function () {\\n\\tfixtures.forEach(fs.removeSync);\\n}\"]",
     "iid": 98,
-    "Runtime_ms": 0.7115859985351562
+    "Runtime_ms": 0.30157100036740303
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -5816,7 +5778,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "return deleted files - sync, function () {\n\tfs.ensureFileSync('tmp/tmp.txt');\n\tassert.deepEqual(del.sync('tmp.txt', {cwd: 'tmp'}), [path.resolve('tmp/tmp.txt')]);\n}",
     "iid": 102
 },
 {
@@ -5850,11 +5811,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "return deleted files - sync, function () {\n\tfs.ensureFileSync('tmp/tmp.txt');\n\tassert.deepEqual(del.sync('tmp.txt', {cwd: 'tmp'}), [path.resolve('tmp/tmp.txt')]);\n}",
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"title\":\"1\",\"body\":\"2\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},\"return deleted files - sync\",\"function () {\\n\\tfs.ensureFileSync('tmp/tmp.txt');\\n\\tassert.deepEqual(del.sync('tmp.txt', {cwd: 'tmp'}), [path.resolve('tmp/tmp.txt')]);\\n}\",\"test\",\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js\",{\"title\":\"7\",\"ctx\":\"6\",\"suites\":\"8\",\"tests\":\"9\",\"pending\":false,\"_beforeEach\":\"10\",\"_beforeAll\":\"11\",\"_afterEach\":\"12\",\"_afterAll\":\"13\",\"root\":true,\"_timeout\":2000,\"_enableTimeouts\":true,\"_slow\":75,\"_retries\":-1,\"_onlyTests\":\"14\",\"_onlySuites\":\"15\",\"delayed\":false,\"_events\":\"16\",\"_eventsCount\":2},{},\"\",[],[\"17\",\"18\",\"19\",\"20\",\"21\",\"22\",\"0\"],[\"23\"],[],[\"24\"],[],[],[],{\"pre-require\":\"25\"},{\"title\":\"26\",\"body\":\"27\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"28\",\"body\":\"29\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"30\",\"body\":\"31\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"32\",\"body\":\"33\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"34\",\"body\":\"35\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"36\",\"body\":\"37\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"38\",\"body\":\"39\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"40\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"41\",\"body\":\"42\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"40\",\"parent\":\"5\",\"ctx\":\"6\"},[null,null],\"should delete files - async\",\"function () {\\n\\treturn del(['*.tmp', '!1*']).then(function () {\\n\\t\\tassert(pathExists.sync('1.tmp'));\\n\\t\\tassert(!pathExists.sync('2.tmp'));\\n\\t\\tassert(!pathExists.sync('3.tmp'));\\n\\t\\tassert(!pathExists.sync('4.tmp'));\\n\\t\\tassert(pathExists.sync('.dot.tmp'));\\n\\t});\\n}\",\"should delete files - sync\",\"function () {\\n\\tdel.sync(['*.tmp', '!1*']);\\n\\tassert(pathExists.sync('1.tmp'));\\n\\tassert(!pathExists.sync('2.tmp'));\\n\\tassert(!pathExists.sync('3.tmp'));\\n\\tassert(!pathExists.sync('4.tmp'));\\n\\tassert(pathExists.sync('.dot.tmp'));\\n}\",\"should take account of options - async\",\"function () {\\n\\treturn del(['*.tmp', '!1*'], {dot: true}).then(function () {\\n\\t\\tassert(pathExists.sync('1.tmp'));\\n\\t\\tassert(!pathExists.sync('2.tmp'));\\n\\t\\tassert(!pathExists.sync('3.tmp'));\\n\\t\\tassert(!pathExists.sync('4.tmp'));\\n\\t\\tassert(!pathExists.sync('.dot.tmp'));\\n\\t});\\n}\",\"should take account of options - sync\",\"function () {\\n\\tdel.sync(['*.tmp', '!1*'], {dot: true});\\n\\tassert(pathExists.sync('1.tmp'));\\n\\tassert(!pathExists.sync('2.tmp'));\\n\\tassert(!pathExists.sync('3.tmp'));\\n\\tassert(!pathExists.sync('4.tmp'));\\n\\tassert(!pathExists.sync('.dot.tmp'));\\n}\",\"cwd option - sync\",\"function () {\\n\\tvar f = 'tmp/tmp.txt';\\n\\tfs.ensureFileSync(f);\\n\\tdel.sync('tmp.txt', {cwd: 'tmp'});\\n\\tassert(!pathExists.sync(f));\\n\\tfs.remove(f);\\n}\",\"cwd option - async\",\"function () {\\n\\tvar f = 'tmp/tmp.txt';\\n\\tfs.ensureFileSync(f);\\n\\n\\treturn del('tmp.txt', {cwd: 'tmp'}).then(function () {\\n\\t\\tassert(!pathExists.sync(f));\\n\\t\\tfs.remove(f);\\n\\t});\\n}\",\"\\\"before each\\\" hook\",\"function () {\\n\\tfixtures.forEach(fs.ensureFileSync);\\n}\",\"hook\",\"\\\"after each\\\" hook\",\"function () {\\n\\tfixtures.forEach(fs.removeSync);\\n}\"]",
     "iid": 102,
-    "Runtime_ms": 0.4642920009791851
+    "Runtime_ms": 0.5471430001780391
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -6053,7 +6013,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "return deleted files - async, function () {\n\tfs.ensureFileSync('tmp/tmp.txt');\n\treturn del('tmp.txt', {cwd: 'tmp'}).then(function (deletedFiles) {\n\t\tassert.deepEqual(deletedFiles, [path.resolve('tmp/tmp.txt')]);\n\t});\n}",
     "iid": 106
 },
 {
@@ -6087,11 +6046,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "return deleted files - async, function () {\n\tfs.ensureFileSync('tmp/tmp.txt');\n\treturn del('tmp.txt', {cwd: 'tmp'}).then(function (deletedFiles) {\n\t\tassert.deepEqual(deletedFiles, [path.resolve('tmp/tmp.txt')]);\n\t});\n}",
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"title\":\"1\",\"body\":\"2\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},\"return deleted files - async\",\"function () {\\n\\tfs.ensureFileSync('tmp/tmp.txt');\\n\\treturn del('tmp.txt', {cwd: 'tmp'}).then(function (deletedFiles) {\\n\\t\\tassert.deepEqual(deletedFiles, [path.resolve('tmp/tmp.txt')]);\\n\\t});\\n}\",\"test\",\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js\",{\"title\":\"7\",\"ctx\":\"6\",\"suites\":\"8\",\"tests\":\"9\",\"pending\":false,\"_beforeEach\":\"10\",\"_beforeAll\":\"11\",\"_afterEach\":\"12\",\"_afterAll\":\"13\",\"root\":true,\"_timeout\":2000,\"_enableTimeouts\":true,\"_slow\":75,\"_retries\":-1,\"_onlyTests\":\"14\",\"_onlySuites\":\"15\",\"delayed\":false,\"_events\":\"16\",\"_eventsCount\":2},{},\"\",[],[\"17\",\"18\",\"19\",\"20\",\"21\",\"22\",\"23\",\"0\"],[\"24\"],[],[\"25\"],[],[],[],{\"pre-require\":\"26\"},{\"title\":\"27\",\"body\":\"28\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"29\",\"body\":\"30\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"31\",\"body\":\"32\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"33\",\"body\":\"34\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"35\",\"body\":\"36\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"37\",\"body\":\"38\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"39\",\"body\":\"40\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"41\",\"body\":\"42\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"43\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"44\",\"body\":\"45\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"43\",\"parent\":\"5\",\"ctx\":\"6\"},[null,null],\"should delete files - async\",\"function () {\\n\\treturn del(['*.tmp', '!1*']).then(function () {\\n\\t\\tassert(pathExists.sync('1.tmp'));\\n\\t\\tassert(!pathExists.sync('2.tmp'));\\n\\t\\tassert(!pathExists.sync('3.tmp'));\\n\\t\\tassert(!pathExists.sync('4.tmp'));\\n\\t\\tassert(pathExists.sync('.dot.tmp'));\\n\\t});\\n}\",\"should delete files - sync\",\"function () {\\n\\tdel.sync(['*.tmp', '!1*']);\\n\\tassert(pathExists.sync('1.tmp'));\\n\\tassert(!pathExists.sync('2.tmp'));\\n\\tassert(!pathExists.sync('3.tmp'));\\n\\tassert(!pathExists.sync('4.tmp'));\\n\\tassert(pathExists.sync('.dot.tmp'));\\n}\",\"should take account of options - async\",\"function () {\\n\\treturn del(['*.tmp', '!1*'], {dot: true}).then(function () {\\n\\t\\tassert(pathExists.sync('1.tmp'));\\n\\t\\tassert(!pathExists.sync('2.tmp'));\\n\\t\\tassert(!pathExists.sync('3.tmp'));\\n\\t\\tassert(!pathExists.sync('4.tmp'));\\n\\t\\tassert(!pathExists.sync('.dot.tmp'));\\n\\t});\\n}\",\"should take account of options - sync\",\"function () {\\n\\tdel.sync(['*.tmp', '!1*'], {dot: true});\\n\\tassert(pathExists.sync('1.tmp'));\\n\\tassert(!pathExists.sync('2.tmp'));\\n\\tassert(!pathExists.sync('3.tmp'));\\n\\tassert(!pathExists.sync('4.tmp'));\\n\\tassert(!pathExists.sync('.dot.tmp'));\\n}\",\"cwd option - sync\",\"function () {\\n\\tvar f = 'tmp/tmp.txt';\\n\\tfs.ensureFileSync(f);\\n\\tdel.sync('tmp.txt', {cwd: 'tmp'});\\n\\tassert(!pathExists.sync(f));\\n\\tfs.remove(f);\\n}\",\"cwd option - async\",\"function () {\\n\\tvar f = 'tmp/tmp.txt';\\n\\tfs.ensureFileSync(f);\\n\\n\\treturn del('tmp.txt', {cwd: 'tmp'}).then(function () {\\n\\t\\tassert(!pathExists.sync(f));\\n\\t\\tfs.remove(f);\\n\\t});\\n}\",\"return deleted files - sync\",\"function () {\\n\\tfs.ensureFileSync('tmp/tmp.txt');\\n\\tassert.deepEqual(del.sync('tmp.txt', {cwd: 'tmp'}), [path.resolve('tmp/tmp.txt')]);\\n}\",\"\\\"before each\\\" hook\",\"function () {\\n\\tfixtures.forEach(fs.ensureFileSync);\\n}\",\"hook\",\"\\\"after each\\\" hook\",\"function () {\\n\\tfixtures.forEach(fs.removeSync);\\n}\"]",
     "iid": 106,
-    "Runtime_ms": 0.7394730001688004
+    "Runtime_ms": 0.5118260001763701
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -6290,7 +6248,6 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "options are optional, function () {\n\tdel.sync('1.tmp');\n\treturn del('1.tmp');\n}",
     "iid": 110
 },
 {
@@ -6324,11 +6281,10 @@
     },
     "Async_Hook_Id": 1,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "options are optional, function () {\n\tdel.sync('1.tmp');\n\treturn del('1.tmp');\n}",
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"title\":\"1\",\"body\":\"2\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},\"options are optional\",\"function () {\\n\\tdel.sync('1.tmp');\\n\\treturn del('1.tmp');\\n}\",\"test\",\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js\",{\"title\":\"7\",\"ctx\":\"6\",\"suites\":\"8\",\"tests\":\"9\",\"pending\":false,\"_beforeEach\":\"10\",\"_beforeAll\":\"11\",\"_afterEach\":\"12\",\"_afterAll\":\"13\",\"root\":true,\"_timeout\":2000,\"_enableTimeouts\":true,\"_slow\":75,\"_retries\":-1,\"_onlyTests\":\"14\",\"_onlySuites\":\"15\",\"delayed\":false,\"_events\":\"16\",\"_eventsCount\":2},{},\"\",[],[\"17\",\"18\",\"19\",\"20\",\"21\",\"22\",\"23\",\"24\",\"0\"],[\"25\"],[],[\"26\"],[],[],[],{\"pre-require\":\"27\"},{\"title\":\"28\",\"body\":\"29\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"30\",\"body\":\"31\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"32\",\"body\":\"33\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"34\",\"body\":\"35\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"36\",\"body\":\"37\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"38\",\"body\":\"39\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"40\",\"body\":\"41\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"42\",\"body\":\"43\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"3\",\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"44\",\"body\":\"45\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"46\",\"parent\":\"5\",\"ctx\":\"6\"},{\"title\":\"47\",\"body\":\"48\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_enableTimeouts\":true,\"timedOut\":false,\"_retries\":-1,\"_currentRetry\":0,\"pending\":false,\"type\":\"46\",\"parent\":\"5\",\"ctx\":\"6\"},[null,null],\"should delete files - async\",\"function () {\\n\\treturn del(['*.tmp', '!1*']).then(function () {\\n\\t\\tassert(pathExists.sync('1.tmp'));\\n\\t\\tassert(!pathExists.sync('2.tmp'));\\n\\t\\tassert(!pathExists.sync('3.tmp'));\\n\\t\\tassert(!pathExists.sync('4.tmp'));\\n\\t\\tassert(pathExists.sync('.dot.tmp'));\\n\\t});\\n}\",\"should delete files - sync\",\"function () {\\n\\tdel.sync(['*.tmp', '!1*']);\\n\\tassert(pathExists.sync('1.tmp'));\\n\\tassert(!pathExists.sync('2.tmp'));\\n\\tassert(!pathExists.sync('3.tmp'));\\n\\tassert(!pathExists.sync('4.tmp'));\\n\\tassert(pathExists.sync('.dot.tmp'));\\n}\",\"should take account of options - async\",\"function () {\\n\\treturn del(['*.tmp', '!1*'], {dot: true}).then(function () {\\n\\t\\tassert(pathExists.sync('1.tmp'));\\n\\t\\tassert(!pathExists.sync('2.tmp'));\\n\\t\\tassert(!pathExists.sync('3.tmp'));\\n\\t\\tassert(!pathExists.sync('4.tmp'));\\n\\t\\tassert(!pathExists.sync('.dot.tmp'));\\n\\t});\\n}\",\"should take account of options - sync\",\"function () {\\n\\tdel.sync(['*.tmp', '!1*'], {dot: true});\\n\\tassert(pathExists.sync('1.tmp'));\\n\\tassert(!pathExists.sync('2.tmp'));\\n\\tassert(!pathExists.sync('3.tmp'));\\n\\tassert(!pathExists.sync('4.tmp'));\\n\\tassert(!pathExists.sync('.dot.tmp'));\\n}\",\"cwd option - sync\",\"function () {\\n\\tvar f = 'tmp/tmp.txt';\\n\\tfs.ensureFileSync(f);\\n\\tdel.sync('tmp.txt', {cwd: 'tmp'});\\n\\tassert(!pathExists.sync(f));\\n\\tfs.remove(f);\\n}\",\"cwd option - async\",\"function () {\\n\\tvar f = 'tmp/tmp.txt';\\n\\tfs.ensureFileSync(f);\\n\\n\\treturn del('tmp.txt', {cwd: 'tmp'}).then(function () {\\n\\t\\tassert(!pathExists.sync(f));\\n\\t\\tfs.remove(f);\\n\\t});\\n}\",\"return deleted files - sync\",\"function () {\\n\\tfs.ensureFileSync('tmp/tmp.txt');\\n\\tassert.deepEqual(del.sync('tmp.txt', {cwd: 'tmp'}), [path.resolve('tmp/tmp.txt')]);\\n}\",\"return deleted files - async\",\"function () {\\n\\tfs.ensureFileSync('tmp/tmp.txt');\\n\\treturn del('tmp.txt', {cwd: 'tmp'}).then(function (deletedFiles) {\\n\\t\\tassert.deepEqual(deletedFiles, [path.resolve('tmp/tmp.txt')]);\\n\\t});\\n}\",\"\\\"before each\\\" hook\",\"function () {\\n\\tfixtures.forEach(fs.ensureFileSync);\\n}\",\"hook\",\"\\\"after each\\\" hook\",\"function () {\\n\\tfixtures.forEach(fs.removeSync);\\n}\"]",
     "iid": 110,
-    "Runtime_ms": 0.6919119991362095
+    "Runtime_ms": 0.55984599981457
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -6362,7 +6318,9 @@
     "Async_Hook_Id": 1,
     "Returned_Type": "undefined",
     "Returned_Value": "[]",
-    "Excession_Occurred": {}
+    "Excession_Occurred": {},
+    "iid": 1,
+    "Runtime_ms": 959.490349999629
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -6379,7 +6337,7 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": ""
+    "iid": 74
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -6612,7 +6570,6 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "forEach",
-    "Function_Arguments": "function createFileSync (file) {\n  if (fs.existsSync(file)) return\n\n  var dir = path.dirname(file)\n  if (!fs.existsSync(dir)) {\n    mkdir.mkdirsSync(dir)\n  }\n\n  fs.writeFileSync(file, '')\n}",
     "iid": 115
 },
 {
@@ -6646,11 +6603,10 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "forEach",
-    "Function_Arguments": "function createFileSync (file) {\n  if (fs.existsSync(file)) return\n\n  var dir = path.dirname(file)\n  if (!fs.existsSync(dir)) {\n    mkdir.mkdirsSync(dir)\n  }\n\n  fs.writeFileSync(file, '')\n}",
     "Tipo_Returned_Value": "undefined",
     "Returned_Value": "[]",
     "iid": 115,
-    "Runtime_ms": 16.22689599916339
+    "Runtime_ms": 12.00946499966085
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -6684,7 +6640,9 @@
     "Async_Hook_Id": 11,
     "Returned_Type": "undefined",
     "Returned_Value": "[]",
-    "Excession_Occurred": {}
+    "Excession_Occurred": {},
+    "iid": 74,
+    "Runtime_ms": 22.289140000008047
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -6701,7 +6659,7 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": ""
+    "iid": 97
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -6970,7 +6928,6 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "createFileSync",
-    "Function_Arguments": "tmp/tmp.txt",
     "iid": 123
 },
 {
@@ -7004,11 +6961,10 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "createFileSync",
-    "Function_Arguments": "tmp/tmp.txt",
     "Tipo_Returned_Value": "undefined",
     "Returned_Value": "[]",
     "iid": 123,
-    "Runtime_ms": 1.1706039980053902
+    "Runtime_ms": 0.9587700003758073
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -7307,7 +7263,6 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "tmp.txt, [object Object]",
     "iid": 127
 },
 {
@@ -7341,7 +7296,7 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "tmp.txt, [object Object]"
+    "iid": 69
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -7540,7 +7495,6 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "assign",
-    "Function_Arguments": "[object Object], [object Object]",
     "iid": 135
 },
 {
@@ -7574,11 +7528,10 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "assign",
-    "Function_Arguments": "[object Object], [object Object]",
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"cwd\":\"1\"},\"tmp\"]",
     "iid": 135,
-    "Runtime_ms": 0.8423839993774891
+    "Runtime_ms": 0.37847799994051456
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -8208,7 +8161,6 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "tmp.txt, [object Object]",
     "iid": 146
 },
 {
@@ -8242,11 +8194,10 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "tmp.txt, [object Object]",
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[[\"1\"],\"tmp.txt\"]",
     "iid": 146,
-    "Runtime_ms": 17.718293998390436
+    "Runtime_ms": 25.129239999689162
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -8363,7 +8314,6 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "map",
-    "Function_Arguments": "function (file) {\n\t\tif (!force) {\n\t\t\tsafeCheck(file);\n\t\t}\n\n\t\tfile = path.resolve(opts.cwd || '', file);\n\t\trimraf.sync(file);\n\n\t\treturn file;\n\t}",
     "iid": 145
 },
 {
@@ -8397,7 +8347,7 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "tmp.txt, 0, tmp.txt"
+    "iid": 152
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -8596,7 +8546,6 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "safeCheck",
-    "Function_Arguments": "tmp.txt",
     "iid": 156
 },
 {
@@ -8630,7 +8579,7 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "safeCheck",
-    "Function_Arguments": "tmp.txt"
+    "iid": 24
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -8763,7 +8712,6 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "tmp.txt",
     "iid": 161
 },
 {
@@ -8797,11 +8745,10 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "tmp.txt",
     "Tipo_Returned_Value": "boolean",
     "Returned_Value": "[false]",
     "iid": 161,
-    "Runtime_ms": 0.8728000000119209
+    "Runtime_ms": 0.9978789994493127
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -8950,7 +8897,6 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "tmp.txt",
     "iid": 165
 },
 {
@@ -8984,11 +8930,10 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "tmp.txt",
     "Tipo_Returned_Value": "boolean",
     "Returned_Value": "[true]",
     "iid": 165,
-    "Runtime_ms": 1.4015690013766289
+    "Runtime_ms": 1.2590720001608133
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -9022,7 +8967,9 @@
     "Async_Hook_Id": 11,
     "Returned_Type": "undefined",
     "Returned_Value": "[]",
-    "Excession_Occurred": {}
+    "Excession_Occurred": {},
+    "iid": 24,
+    "Runtime_ms": 8.50612000003457
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -9039,11 +8986,10 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "safeCheck",
-    "Function_Arguments": "tmp.txt",
     "Tipo_Returned_Value": "undefined",
     "Returned_Value": "[]",
     "iid": 156,
-    "Runtime_ms": 9.1171870008111
+    "Runtime_ms": 11.1786900004372
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -9390,7 +9336,6 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "resolve",
-    "Function_Arguments": "tmp, tmp.txt",
     "iid": 169
 },
 {
@@ -9424,11 +9369,10 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "resolve",
-    "Function_Arguments": "tmp, tmp.txt",
     "Tipo_Returned_Value": "string",
     "Returned_Value": "[\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/tmp/tmp.txt\"]",
     "iid": 169,
-    "Runtime_ms": 0.6096380017697811
+    "Runtime_ms": 0.6968310000374913
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -9663,7 +9607,6 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "rimrafSync",
-    "Function_Arguments": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/tmp/tmp.txt",
     "iid": 176
 },
 {
@@ -9697,11 +9640,10 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "rimrafSync",
-    "Function_Arguments": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/tmp/tmp.txt",
     "Tipo_Returned_Value": "undefined",
     "Returned_Value": "[]",
     "iid": 176,
-    "Runtime_ms": 3.9647220000624657
+    "Runtime_ms": 1.5265899999067187
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -9801,7 +9743,9 @@
     "Async_Hook_Id": 11,
     "Returned_Type": "string",
     "Returned_Value": "[\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/tmp/tmp.txt\"]",
-    "Excession_Occurred": {}
+    "Excession_Occurred": {},
+    "iid": 152,
+    "Runtime_ms": 40.872597000561655
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -9818,11 +9762,10 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "map",
-    "Function_Arguments": "function (file) {\n\t\tif (!force) {\n\t\t\tsafeCheck(file);\n\t\t}\n\n\t\tfile = path.resolve(opts.cwd || '', file);\n\t\trimraf.sync(file);\n\n\t\treturn file;\n\t}",
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[[\"1\"],\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/tmp/tmp.txt\"]",
     "iid": 145,
-    "Runtime_ms": 30.670242000371218
+    "Runtime_ms": 42.41154299955815
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/index.js",
@@ -9856,7 +9799,9 @@
     "Async_Hook_Id": 11,
     "Returned_Type": "object",
     "Returned_Value": "[[\"1\"],\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/tmp/tmp.txt\"]",
-    "Excession_Occurred": {}
+    "Excession_Occurred": {},
+    "iid": 69,
+    "Runtime_ms": 87.49761699978262
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -9873,11 +9818,10 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "tmp.txt, [object Object]",
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[[\"1\"],\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/tmp/tmp.txt\"]",
     "iid": 127,
-    "Runtime_ms": 65.66959699988365
+    "Runtime_ms": 88.59385900013149
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -10158,7 +10102,6 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "tmp/tmp.txt",
     "iid": 185
 },
 {
@@ -10192,11 +10135,10 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": "tmp/tmp.txt",
     "Tipo_Returned_Value": "boolean",
     "Returned_Value": "[false]",
     "iid": 185,
-    "Runtime_ms": 2.0951700024306774
+    "Runtime_ms": 2.120942000299692
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -10264,7 +10206,6 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "ok",
-    "Function_Arguments": "true",
     "iid": 182
 },
 {
@@ -10298,11 +10239,10 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "ok",
-    "Function_Arguments": "true",
     "Tipo_Returned_Value": "undefined",
     "Returned_Value": "[]",
     "iid": 182,
-    "Runtime_ms": 0.6181550025939941
+    "Runtime_ms": 0.5919589996337891
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -10501,7 +10441,6 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "remove",
-    "Function_Arguments": "tmp/tmp.txt",
     "iid": 189
 },
 {
@@ -10535,11 +10474,10 @@
     },
     "Async_Hook_Id": 11,
     "Function_Name": "remove",
-    "Function_Arguments": "tmp/tmp.txt",
     "Tipo_Returned_Value": "undefined",
     "Returned_Value": "[]",
     "iid": 189,
-    "Runtime_ms": 7.88120000064373
+    "Runtime_ms": 5.64629300031811
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -10573,7 +10511,9 @@
     "Async_Hook_Id": 11,
     "Returned_Type": "undefined",
     "Returned_Value": "[]",
-    "Excession_Occurred": {}
+    "Excession_Occurred": {},
+    "iid": 97,
+    "Runtime_ms": 125.97259700018913
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -10590,7 +10530,7 @@
     },
     "Async_Hook_Id": 14,
     "Function_Name": "Anonymous Function ",
-    "Function_Arguments": ""
+    "iid": 77
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -10823,7 +10763,6 @@
     },
     "Async_Hook_Id": 14,
     "Function_Name": "forEach",
-    "Function_Arguments": "function removeSync (dir) {\n  return rimraf.sync(dir)\n}",
     "iid": 194
 },
 {
@@ -10857,11 +10796,10 @@
     },
     "Async_Hook_Id": 14,
     "Function_Name": "forEach",
-    "Function_Arguments": "function removeSync (dir) {\n  return rimraf.sync(dir)\n}",
     "Tipo_Returned_Value": "undefined",
     "Returned_Value": "[]",
     "iid": 194,
-    "Runtime_ms": 6.1929810009896755
+    "Runtime_ms": 7.8906509997323155
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/test.js",
@@ -10895,7 +10833,9 @@
     "Async_Hook_Id": 14,
     "Returned_Type": "undefined",
     "Returned_Value": "[]",
-    "Excession_Occurred": {}
+    "Excession_Occurred": {},
+    "iid": 77,
+    "Runtime_ms": 33.84754399955273
 },
 {
     "Detected_Hook": "endExecution",

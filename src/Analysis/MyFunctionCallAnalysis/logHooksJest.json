@@ -1,0 +1,1079 @@
+[
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 29,
+            "column": 4
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "Anonymous Function ",
+    "iid": 1
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 29,
+            "column": 4
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Returned_Type": "object",
+    "Returned_Value": "[{}]",
+    "Excession_Occurred": {},
+    "iid": 1,
+    "Runtime_ms": 2.503463000059128
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 24
+        },
+        "end": {
+            "line": 29,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "Object.<anonymous>",
+    "iid": 2
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 11,
+            "column": 5
+        },
+        "end": {
+            "line": 11,
+            "column": 34
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "bound requireModuleOrMock",
+    "iid": 4
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/arquivoPrincipal.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 20,
+            "column": 4
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "Anonymous Function ",
+    "iid": 5
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/arquivoPrincipal.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 20,
+            "column": 4
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Returned_Type": "object",
+    "Returned_Value": "[{}]",
+    "Excession_Occurred": {},
+    "iid": 5,
+    "Runtime_ms": 0.5293079987168312
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/arquivoPrincipal.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 24
+        },
+        "end": {
+            "line": 20,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "Object.<anonymous>",
+    "iid": 6
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/arquivoPrincipal.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 24
+        },
+        "end": {
+            "line": 20,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Returned_Type": "undefined",
+    "Returned_Value": "[]",
+    "Excession_Occurred": {},
+    "iid": 6,
+    "Runtime_ms": 0.42328600212931633
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 11,
+            "column": 5
+        },
+        "end": {
+            "line": 11,
+            "column": 34
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "bound requireModuleOrMock",
+    "Tipo_Returned_Value": "object",
+    "Returned_Value": "[{}]",
+    "iid": 4,
+    "Runtime_ms": 100.45421900227666
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 12,
+            "column": 1
+        },
+        "end": {
+            "line": 15,
+            "column": 2
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "test",
+    "iid": 8
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 12,
+            "column": 1
+        },
+        "end": {
+            "line": 15,
+            "column": 2
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "test",
+    "Tipo_Returned_Value": "undefined",
+    "Returned_Value": "[]",
+    "iid": 8,
+    "Runtime_ms": 2.4214579984545708
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 16,
+            "column": 1
+        },
+        "end": {
+            "line": 19,
+            "column": 2
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "test",
+    "iid": 9
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 16,
+            "column": 1
+        },
+        "end": {
+            "line": 19,
+            "column": 2
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "test",
+    "Tipo_Returned_Value": "undefined",
+    "Returned_Value": "[]",
+    "iid": 9,
+    "Runtime_ms": 1.5738820023834705
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 20,
+            "column": 1
+        },
+        "end": {
+            "line": 23,
+            "column": 2
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "test",
+    "iid": 10
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 20,
+            "column": 1
+        },
+        "end": {
+            "line": 23,
+            "column": 2
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "test",
+    "Tipo_Returned_Value": "undefined",
+    "Returned_Value": "[]",
+    "iid": 10,
+    "Runtime_ms": 1.484349999576807
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 24,
+            "column": 1
+        },
+        "end": {
+            "line": 27,
+            "column": 2
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "test",
+    "iid": 11
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 24,
+            "column": 1
+        },
+        "end": {
+            "line": 27,
+            "column": 2
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "test",
+    "Tipo_Returned_Value": "undefined",
+    "Returned_Value": "[]",
+    "iid": 11,
+    "Runtime_ms": 1.4805079996585846
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 24
+        },
+        "end": {
+            "line": 29,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Returned_Type": "undefined",
+    "Returned_Value": "[]",
+    "Excession_Occurred": {},
+    "iid": 2,
+    "Runtime_ms": 116.53500799834728
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 12,
+            "column": 42
+        },
+        "end": {
+            "line": 15,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "Anonymous Function ",
+    "iid": 12
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 13,
+            "column": 22
+        },
+        "end": {
+            "line": 13,
+            "column": 40
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "somarEdobrar",
+    "iid": 14
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/arquivoPrincipal.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 1
+        },
+        "end": {
+            "line": 7,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "somarEdobrar",
+    "iid": 15
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/arquivoPrincipal.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 1
+        },
+        "end": {
+            "line": 7,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Returned_Type": "number",
+    "Returned_Value": "[40]",
+    "Excession_Occurred": {},
+    "iid": 15,
+    "Runtime_ms": 0.3869819976389408
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 13,
+            "column": 22
+        },
+        "end": {
+            "line": 13,
+            "column": 40
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "somarEdobrar",
+    "Tipo_Returned_Value": "number",
+    "Returned_Value": "[40]",
+    "iid": 14,
+    "Runtime_ms": 1.6279250010848045
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 14,
+            "column": 3
+        },
+        "end": {
+            "line": 14,
+            "column": 20
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "expect",
+    "iid": 18
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 14,
+            "column": 3
+        },
+        "end": {
+            "line": 14,
+            "column": 20
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "expect",
+    "Tipo_Returned_Value": "object",
+    "Returned_Value": "[{\"not\":\"1\",\"rejects\":\"2\",\"resolves\":\"3\"},{},{\"not\":\"4\"},{\"not\":\"5\"},{},{}]",
+    "iid": 18,
+    "Runtime_ms": 2.6493400000035763
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 14,
+            "column": 3
+        },
+        "end": {
+            "line": 14,
+            "column": 29
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "throwingMatcher",
+    "iid": 17
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 14,
+            "column": 3
+        },
+        "end": {
+            "line": 14,
+            "column": 29
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "throwingMatcher",
+    "Tipo_Returned_Value": "undefined",
+    "Returned_Value": "[]",
+    "iid": 17,
+    "Runtime_ms": 1.8179700002074242
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 12,
+            "column": 42
+        },
+        "end": {
+            "line": 15,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Returned_Type": "undefined",
+    "Returned_Value": "[]",
+    "Excession_Occurred": {},
+    "iid": 12,
+    "Runtime_ms": 10.401207000017166
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 16,
+            "column": 42
+        },
+        "end": {
+            "line": 19,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "Anonymous Function ",
+    "iid": 19
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 17,
+            "column": 22
+        },
+        "end": {
+            "line": 17,
+            "column": 43
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "somarEdobrar",
+    "iid": 21
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/arquivoPrincipal.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 1
+        },
+        "end": {
+            "line": 7,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "somarEdobrar",
+    "iid": 15
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/arquivoPrincipal.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 3,
+            "column": 1
+        },
+        "end": {
+            "line": 7,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Returned_Type": "number",
+    "Returned_Value": "[-60]",
+    "Excession_Occurred": {},
+    "iid": 15,
+    "Runtime_ms": 0.27854299917817116
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 17,
+            "column": 22
+        },
+        "end": {
+            "line": 17,
+            "column": 43
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "somarEdobrar",
+    "Tipo_Returned_Value": "number",
+    "Returned_Value": "[-60]",
+    "iid": 21,
+    "Runtime_ms": 1.1532410010695457
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 18,
+            "column": 3
+        },
+        "end": {
+            "line": 18,
+            "column": 20
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "expect",
+    "iid": 23
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 18,
+            "column": 3
+        },
+        "end": {
+            "line": 18,
+            "column": 20
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "expect",
+    "Tipo_Returned_Value": "object",
+    "Returned_Value": "[{\"not\":\"1\",\"rejects\":\"2\",\"resolves\":\"3\"},{},{\"not\":\"4\"},{\"not\":\"5\"},{},{}]",
+    "iid": 23,
+    "Runtime_ms": 3.0794709995388985
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 18,
+            "column": 3
+        },
+        "end": {
+            "line": 18,
+            "column": 30
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "throwingMatcher",
+    "iid": 22
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 18,
+            "column": 3
+        },
+        "end": {
+            "line": 18,
+            "column": 30
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "throwingMatcher",
+    "Tipo_Returned_Value": "undefined",
+    "Returned_Value": "[]",
+    "iid": 22,
+    "Runtime_ms": 0.4696029983460903
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 16,
+            "column": 42
+        },
+        "end": {
+            "line": 19,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Returned_Type": "undefined",
+    "Returned_Value": "[]",
+    "Excession_Occurred": {},
+    "iid": 19,
+    "Runtime_ms": 9.080871000885963
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 20,
+            "column": 46
+        },
+        "end": {
+            "line": 23,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "Anonymous Function ",
+    "iid": 24
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 21,
+            "column": 22
+        },
+        "end": {
+            "line": 21,
+            "column": 45
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "subtrairEdividir",
+    "iid": 26
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/arquivoPrincipal.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 10,
+            "column": 1
+        },
+        "end": {
+            "line": 14,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "subtrairEdividir",
+    "iid": 27
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/arquivoPrincipal.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 10,
+            "column": 1
+        },
+        "end": {
+            "line": 14,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Returned_Type": "number",
+    "Returned_Value": "[5]",
+    "Excession_Occurred": {},
+    "iid": 27,
+    "Runtime_ms": 0.3430589996278286
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 21,
+            "column": 22
+        },
+        "end": {
+            "line": 21,
+            "column": 45
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "subtrairEdividir",
+    "Tipo_Returned_Value": "number",
+    "Returned_Value": "[5]",
+    "iid": 26,
+    "Runtime_ms": 1.420583002269268
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 22,
+            "column": 3
+        },
+        "end": {
+            "line": 22,
+            "column": 20
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "expect",
+    "iid": 30
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 22,
+            "column": 3
+        },
+        "end": {
+            "line": 22,
+            "column": 20
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "expect",
+    "Tipo_Returned_Value": "object",
+    "Returned_Value": "[{\"not\":\"1\",\"rejects\":\"2\",\"resolves\":\"3\"},{},{\"not\":\"4\"},{\"not\":\"5\"},{},{}]",
+    "iid": 30,
+    "Runtime_ms": 1.9019390009343624
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 22,
+            "column": 3
+        },
+        "end": {
+            "line": 22,
+            "column": 28
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "throwingMatcher",
+    "iid": 29
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 22,
+            "column": 3
+        },
+        "end": {
+            "line": 22,
+            "column": 28
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "throwingMatcher",
+    "Tipo_Returned_Value": "undefined",
+    "Returned_Value": "[]",
+    "iid": 29,
+    "Runtime_ms": 1.0785260014235973
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 20,
+            "column": 46
+        },
+        "end": {
+            "line": 23,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Returned_Type": "undefined",
+    "Returned_Value": "[]",
+    "Excession_Occurred": {},
+    "iid": 24,
+    "Runtime_ms": 8.5831289999187
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 24,
+            "column": 46
+        },
+        "end": {
+            "line": 27,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "Anonymous Function ",
+    "iid": 31
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 25,
+            "column": 22
+        },
+        "end": {
+            "line": 25,
+            "column": 46
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "subtrairEdividir",
+    "iid": 33
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/arquivoPrincipal.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 10,
+            "column": 1
+        },
+        "end": {
+            "line": 14,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "subtrairEdividir",
+    "iid": 27
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/arquivoPrincipal.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 10,
+            "column": 1
+        },
+        "end": {
+            "line": 14,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Returned_Type": "number",
+    "Returned_Value": "[-11]",
+    "Excession_Occurred": {},
+    "iid": 27,
+    "Runtime_ms": 0.3141530007123947
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 25,
+            "column": 22
+        },
+        "end": {
+            "line": 25,
+            "column": 46
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "subtrairEdividir",
+    "Tipo_Returned_Value": "number",
+    "Returned_Value": "[-11]",
+    "iid": 33,
+    "Runtime_ms": 1.1762439981102943
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 26,
+            "column": 3
+        },
+        "end": {
+            "line": 26,
+            "column": 20
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "expect",
+    "iid": 35
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 26,
+            "column": 3
+        },
+        "end": {
+            "line": 26,
+            "column": 20
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "expect",
+    "Tipo_Returned_Value": "object",
+    "Returned_Value": "[{\"not\":\"1\",\"rejects\":\"2\",\"resolves\":\"3\"},{},{\"not\":\"4\"},{\"not\":\"5\"},{},{}]",
+    "iid": 35,
+    "Runtime_ms": 1.640980001538992
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 26,
+            "column": 3
+        },
+        "end": {
+            "line": 26,
+            "column": 30
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "throwingMatcher",
+    "iid": 34
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 26,
+            "column": 3
+        },
+        "end": {
+            "line": 26,
+            "column": 30
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "throwingMatcher",
+    "Tipo_Returned_Value": "undefined",
+    "Returned_Value": "[]",
+    "iid": 34,
+    "Runtime_ms": 0.5933960005640984
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/teste/testandoJest.test.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 24,
+            "column": 46
+        },
+        "end": {
+            "line": 27,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Returned_Type": "undefined",
+    "Returned_Value": "[]",
+    "Excession_Occurred": {},
+    "iid": 31,
+    "Runtime_ms": 7.109566997736692
+},
+{
+    "Detected_Hook": "endExecution",
+    "Async_Hook_Id": 0
+}
+]

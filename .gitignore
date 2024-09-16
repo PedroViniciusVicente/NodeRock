@@ -172,3 +172,7 @@ Temporary Items
 src/Analysis/MyFunctionCallAnalysis/logHooks.json
 src/Analysis/MyFunctionCallAnalysis/logExpress.json
 src/Analysis/MyFunctionCallAnalysis/logHooksComScopeModule.json
+src/Analysis/MyFunctionCallAnalysis/logHooksComScopeAll.json
+src/Analysis/MyFunctionCallAnalysis/logHooksComScopeModuleEExcludeSource.json
+
+collectedTracesFolder

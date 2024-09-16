@@ -295,7 +295,7 @@ export class MyFunctionCallAnalysis extends Analysis {
             };
             
            
-            this.functionEnter = (iid, f, _dis, args) => {
+            this.functionEnter = (iid, f, _dis, _args) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
@@ -314,7 +314,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "Function_Name": newFunctionName,
                     // esse join() transforma a lista de argumentos em uma string para nao dar erro de circular reference
-                    "Function_Arguments": args.join(", "),
+                    //"Function_Arguments": args.join(", "),
                     "iid": iid,
 
                     // Acho que esse dis nao eh importante, pois ele eh o valor do this no corpo da funcao: (?)
@@ -391,7 +391,7 @@ export class MyFunctionCallAnalysis extends Analysis {
             };
                     
             
-            this.invokeFunPre = (iid, f, _base, args) => {
+            this.invokeFunPre = (iid, f, _base, _args) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
@@ -408,7 +408,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "loc": loc,
                     "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "Function_Name": newFunctionName,
-                    "Function_Arguments": args.join(", "),
+                    //"Function_Arguments": args.join(", "),
                     "iid": iid,
                     //"Objeto_Base": base, // objeto base que vai receber a funcao, julgo que nao eh mt necessaria
                 };
@@ -419,7 +419,7 @@ export class MyFunctionCallAnalysis extends Analysis {
             }
 
 
-            this.invokeFun = (iid, f, _base, args, result) => {
+            this.invokeFun = (iid, f, _base, _args, result) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
@@ -458,7 +458,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "loc": loc,
                     "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "Function_Name": newFunctionName,
-                    "Function_Arguments": args.join(", "),
+                    //"Function_Arguments": args.join(", "),
                     "Tipo_Returned_Value": typeof result,
                     "Returned_Value": stringJSONdoResult,
                     "iid": iid,
@@ -470,7 +470,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 MyFunctionCallAnalysis.eventEmitter.emit('addLogToVector', stringJSON);
                 //console.log("Essa base eh: ", base);
             };
-    
+            
             this.startExpression = (iid, type) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
