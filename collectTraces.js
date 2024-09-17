@@ -6,9 +6,10 @@ shell.echo("COMECOU!");
 let pathProjectFolder = "";
 let testFile = "";
 let parameters = "";
+let isMocha = true;
 
 // 0) CHOOSING THE TEST FILE THAT YOU WANT TO ANALYSE
-let chosenProject = "MeuTestMocha";
+let chosenProject = "MeuTestJest";
 
 switch (chosenProject) {
     case "MeuTestMocha":
@@ -17,10 +18,13 @@ switch (chosenProject) {
         testFile = "teste/testeMenor.js";
         break;
 
-    // case "MeuTestJest":
-    //     console.log("Executando analise do Jest");
-
-    //     break;
+    case "MeuTestJest":
+        console.log("Executando analise do meu teste simples em Jest");
+        pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest";
+        testFile = "teste/testandoJest";
+        parameters = "--runInBand"; // Roda os testes sequenciamente (em batch), e não paralelamente
+        isMocha = false;
+        break;
 
     case "FPS": // known-bugs
         console.log("Executando analise do fiware-pep-steelskin");
@@ -71,8 +75,9 @@ switch (chosenProject) {
 }
 
 const entryFile = pathProjectFolder+testFile;
+let pathNode_modules = isMocha ? "node_modules/.bin/_mocha" : "node_modules/.bin/jest";
 
-const completCommand = "node ./dist/bin/nodeprof.js " + pathProjectFolder + " node_modules/.bin/_mocha " + testFile + " " + parameters;
+const completCommand = "node ./dist/bin/nodeprof.js " + pathProjectFolder + " " + pathNode_modules + " " + testFile + " " + parameters;
 
 // 1) EXECUTING THE FIRST TIME WITH THE ENTIRE MOCHA FILE TO SEE THE NAME OF THE ITs Tests
 
@@ -88,8 +93,15 @@ try {
     const elementosParseados = JSON.parse(logHooks);
 
     // Filtrar os elementos pra pegar as linhas dos its
-    const elementosFiltrados = elementosParseados.filter(elemento => (elemento.Detected_Hook === "read" && elemento.Variable_Name === "it"));
-    //console.log(elementosFiltrados);
+    let elementosFiltrados;
+    if(isMocha) {
+        elementosFiltrados = elementosParseados.filter(elemento => (elemento.Detected_Hook === "read" && elemento.Variable_Name === "it"));
+        console.log("Objetos filtrados no Mocha", elementosFiltrados);
+    }
+    else {
+        elementosFiltrados = elementosParseados.filter(elemento => (elemento.Detected_Hook === "invokeFunPre" && elemento.Function_Name === "test"));
+        console.log("Objetos filtrados no Jest", elementosFiltrados);
+    }
 
     // Obter os valores de startline dos its filtrados
     const vetorLinhasDosIts = elementosFiltrados.map(elemento => elemento.loc.start.line);
@@ -141,9 +153,68 @@ try {
 
 // 4) COLLECT STATISTICS FROM THE LOGS OBTAINED (EXTRACT FEATURES)
 try {
+    
+    const diretorio = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
+    fs.readdir(diretorio, (err, files) => {
+        if (err) {
+          console.error('Erro ao ler o diretório:', err);
+          return;
+        }
+        
+        const pathExtractedFeaturesLog = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesLog.json";
+        fs.writeFileSync(pathExtractedFeaturesLog, '[\n');
+
+        //console.log("files eh: ", files);
+        for(let i = 0; i < files.length; i++) {
+
+            let pathExtractFile = "";
+            pathExtractFile = diretorio + files[i];
+            console.log("o arquivo tentando ser acessado eh: ", pathExtractFile);
+            const logHooks = fs.readFileSync(pathExtractFile, 'utf8');
+            const objectsExtractFeatures = JSON.parse(logHooks);
+
+            // Extracting Features
+            const countFunctionEnter = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "functionEnter").length;
+            //console.log("Number of objects with Detected_Hook = functionEnter:", countFunctionEnter);
+
+            const countFunctionExit = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "functionExit").length;
+            //console.log("Number of objects with Detected_Hook = functionExit:", countFunctionExit);
+
+            let totalTimeFunctions = objectsExtractFeatures
+                .filter(obj => obj.Detected_Hook === "functionExit")
+                .reduce((sum, obj) => sum + obj.Runtime_ms, 0);
+
+            const countInvokeFunPre = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "invokeFunPre").length;
+            //console.log("Number of objects with Detected_Hook = invokeFunPre:", countInvokeFunPre);
+
+            const countInvokeFun = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "invokeFun").length;
+            //console.log("Number of objects with Detected_Hook = invokeFun:", countInvokeFun);
+
+            let totalTimeInvokes = objectsExtractFeatures
+                .filter(obj => obj.Detected_Hook === "invokeFun")
+                .reduce((sum, obj) => sum + obj.Runtime_ms, 0);
+
+            const ObjectLogMessage = {
+                "File_Extract_Features": pathExtractFile,
+                "FunctionEnter_Count": countFunctionEnter,
+                "FunctionExit_Count": countFunctionExit,
+                "Total_Time_Functions": totalTimeFunctions,
+                "InvokeFunPre_Count": countInvokeFunPre,
+                "InvokeFun_Count": countInvokeFun,
+                "Total_time_Invokes": totalTimeInvokes,
+            };
+
+            const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
+
+            fs.writeFileSync(pathExtractedFeaturesLog, stringJSON + ',\n', {flag:'a'});
+
+        }
+        fs.writeFileSync(pathExtractedFeaturesLog, ']', {flag:'a'});
+
+      });
 
 } catch (error) {
-    console.error('Erro ao processar os elementos:', error);
+    console.error('Erro no extract features:', error);
 }
 
 

@@ -176,3 +176,4 @@ src/Analysis/MyFunctionCallAnalysis/logHooksComScopeAll.json
 src/Analysis/MyFunctionCallAnalysis/logHooksComScopeModuleEExcludeSource.json
 
 collectedTracesFolder/
+collectedTracesFolderDoMeutesteMochaSimples/
