@@ -20,8 +20,8 @@ switch (chosenProject) {
 
     case "MeuTestJest":
         console.log("Executando analise do meu teste simples em Jest");
-        pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest";
-        testFile = "teste/testandoJest";
+        pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/";
+        testFile = "teste/testandoJest.test.js";
         parameters = "--runInBand"; // Roda os testes sequenciamente (em batch), e não paralelamente
         isMocha = false;
         break;
@@ -139,12 +139,18 @@ try {
     
     for(let i = 0; i < vetorNomesDosIts.length; i++) {
 
-        shell.exec(completCommand + " -g " + vetorNomesDosIts[i]);
+        if(isMocha) {
+            shell.exec(completCommand + " -g " + vetorNomesDosIts[i]);
+            console.log("comando com o -g eh: ", completCommand + " -g " + vetorNomesDosIts[i]);
+        }
+        else {
+            shell.exec(completCommand + " --testNamePattern " + vetorNomesDosIts[i]);
+            console.log("comando com o --testNamePattern eh: ", completCommand + " --testNamePattern " + vetorNomesDosIts[i]);
+        }
 
         copiedFileName = "tracesFromIt_" + i.toString() + ".json";
         shell.cp(sourceCopyPath, (destinationCopyFolder + copiedFileName));
         console.log("executou com i = ", i);
-        console.log("comando com o -g eh: ", completCommand + " -g " + vetorNomesDosIts[i]);
     }
 
 } catch (error) {
