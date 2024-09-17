@@ -9,7 +9,7 @@ let parameters = "";
 let isMocha = true;
 
 // 0) CHOOSING THE TEST FILE THAT YOU WANT TO ANALYSE
-let chosenProject = "MeuTestJest";
+let chosenProject = "MeuTestVerificarRuntimes";
 
 switch (chosenProject) {
     case "MeuTestMocha":
@@ -25,7 +25,14 @@ switch (chosenProject) {
         parameters = "--runInBand"; // Roda os testes sequenciamente (em batch), e não paralelamente
         isMocha = false;
         break;
+    
+        case "MeuTestVerificarRuntimes":
+            console.log("Executando analise do runtime");
+            pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/";
+            testFile = "test/test.js";
+            break;
 
+    // Obs: o FPS funciona, mas ele eh apenas 1 teste e ele so printa o sucesso do teste caso esteja usando o node v10 (nvm use 10) 
     case "FPS": // known-bugs
         console.log("Executando analise do fiware-pep-steelskin");
         pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/fiware-pep-steelskin/";
@@ -33,21 +40,26 @@ switch (chosenProject) {
         parameters = "--timeout 50000";
         break;
 
-    // case "NES": // known-bugs
-    //     console.log("Executando analise do nes");
-    //     pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/nes/";
-    //     testFile = "test/client_TP.js";
-    //     break;
+    // Obs: o NES nao conseguiu ser analisado, (apenas testado). Ele exige o node v10 e parece que ele usa uma lib que n eh mocha nem jest
+    case "NES": // known-bugs
+        console.log("Executando analise do nes");
+        pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/nes/";
+        testFile = "test/client_TP.js";
+        break;
 
-    case "DEL": // known-bugs, porem estou usando outro arquivo como entrypoint para teste
+    case "DEL": // known-bugs, funciona muito bem, porem estou usando outro arquivo como entrypoint para teste
         console.log("Executando analise do del");
         pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/";
         testFile = "test.js";
         break;
 
-    // case "XLS": // known-bugs
-
-    //     break;
+    // Obs: o XLS nao conseguiu ser analisado, (apenas testado). Ele exige o node v10
+    case "XLS": // known-bugs
+        console.log("Executando analise do xls");
+        pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/xlsx-extract/";
+        testFile = "test/tests.js";
+        parameters = "--timeout 20000 -g 'should\ read\ all\ columns\ and\ rows'";
+        break;
 
     // case "ME1": // known-bugs
     //     break;
@@ -62,14 +74,15 @@ switch (chosenProject) {
     // case "NEDB2": // known-bugs
     //     break;
 
+    // Obs: o ARC funciona, mas apenas mantendo a limitacao dele para apenas esse teste
     case "ARC": // exploratory
         pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver/";
         testFile = "test/archiver.js";
-        parameters = `--exit -t 10000 - g "archiver\ api\ #errors\ should\ allow\ continue\ on\ stat\ failing"`;
+        parameters = `--exit -t 10000 -g "archiver\ api\ #errors\ should\ allow\ continue\ on\ stat\ failing"`;
         break;
 
-    case "OBJ": // exploratory
-        break;
+    // case "OBJ": // exploratory
+    //     break;
     default:
         console.log("Esse projeto ainda nao esta nesse switch case!");
 }
