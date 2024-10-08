@@ -93,6 +93,8 @@ switch (chosenProject) {
 // 2) Treatments and Path Verifications
 
 const entryFile = pathProjectFolder+testFile;
+let testNames = [];
+let testNamesRespectiveFile = [];
 
 try {
     const stats = fs.lstatSync(entryFile);
@@ -107,19 +109,39 @@ try {
         
             const jsFiles = files.filter(file => path.extname(file) === '.js');
             console.log('Arquivos .js encontrados:');
-            jsFiles.forEach(file => console.log(file));
-          });
+
+            jsFiles.forEach(jsfile => {
+                console.log(jsfile);
+                const testNamesTemporary = getTestsNamev2(entryFile + "/" + jsfile);
+
+                if (testNamesTemporary.length === 0) {
+                    console.log('No tests were found in the file: ', entryFile);
+                } else {
+                    //console.log('The name of the tests found are:');
+                    testNamesTemporary.forEach((name, index) => {
+                        //console.log(`${index + 1}. ${name}`);
+                        testNames.push(name);
+                        testNamesRespectiveFile.push(entryFile + "/" + jsfile);
+                    });
+                }
+            });
+            for(let i = 0; i < testNames.length; i++) {
+                console.log(`teste de nome: ${testNames[i]}; na posicao: ${testNamesRespectiveFile[i]}`);
+            }
+        });
 
     } else if (stats.isFile()) {
         console.log(`${entryFile} é um arquivo.`);
-        const testNames = getTestsNamev2(entryFile);
+        const testNamesTemporary = getTestsNamev2(entryFile);
 
-        if (testNames.length === 0) {
+        if (testNamesTemporary.length === 0) {
             console.log('No tests were found in the file: ', entryFile);
         } else {
             console.log('The name of the tests found are:');
-            testNames.forEach((name, index) => {
-              console.log(`${index + 1}. ${name}`);
+            testNamesTemporary.forEach((name, index) => {
+                console.log(`${index + 1}. ${name}`);
+                testNames.push(name);
+                testNamesRespectiveFile.push(entryFile + "/" + jsfile);
             });
         }
 
