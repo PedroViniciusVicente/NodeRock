@@ -1,5 +1,7 @@
 const shell = require('shelljs');
 const fs = require('fs');
+const path = require('path');
+
 
 shell.echo("COMECOU!");
 
@@ -8,14 +10,15 @@ let testFile = "";
 let parameters = "";
 let isMocha = true;
 
-// 0) CHOOSING THE TEST FILE THAT YOU WANT TO ANALYSE
-let chosenProject = "MeuTestVerificarRuntimes";
+// 1) CHOOSING THE TEST FILE THAT YOU WANT TO ANALYSE
+let chosenProject = "MeuTestMocha";
 
 switch (chosenProject) {
     case "MeuTestMocha":
         console.log("Executando analise do meu teste simples em Mocha");
         pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/";
-        testFile = "teste/testeMenor.js";
+        testFile = "teste";
+        //testFile = "teste/testeMenor.js";
         break;
 
     case "MeuTestJest":
@@ -26,11 +29,11 @@ switch (chosenProject) {
         isMocha = false;
         break;
     
-        case "MeuTestVerificarRuntimes":
-            console.log("Executando analise do runtime");
-            pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/";
-            testFile = "test/test.js";
-            break;
+    case "MeuTestVerificarRuntimes":
+        console.log("Executando analise do runtime");
+        pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/";
+        testFile = "test/test.js";
+        break;
 
     // Obs: o FPS funciona, mas ele eh apenas 1 teste e ele so printa o sucesso do teste caso esteja usando o node v10 (nvm use 10) 
     case "FPS": // known-bugs
@@ -87,60 +90,123 @@ switch (chosenProject) {
         console.log("Esse projeto ainda nao esta nesse switch case!");
 }
 
+// 2) Treatments and Path Verifications
+
 const entryFile = pathProjectFolder+testFile;
+
+try {
+    const stats = fs.lstatSync(entryFile);
+    if (stats.isDirectory()) {
+        console.log(`${entryFile} é um diretório.`);
+
+        fs.readdir(entryFile, (err, files) => {
+            if (err) {
+              console.error(`Erro ao ler o diretório: ${err.message}`);
+              return;
+            }
+        
+            const jsFiles = files.filter(file => path.extname(file) === '.js');
+            console.log('Arquivos .js encontrados:');
+            jsFiles.forEach(file => console.log(file));
+          });
+
+    } else if (stats.isFile()) {
+        console.log(`${entryFile} é um arquivo.`);
+        const testNames = getTestsNamev2(entryFile);
+
+        if (testNames.length === 0) {
+            console.log('No tests were found in the file: ', entryFile);
+        } else {
+            console.log('The name of the tests found are:');
+            testNames.forEach((name, index) => {
+              console.log(`${index + 1}. ${name}`);
+            });
+        }
+
+    } else {
+        console.log(`${entryFile} existe, mas não é um arquivo nem um diretório.`);
+    }
+} catch (error) {
+    if (error.code === 'ENOENT') {
+        console.log(`${entryFile} não existe.`);
+    } else {
+        console.error(`Erro ao verificar o caminho: ${error.message}`);
+    }
+}
+
+// ESSA ABORDAGEM ACABA GERANDO FALSO POSITIVOS SE O TEST/IT ESTIVER EM UM COMENTARIO DE BLOCO
+function getTestsNamev2(filePath) {
+    const content = fs.readFileSync(filePath, 'utf8');
+    const testRegex = /(?:^|\s)(?:it|test)\s*\(\s*['"`](.+?)['"`]/gm;
+    const tests = [];
+    let match;
+
+    while ((match = testRegex.exec(content)) !== null) {
+        tests.push(match[1]);
+    }
+
+    return tests;
+}
+
+// Abordagem original, que executa os traces primeiro e depois vai coletando os nomes dos tests files
+// (abordagem mais lenta, porem nao gera falso positivo com trechos comentados)
+function getTestsNamev1(completCommand) {
+    // 1) EXECUTING THE FIRST TIME WITH THE ENTIRE MOCHA FILE TO SEE THE NAME OF THE ITs Tests
+    //console.log(completCommand);
+    shell.exec(completCommand);
+    
+    try {
+        // 2) COLLECTING THE NAME OF THE ITs Tests
+        const logHooks = fs.readFileSync('src/Analysis/MyFunctionCallAnalysis/logHooks.json', 'utf8');
+    
+        // Converting the JSON content to JavaScript object
+        const elementosParseados = JSON.parse(logHooks);
+    
+        // Filtrar os elementos pra pegar as linhas dos its
+        let elementosFiltrados;
+        if(isMocha) {
+            elementosFiltrados = elementosParseados.filter(elemento => (elemento.Detected_Hook === "read" && elemento.Variable_Name === "it"));
+            console.log("Objetos filtrados no Mocha", elementosFiltrados);
+        }
+        else {
+            elementosFiltrados = elementosParseados.filter(elemento => (elemento.Detected_Hook === "invokeFunPre" && elemento.Function_Name === "test"));
+            console.log("Objetos filtrados no Jest", elementosFiltrados);
+        }
+    
+        // Obter os valores de startline dos its filtrados
+        const vetorLinhasDosIts = elementosFiltrados.map(elemento => elemento.loc.start.line);
+        console.log("Linha dos its eh: ", vetorLinhasDosIts);
+        
+        // Pegar o nome dos testes its encontrados
+        const vetorNomesDosIts = elementosParseados.filter(elemento => {
+            let linhaDoLiteral;
+            linhaDoLiteral = elemento && elemento.loc && elemento.loc.start && elemento.loc.start.line ? elemento.loc.start.line : -1;
+            //console.log("Verificando elemento:", linhaDoLiteral);
+    
+            return vetorLinhasDosIts.includes(linhaDoLiteral) &&
+            elemento.Detected_Hook === "literal" &&
+            elemento.Literal_Value_Type === "string" &&
+            elemento.File_Path === (entryFile);
+        });
+            
+        for(let i = 0; i < vetorNomesDosIts.length; i++) {
+            vetorNomesDosIts[i] = vetorNomesDosIts[i].Literal_Value;
+            vetorNomesDosIts[i] = vetorNomesDosIts[i].replace(/\[|\]/g, ""); // Removendo os colchetes "[" "]"
+            vetorNomesDosIts[i] = vetorNomesDosIts[i].replace(/\s/g, '\\ '); // Adicionando "\" antes dos espacos
+        }
+        
+        console.log("Os nomes dos its detectados sao: ")
+        console.log(vetorNomesDosIts);
+    } catch (error) {
+        console.error('Erro ao processar os elementos:', error);
+    }
+} 
+
 let pathNode_modules = isMocha ? "node_modules/.bin/_mocha" : "node_modules/.bin/jest";
 
 const completCommand = "node ./dist/bin/nodeprof.js " + pathProjectFolder + " " + pathNode_modules + " " + testFile + " " + parameters;
-
-// 1) EXECUTING THE FIRST TIME WITH THE ENTIRE MOCHA FILE TO SEE THE NAME OF THE ITs Tests
-
-//console.log(completCommand);
-
-shell.exec(completCommand);
-
+/*
 try {
-    // 2) COLLECTING THE NAME OF THE ITs Tests
-    const logHooks = fs.readFileSync('src/Analysis/MyFunctionCallAnalysis/logHooks.json', 'utf8');
-
-    // Converting the JSON content to JavaScript object
-    const elementosParseados = JSON.parse(logHooks);
-
-    // Filtrar os elementos pra pegar as linhas dos its
-    let elementosFiltrados;
-    if(isMocha) {
-        elementosFiltrados = elementosParseados.filter(elemento => (elemento.Detected_Hook === "read" && elemento.Variable_Name === "it"));
-        console.log("Objetos filtrados no Mocha", elementosFiltrados);
-    }
-    else {
-        elementosFiltrados = elementosParseados.filter(elemento => (elemento.Detected_Hook === "invokeFunPre" && elemento.Function_Name === "test"));
-        console.log("Objetos filtrados no Jest", elementosFiltrados);
-    }
-
-    // Obter os valores de startline dos its filtrados
-    const vetorLinhasDosIts = elementosFiltrados.map(elemento => elemento.loc.start.line);
-    console.log("Linha dos its eh: ", vetorLinhasDosIts);
-    
-    // Pegar o nome dos testes its encontrados
-    const vetorNomesDosIts = elementosParseados.filter(elemento => {
-        let linhaDoLiteral;
-        linhaDoLiteral = elemento && elemento.loc && elemento.loc.start && elemento.loc.start.line ? elemento.loc.start.line : -1;
-        //console.log("Verificando elemento:", linhaDoLiteral);
-
-        return vetorLinhasDosIts.includes(linhaDoLiteral) &&
-        elemento.Detected_Hook === "literal" &&
-        elemento.Literal_Value_Type === "string" &&
-        elemento.File_Path === (entryFile);
-    });
-        
-    for(let i = 0; i < vetorNomesDosIts.length; i++) {
-        vetorNomesDosIts[i] = vetorNomesDosIts[i].Literal_Value;
-        vetorNomesDosIts[i] = vetorNomesDosIts[i].replace(/\[|\]/g, ""); // Removendo os colchetes "[" "]"
-        vetorNomesDosIts[i] = vetorNomesDosIts[i].replace(/\s/g, '\\ '); // Adicionando "\" antes dos espacos
-    }
-    
-    console.log("Os nomes dos its detectados sao: ")
-    console.log(vetorNomesDosIts);
-    
     // 3) EXECUTING ALL THE IT TESTS INDIVIDUALLY
     const sourceCopyPath = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/MyFunctionCallAnalysis/logHooks.json";
     const destinationCopyFolder = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
@@ -240,5 +306,5 @@ try {
 
 
 //shell.exec("pwd");
-//shell.exec("VERBOSE=1 yarn nodeprof /home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/ arquivoPrincipal.js");
+//shell.exec("VERBOSE=1 yarn nodeprof /home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/ arquivoPrincipal.js");*/
 shell.echo("TERMINOU!");

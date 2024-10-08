@@ -1,7 +1,7 @@
 // DO NOT INSTRUMENT
 
 import {Analysis, Hooks, Sandbox} from '../../Type/nodeprof';
-import {isArrayAccess} from '../../Util';
+//import {isArrayAccess} from '../../Util';
 
 import * as fs from 'fs';
 import EventEmitter from 'events';
@@ -119,7 +119,7 @@ export class MyFunctionCallAnalysis extends Analysis {
             console.log("Calling all hooks!");
             
 
-            this.read = (iid, name, val, _isGlobal) => {
+            /*this.read = (iid, name, val, _isGlobal) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
@@ -292,7 +292,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 
                 const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
                 MyFunctionCallAnalysis.eventEmitter.emit('addLogToVector', stringJSON);
-            };
+            };*/
             
            
             this.functionEnter = (iid, f, _dis, _args) => {
@@ -470,7 +470,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 MyFunctionCallAnalysis.eventEmitter.emit('addLogToVector', stringJSON);
                 //console.log("Essa base eh: ", base);
             };
-            
+            /*
             this.startExpression = (iid, type) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
@@ -732,7 +732,7 @@ export class MyFunctionCallAnalysis extends Analysis {
             
                 const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
                 MyFunctionCallAnalysis.eventEmitter.emit('addLogToVector', stringJSON);
-            };
+            };*/
 
 
 
