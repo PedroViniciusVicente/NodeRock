@@ -1,0 +1,20 @@
+[
+{
+    "File_Extract_Features": "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/tracesFromIt_0.json",
+    "FunctionEnter_Count": 8,
+    "FunctionExit_Count": 8,
+    "Total_Time_Functions": 131.0090219999547,
+    "InvokeFunPre_Count": 14,
+    "InvokeFun_Count": 14,
+    "Total_time_Invokes": 92.92554600007134
+},
+{
+    "File_Extract_Features": "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/tracesFromIt_1.json",
+    "FunctionEnter_Count": 9,
+    "FunctionExit_Count": 9,
+    "Total_Time_Functions": 130.51839899999322,
+    "InvokeFunPre_Count": 16,
+    "InvokeFun_Count": 16,
+    "Total_time_Invokes": 85.87305900006322
+}
+]

@@ -1,0 +1,927 @@
+[
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 19,
+            "column": 26
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "Anonymous Function ",
+    "iid": 1
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 19,
+            "column": 26
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Returned_Type": "function",
+    "Returned_Value": "{\"returnVal\":\"const assert = require('assert');\\nconst { leituraAssincronaComCallback, leituraAssincronaComTimeout } = require('../principal');\\n\\n\\ndescribe('Testes para verificar se o runtime obtido pelo NodeRock condiz com o runtime real', function () {\\n    it('Leitura assincrona com callback simples', function () {\\n        leituraAssincronaComCallback();\\n        assert.equal(0, 0);\\n    });\\n\\n    it('leitura assincrona com timeout de 3s no callback', function () {\\n        leituraAssincronaComTimeout();\\n        assert.equal(0, 0);\\n    });\\n\\n});\\n\\n// PARA EXECUTAR ESSE TESTE, DIGITAR NO CONSOLE:\\n// npx mocha test/test.js\\n\"}",
+    "Excession_Occurred": {},
+    "iid": 1,
+    "Runtime_ms": 4.434444000013173
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 19,
+            "column": 26
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "Anonymous Function ",
+    "iid": 1
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 16
+        },
+        "end": {
+            "line": 1,
+            "column": 32
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "require",
+    "iid": 2
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 16
+        },
+        "end": {
+            "line": 1,
+            "column": 32
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "require",
+    "Tipo_Returned_Value": "function",
+    "Returned_Value": "{\"result\":\"function ok(...args) {\\n  innerOk(ok, args.length, ...args);\\n}\"}",
+    "iid": 2,
+    "Runtime_ms": 1.5874000000185333
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 2,
+            "column": 71
+        },
+        "end": {
+            "line": 2,
+            "column": 93
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "require",
+    "iid": 3
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 69,
+            "column": 3
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "Anonymous Function ",
+    "iid": 4
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 69,
+            "column": 3
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Returned_Type": "function",
+    "Returned_Value": "{\"returnVal\":\"const fs = require('fs');\\nconst { performance } = require('perf_hooks');\\n\\n// Resultado: \\n// Na funcao de leitura com callback simples:\\n// Tempo por fora: 1.1 ms\\n// Tempo por dentro: 21 ms\\n\\n// Na funcao de leitura com timeout de 3 segundos no callback:\\n// Tempo por fora: 18 ms\\n// Tempo por dentro: 3027 ms\\n\\nlet startTimeDentroFuncaoComCb;\\nlet endTimeDentroFuncaoComCb;\\n\\nfunction leituraAssincronaComCallback() {\\n\\n    startTimeDentroFuncaoComCb = performance.now();\\n\\n    fs.readFile(\\\"meuArquivo2.txt\\\", \\\"utf8\\\", (err, data) => {\\n        if (err) {\\n            console.error('Erro ao ler o arquivo:', err);\\n        } else {\\n            console.log(\\\"Conteudo obtido com a leitura assincrona com callback simples: \\\",data);\\n            \\n            endTimeDentroFuncaoComCb = performance.now();\\n            console.log(\\\"O intervalo da funcao com Cb simples por dentro eh: \\\", endTimeDentroFuncaoComCb - startTimeDentroFuncaoComCb);\\n        }\\n    });\\n}\\n\\n// const startTimeForaFuncaoComCb = performance.now();\\n// leituraAssincronaComCallback();\\n// const endTimeForaFuncaoComCb = performance.now();\\n// console.log(\\\"O intervalo da funcao com Cb simples por fora eh: \\\", endTimeForaFuncaoComCb - startTimeForaFuncaoComCb);\\n\\nlet startTimeDentroFuncao;\\nlet endTimeDentroFuncao;\\n\\nfunction leituraAssincronaComTimeout() {\\n\\n    startTimeDentroFuncao = performance.now();\\n\\n    fs.readFile(\\\"meuArquivo.txt\\\", \\\"utf8\\\", (err, data) => {\\n        if (err) {\\n            console.error('Erro ao ler o arquivo:', err);\\n        } else {\\n            setTimeout(() => {\\n                console.log(\\\"Conteudo obtido com a leitura assincrona com timeout: \\\", data);\\n\\n                endTimeDentroFuncao = performance.now();\\n                console.log(\\\"O intervalo da funcao com timeout por dentro eh: \\\", endTimeDentroFuncao - startTimeDentroFuncao);\\n\\n            }, 3000);\\n        }\\n    });\\n    console.log(\\\"Termino da leitura Assincrona\\\")\\n}\\n\\n\\n// const startTimeForaFuncao = performance.now();\\n// leituraAssincronaComTimeout();\\n// const endTimeForaFuncao = performance.now();\\n// console.log(\\\"O intervalo da funcao com timeout por fora eh: \\\", endTimeForaFuncao - startTimeForaFuncao);\\n\\nmodule.exports = {\\n    leituraAssincronaComCallback,\\n    leituraAssincronaComTimeout\\n};\\n\"}",
+    "Excession_Occurred": {},
+    "iid": 4,
+    "Runtime_ms": 0.2874970000120811
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 69,
+            "column": 3
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "Anonymous Function ",
+    "iid": 4
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 12
+        },
+        "end": {
+            "line": 1,
+            "column": 24
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "require",
+    "iid": 5
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 12
+        },
+        "end": {
+            "line": 1,
+            "column": 24
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "require",
+    "Tipo_Returned_Value": "object",
+    "Returned_Value": "[{\"F_OK\":0,\"R_OK\":4,\"W_OK\":2,\"X_OK\":1,\"constants\":\"1\",\"promises\":\"2\"},{\"UV_FS_SYMLINK_DIR\":1,\"UV_FS_SYMLINK_JUNCTION\":2,\"O_RDONLY\":0,\"O_WRONLY\":1,\"O_RDWR\":2,\"UV_DIRENT_UNKNOWN\":0,\"UV_DIRENT_FILE\":1,\"UV_DIRENT_DIR\":2,\"UV_DIRENT_LINK\":3,\"UV_DIRENT_FIFO\":4,\"UV_DIRENT_SOCKET\":5,\"UV_DIRENT_CHAR\":6,\"UV_DIRENT_BLOCK\":7,\"S_IFMT\":61440,\"S_IFREG\":32768,\"S_IFDIR\":16384,\"S_IFCHR\":8192,\"S_IFBLK\":24576,\"S_IFIFO\":4096,\"S_IFLNK\":40960,\"S_IFSOCK\":49152,\"O_CREAT\":64,\"O_EXCL\":128,\"UV_FS_O_FILEMAP\":0,\"O_NOCTTY\":256,\"O_TRUNC\":512,\"O_APPEND\":1024,\"O_DIRECTORY\":65536,\"O_NOATIME\":262144,\"O_NOFOLLOW\":131072,\"O_SYNC\":1052672,\"O_DSYNC\":4096,\"O_DIRECT\":16384,\"O_NONBLOCK\":2048,\"S_IRWXU\":448,\"S_IRUSR\":256,\"S_IWUSR\":128,\"S_IXUSR\":64,\"S_IRWXG\":56,\"S_IRGRP\":32,\"S_IWGRP\":16,\"S_IXGRP\":8,\"S_IRWXO\":7,\"S_IROTH\":4,\"S_IWOTH\":2,\"S_IXOTH\":1,\"F_OK\":0,\"R_OK\":4,\"W_OK\":2,\"X_OK\":1,\"UV_FS_COPYFILE_EXCL\":1,\"COPYFILE_EXCL\":1,\"UV_FS_COPYFILE_FICLONE\":2,\"COPYFILE_FICLONE\":2,\"UV_FS_COPYFILE_FICLONE_FORCE\":4,\"COPYFILE_FICLONE_FORCE\":4},{}]",
+    "iid": 5,
+    "Runtime_ms": 0.3879179999930784
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 2,
+            "column": 25
+        },
+        "end": {
+            "line": 2,
+            "column": 45
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "require",
+    "iid": 6
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 2,
+            "column": 25
+        },
+        "end": {
+            "line": 2,
+            "column": 45
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "require",
+    "Tipo_Returned_Value": "object",
+    "Returned_Value": "[{\"performance\":\"1\",\"constants\":\"2\"},{},{\"NODE_PERFORMANCE_GC_MAJOR\":2,\"NODE_PERFORMANCE_GC_MINOR\":1,\"NODE_PERFORMANCE_GC_INCREMENTAL\":4,\"NODE_PERFORMANCE_GC_WEAKCB\":8,\"NODE_PERFORMANCE_GC_FLAGS_NO\":0,\"NODE_PERFORMANCE_GC_FLAGS_CONSTRUCT_RETAINED\":2,\"NODE_PERFORMANCE_GC_FLAGS_FORCED\":4,\"NODE_PERFORMANCE_GC_FLAGS_SYNCHRONOUS_PHANTOM_PROCESSING\":8,\"NODE_PERFORMANCE_GC_FLAGS_ALL_AVAILABLE_GARBAGE\":16,\"NODE_PERFORMANCE_GC_FLAGS_ALL_EXTERNAL_MEMORY\":32,\"NODE_PERFORMANCE_GC_FLAGS_SCHEDULE_IDLE\":64}]",
+    "iid": 6,
+    "Runtime_ms": 0.42690100002801046
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 69,
+            "column": 3
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Returned_Type": "undefined",
+    "Returned_Value": "[]",
+    "Excession_Occurred": {},
+    "iid": 4,
+    "Runtime_ms": 13.816449999983888
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 2,
+            "column": 71
+        },
+        "end": {
+            "line": 2,
+            "column": 93
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "require",
+    "Tipo_Returned_Value": "object",
+    "Returned_Value": "[{}]",
+    "iid": 3,
+    "Runtime_ms": 17.754998999997042
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 5,
+            "column": 1
+        },
+        "end": {
+            "line": 16,
+            "column": 2
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "Anonymous Function ",
+    "iid": 7
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 5,
+            "column": 95
+        },
+        "end": {
+            "line": 16,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "Anonymous Function ",
+    "iid": 8
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 6,
+            "column": 5
+        },
+        "end": {
+            "line": 9,
+            "column": 6
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "Anonymous Function ",
+    "iid": 10
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 6,
+            "column": 5
+        },
+        "end": {
+            "line": 9,
+            "column": 6
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "Anonymous Function ",
+    "Tipo_Returned_Value": "object",
+    "Returned_Value": "[{\"type\":\"1\",\"title\":\"2\",\"body\":\"3\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},\"test\",\"Leitura assincrona com callback simples\",\"function () {\\n        leituraAssincronaComCallback();\\n        assert.equal(0, 0);\\n    }\",\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js\",{\"title\":\"7\",\"ctx\":\"6\",\"suites\":\"8\",\"tests\":\"9\",\"root\":false,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"10\",\"_beforeAll\":\"11\",\"_afterEach\":\"12\",\"_afterAll\":\"13\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"14\",\"_onlySuites\":\"15\",\"delayed\":false,\"parent\":\"16\",\"file\":\"4\"},{},\"Testes para verificar se o runtime obtido pelo NodeRock condiz com o runtime real\",[],[\"0\"],[],[],[],[],[],[],{\"title\":\"17\",\"ctx\":\"18\",\"suites\":\"19\",\"tests\":\"20\",\"root\":true,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"21\",\"_beforeAll\":\"22\",\"_afterEach\":\"23\",\"_afterAll\":\"24\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"25\",\"_onlySuites\":\"26\",\"delayed\":false,\"_events\":\"27\",\"_eventsCount\":1},\"\",{},[\"5\"],[],[],[],[],[],[],[],{\"pre-require\":\"28\"},[null,null]]",
+    "iid": 10,
+    "Runtime_ms": 2.910351000027731
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 11,
+            "column": 5
+        },
+        "end": {
+            "line": 14,
+            "column": 6
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "Anonymous Function ",
+    "iid": 11
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 11,
+            "column": 5
+        },
+        "end": {
+            "line": 14,
+            "column": 6
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "Anonymous Function ",
+    "Tipo_Returned_Value": "object",
+    "Returned_Value": "[{\"type\":\"1\",\"title\":\"2\",\"body\":\"3\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},\"test\",\"leitura assincrona com timeout de 3s no callback\",\"function () {\\n        leituraAssincronaComTimeout();\\n        assert.equal(0, 0);\\n    }\",\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js\",{\"title\":\"7\",\"ctx\":\"6\",\"suites\":\"8\",\"tests\":\"9\",\"root\":false,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"10\",\"_beforeAll\":\"11\",\"_afterEach\":\"12\",\"_afterAll\":\"13\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"14\",\"_onlySuites\":\"15\",\"delayed\":false,\"parent\":\"16\",\"file\":\"4\"},{},\"Testes para verificar se o runtime obtido pelo NodeRock condiz com o runtime real\",[],[\"17\",\"0\"],[],[],[],[],[],[],{\"title\":\"18\",\"ctx\":\"19\",\"suites\":\"20\",\"tests\":\"21\",\"root\":true,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"22\",\"_beforeAll\":\"23\",\"_afterEach\":\"24\",\"_afterAll\":\"25\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"26\",\"_onlySuites\":\"27\",\"delayed\":false,\"_events\":\"28\",\"_eventsCount\":1},{\"type\":\"1\",\"title\":\"29\",\"body\":\"30\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},\"\",{},[\"5\"],[],[],[],[],[],[],[],{\"pre-require\":\"31\"},\"Leitura assincrona com callback simples\",\"function () {\\n        leituraAssincronaComCallback();\\n        assert.equal(0, 0);\\n    }\",[null,null]]",
+    "iid": 11,
+    "Runtime_ms": 0.8041189999785274
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 5,
+            "column": 95
+        },
+        "end": {
+            "line": 16,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Returned_Type": "undefined",
+    "Returned_Value": "[]",
+    "Excession_Occurred": {},
+    "iid": 8,
+    "Runtime_ms": 8.584957999992184
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 5,
+            "column": 1
+        },
+        "end": {
+            "line": 16,
+            "column": 2
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Function_Name": "Anonymous Function ",
+    "Tipo_Returned_Value": "object",
+    "Returned_Value": "[{\"title\":\"1\",\"ctx\":\"2\",\"suites\":\"3\",\"tests\":\"4\",\"root\":false,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"5\",\"_beforeAll\":\"6\",\"_afterEach\":\"7\",\"_afterAll\":\"8\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"9\",\"_onlySuites\":\"10\",\"delayed\":false,\"parent\":\"11\",\"file\":\"12\"},\"Testes para verificar se o runtime obtido pelo NodeRock condiz com o runtime real\",{},[],[\"13\",\"14\"],[],[],[],[],[],[],{\"title\":\"15\",\"ctx\":\"16\",\"suites\":\"17\",\"tests\":\"18\",\"root\":true,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"19\",\"_beforeAll\":\"20\",\"_afterEach\":\"21\",\"_afterAll\":\"22\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"23\",\"_onlySuites\":\"24\",\"delayed\":false,\"_events\":\"25\",\"_eventsCount\":1},\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js\",{\"type\":\"26\",\"title\":\"27\",\"body\":\"28\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"12\",\"parent\":\"0\",\"ctx\":\"2\"},{\"type\":\"26\",\"title\":\"29\",\"body\":\"30\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"12\",\"parent\":\"0\",\"ctx\":\"2\"},\"\",{},[\"0\"],[],[],[],[],[],[],[],{\"pre-require\":\"31\"},\"test\",\"Leitura assincrona com callback simples\",\"function () {\\n        leituraAssincronaComCallback();\\n        assert.equal(0, 0);\\n    }\",\"leitura assincrona com timeout de 3s no callback\",\"function () {\\n        leituraAssincronaComTimeout();\\n        assert.equal(0, 0);\\n    }\",[null,null]]",
+    "iid": 7,
+    "Runtime_ms": 12.53950299997814
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 1
+        },
+        "end": {
+            "line": 19,
+            "column": 26
+        }
+    },
+    "Async_Hook_Id": 0,
+    "Returned_Type": "undefined",
+    "Returned_Value": "[]",
+    "Excession_Occurred": {},
+    "iid": 1,
+    "Runtime_ms": 41.017745000019204
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 11,
+            "column": 60
+        },
+        "end": {
+            "line": 14,
+            "column": 5
+        }
+    },
+    "Async_Hook_Id": 14,
+    "Function_Name": "Anonymous Function ",
+    "iid": 12
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 12,
+            "column": 9
+        },
+        "end": {
+            "line": 12,
+            "column": 37
+        }
+    },
+    "Async_Hook_Id": 14,
+    "Function_Name": "leituraAssincronaComTimeout",
+    "iid": 14
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 40,
+            "column": 1
+        },
+        "end": {
+            "line": 58,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 14,
+    "Function_Name": "leituraAssincronaComTimeout",
+    "iid": 15
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 42,
+            "column": 29
+        },
+        "end": {
+            "line": 42,
+            "column": 45
+        }
+    },
+    "Async_Hook_Id": 14,
+    "Function_Name": "now",
+    "iid": 17
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 42,
+            "column": 29
+        },
+        "end": {
+            "line": 42,
+            "column": 45
+        }
+    },
+    "Async_Hook_Id": 14,
+    "Function_Name": "now",
+    "Tipo_Returned_Value": "number",
+    "Returned_Value": "[7476.738788999966]",
+    "iid": 17,
+    "Runtime_ms": 0.41153100004885346
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 44,
+            "column": 5
+        },
+        "end": {
+            "line": 56,
+            "column": 6
+        }
+    },
+    "Async_Hook_Id": 14,
+    "Function_Name": "readFile",
+    "iid": 18
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 44,
+            "column": 5
+        },
+        "end": {
+            "line": 56,
+            "column": 6
+        }
+    },
+    "Async_Hook_Id": 14,
+    "Function_Name": "readFile",
+    "Tipo_Returned_Value": "undefined",
+    "Returned_Value": "[]",
+    "iid": 18,
+    "Runtime_ms": 10.828282999980729
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 57,
+            "column": 5
+        },
+        "end": {
+            "line": 57,
+            "column": 48
+        }
+    },
+    "Async_Hook_Id": 14,
+    "Function_Name": "log",
+    "iid": 19
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 57,
+            "column": 5
+        },
+        "end": {
+            "line": 57,
+            "column": 48
+        }
+    },
+    "Async_Hook_Id": 14,
+    "Function_Name": "log",
+    "Tipo_Returned_Value": "undefined",
+    "Returned_Value": "[]",
+    "iid": 19,
+    "Runtime_ms": 0.8672329999972135
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 40,
+            "column": 1
+        },
+        "end": {
+            "line": 58,
+            "column": 1
+        }
+    },
+    "Async_Hook_Id": 14,
+    "Returned_Type": "undefined",
+    "Returned_Value": "[]",
+    "Excession_Occurred": {},
+    "iid": 15,
+    "Runtime_ms": 17.03283999999985
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 12,
+            "column": 9
+        },
+        "end": {
+            "line": 12,
+            "column": 37
+        }
+    },
+    "Async_Hook_Id": 14,
+    "Function_Name": "leituraAssincronaComTimeout",
+    "Tipo_Returned_Value": "undefined",
+    "Returned_Value": "[]",
+    "iid": 14,
+    "Runtime_ms": 19.06390999996802
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 13,
+            "column": 9
+        },
+        "end": {
+            "line": 13,
+            "column": 26
+        }
+    },
+    "Async_Hook_Id": 14,
+    "Function_Name": "equal",
+    "iid": 20
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 13,
+            "column": 9
+        },
+        "end": {
+            "line": 13,
+            "column": 26
+        }
+    },
+    "Async_Hook_Id": 14,
+    "Function_Name": "equal",
+    "Tipo_Returned_Value": "undefined",
+    "Returned_Value": "[]",
+    "iid": 20,
+    "Runtime_ms": 0.5405569999711588
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/test/test.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 11,
+            "column": 60
+        },
+        "end": {
+            "line": 14,
+            "column": 5
+        }
+    },
+    "Async_Hook_Id": 14,
+    "Returned_Type": "undefined",
+    "Returned_Value": "[]",
+    "Excession_Occurred": {},
+    "iid": 12,
+    "Runtime_ms": 23.09501900000032
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 44,
+            "column": 43
+        },
+        "end": {
+            "line": 56,
+            "column": 5
+        }
+    },
+    "Async_Hook_Id": 25,
+    "Function_Name": "Anonymous Function ",
+    "iid": 21
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 48,
+            "column": 13
+        },
+        "end": {
+            "line": 54,
+            "column": 20
+        }
+    },
+    "Async_Hook_Id": 25,
+    "Function_Name": "setTimeout",
+    "iid": 23
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 48,
+            "column": 13
+        },
+        "end": {
+            "line": 54,
+            "column": 20
+        }
+    },
+    "Async_Hook_Id": 25,
+    "Function_Name": "setTimeout",
+    "Tipo_Returned_Value": "object",
+    "Returned_Value": "[{\"_idleTimeout\":3000,\"_idlePrev\":\"1\",\"_idleNext\":\"1\",\"_idleStart\":7546,\"_repeat\":null,\"_destroyed\":false},{\"_idleNext\":\"0\",\"_idlePrev\":\"0\",\"expiry\":10546,\"id\":-9007199254740991,\"msecs\":3000,\"priorityQueuePosition\":1}]",
+    "iid": 23,
+    "Runtime_ms": 10.136776000028476
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 44,
+            "column": 43
+        },
+        "end": {
+            "line": 56,
+            "column": 5
+        }
+    },
+    "Async_Hook_Id": 25,
+    "Returned_Type": "undefined",
+    "Returned_Value": "[]",
+    "Excession_Occurred": {},
+    "iid": 21,
+    "Runtime_ms": 11.806281999975909
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "functionEnter",
+    "loc": {
+        "start": {
+            "line": 48,
+            "column": 24
+        },
+        "end": {
+            "line": 54,
+            "column": 13
+        }
+    },
+    "Async_Hook_Id": 26,
+    "Function_Name": "Anonymous Function ",
+    "iid": 24
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 49,
+            "column": 17
+        },
+        "end": {
+            "line": 49,
+            "column": 91
+        }
+    },
+    "Async_Hook_Id": 26,
+    "Function_Name": "log",
+    "iid": 26
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 49,
+            "column": 17
+        },
+        "end": {
+            "line": 49,
+            "column": 91
+        }
+    },
+    "Async_Hook_Id": 26,
+    "Function_Name": "log",
+    "Tipo_Returned_Value": "undefined",
+    "Returned_Value": "[]",
+    "iid": 26,
+    "Runtime_ms": 2.1476100000436418
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 51,
+            "column": 39
+        },
+        "end": {
+            "line": 51,
+            "column": 55
+        }
+    },
+    "Async_Hook_Id": 26,
+    "Function_Name": "now",
+    "iid": 27
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 51,
+            "column": 39
+        },
+        "end": {
+            "line": 51,
+            "column": 55
+        }
+    },
+    "Async_Hook_Id": 26,
+    "Function_Name": "now",
+    "Tipo_Returned_Value": "number",
+    "Returned_Value": "[10554.737177999981]",
+    "iid": 27,
+    "Runtime_ms": 0.320103999983985
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "invokeFunPre",
+    "loc": {
+        "start": {
+            "line": 52,
+            "column": 17
+        },
+        "end": {
+            "line": 52,
+            "column": 125
+        }
+    },
+    "Async_Hook_Id": 26,
+    "Function_Name": "log",
+    "iid": 28
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "invokeFun",
+    "loc": {
+        "start": {
+            "line": 52,
+            "column": 17
+        },
+        "end": {
+            "line": 52,
+            "column": 125
+        }
+    },
+    "Async_Hook_Id": 26,
+    "Function_Name": "log",
+    "Tipo_Returned_Value": "undefined",
+    "Returned_Value": "[]",
+    "iid": 28,
+    "Runtime_ms": 5.145864000020083
+},
+{
+    "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/principal.js",
+    "Detected_Hook": "functionExit",
+    "loc": {
+        "start": {
+            "line": 48,
+            "column": 24
+        },
+        "end": {
+            "line": 54,
+            "column": 13
+        }
+    },
+    "Async_Hook_Id": 26,
+    "Returned_Type": "undefined",
+    "Returned_Value": "[]",
+    "Excession_Occurred": {},
+    "iid": 24,
+    "Runtime_ms": 10.443163999996614
+}
+]

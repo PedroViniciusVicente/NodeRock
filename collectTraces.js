@@ -10,7 +10,7 @@ let parameters = "";
 let isMocha = true;
 
 // 1) CHOOSING THE TEST FILE THAT YOU WANT TO ANALYSE
-let chosenProject = "MeuTestMocha";
+let chosenProject = "MeuTestVerificarRuntimes";
 
 switch (chosenProject) {
     case "MeuTestMocha":
@@ -203,7 +203,7 @@ for(let i = 0; i < testNames.length; i++) {
         console.log("Comando usado foi: ", completCommand);
         //console.log(completCommand);
 
-        shell.exec(completCommand);
+        //shell.exec(completCommand);
 
         copiedFileName = "tracesFromIt_" + i.toString() + ".json";
         shell.cp(sourceCopyPath, (destinationCopyFolder + copiedFileName));
@@ -211,6 +211,22 @@ for(let i = 0; i < testNames.length; i++) {
         console.error('Erro executar testes individuais:', error);
         console.log("Erro ao executar a iteracao do teste individual com i=", i);
     }
+}
+
+console.log("\nGerando a lista com todas as funcoes presentes");
+try {
+    const diretorio = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
+    const files = fs.readdirSync(diretorio);
+
+    const pathExtractedFeaturesLog = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesLog.json";
+    
+    for(let i = 0; i < files.length; i++) {
+        fs.writeFileSync(pathExtractedFeaturesLog + "functionsFromTest_" + i + ".json", '');
+
+    }
+
+} catch(error) {
+    console.error("Erro foi detectado no gerando a lista das funcoes: ", error);
 }
 
 
@@ -274,7 +290,16 @@ try {
     console.error('Erro no extract features:', error);
 }
 
+
+
 shell.echo("TERMINOU!");
+
+
+
+
+
+
+
 
 
 

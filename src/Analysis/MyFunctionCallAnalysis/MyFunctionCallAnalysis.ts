@@ -322,6 +322,23 @@ export class MyFunctionCallAnalysis extends Analysis {
                     //"Valor_do_this???": dis, 
                 };
 
+                if(loc.start.line === 20) {
+                    console.log("\nFunctionEnter");
+                    //console.log("O IID EH: ", iid);
+                    //console.log("O IIDTOCODE EH: ", this.getSandbox().iidToCode(iid));
+                    //console.log("O IIDTOSOURCE EH: ", this.getSandbox().iidToSourceObject(iid));
+                    //console.log("O IID TOLOCATION EH: ", this.getSandbox().iidToLocation(iid));
+
+                    interface FuncaoComAtributo extends Function {
+                        novoAtributo?: string;
+                    }
+
+                    if(typeof(f) === 'function') {
+                        //(f as FuncaoComAtributo).novoAtributo = "AAAAAA";
+                        console.log((f as FuncaoComAtributo).novoAtributo);
+                    }
+                }
+
                 const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
                 MyFunctionCallAnalysis.eventEmitter.emit('addLogToVector', stringJSON);
                 // -=+=- prints para debugar o functionEnter: -=+=-
@@ -391,7 +408,7 @@ export class MyFunctionCallAnalysis extends Analysis {
             };
                     
             
-            this.invokeFunPre = (iid, f, _base, _args) => {
+            this.invokeFunPre = (iid, f, _base, args, _isConstructor, _isMethod, _functionIid,) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
@@ -408,10 +425,58 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "loc": loc,
                     "Async_Hook_Id": async_hooks.executionAsyncId(),
                     "Function_Name": newFunctionName,
-                    //"Function_Arguments": args.join(", "),
+                    "Function_Arguments": args.join(", "),
                     "iid": iid,
                     //"Objeto_Base": base, // objeto base que vai receber a funcao, julgo que nao eh mt necessaria
                 };
+                // console.log("\nInvokeFunPre:");
+                // console.log("iid eh: ", iid);
+                // console.log("functionIid eh: ", functionIid);
+                // console.log("loc start line eh: ", loc.start.line);
+
+                if(loc.start.line === 20) {
+                    console.log("\nInvokeFunPre");
+                    //console.log("O IID EH: ", iid);
+                    //console.log("O IIDTOCODE EH: ", this.getSandbox().iidToCode(iid));
+                    //console.log("O IIDTOSOURCE EH: ", this.getSandbox().iidToSourceObject(iid));
+                    //console.log("O IID TOLOCATION EH: ", this.getSandbox().iidToLocation(iid));
+
+                    
+                    interface FuncaoComAtributo extends Function {
+                        novoAtributo?: string;
+                    }
+
+                    if(typeof(args[2]) === 'function') {
+                        (args[2] as FuncaoComAtributo).novoAtributo = "AAAAAA";
+                        console.log((args[2] as FuncaoComAtributo).novoAtributo);
+                    }
+
+                    // Object.defineProperty(args[2], 'idCaller', {
+                    //     value: '100',
+                    //     writable: true, // Permite que o valor seja alterado posteriormente
+                    //     enumerable: true, // Permite que a propriedade apareça em loops
+                    //     configurable: true // Permite que a propriedade seja deletada ou alterada
+                    // });
+
+                    // typeof(args[2]) === "function" ? console.log("IDCALLER EH: ", args[2].idCaller) : console.log("Nao eh function");
+                }
+
+                // if(args[0] === 'meuArquivo2.txt') {
+
+                //     console.log("O TIPO DO ARGS EH: ", typeof(args));
+                //     console.log("O ARGS EH: ", args);
+                //     typeof(args[2]) === "function" ? console.log("O NOME EH: ", args[2].name) : console.log("Nao eh function");
+
+                    
+                //     console.log("O TIPO DESSA FUNCTION EH: ", typeof(args[2]));
+                //     typeof(args[2]) === "function" ? console.log("O LENGTH DESSA FUNCTION EH: ", args[2].length) : console.log("Nao eh function");
+                //     typeof(args[2]) === "function" ? console.log("O TOSTRING DESSA FUNCTION EH: ", args[2].toString) : console.log("Nao eh function");
+                //     console.dir(args[2]);
+
+                //     typeof(args[2]) === "function" ? console.log("O CALLER EH: ", args[2].call) : console.log("Nao eh function");
+                //     console.log("F TEM O CALL DE: ", f.call);
+                // }
+
             
                 const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
                 MyFunctionCallAnalysis.eventEmitter.emit('addLogToVector', stringJSON);
@@ -419,7 +484,7 @@ export class MyFunctionCallAnalysis extends Analysis {
             }
 
 
-            this.invokeFun = (iid, f, _base, _args, result) => {
+            this.invokeFun = (iid, f, _base, _args, result, _isConstructor, _isMethod, _functionIid) => {
                 const sourceObject = this.getSandbox().iidToSourceObject(iid);
                 if(!sourceObject) { return }
                 const {name: fileName, loc} = sourceObject;
