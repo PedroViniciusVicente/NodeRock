@@ -1,8 +1,6 @@
 const shell = require('shelljs');
 const fs = require('fs');
 const path = require('path');
-const { CONNREFUSED } = require('dns');
-
 
 shell.echo("COMECOU!");
 
@@ -105,7 +103,6 @@ try {
         console.log(`${entryFile} é um diretório.`);
 
         const files = fs.readdirSync(entryFile);
-        console.log("Chegou no readdir");
     
         const jsFiles = files.filter(file => path.extname(file) === '.js');
 
@@ -156,7 +153,6 @@ try {
     }
 }
 catch (error) {
-    console.log("CHEGOU EM UM ERRO");
     if (error.code === 'ENOENT') {
         console.log(`${entryFile} não existe.`);
     }
@@ -207,7 +203,7 @@ for(let i = 0; i < testNames.length; i++) {
         console.log("Comando usado foi: ", completCommand);
         //console.log(completCommand);
 
-        //shell.exec(completCommand);
+        shell.exec(completCommand);
 
         copiedFileName = "tracesFromIt_" + i.toString() + ".json";
         shell.cp(sourceCopyPath, (destinationCopyFolder + copiedFileName));
@@ -219,76 +215,65 @@ for(let i = 0; i < testNames.length; i++) {
 
 
 // 4) COLLECT STATISTICS FROM THE LOGS OBTAINED (EXTRACT FEATURES)
+console.log("\nExtracao das features a partir dos traces gerados:");
 try {
-    
     const diretorio = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
-    fs.readdir(diretorio, (err, files) => {
-        if (err) {
-          console.error('Erro ao ler o diretório:', err);
-          return;
-        }
-        
-        const pathExtractedFeaturesLog = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesLog.json";
-        fs.writeFileSync(pathExtractedFeaturesLog, '[\n');
+    const files = fs.readdirSync(diretorio);
+    
+    const pathExtractedFeaturesLog = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesLog.json";
+    fs.writeFileSync(pathExtractedFeaturesLog, '[\n');
 
-        //console.log("files eh: ", files);
-        for(let i = 0; i < files.length; i++) {
+    //console.log("files eh: ", files);
+    for(let i = 0; i < files.length; i++) {
 
-            let pathExtractFile = "";
-            pathExtractFile = diretorio + files[i];
-            console.log("o arquivo tentando ser acessado eh: ", pathExtractFile);
-            const logHooks = fs.readFileSync(pathExtractFile, 'utf8');
-            const objectsExtractFeatures = JSON.parse(logHooks);
+        let pathExtractFile = "";
+        pathExtractFile = diretorio + files[i];
+        console.log(`${i+1}/${files.length}. Extraindo features do arquivo: ${files[i]}`);
+        const logHooks = fs.readFileSync(pathExtractFile, 'utf8');
+        const objectsExtractFeatures = JSON.parse(logHooks);
 
-            // Extracting Features
-            const countFunctionEnter = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "functionEnter").length;
-            //console.log("Number of objects with Detected_Hook = functionEnter:", countFunctionEnter);
+        // Extracting Features
+        const countFunctionEnter = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "functionEnter").length;
+        //console.log("Number of objects with Detected_Hook = functionEnter:", countFunctionEnter);
 
-            const countFunctionExit = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "functionExit").length;
-            //console.log("Number of objects with Detected_Hook = functionExit:", countFunctionExit);
+        const countFunctionExit = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "functionExit").length;
+        //console.log("Number of objects with Detected_Hook = functionExit:", countFunctionExit);
 
-            let totalTimeFunctions = objectsExtractFeatures
-                .filter(obj => obj.Detected_Hook === "functionExit")
-                .reduce((sum, obj) => sum + obj.Runtime_ms, 0);
+        let totalTimeFunctions = objectsExtractFeatures
+            .filter(obj => obj.Detected_Hook === "functionExit")
+            .reduce((sum, obj) => sum + obj.Runtime_ms, 0);
 
-            const countInvokeFunPre = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "invokeFunPre").length;
-            //console.log("Number of objects with Detected_Hook = invokeFunPre:", countInvokeFunPre);
+        const countInvokeFunPre = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "invokeFunPre").length;
+        //console.log("Number of objects with Detected_Hook = invokeFunPre:", countInvokeFunPre);
 
-            const countInvokeFun = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "invokeFun").length;
-            //console.log("Number of objects with Detected_Hook = invokeFun:", countInvokeFun);
+        const countInvokeFun = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "invokeFun").length;
+        //console.log("Number of objects with Detected_Hook = invokeFun:", countInvokeFun);
 
-            let totalTimeInvokes = objectsExtractFeatures
-                .filter(obj => obj.Detected_Hook === "invokeFun")
-                .reduce((sum, obj) => sum + obj.Runtime_ms, 0);
+        let totalTimeInvokes = objectsExtractFeatures
+            .filter(obj => obj.Detected_Hook === "invokeFun")
+            .reduce((sum, obj) => sum + obj.Runtime_ms, 0);
 
-            const ObjectLogMessage = {
-                "File_Extract_Features": pathExtractFile,
-                "FunctionEnter_Count": countFunctionEnter,
-                "FunctionExit_Count": countFunctionExit,
-                "Total_Time_Functions": totalTimeFunctions,
-                "InvokeFunPre_Count": countInvokeFunPre,
-                "InvokeFun_Count": countInvokeFun,
-                "Total_time_Invokes": totalTimeInvokes,
-            };
+        const ObjectLogMessage = {
+            "File_Extract_Features": pathExtractFile,
+            "FunctionEnter_Count": countFunctionEnter,
+            "FunctionExit_Count": countFunctionExit,
+            "Total_Time_Functions": totalTimeFunctions,
+            "InvokeFunPre_Count": countInvokeFunPre,
+            "InvokeFun_Count": countInvokeFun,
+            "Total_time_Invokes": totalTimeInvokes,
+        };
 
-            const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
+        const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
 
-            fs.writeFileSync(pathExtractedFeaturesLog, stringJSON + ',\n', {flag:'a'});
+        fs.writeFileSync(pathExtractedFeaturesLog, stringJSON + ',\n', {flag:'a'});
 
-        }
-        fs.writeFileSync(pathExtractedFeaturesLog, ']', {flag:'a'});
-
-      });
+    }
+    fs.writeFileSync(pathExtractedFeaturesLog, ']', {flag:'a'});
 
 } catch (error) {
     console.error('Erro no extract features:', error);
 }
 
-
-
-
-//shell.exec("pwd");
-//shell.exec("VERBOSE=1 yarn nodeprof /home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/ arquivoPrincipal.js");
 shell.echo("TERMINOU!");
 
 
@@ -305,6 +290,12 @@ function getTestsNamev2(filePath) {
 
     while ((match = testRegex.exec(content)) !== null) {
         tests.push(match[1]);
+    }
+
+    for(let i = 0; i < tests.length; i++) {
+        tests[i] = `"` + tests[i] + `"`;
+        tests[i] = tests[i].replace(/\s/g, '\\ '); // Adicionando "\" antes dos espacos
+
     }
 
     return tests;

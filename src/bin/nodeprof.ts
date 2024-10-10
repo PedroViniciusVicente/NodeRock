@@ -15,7 +15,7 @@ const {error} = childProcess.spawnSync(`cd ${process.argv.slice(2, 3)} && graaln
     '--jvm',
     '--experimental-options',
     `--vm.Dtruffle.class.path.append=${NODEPROF_PATH}`,
-    '--nodeprof.Scope=module', // '--nodeprof.Scope=module',
+    '--nodeprof.Scope=app', // '--nodeprof.Scope=app',
     '--nodeprof.ExcludeSource="depd,body-parser,merge-descriptors,mime-types"',
     '--nodeprof', path.resolve(ROOT, './nodeprof.js/nodeprof.js/src/ch.usi.inf.nodeprof/js/jalangi.js'),
     '--analysis', path.resolve(ROOT, './dist/'),
