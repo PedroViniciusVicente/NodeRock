@@ -22,6 +22,11 @@ if(false) { // temporary instructions to remember to try later the use of parse 
     //shell.echo('Hello, world!');
 }
 
+// Interface que possibilita marcar o iid das funcoes chamadas por callback
+interface FuncaoComAtributo extends Function {
+    callerIID?: number;
+}
+
 export class MyFunctionCallAnalysis extends Analysis {
     
     static monitorOnlyMyFunctionCallAnalysis: boolean = true;
@@ -29,8 +34,8 @@ export class MyFunctionCallAnalysis extends Analysis {
     static pathLogHooks: string;
 
     // Map to calculate the runtime of the functions detected in invokeFunPre and invokeFun
-    static startTimesInvokeFunPre: Map<number, number> = new Map();
-    static startTimesFunctionEnter: Map<number, number> = new Map();
+    //static startTimesInvokeFunPre: Map<number, number> = new Map();
+    //static startTimesFunctionEnter: Map<number, number> = new Map();
 
 
     /*
@@ -301,11 +306,17 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const {name: fileName, loc} = sourceObject;
 
                 // Registering the starttime of this function
-                MyFunctionCallAnalysis.startTimesFunctionEnter.set(iid, performance.now());
+                //MyFunctionCallAnalysis.startTimesFunctionEnter.set(iid, performance.now());
 
 
                 let newFunctionName: String;
                 f.name ? newFunctionName = f.name : newFunctionName = "Anonymous Function ";
+
+                let isCallBack = false;
+                const valueCallerIID = (f as FuncaoComAtributo).callerIID;
+                if (valueCallerIID) {
+                    isCallBack = true;
+                }
 
                 const ObjectLogMessage = {
                     "File_Path": path.resolve(fileName),
@@ -316,28 +327,26 @@ export class MyFunctionCallAnalysis extends Analysis {
                     // esse join() transforma a lista de argumentos em uma string para nao dar erro de circular reference
                     //"Function_Arguments": args.join(", "),
                     "iid": iid,
+                    "timer": performance.now(),
+                    "is_Callback": isCallBack, 
+                    "valueCallerIID": valueCallerIID,
 
                     // Acho que esse dis nao eh importante, pois ele eh o valor do this no corpo da funcao: (?)
                     // "@param {*} dis - The value of the <tt>this</tt> variable in the function body"
                     //"Valor_do_this???": dis, 
                 };
 
-                if(loc.start.line === 20) {
-                    console.log("\nFunctionEnter");
-                    //console.log("O IID EH: ", iid);
-                    //console.log("O IIDTOCODE EH: ", this.getSandbox().iidToCode(iid));
-                    //console.log("O IIDTOSOURCE EH: ", this.getSandbox().iidToSourceObject(iid));
-                    //console.log("O IID TOLOCATION EH: ", this.getSandbox().iidToLocation(iid));
+                // if(loc.start.line === 20) {
+                //     console.log("\nFunctionEnter");
+                //     //console.log("O IID EH: ", iid);
+                //     //console.log("O IIDTOCODE EH: ", this.getSandbox().iidToCode(iid));
+                //     //console.log("O IIDTOSOURCE EH: ", this.getSandbox().iidToSourceObject(iid));
+                //     //console.log("O IID TOLOCATION EH: ", this.getSandbox().iidToLocation(iid));
 
-                    interface FuncaoComAtributo extends Function {
-                        novoAtributo?: string;
-                    }
-
-                    if(typeof(f) === 'function') {
-                        //(f as FuncaoComAtributo).novoAtributo = "AAAAAA";
-                        console.log((f as FuncaoComAtributo).novoAtributo);
-                    }
-                }
+                //     if(typeof(f) === 'function') {
+                //         console.log((f as FuncaoComAtributo).callerIID);
+                //     }
+                // }
 
                 const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
                 MyFunctionCallAnalysis.eventEmitter.emit('addLogToVector', stringJSON);
@@ -363,12 +372,12 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const {name: fileName, loc} = sourceObject;
 
                 // Calculating runTime
-                const startTime = MyFunctionCallAnalysis.startTimesFunctionEnter.get(iid);
-                const endTime = performance.now();
-                const runtime = startTime ? endTime - startTime : null;
+                //const startTime = MyFunctionCallAnalysis.startTimesFunctionEnter.get(iid);
+                //const endTime = performance.now();
+                //const runtime = startTime ? endTime - startTime : null;
 
                 // Removing startTime from the map
-                MyFunctionCallAnalysis.startTimesFunctionEnter.delete(iid);
+                //MyFunctionCallAnalysis.startTimesFunctionEnter.delete(iid);
 
                 let stringJSONdoreturnVal : string;
                 try {
@@ -398,7 +407,8 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "Returned_Value": stringJSONdoreturnVal,
                     "Excession_Occurred": wrappedExceptionVal,
                     "iid": iid,
-                    "Runtime_ms": runtime,
+                    "timer": performance.now(),
+                    //"Runtime_ms": runtime,
                 };
             
                 const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
@@ -414,10 +424,19 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const {name: fileName, loc} = sourceObject;
                 
                 // Registering the starttime of this function
-                MyFunctionCallAnalysis.startTimesInvokeFunPre.set(iid, performance.now());
+                //MyFunctionCallAnalysis.startTimesInvokeFunPre.set(iid, performance.now());
 
                 let newFunctionName: String;
                 f.name ? newFunctionName = f.name : newFunctionName = "Anonymous Function ";
+
+                let makesCallBack = false;
+                for(let i = 0; i < args.length; i++) {
+                    if(typeof(args[i]) === 'function') {
+                        (args[i] as FuncaoComAtributo).callerIID = iid;
+                        makesCallBack = true;
+                        //console.log("Atribuiu um callerIID com valor: ", iid);
+                    }
+                }
 
                 const ObjectLogMessage = {
                     "File_Path": path.resolve(fileName),
@@ -428,28 +447,29 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "Function_Arguments": args.join(", "),
                     "iid": iid,
                     //"Objeto_Base": base, // objeto base que vai receber a funcao, julgo que nao eh mt necessaria
+                    "timer": performance.now(),
+                    "Makes_CallBack": makesCallBack,
                 };
                 // console.log("\nInvokeFunPre:");
                 // console.log("iid eh: ", iid);
                 // console.log("functionIid eh: ", functionIid);
                 // console.log("loc start line eh: ", loc.start.line);
 
-                if(loc.start.line === 20) {
-                    console.log("\nInvokeFunPre");
+                
+
+                //if(loc.start.line === 20) {
+                //    console.log("\nInvokeFunPre");
                     //console.log("O IID EH: ", iid);
                     //console.log("O IIDTOCODE EH: ", this.getSandbox().iidToCode(iid));
                     //console.log("O IIDTOSOURCE EH: ", this.getSandbox().iidToSourceObject(iid));
                     //console.log("O IID TOLOCATION EH: ", this.getSandbox().iidToLocation(iid));
 
                     
-                    interface FuncaoComAtributo extends Function {
-                        novoAtributo?: string;
-                    }
 
-                    if(typeof(args[2]) === 'function') {
-                        (args[2] as FuncaoComAtributo).novoAtributo = "AAAAAA";
-                        console.log((args[2] as FuncaoComAtributo).novoAtributo);
-                    }
+                    // if(typeof(args[2]) === 'function') {
+                    //     (args[2] as FuncaoComAtributo).callerIID = 100;
+                    //     console.log((args[2] as FuncaoComAtributo).callerIID);
+                    // }
 
                     // Object.defineProperty(args[2], 'idCaller', {
                     //     value: '100',
@@ -459,23 +479,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                     // });
 
                     // typeof(args[2]) === "function" ? console.log("IDCALLER EH: ", args[2].idCaller) : console.log("Nao eh function");
-                }
-
-                // if(args[0] === 'meuArquivo2.txt') {
-
-                //     console.log("O TIPO DO ARGS EH: ", typeof(args));
-                //     console.log("O ARGS EH: ", args);
-                //     typeof(args[2]) === "function" ? console.log("O NOME EH: ", args[2].name) : console.log("Nao eh function");
-
-                    
-                //     console.log("O TIPO DESSA FUNCTION EH: ", typeof(args[2]));
-                //     typeof(args[2]) === "function" ? console.log("O LENGTH DESSA FUNCTION EH: ", args[2].length) : console.log("Nao eh function");
-                //     typeof(args[2]) === "function" ? console.log("O TOSTRING DESSA FUNCTION EH: ", args[2].toString) : console.log("Nao eh function");
-                //     console.dir(args[2]);
-
-                //     typeof(args[2]) === "function" ? console.log("O CALLER EH: ", args[2].call) : console.log("Nao eh function");
-                //     console.log("F TEM O CALL DE: ", f.call);
-                // }
+                //}
 
             
                 const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
@@ -490,12 +494,12 @@ export class MyFunctionCallAnalysis extends Analysis {
                 const {name: fileName, loc} = sourceObject;
                 
                 // Calculating runTime
-                const startTime = MyFunctionCallAnalysis.startTimesInvokeFunPre.get(iid);
-                const endTime = performance.now();
-                const runtime = startTime ? endTime - startTime : null;
+                // const startTime = MyFunctionCallAnalysis.startTimesInvokeFunPre.get(iid);
+                // const endTime = performance.now();
+                // const runtime = startTime ? endTime - startTime : null;
 
                 // Removing startTime from the map
-                MyFunctionCallAnalysis.startTimesInvokeFunPre.delete(iid);
+                //MyFunctionCallAnalysis.startTimesInvokeFunPre.delete(iid);
 
                 let newFunctionName: String;
                 f.name ? newFunctionName = f.name : newFunctionName = "Anonymous Function ";
@@ -527,8 +531,9 @@ export class MyFunctionCallAnalysis extends Analysis {
                     "Tipo_Returned_Value": typeof result,
                     "Returned_Value": stringJSONdoResult,
                     "iid": iid,
-                    "Runtime_ms": runtime,
+                    //"Runtime_ms": runtime,
                     //"Objeto_Base": base, // objeto base que vai receber a funcao, julgo que nao eh mt necessario
+                    "timer": performance.now(),
                 };
             
                 const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);

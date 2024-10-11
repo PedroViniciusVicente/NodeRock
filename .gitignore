@@ -175,6 +175,9 @@ src/Analysis/MyFunctionCallAnalysis/logHooksComScopeModule.json
 src/Analysis/MyFunctionCallAnalysis/logHooksComScopeAll.json
 src/Analysis/MyFunctionCallAnalysis/logHooksComScopeModuleEExcludeSource.json
 
+src/Analysis/MyFunctionCallAnalysis/logHooksTentandoVerRuntimes.json
+src/Analysis/MyFunctionCallAnalysis/logHooksTesteBasico.json
+
 collectedTracesFolder/
 
 collectedTracesFolderDoMeutesteMochaSimples/
@@ -183,3 +186,5 @@ collectedTracesFolderDoMeutesteJest/
 collectedTracesFolderVerificarRuntimeScopeApp/
 collectedTracesFolderVerificarRunTimeScopeModule/
 collectedTracesFolderVerificarRuntimeScopeAll/
+collectedTracesFolderRunTimeVerifica/
+

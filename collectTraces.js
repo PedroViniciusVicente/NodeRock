@@ -201,9 +201,8 @@ for(let i = 0; i < testNames.length; i++) {
 
         console.log(`\n${i+1}/${testNames.length}. Executando o teste: ${testNames[i]}`);
         console.log("Comando usado foi: ", completCommand);
-        //console.log(completCommand);
 
-        //shell.exec(completCommand);
+        shell.exec(completCommand);
 
         copiedFileName = "tracesFromIt_" + i.toString() + ".json";
         shell.cp(sourceCopyPath, (destinationCopyFolder + copiedFileName));
@@ -216,13 +215,60 @@ for(let i = 0; i < testNames.length; i++) {
 console.log("\nGerando a lista com todas as funcoes presentes");
 try {
     const diretorio = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
+
+    let destinationFile = "";
+    let pathExtractFile = "";
     const files = fs.readdirSync(diretorio);
-
-    const pathExtractedFeaturesLog = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesLog.json";
-    
     for(let i = 0; i < files.length; i++) {
-        fs.writeFileSync(pathExtractedFeaturesLog + "functionsFromTest_" + i + ".json", '');
+        destinationFile = diretorio + "functionsFromTest_" + i + ".json";
+        fs.writeFileSync(destinationFile, '');
 
+
+        pathExtractFile = diretorio + "tracesFromIt_" + i + ".json";
+        const logHooks = fs.readFileSync(pathExtractFile, 'utf8');
+        const objectsExtractFeatures = JSON.parse(logHooks);
+
+        let runtime = 0;
+        let callBackDetectedFunction;
+
+        // LEMBRAR QUE NESSE LACO EH PARA USAR O J
+        for(let j = 0; j < objectsExtractFeatures.length; j++) {
+            if (objectsExtractFeatures[j].Detected_Hook === "invokeFunPre") {
+
+                if(objectsExtractFeatures.Makes_CallBack === true) {
+                    for(let k = 0; k < objectsExtractFeatures.length; k++) {
+                        if (objectsExtractFeatures[k].Detected_Hook === "functionEnter") {
+                            if(objectsExtractFeatures[k].is_Callback && valueCallerIID === objectsExtractFeatures[j].iid) {
+                                callBackDetectedFunction = objectsExtractFeatures[k];
+                                runtime = objectsExtractFeatures[k].timer - objectsExtractFeatures[j].timer;
+                            }
+                        }
+                    }
+                }
+                else { // funcoes invocadas que nao fazem callback
+                    for (let k = 0; k < objectsExtractFeatures.length; k++) {
+                        if (objectsExtractFeatures[k].Detected_Hook === "invokeFunPre" && 
+                            objectsExtractFeatures[k].iid === objectsExtractFeatures[j].iid) {
+                                runtime = objectsExtractFeatures[j].timer - objectsExtractFeatures[k].timer;
+                        }
+                    }
+                }
+
+                const ObjectLogMessage = {
+                    "Name": objectsExtractFeatures[j].Function_Name,
+                    "File_Path": objectsExtractFeatures[j].File_Path,
+                    "loc": objectsExtractFeatures[j].loc,
+                    "Runtime_ms": runtime,
+                    "Args": objectsExtractFeatures[j].Args,
+                    "CallBack": callBackDetectedFunction,
+                };
+        
+                const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
+        
+                fs.writeFileSync(destinationFile, stringJSON + ',\n', {flag:'a'});
+            }
+
+        }
     }
 
 } catch(error) {
@@ -239,12 +285,16 @@ try {
     const pathExtractedFeaturesLog = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesLog.json";
     fs.writeFileSync(pathExtractedFeaturesLog, '[\n');
 
+    // Filtrar para ler apenas os arquivos de nome tracesFromIt_x.json;
+    const regex = /^tracesFromIt_\d+\.json$/;
+    const filteredFiles = files.filter(file => regex.test(file));
+
     //console.log("files eh: ", files);
-    for(let i = 0; i < files.length; i++) {
+    for(let i = 0; i < filteredFiles.length; i++) {
 
         let pathExtractFile = "";
-        pathExtractFile = diretorio + files[i];
-        console.log(`${i+1}/${files.length}. Extraindo features do arquivo: ${files[i]}`);
+        pathExtractFile = diretorio + filteredFiles[i];
+        console.log(`${i+1}/${filteredFiles.length}. Extraindo features do arquivo: ${filteredFiles[i]}`);
         const logHooks = fs.readFileSync(pathExtractFile, 'utf8');
         const objectsExtractFeatures = JSON.parse(logHooks);
 
