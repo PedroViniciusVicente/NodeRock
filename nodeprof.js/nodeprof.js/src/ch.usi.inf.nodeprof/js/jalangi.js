@@ -89,6 +89,10 @@ J$={};
       }
     }
     if(!filterConfig) {
+      const sourceConfig = {
+        includes: 'clone' // Only include files with "express" in the name or path
+      };
+      //sandbox.adapter.onReady(analysis, sourceConfig);
       sandbox.adapter.onReady(analysis);
     }else{
       sandbox.adapter.onReady(analysis, filterConfig);

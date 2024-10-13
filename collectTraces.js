@@ -10,9 +10,15 @@ let parameters = "";
 let isMocha = true;
 
 // 1) CHOOSING THE TEST FILE THAT YOU WANT TO ANALYSE
-let chosenProject = "MeuTestVerificarRuntimes";
+let chosenProject = "MeuTestBasico";
 
 switch (chosenProject) {
+    case "MeuTestBasico": // teste para ver melhor o tempo com cb assincrono
+        console.log("Executando analise do meu teste basico para ver o tempo com cb assincrono");
+        pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testeBasico/";
+        testFile = "test/test.js";
+        break;
+
     case "MeuTestMocha":
         console.log("Executando analise do meu teste simples em Mocha");
         pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/";
@@ -221,7 +227,7 @@ try {
     const files = fs.readdirSync(diretorio);
     for(let i = 0; i < files.length; i++) {
         destinationFile = diretorio + "functionsFromTest_" + i + ".json";
-        fs.writeFileSync(destinationFile, '');
+        fs.writeFileSync(destinationFile, '[');
 
 
         pathExtractFile = diretorio + "tracesFromIt_" + i + ".json";
@@ -229,27 +235,60 @@ try {
         const objectsExtractFeatures = JSON.parse(logHooks);
 
         let runtime = 0;
-        let callBackDetectedFunction;
+        let callBackDetectedFunction = [];
 
+
+        let DEBUG = true;
         // LEMBRAR QUE NESSE LACO EH PARA USAR O J
-        for(let j = 0; j < objectsExtractFeatures.length; j++) {
-            if (objectsExtractFeatures[j].Detected_Hook === "invokeFunPre") {
+        for (let j = 0; j < objectsExtractFeatures.length; j++)
+        {
+            if (objectsExtractFeatures[j].Detected_Hook === "invokeFunPre")
+            {
+                if (objectsExtractFeatures[j].Makes_CallBack === true)
+                {
+                    if(DEBUG) {
+                        console.log(`a) A FUNCAO DE IID = ${objectsExtractFeatures[j].iid} FAZ CALLBACKS, 
+                            E SEU TIMER EH: ${objectsExtractFeatures[j].timer}`);
+                    }
 
-                if(objectsExtractFeatures.Makes_CallBack === true) {
-                    for(let k = 0; k < objectsExtractFeatures.length; k++) {
-                        if (objectsExtractFeatures[k].Detected_Hook === "functionEnter") {
-                            if(objectsExtractFeatures[k].is_Callback && valueCallerIID === objectsExtractFeatures[j].iid) {
-                                callBackDetectedFunction = objectsExtractFeatures[k];
-                                runtime = objectsExtractFeatures[k].timer - objectsExtractFeatures[j].timer;
+                    // o objeto na posicao k eh o funtionEnter da funcao de callback
+                    for (let k = 0; k < objectsExtractFeatures.length; k++)
+                    {
+                        if (objectsExtractFeatures[k].Detected_Hook === "functionEnter" &&
+                            objectsExtractFeatures[k].is_Callback === true &&
+                            objectsExtractFeatures[k].valueCallerIID === objectsExtractFeatures[j].iid)
+                        {
+
+                            if(DEBUG) {
+                                console.log(`b) A FUNCAO DE IID = ${objectsExtractFeatures[k].iid} EH O CALLBACK DA ${objectsExtractFeatures[j].iid}`);
+                            }
+
+                            callBackDetectedFunction.push(objectsExtractFeatures[k].iid);
+                            // o objeto na posicao l eh o functionExit da funcao de callback
+                            for (l = 0; l < objectsExtractFeatures.length; l++)
+                            {
+                                if (objectsExtractFeatures[l].Detected_Hook === "functionExit" &&
+                                    objectsExtractFeatures[l].iid === objectsExtractFeatures[k].iid)
+                                {
+                                    if(DEBUG) {
+                                        console.log(`c) A FUNCAO DE CALLBACK TERMINA NO TIMER: ${objectsExtractFeatures[l].timer}`);
+                                    }
+
+                                    // runtime = timerDoFunctionExit - timerDoInvokeFunPre
+                                    runtime = objectsExtractFeatures[l].timer - objectsExtractFeatures[j].timer;
+                                    break;
+                                }
                             }
                         }
                     }
                 }
                 else { // funcoes invocadas que nao fazem callback
-                    for (let k = 0; k < objectsExtractFeatures.length; k++) {
-                        if (objectsExtractFeatures[k].Detected_Hook === "invokeFunPre" && 
-                            objectsExtractFeatures[k].iid === objectsExtractFeatures[j].iid) {
-                                runtime = objectsExtractFeatures[j].timer - objectsExtractFeatures[k].timer;
+                    for (let k = 0; k < objectsExtractFeatures.length; k++)
+                    {
+                        if (objectsExtractFeatures[k].Detected_Hook === "invokeFun" && 
+                            objectsExtractFeatures[k].iid === objectsExtractFeatures[j].iid)
+                        {
+                            runtime = objectsExtractFeatures[k].timer - objectsExtractFeatures[j].timer;
                         }
                     }
                 }
@@ -266,8 +305,11 @@ try {
                 const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
         
                 fs.writeFileSync(destinationFile, stringJSON + ',\n', {flag:'a'});
+                if (j === objectsExtractFeatures.length - 1)
+                {
+                    fs.writeFileSync(destinationFile, '\n]', {flag:'a'});
+                }
             }
-
         }
     }
 
@@ -332,11 +374,14 @@ try {
         const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
 
         fs.writeFileSync(pathExtractedFeaturesLog, stringJSON + ',\n', {flag:'a'});
+        if (i === filteredFiles.length - 1)
+        {
+            fs.writeFileSync(pathExtractedFeaturesLog, '\n]', {flag:'a'});
+        }
 
     }
-    fs.writeFileSync(pathExtractedFeaturesLog, ']', {flag:'a'});
-
-} catch (error) {
+}
+catch (error) {
     console.error('Erro no extract features:', error);
 }
 
