@@ -13,6 +13,7 @@ let isMocha = true;
 let chosenProject = "MeuTestBasico";
 
 switch (chosenProject) {
+
     case "MeuTestBasico": // teste para ver melhor o tempo com cb assincrono
         console.log("Executando analise do meu teste basico para ver o tempo com cb assincrono");
         pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testeBasico/";
@@ -238,7 +239,7 @@ try {
         let callBackDetectedFunction = [];
 
 
-        let DEBUG = true;
+        let DEBUG = false;
         // LEMBRAR QUE NESSE LACO EH PARA USAR O J
         for (let j = 0; j < objectsExtractFeatures.length; j++)
         {
@@ -265,7 +266,7 @@ try {
 
                             callBackDetectedFunction.push(objectsExtractFeatures[k].iid);
                             // o objeto na posicao l eh o functionExit da funcao de callback
-                            for (l = 0; l < objectsExtractFeatures.length; l++)
+                            for (l = k; l < objectsExtractFeatures.length; l++)
                             {
                                 if (objectsExtractFeatures[l].Detected_Hook === "functionExit" &&
                                     objectsExtractFeatures[l].iid === objectsExtractFeatures[k].iid)
@@ -295,6 +296,7 @@ try {
 
                 const ObjectLogMessage = {
                     "Name": objectsExtractFeatures[j].Function_Name,
+                    "iid": objectsExtractFeatures[j].iid,
                     "File_Path": objectsExtractFeatures[j].File_Path,
                     "loc": objectsExtractFeatures[j].loc,
                     "Runtime_ms": runtime,
@@ -305,10 +307,10 @@ try {
                 const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
         
                 fs.writeFileSync(destinationFile, stringJSON + ',\n', {flag:'a'});
-                if (j === objectsExtractFeatures.length - 1)
-                {
-                    fs.writeFileSync(destinationFile, '\n]', {flag:'a'});
-                }
+            }
+
+            if(j === objectsExtractFeatures.length - 1) {
+                fs.writeFileSync(destinationFile, ']', {flag:'a'});
             }
         }
     }
@@ -373,10 +375,11 @@ try {
 
         const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
 
-        fs.writeFileSync(pathExtractedFeaturesLog, stringJSON + ',\n', {flag:'a'});
-        if (i === filteredFiles.length - 1)
-        {
-            fs.writeFileSync(pathExtractedFeaturesLog, '\n]', {flag:'a'});
+        if (i !== filteredFiles.length - 1) {
+            fs.writeFileSync(pathExtractedFeaturesLog, stringJSON + ',\n', {flag:'a'});
+        }
+        else {
+            fs.writeFileSync(pathExtractedFeaturesLog, stringJSON + '\n]', {flag:'a'});
         }
 
     }
