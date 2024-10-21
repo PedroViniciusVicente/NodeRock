@@ -19,6 +19,12 @@ switch (chosenProject) {
         pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testeBasico/";
         testFile = "test/test.js";
         break;
+    
+    case "MeuTestBasico2": // teste para ver melhor o tempo com cb assincrono
+    console.log("Executando analise do meu teste basico2 para ver o tempo ate chamar cb assincrono");
+    pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testeBasico/";
+    testFile = "test/testLeitura.js";
+    break;
 
     case "MeuTestMocha":
         console.log("Executando analise do meu teste simples em Mocha");
