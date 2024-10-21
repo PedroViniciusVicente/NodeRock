@@ -179,6 +179,7 @@ src/Analysis/MyFunctionCallAnalysis/logHooksTentandoVerRuntimes.json
 src/Analysis/MyFunctionCallAnalysis/logHooksTesteBasico.json
 
 collectedTracesFolder/
+collectedTracesFolder2/
 
 collectedTracesFolderDoMeutesteMochaSimples/
 collectedTracesFolderDoMeutesteJest/

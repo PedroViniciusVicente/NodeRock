@@ -1,0 +1,11 @@
+[
+{
+    "File_Extract_Features": "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/tracesFromIt_0.json",
+    "FunctionEnter_Count": 8,
+    "FunctionExit_Count": 8,
+    "Total_Time_Functions": null,
+    "InvokeFunPre_Count": 11,
+    "InvokeFun_Count": 11,
+    "Total_time_Invokes": null
+}
+]

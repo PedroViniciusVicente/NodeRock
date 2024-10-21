@@ -10,7 +10,7 @@ let parameters = "";
 let isMocha = true;
 
 // 1) CHOOSING THE TEST FILE THAT YOU WANT TO ANALYSE
-let chosenProject = "MeuTestBasico";
+let chosenProject = "MeuTestBasico2";
 
 switch (chosenProject) {
 
@@ -234,16 +234,16 @@ try {
     const files = fs.readdirSync(diretorio);
     for(let i = 0; i < files.length; i++) {
         destinationFile = diretorio + "functionsFromTest_" + i + ".json";
-        fs.writeFileSync(destinationFile, '[');
+        fs.writeFileSync(destinationFile, '[\n');
 
 
         pathExtractFile = diretorio + "tracesFromIt_" + i + ".json";
         const logHooks = fs.readFileSync(pathExtractFile, 'utf8');
         const objectsExtractFeatures = JSON.parse(logHooks);
 
-        let runtime = 0;
-        let callBackDetectedFunction = [];
-
+        let delayCb = 0;
+        let callbackMade = [];
+        let firstWrite = true;
 
         let DEBUG = false;
         // LEMBRAR QUE NESSE LACO EH PARA USAR O J
@@ -259,7 +259,7 @@ try {
                     }
 
                     // o objeto na posicao k eh o funtionEnter da funcao de callback
-                    for (let k = 0; k < objectsExtractFeatures.length; k++)
+                    for (let k = j; k < objectsExtractFeatures.length; k++)
                     {
                         if (objectsExtractFeatures[k].Detected_Hook === "functionEnter" &&
                             objectsExtractFeatures[k].is_Callback === true &&
@@ -270,53 +270,65 @@ try {
                                 console.log(`b) A FUNCAO DE IID = ${objectsExtractFeatures[k].iid} EH O CALLBACK DA ${objectsExtractFeatures[j].iid}`);
                             }
 
-                            callBackDetectedFunction.push(objectsExtractFeatures[k].iid);
-                            // o objeto na posicao l eh o functionExit da funcao de callback
-                            for (l = k; l < objectsExtractFeatures.length; l++)
-                            {
-                                if (objectsExtractFeatures[l].Detected_Hook === "functionExit" &&
-                                    objectsExtractFeatures[l].iid === objectsExtractFeatures[k].iid)
-                                {
-                                    if(DEBUG) {
-                                        console.log(`c) A FUNCAO DE CALLBACK TERMINA NO TIMER: ${objectsExtractFeatures[l].timer}`);
-                                    }
+                            callbackMade.push(objectsExtractFeatures[k].iid);
+                            delayCb = objectsExtractFeatures[k].timer - objectsExtractFeatures[j].timer;
 
-                                    // runtime = timerDoFunctionExit - timerDoInvokeFunPre
-                                    runtime = objectsExtractFeatures[l].timer - objectsExtractFeatures[j].timer;
-                                    break;
-                                }
-                            }
+                            // o objeto na posicao l eh o functionExit da funcao de callback
+                            // for (l = k; l < objectsExtractFeatures.length; l++)
+                            // {
+                            //     if (objectsExtractFeatures[l].Detected_Hook === "functionExit" &&
+                            //         objectsExtractFeatures[l].iid === objectsExtractFeatures[k].iid)
+                            //     {
+                            //         if(DEBUG) {
+                            //             console.log(`c) A FUNCAO DE CALLBACK TERMINA NO TIMER: ${objectsExtractFeatures[l].timer}`);
+                            //         }
+
+                            //         // delayCb = timerDoFunctionExit - timerDoInvokeFunPre
+                            //         // ESSE RUNTIME NA VERDADE SERIA A DEMORA PARA UM CALLBACK COMECAR A SER EXECUTADO A PARTIR DO MOMENTO QUE ELE FOI INVOCADO
+                            //         delayCb = objectsExtractFeatures[l].timer - objectsExtractFeatures[j].timer;
+                            //         // TALVEZ LEMBRAR DE ZERAR O delayCb PRA NAO DAR ERRO??
+                            //         break;
+                            //     }
+                            // }
                         }
                     }
                 }
-                else { // funcoes invocadas que nao fazem callback
-                    for (let k = 0; k < objectsExtractFeatures.length; k++)
-                    {
-                        if (objectsExtractFeatures[k].Detected_Hook === "invokeFun" && 
-                            objectsExtractFeatures[k].iid === objectsExtractFeatures[j].iid)
-                        {
-                            runtime = objectsExtractFeatures[k].timer - objectsExtractFeatures[j].timer;
-                        }
-                    }
-                }
+                // else { // funcoes invocadas que nao fazem callback
+                //     for (let k = 0; k < objectsExtractFeatures.length; k++)
+                //     {
+                //         if (objectsExtractFeatures[k].Detected_Hook === "invokeFun" && 
+                //             objectsExtractFeatures[k].iid === objectsExtractFeatures[j].iid)
+                //         {
+                //             delayCb = objectsExtractFeatures[k].timer - objectsExtractFeatures[j].timer;
+                //         }
+                //     }
+                // }
+                
 
                 const ObjectLogMessage = {
                     "Name": objectsExtractFeatures[j].Function_Name,
                     "iid": objectsExtractFeatures[j].iid,
                     "File_Path": objectsExtractFeatures[j].File_Path,
                     "loc": objectsExtractFeatures[j].loc,
-                    "Runtime_ms": runtime,
-                    "Args": objectsExtractFeatures[j].Args,
-                    "CallBack": callBackDetectedFunction,
+                    "delayCb_ms": delayCb,
+                    //"Args": objectsExtractFeatures[j].args,
+                    "Called_iid": callbackMade,
                 };
+                callbackMade = [] // zerando o vetor
+                delayCb = 0;
         
                 const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
-        
-                fs.writeFileSync(destinationFile, stringJSON + ',\n', {flag:'a'});
+                if(firstWrite) {
+                    fs.writeFileSync(destinationFile, stringJSON, {flag:'a'});
+                    firstWrite = false;
+                }
+                else {
+                    fs.writeFileSync(destinationFile, ',\n' + stringJSON, {flag:'a'});
+                }
             }
 
             if(j === objectsExtractFeatures.length - 1) {
-                fs.writeFileSync(destinationFile, ']', {flag:'a'});
+                fs.writeFileSync(destinationFile, '\n]', {flag:'a'});
             }
         }
     }
@@ -332,11 +344,12 @@ try {
     const diretorio = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
     const files = fs.readdirSync(diretorio);
     
-    const pathExtractedFeaturesLog = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesLog.json";
-    fs.writeFileSync(pathExtractedFeaturesLog, '[\n');
+    const pathExtractedFeaturesResume = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesResume.json";
+    fs.writeFileSync(pathExtractedFeaturesResume, '[\n');
 
     // Filtrar para ler apenas os arquivos de nome tracesFromIt_x.json;
-    const regex = /^tracesFromIt_\d+\.json$/;
+    //const regex = /^tracesFromIt_\d+\.json$/;
+    const regex = /^functionsFromTest_\d+\.json$/;
     const filteredFiles = files.filter(file => regex.test(file));
 
     //console.log("files eh: ", files);
@@ -349,43 +362,64 @@ try {
         const objectsExtractFeatures = JSON.parse(logHooks);
 
         // Extracting Features
-        const countFunctionEnter = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "functionEnter").length;
-        //console.log("Number of objects with Detected_Hook = functionEnter:", countFunctionEnter);
+        let countInvokeFunPre = objectsExtractFeatures.length;
+        let countInvokesWithCallback = 0;
+        let totalDelay = 0;
+        let avgDelay = 0;
+        for(let j = 0; j < objectsExtractFeatures.length; j++) {
+            if(objectsExtractFeatures[j].Called_iid.length > 0) {
+                countInvokesWithCallback++;
+                totalDelay += objectsExtractFeatures[j].delayCb_ms;
+            }
+        }
+        avgDelay = totalDelay / countInvokesWithCallback;
+        
 
-        const countFunctionExit = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "functionExit").length;
-        //console.log("Number of objects with Detected_Hook = functionExit:", countFunctionExit);
+        // const countFunctionEnter = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "functionEnter").length;
+        // //console.log("Number of objects with Detected_Hook = functionEnter:", countFunctionEnter);
 
-        let totalTimeFunctions = objectsExtractFeatures
-            .filter(obj => obj.Detected_Hook === "functionExit")
-            .reduce((sum, obj) => sum + obj.Runtime_ms, 0);
+        // const countFunctionExit = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "functionExit").length;
+        // //console.log("Number of objects with Detected_Hook = functionExit:", countFunctionExit);
 
-        const countInvokeFunPre = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "invokeFunPre").length;
-        //console.log("Number of objects with Detected_Hook = invokeFunPre:", countInvokeFunPre);
+        // let totalTimeFunctions = objectsExtractFeatures
+        //     .filter(obj => obj.Detected_Hook === "functionExit")
+        //     .reduce((sum, obj) => sum + obj.Runtime_ms, 0);
 
-        const countInvokeFun = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "invokeFun").length;
-        //console.log("Number of objects with Detected_Hook = invokeFun:", countInvokeFun);
+        // const countInvokeFunPre = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "invokeFunPre").length;
+        // //console.log("Number of objects with Detected_Hook = invokeFunPre:", countInvokeFunPre);
 
-        let totalTimeInvokes = objectsExtractFeatures
-            .filter(obj => obj.Detected_Hook === "invokeFun")
-            .reduce((sum, obj) => sum + obj.Runtime_ms, 0);
+        // const countInvokeFun = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "invokeFun").length;
+        // //console.log("Number of objects with Detected_Hook = invokeFun:", countInvokeFun);
+
+        // let totalTimeInvokes = objectsExtractFeatures
+        //     .filter(obj => obj.Detected_Hook === "invokeFun")
+        //     .reduce((sum, obj) => sum + obj.Runtime_ms, 0);
+
+        // const ObjectLogMessage = {
+        //     "File_Extract_Features": pathExtractFile,
+        //     "FunctionEnter_Count": countFunctionEnter,
+        //     "FunctionExit_Count": countFunctionExit,
+        //     "Total_Time_Functions": totalTimeFunctions,
+        //     "InvokeFunPre_Count": countInvokeFunPre,
+        //     "InvokeFun_Count": countInvokeFun,
+        //     "Total_time_Invokes": totalTimeInvokes,
+        // };
 
         const ObjectLogMessage = {
             "File_Extract_Features": pathExtractFile,
-            "FunctionEnter_Count": countFunctionEnter,
-            "FunctionExit_Count": countFunctionExit,
-            "Total_Time_Functions": totalTimeFunctions,
             "InvokeFunPre_Count": countInvokeFunPre,
-            "InvokeFun_Count": countInvokeFun,
-            "Total_time_Invokes": totalTimeInvokes,
+            "Invokes_with_callback": countInvokesWithCallback,
+            "Total_delay_ms": totalDelay,
+            "Average_delay_ms": avgDelay, // total_delay / invokes_with_callback
         };
 
         const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
 
         if (i !== filteredFiles.length - 1) {
-            fs.writeFileSync(pathExtractedFeaturesLog, stringJSON + ',\n', {flag:'a'});
+            fs.writeFileSync(pathExtractedFeaturesResume, stringJSON + ',\n', {flag:'a'});
         }
         else {
-            fs.writeFileSync(pathExtractedFeaturesLog, stringJSON + '\n]', {flag:'a'});
+            fs.writeFileSync(pathExtractedFeaturesResume, stringJSON + '\n]', {flag:'a'});
         }
 
     }
@@ -393,7 +427,6 @@ try {
 catch (error) {
     console.error('Erro no extract features:', error);
 }
-
 
 
 shell.echo("TERMINOU!");
