@@ -107,14 +107,14 @@ export class MyFunctionCallAnalysis extends Analysis {
 
     protected override registerHooks()
     {
-        console.log("Starting registerHooks from MyFunctionCallAnalysis:");
+        //console.log("Starting registerHooks from MyFunctionCallAnalysis:");
         
         // -=+=- Initializing with the right path to the file address -=+=-
         MyFunctionCallAnalysis.pathLogHooks = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/MyFunctionCallAnalysis/logHooks.json";
 
 
         // -=+=- Detecting and registering hooks -=+=-
-        console.log("Calling all hooks!");
+        //console.log("Calling all hooks!");
         
 
         /*this.read = (iid, name, val, _isGlobal) => {

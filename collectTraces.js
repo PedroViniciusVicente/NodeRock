@@ -10,7 +10,7 @@ let parameters = "";
 let isMocha = true;
 
 // 1) CHOOSING THE TEST FILE THAT YOU WANT TO ANALYSE
-let chosenProject = "MeuTestBasico2";
+let chosenProject = "DEL";
 
 switch (chosenProject) {
 
@@ -121,7 +121,7 @@ try {
 
         console.log(`\nForam encontrados ${jsFiles.length} Arquivos .js:`);
         for(let i = 0; i < jsFiles.length; i++) {
-            console.log(`${i}. ${jsFiles[i]}`);
+            console.log(`${i+1}. ${jsFiles[i]}`);
         }
 
         for(let i = 0; i < jsFiles.length; i++) {
@@ -140,7 +140,7 @@ try {
 
         console.log(`\nForam encontrados um total de ${testNames.length} testes no folder '${testFile}':`);
         for(let i = 0; i < testNames.length; i++) {
-            console.log(`${i}. ${testNames[i]}; --- file: ${testNamesRespectiveFile[i]}`);
+            console.log(`${i+1}. ${testNames[i]}; --- file: ${testNamesRespectiveFile[i]}`);
         }
     }
     else if (stats.isFile()) {
@@ -157,7 +157,7 @@ try {
 
             console.log(`\nForam encontrados um total de ${testNames.length} testes no file '${testFile}':`);
             for(let i = 0; i < testNames.length; i++) {
-                console.log(`${i}. ${testNames[i]};`);
+                console.log(`${i+1}. ${testNames[i]};`);
             }
         }
     }
@@ -233,7 +233,11 @@ try {
     let pathExtractFile = "";
     const files = fs.readdirSync(diretorio);
     for(let i = 0; i < files.length; i++) {
+        
         destinationFile = diretorio + "functionsFromTest_" + i + ".json";
+
+        console.log(`${i+1}/${files.length}. Selecionando funcoes e calculando delays de Callbacks do arquivo: ${destinationFile}`);
+
         fs.writeFileSync(destinationFile, '[\n');
 
 
