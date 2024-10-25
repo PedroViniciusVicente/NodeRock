@@ -1,6 +1,7 @@
 const shell = require('shelljs');
 const fs = require('fs');
 const path = require('path');
+//const { arrayBuffer } = require('stream/consumers');
 
 shell.echo("COMECOU!");
 
@@ -10,7 +11,7 @@ let parameters = "";
 let isMocha = true;
 
 // 1) CHOOSING THE TEST FILE THAT YOU WANT TO ANALYSE
-let chosenProject = "DEL";
+let chosenProject = "NEDB";
 
 switch (chosenProject) {
 
@@ -21,10 +22,10 @@ switch (chosenProject) {
         break;
     
     case "MeuTestBasico2": // teste para ver melhor o tempo com cb assincrono
-    console.log("Executando analise do meu teste basico2 para ver o tempo ate chamar cb assincrono");
-    pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testeBasico/";
-    testFile = "test/testLeitura.js";
-    break;
+        console.log("Executando analise do meu teste basico2 para ver o tempo ate chamar cb assincrono");
+        pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testeBasico/";
+        testFile = "test/testLeitura.js";
+        break;
 
     case "MeuTestMocha":
         console.log("Executando analise do meu teste simples em Mocha");
@@ -47,7 +48,8 @@ switch (chosenProject) {
         testFile = "test/test.js";
         break;
 
-    // Obs: o FPS funciona, mas ele eh apenas 1 teste e ele so printa o sucesso do teste caso esteja usando o node v10 (nvm use 10) 
+
+    // Obs: o FPS "funciona", mas ele eh apenas 1 teste e ele so printa o sucesso do teste caso esteja usando o node v10 (nvm use 10) 
     case "FPS": // known-bugs
         console.log("Executando analise do fiware-pep-steelskin");
         pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/fiware-pep-steelskin/";
@@ -89,15 +91,22 @@ switch (chosenProject) {
     // case "NEDB2": // known-bugs
     //     break;
 
-    // Obs: o ARC funciona, mas apenas mantendo a limitacao dele para apenas esse teste
+    case "NEDB": // exploratory
+        pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/nedb/";
+        testFile = "test/db.test.js";
+        parameters = `--exit -t 20000`;
+        break;
+
     case "ARC": // exploratory
         pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver/";
         testFile = "test/archiver.js";
-        parameters = `--exit -t 10000 -g "archiver\ api\ #errors\ should\ allow\ continue\ on\ stat\ failing"`;
+        parameters = `--exit -t 10000`;
+        // Obs: O teste com a race condition era -g "archiver\ api\ #errors\ should\ allow\ continue\ on\ stat\ failing"
         break;
 
     // case "OBJ": // exploratory
     //     break;
+
     default:
         console.log("Esse projeto ainda nao esta nesse switch case!");
 }
@@ -224,6 +233,7 @@ for(let i = 0; i < testNames.length; i++) {
         console.log("Erro ao executar a iteracao do teste individual com i=", i);
     }
 }
+
 
 console.log("\nGerando a lista com todas as funcoes presentes");
 try {
@@ -410,6 +420,7 @@ try {
         // };
 
         const ObjectLogMessage = {
+            //"Test_Name": aaaa,
             "File_Extract_Features": pathExtractFile,
             "InvokeFunPre_Count": countInvokeFunPre,
             "Invokes_with_callback": countInvokesWithCallback,
@@ -446,6 +457,89 @@ shell.echo("TERMINOU!");
 
 
 // -=+=- Used Functions -=+=-
+
+// ESSA ABRODAGEM CONSEGUE PEGAR O DESCRIBE DE CADA IT TAMBEM
+function getTestsNamev3(filePath) {
+    const testFileContent = fs.readFileSync(filePath, 'utf8');
+
+    const lines = testFileContent.split('\n');
+    const describeStack = [];
+    let columnUltimoDescribe = 0;
+    //let qtdTestes = 0;
+    arrayTestFullNames = [];
+
+
+    lines.forEach((line, lineNumber) => {
+        // Remove leading/trailing whitespace
+        const trimmedLine = line.trim();
+
+        // Check for describe blocks and print their location
+        if (trimmedLine.startsWith('describe(')) {
+            const match = line.match(/describe\(['"`](.*?)['"`],/);
+            if (match) {
+                const column = line.indexOf('describe(') + 1; // Column number, starting from 1
+                const describeName = match[1];
+                //console.log(`Found 'describe' block for "${describeName}" at line ${lineNumber + 1}, column ${column}`);
+
+                let par_nomedescribe_coluna = {
+                    nome: describeName,
+                    coluna: column
+                }
+
+                if(column === columnUltimoDescribe) {
+                    describeStack.pop();
+                    describeStack.push(par_nomedescribe_coluna);
+                    // (e o columnUltimoDescribe mantem o mesmo)
+                }
+                else if(column > columnUltimoDescribe) {
+                    describeStack.push(par_nomedescribe_coluna);
+                    columnUltimoDescribe = column;
+                }
+                else if(column < columnUltimoDescribe) {
+                    describeStack.pop();
+                    while(describeStack.length > 0 && column <= describeStack[describeStack.length-1].coluna) {
+                        describeStack.pop();
+                    }
+                    describeStack.push(par_nomedescribe_coluna);
+                    columnUltimoDescribe = column;
+                }
+
+
+
+            }
+        }
+
+        if (trimmedLine.startsWith('it(')) {
+            const match = line.match(/it\(['"`](.*?)['"`],/);
+            if (match) {
+                const column = line.indexOf('it(') + 1; // Column number, starting from 1
+                const itName = match[1];
+                //console.log(`Found 'it' block for "${describeName}" at line ${lineNumber + 1}, column ${column}`);
+
+                if(column <= columnUltimoDescribe) {
+                    describeStack.pop();
+                    while(describeStack.length > 0 && column <= describeStack[describeStack.length-1].coluna) {
+                        describeStack.pop();
+                    }
+                    columnUltimoDescribe = describeStack[describeStack.length-1].coluna;
+                }
+
+                let testFullNames = "";
+                for (let i = 0; i < describeStack.length; i++) {
+                    testFullNames += describeStack[i].nome /*+ "(" + describeStack[i].coluna + ")" */+ " > ";
+                }
+                testFullNames += itName;
+                arrayTestFullNames.push(testFullNames);
+                //qtdTestes++;
+                //console.log(qtdTestes + ". " + testFullNames);
+            }
+        }
+    });
+    return arrayTestFullNames;
+}
+
+
+
 
 // ESSA ABORDAGEM ACABA GERANDO FALSO POSITIVOS SE O TEST/IT ESTIVER EM UM COMENTARIO DE BLOCO
 function getTestsNamev2(filePath) {
