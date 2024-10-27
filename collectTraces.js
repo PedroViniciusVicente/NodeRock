@@ -11,7 +11,7 @@ let parameters = "";
 let isMocha = true;
 
 // 1) CHOOSING THE TEST FILE THAT YOU WANT TO ANALYSE
-let chosenProject = "NEDB";
+let chosenProject = "ARC";
 
 switch (chosenProject) {
 
@@ -134,7 +134,7 @@ try {
         }
 
         for(let i = 0; i < jsFiles.length; i++) {
-            const TemporaryTestName = getTestsNamev2(entryFile + "/" + jsFiles[i]);
+            const TemporaryTestName = getTestsNamev3(entryFile + "/" + jsFiles[i]);
 
             if (TemporaryTestName.length === 0) {
                 console.log('No tests were found in the file: ', entryFile);
@@ -154,7 +154,7 @@ try {
     }
     else if (stats.isFile()) {
         console.log(`${entryFile} é um arquivo.`);
-        const TemporaryTestName = getTestsNamev2(entryFile);
+        const TemporaryTestName = getTestsNamev3(entryFile);
 
         if (TemporaryTestName.length === 0) {
             console.log('No tests were found in the file: ', entryFile);
@@ -387,37 +387,6 @@ try {
             }
         }
         avgDelay = totalDelay / countInvokesWithCallback;
-        
-
-        // const countFunctionEnter = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "functionEnter").length;
-        // //console.log("Number of objects with Detected_Hook = functionEnter:", countFunctionEnter);
-
-        // const countFunctionExit = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "functionExit").length;
-        // //console.log("Number of objects with Detected_Hook = functionExit:", countFunctionExit);
-
-        // let totalTimeFunctions = objectsExtractFeatures
-        //     .filter(obj => obj.Detected_Hook === "functionExit")
-        //     .reduce((sum, obj) => sum + obj.Runtime_ms, 0);
-
-        // const countInvokeFunPre = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "invokeFunPre").length;
-        // //console.log("Number of objects with Detected_Hook = invokeFunPre:", countInvokeFunPre);
-
-        // const countInvokeFun = objectsExtractFeatures.filter(obj => obj.Detected_Hook === "invokeFun").length;
-        // //console.log("Number of objects with Detected_Hook = invokeFun:", countInvokeFun);
-
-        // let totalTimeInvokes = objectsExtractFeatures
-        //     .filter(obj => obj.Detected_Hook === "invokeFun")
-        //     .reduce((sum, obj) => sum + obj.Runtime_ms, 0);
-
-        // const ObjectLogMessage = {
-        //     "File_Extract_Features": pathExtractFile,
-        //     "FunctionEnter_Count": countFunctionEnter,
-        //     "FunctionExit_Count": countFunctionExit,
-        //     "Total_Time_Functions": totalTimeFunctions,
-        //     "InvokeFunPre_Count": countInvokeFunPre,
-        //     "InvokeFun_Count": countInvokeFun,
-        //     "Total_time_Invokes": totalTimeInvokes,
-        // };
 
         const ObjectLogMessage = {
             //"Test_Name": aaaa,
@@ -442,7 +411,6 @@ try {
 catch (error) {
     console.error('Erro no extract features:', error);
 }
-
 
 shell.echo("TERMINOU!");
 
@@ -526,7 +494,7 @@ function getTestsNamev3(filePath) {
 
                 let testFullNames = "";
                 for (let i = 0; i < describeStack.length; i++) {
-                    testFullNames += describeStack[i].nome /*+ "(" + describeStack[i].coluna + ")" */+ " > ";
+                    testFullNames += describeStack[i].nome + " ";
                 }
                 testFullNames += itName;
                 arrayTestFullNames.push(testFullNames);
@@ -535,6 +503,11 @@ function getTestsNamev3(filePath) {
             }
         }
     });
+    for(let i = 0; i < arrayTestFullNames.length; i++) {
+        arrayTestFullNames[i] = `"` + arrayTestFullNames[i] + `"`;
+        arrayTestFullNames[i] = arrayTestFullNames[i].replace(/\s/g, '\\ '); // Adicionando "\" antes dos espacos
+
+    }
     return arrayTestFullNames;
 }
 
