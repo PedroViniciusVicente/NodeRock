@@ -11,7 +11,7 @@ let parameters = "";
 let isMocha = true;
 
 // 1) CHOOSING THE TEST FILE THAT YOU WANT TO ANALYSE
-let chosenProject = "ARC";
+let chosenProject = "MeuTestMocha";
 
 switch (chosenProject) {
 
@@ -21,6 +21,7 @@ switch (chosenProject) {
         testFile = "test/test.js";
         break;
     
+        // (757 linhas de trace)
     case "MeuTestBasico2": // teste para ver melhor o tempo com cb assincrono
         console.log("Executando analise do meu teste basico2 para ver o tempo ate chamar cb assincrono");
         pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testeBasico/";
