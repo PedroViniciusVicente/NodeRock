@@ -6,7 +6,7 @@ function chosenProjectFunction() {
     let parameters = "";
     let isMocha = true;
 
-    let chosenProject = "MeuTestMocha";
+    let chosenProject = "MeuTestAsyncFunctions";
 
     switch (chosenProject) {
 
@@ -43,6 +43,15 @@ function chosenProjectFunction() {
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/";
             testFile = "test/test.js";
             break;
+
+        case "MeuTestAsyncFunctions":
+            console.log("Executando analise do async functions");
+            pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testarAsyncfunctions/";
+            testFile = "test/test.js";
+            break;
+
+
+
 
 
         // Obs: o FPS "funciona", mas ele eh apenas 1 teste e ele so printa o sucesso do teste caso esteja usando o node v10 (nvm use 10) 

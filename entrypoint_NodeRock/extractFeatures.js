@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 
-function extractFeatures() {
+function extractFeatures(testsNames) {
     console.log("\nExtracao das features a partir dos traces gerados:");
     try {
         const diretorio = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
@@ -22,6 +22,7 @@ function extractFeatures() {
             let pathExtractFile = "";
             pathExtractFile = diretorio + filteredFiles[i];
             console.log(`${i+1}/${filteredFiles.length}. Extraindo features do arquivo: ${filteredFiles[i]}`);
+
             const logHooks = fs.readFileSync(pathExtractFile, 'utf8');
             const objectsExtractFeatures = JSON.parse(logHooks);
 
@@ -29,22 +30,50 @@ function extractFeatures() {
             let countInvokeFunPre = objectsExtractFeatures.length;
             let countInvokesWithCallback = 0;
             let totalDelay = 0;
-            let avgDelay = 0;
             for(let j = 0; j < objectsExtractFeatures.length; j++) {
                 if(objectsExtractFeatures[j].Called_iid.length > 0) {
                     countInvokesWithCallback++;
                     totalDelay += objectsExtractFeatures[j].delayCb_ms;
                 }
             }
+            let avgDelay = 0;
             avgDelay = totalDelay / countInvokesWithCallback;
 
+
+            let pathExtractFileAsyncAwait = "";
+            pathExtractFileAsyncAwait = diretorio + "tracesFromIt_" + i + ".json";
+
+            const logHooksAsyncAwait = fs.readFileSync(pathExtractFileAsyncAwait);
+            const objectsExtractFeaturesAsyncAwait = JSON.parse(logHooksAsyncAwait);
+
+            let countAsyncFunctions = 0;
+            let asyncLines = 0;
+            let countAwaits = 0;
+            let max_asynchook_id = 0;
+            for(let j = 0; j < objectsExtractFeaturesAsyncAwait.length; j++) {
+                if(objectsExtractFeaturesAsyncAwait[j].Async_Hook_Id > max_asynchook_id) {
+                    max_asynchook_id = objectsExtractFeaturesAsyncAwait[j].Async_Hook_Id;
+                }
+                if(objectsExtractFeaturesAsyncAwait[j].Detected_Hook === "awaitPre") {
+                    countAwaits++;
+                }
+                if(objectsExtractFeaturesAsyncAwait[j].Detected_Hook === "asyncFunctionEnter") {
+                    countAsyncFunctions++;
+                    asyncLines += objectsExtractFeaturesAsyncAwait[j].loc.end.line - objectsExtractFeaturesAsyncAwait[j].loc.start.line;
+                }
+            }
+
             const ObjectLogMessage = {
-                //"Test_Name": aaaa,
+                "Test_Name": testsNames[i],
                 "File_Extract_Features": pathExtractFile,
                 "InvokeFunPre_Count": countInvokeFunPre,
                 "Invokes_with_callback": countInvokesWithCallback,
                 "Total_delay_ms": totalDelay,
                 "Average_delay_ms": avgDelay, // total_delay / invokes_with_callback
+                "AsyncFunction_Count": countAsyncFunctions,
+                "AsyncFunction_lines": asyncLines,
+                "Await_Count": countAwaits,
+                "Max_Asynchook_id": max_asynchook_id,
             };
 
             const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);

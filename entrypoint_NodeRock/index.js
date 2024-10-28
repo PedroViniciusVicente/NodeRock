@@ -33,7 +33,7 @@ extractFunctions();
 
 
 // 5. Extracting the main features from each test
-extractFeatures();
+extractFeatures(tests);
 
 
 shell.echo("TERMINOU!");

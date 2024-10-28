@@ -655,7 +655,7 @@ export class MyFunctionCallAnalysis extends Analysis {
         };
         */
        
-        /*
+        
         this.asyncFunctionEnter = (iid) => {
             const sourceObject = this.getSandbox().iidToSourceObject(iid);
             if(!sourceObject) { return }
@@ -668,6 +668,8 @@ export class MyFunctionCallAnalysis extends Analysis {
                 "Detected_Hook": "asyncFunctionEnter",
                 "loc": loc,
                 "Async_Hook_Id": async_hooks.executionAsyncId(),
+                "timer": performance.now(),
+                "iid": iid,
             };
             const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
             MyFunctionCallAnalysis.eventEmitter.emit('addLogToVector', stringJSON);
@@ -687,6 +689,8 @@ export class MyFunctionCallAnalysis extends Analysis {
                 "Async_Hook_Id": async_hooks.executionAsyncId(),
                 "Returned_Value": result,
                 "Excession_Occurred": wrappedExceptionVal,
+                "timer": performance.now(),
+                "iid": iid,
             };
 
             const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
@@ -699,13 +703,32 @@ export class MyFunctionCallAnalysis extends Analysis {
             const {name: fileName, loc} = sourceObject;
             
 
+            let stringJSONdopromiseOrValAwaited : string;
+            try {
+                if (typeof(promiseOrValAwaited) === 'function') {
+                    stringJSONdopromiseOrValAwaited = JSON.stringify({ promiseOrValAwaited: promiseOrValAwaited.toString() });
+                }
+                else if (typeof(promiseOrValAwaited) === 'bigint') {
+                    stringJSONdopromiseOrValAwaited = JSON.stringify({ promiseOrValAwaited: promiseOrValAwaited.toString() });
+                }
+                else {
+                    stringJSONdopromiseOrValAwaited = stringify(promiseOrValAwaited);
+                }
+            } catch (err) {
+                stringJSONdopromiseOrValAwaited = err instanceof Error
+                ? `{ "error": "Failed to stringify value", "details": "${err.message}" }`
+                : `{ "error": "Failed to stringify value", "details": "Unknown error" }`;
+            }
+
             // nao tem como saber qual a funcao??
             const ObjectLogMessage = {
                 "File_Path": path.resolve(fileName),
                 "Detected_Hook": "awaitPre",
                 "loc": loc,
                 "Async_Hook_Id": async_hooks.executionAsyncId(),
-                "Expected_Value": promiseOrValAwaited,
+                "Expected_Value": stringJSONdopromiseOrValAwaited,
+                "timer": performance.now(),
+                "iid": iid,
             };
 
             const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
@@ -763,12 +786,14 @@ export class MyFunctionCallAnalysis extends Analysis {
                 "Expected_Value": stringJSONdopromiseOrValAwaited,
                 "Resolved_Value_Type": typeof(valResolveOrRejected),
                 "Resolved_Value": stringJSONdovalResolveOrRejected,
+                "timer": performance.now(),
+                "iid": iid,
             };
 
             const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
             MyFunctionCallAnalysis.eventEmitter.emit('addLogToVector', stringJSON);
         };
-        */
+        
 
         /*
         this.startStatement = (iid, type) => {
