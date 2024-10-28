@@ -1,6 +1,7 @@
 // 2. Treatments and Path Verifications to get the test names
 
 const fs = require('fs');
+const path = require('path');
 
 function getTestsNames(pathProjectFolder, testFile) {
     const entryFile = pathProjectFolder + testFile;
@@ -66,6 +67,12 @@ function getTestsNames(pathProjectFolder, testFile) {
         else {
             console.log(`${entryFile} existe, mas não é um arquivo nem um diretório.`);
         }
+
+        //return [testNames, testNamesRespectiveFile];
+        return {
+            testNames: testNames,
+            testNamesRespectiveFile: testNamesRespectiveFile,
+        }
     }
     catch (error) {
         if (error.code === 'ENOENT') {
@@ -74,12 +81,6 @@ function getTestsNames(pathProjectFolder, testFile) {
         else {
             console.error(`Erro ao verificar o path do projeto desejado: ${error.message}`);
         }
-    }
-
-    //return [testNames, testNamesRespectiveFile];
-    return {
-        testNames: testNames,
-        testNamesRespectiveFile: testNamesRespectiveFile,
     }
 }
 

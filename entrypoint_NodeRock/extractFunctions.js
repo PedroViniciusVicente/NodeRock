@@ -1,3 +1,4 @@
+// 4. Extracting the functions from the traces and calculating their callback times
 
 
 const fs = require('fs');

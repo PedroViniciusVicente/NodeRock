@@ -1,8 +1,16 @@
-// 4. EXECUTING EACH TESTS INDIVIDUALLY
+// 3. Executing the tests individually and placing theirs traces in collectedTracesFolder
 
 const shell = require('shelljs');
 
-function executeTests(tests, sourceCopyPath, destinationCopyFolder, chosenProject) {
+function executeTests(tests, chosenProject) {
+    const sourceCopyPath = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/MyFunctionCallAnalysis/logHooks.json";
+    const destinationCopyFolder = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
+    let copiedFileName;
+
+// Refazendo o diretorio do collectedTracesFolder
+shell.rm('-rf', destinationCopyFolder);
+shell.mkdir(destinationCopyFolder);
+
     let pathNode_modules = chosenProject.isMocha ? "node_modules/.bin/_mocha" : "node_modules/.bin/jest";
 
     let semiCompleteCommand;
