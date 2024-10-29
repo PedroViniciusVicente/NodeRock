@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 
-function extractFeatures(testsNames) {
+function extractFeatures(tests) {
     console.log("\nExtracao das features a partir dos traces gerados:");
     try {
         const diretorio = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
@@ -63,8 +63,15 @@ function extractFeatures(testsNames) {
                 }
             }
 
+            let testName = tests.testNames[i];
+            // Remove as aspas iniciais e finais
+            testName = testName.replace(/^"|"$/g, '');
+            // Remove as barras invertidas antes dos espaços
+            testName = testName.replace(/\\ /g, ' ');
+
+
             const ObjectLogMessage = {
-                "Test_Name": testsNames[i],
+                "Test_Name": testName,
                 "File_Extract_Features": pathExtractFile,
                 "InvokeFunPre_Count": countInvokeFunPre,
                 "Invokes_with_callback": countInvokesWithCallback,
