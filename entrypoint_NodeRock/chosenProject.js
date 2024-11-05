@@ -6,7 +6,7 @@ function chosenProjectFunction() {
     let parameters = "";
     let isMocha = true;
 
-    let chosenProject = "MeuTestMocha";
+    let chosenProject = "MeuTestBasico2";
 
     switch (chosenProject) {
 

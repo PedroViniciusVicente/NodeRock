@@ -12,16 +12,16 @@ function extractFeatures(tests) {
         fs.writeFileSync(pathExtractedFeaturesResume, '[\n');
 
         // Filtrar para ler apenas os arquivos de nome tracesFromIt_x.json;
-        //const regex = /^tracesFromIt_\d+\.json$/;
-        const regex = /^functionsFromTest_\d+\.json$/;
-        const filteredFiles = files.filter(file => regex.test(file));
+        // const regex = /^functionsFromTest_\d+\.json$/;
+        // const filteredFiles = files.filter(file => regex.test(file));
 
         //console.log("files eh: ", files);
-        for(let i = 0; i < filteredFiles.length; i++) {
+        for(let i = 0; i < tests.testNames.length; i++) {
 
             let pathExtractFile = "";
-            pathExtractFile = diretorio + filteredFiles[i];
-            console.log(`${i+1}/${filteredFiles.length}. Extraindo features do arquivo: ${filteredFiles[i]}`);
+            //pathExtractFile = diretorio + filteredFiles[i];
+            pathExtractFile = diretorio + "functionsFromTest_" + i + ".json";
+            console.log(`${i+1}/${tests.testNames.length}. Extraindo features do arquivo: ${"functionsFromTest_" + i + ".json"}`);
 
             const logHooks = fs.readFileSync(pathExtractFile, 'utf8');
             const objectsExtractFeatures = JSON.parse(logHooks);
@@ -50,18 +50,27 @@ function extractFeatures(tests) {
             let asyncLines = 0;
             let countAwaits = 0;
             let max_asynchook_id = 0;
+            const unique_asynchook_ids_set = new Set();
+
             for(let j = 0; j < objectsExtractFeaturesAsyncAwait.length; j++) {
+
                 if(objectsExtractFeaturesAsyncAwait[j].Async_Hook_Id > max_asynchook_id) {
                     max_asynchook_id = objectsExtractFeaturesAsyncAwait[j].Async_Hook_Id;
                 }
+
                 if(objectsExtractFeaturesAsyncAwait[j].Detected_Hook === "awaitPre") {
                     countAwaits++;
                 }
+
                 if(objectsExtractFeaturesAsyncAwait[j].Detected_Hook === "asyncFunctionEnter") {
                     countAsyncFunctions++;
                     asyncLines += objectsExtractFeaturesAsyncAwait[j].loc.end.line - objectsExtractFeaturesAsyncAwait[j].loc.start.line;
                 }
+
+                unique_asynchook_ids_set.add(objectsExtractFeaturesAsyncAwait[j].Async_Hook_Id);
+
             }
+            const unique_asynchook_ids = unique_asynchook_ids_set.size;
 
             let testName = tests.testNames[i];
             // Remove as aspas iniciais e finais
@@ -81,11 +90,12 @@ function extractFeatures(tests) {
                 "AsyncFunction_lines": asyncLines,
                 "Await_Count": countAwaits,
                 "Max_Asynchook_id": max_asynchook_id,
+                "Unique_Asynchook_ids": unique_asynchook_ids,
             };
 
             const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
 
-            if (i !== filteredFiles.length - 1) {
+            if (i !== tests.testNames.length - 1) {
                 fs.writeFileSync(pathExtractedFeaturesResume, stringJSON + ',\n', {flag:'a'});
             }
             else {

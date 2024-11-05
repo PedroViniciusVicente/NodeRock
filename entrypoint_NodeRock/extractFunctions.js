@@ -7,10 +7,10 @@ function extractFunctions() {
     console.log("\nGerando a lista com todas as funcoes presentes");
     try {
         const diretorio = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
+        const files = fs.readdirSync(diretorio);
 
         let destinationFile = "";
         let pathExtractFile = "";
-        const files = fs.readdirSync(diretorio);
         for(let i = 0; i < files.length; i++) {
             
             destinationFile = diretorio + "functionsFromTest_" + i + ".json";

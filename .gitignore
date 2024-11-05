@@ -180,9 +180,6 @@ src/Analysis/MyFunctionCallAnalysis/logHooksTesteBasico.json
 
 collectedTracesFolder/
 
-collectedTracesFolder2/
 collectedTracesFolderNEDB/
 collectedTracesFolderNodeArchiver/
-collectedTracesFolderNodeArchiver2/
-collectedTracesFolderNodeArchiver3/
-collectedTracesFolderAsyncSemHooks/
+collectedTracesFolderTesteBasico2/
