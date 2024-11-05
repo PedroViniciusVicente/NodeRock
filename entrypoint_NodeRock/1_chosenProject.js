@@ -5,8 +5,9 @@ function chosenProjectFunction() {
     let testFile = "";
     let parameters = "";
     let isMocha = true;
+    let raceConditionTests = [];
 
-    let chosenProject = "MeuTestBasico2";
+    let chosenProject = "ARC";
 
     switch (chosenProject) {
 
@@ -100,6 +101,9 @@ function chosenProjectFunction() {
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/nedb/";
             testFile = "test/db.test.js";
             parameters = `--exit -t 20000`;
+
+            raceConditionTests.push("ensureIndex can be called before a loadDatabase and still be initialized and filled correctly");
+            raceConditionTests.push("database loading will not work and no data will be inserted");
             break;
 
         case "ARC": // exploratory
@@ -107,6 +111,7 @@ function chosenProjectFunction() {
             testFile = "test/archiver.js";
             parameters = `--exit -t 10000`;
             // Obs: O teste com a race condition era -g "archiver\ api\ #errors\ should\ allow\ continue\ on\ stat\ failing"
+            raceConditionTests.push("archiver api #errors should allow continue on stat failing");
             break;
 
         // case "OBJ": // exploratory
@@ -122,6 +127,7 @@ function chosenProjectFunction() {
         testFile: testFile,
         parameters: parameters,
         isMocha: isMocha,
+        raceConditionTests: raceConditionTests,
     };
 }
 

@@ -2,11 +2,14 @@ const shell = require('shelljs');
 const fs = require('fs');
 //const path = require('path');
 
-const { chosenProjectFunction } = require('./chosenProject');
-const { getTestsNames } = require('./getTestsNames');
-const { executeTests } = require('./executeTests');
-const { extractFunctions } = require('./extractFunctions'); 
-const { extractFeatures } = require('./extractFeatures'); 
+const { chosenProjectFunction } = require('./1_chosenProject');
+const { getTestsNames } = require('./2_getTestsNames');
+const { executeTests } = require('./3_executeTests');
+const { extractFunctions } = require('./4_extractFunctions'); 
+const { extractFeatures } = require('./5_extractFeatures');
+const { normalizeFeatures } = require('./6_normalizeFeatures'); 
+const { labelFeatures } = require('./7_labelFeatures'); 
+
 
 
 shell.echo("COMECOU!");
@@ -35,5 +38,10 @@ extractFunctions();
 // 5. Extracting the main features from each test
 extractFeatures(tests);
 
+// 6. Normalizing the extracted features before applying the ML methods
+const normalizedObjects = normalizeFeatures();
+
+// 7. Labeling the extracted features before applying the ML methods
+labelFeatures(normalizedObjects, chosenProject.raceConditionTests);
 
 shell.echo("TERMINOU!");

@@ -1,9 +1,9 @@
-// 5. Normalizing and rotulating the extracted features before applying the ML methods
+// 6. Normalizing the extracted features before applying the ML methods
 
 const fs = require('fs');
 
-//const pathExtractedFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesResume.json";
-const pathExtractedFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolderNodeArchiver/extractedFeaturesResume.json";
+const pathExtractedFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesResume.json";
+//const pathExtractedFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolderNodeArchiver/extractedFeaturesResume.json";
 
 
 // Função para normalizar um único valor
@@ -73,5 +73,7 @@ function normalizeFeatures() {
     return normalizedData;
 }
 
-const normalizedFeatures = normalizeFeatures();
-console.log(normalizedFeatures);
+// const normalizedFeatures = normalizeFeatures();
+// console.log(normalizedFeatures);
+
+module.exports = { normalizeFeatures };
