@@ -11,6 +11,8 @@ function chosenProjectFunction() {
 
     switch (chosenProject) {
 
+        // -=+=- 1) Meus testes de exemplo -=+=-
+
         case "MeuTestBasico": // teste para ver melhor o tempo com cb assincrono
             console.log("Executando analise do meu teste basico para ver o tempo com cb assincrono");
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testeBasico/";
@@ -52,7 +54,7 @@ function chosenProjectFunction() {
             break;
 
 
-
+        // -=+=- 2) known-bugs -=+=-
 
 
         // Obs: o FPS "funciona", mas ele eh apenas 1 teste e ele so printa o sucesso do teste caso esteja usando o node v10 (nvm use 10) 
@@ -97,6 +99,14 @@ function chosenProjectFunction() {
         // case "NEDB2": // known-bugs
         //     break;
 
+
+        // -=+=- 2) open-issues -=+=-
+
+
+
+        // -=+=- 3) exploratory -=+=-
+
+
         case "NEDB": // exploratory
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/nedb/";
             testFile = "test/db.test.js";
@@ -117,6 +127,17 @@ function chosenProjectFunction() {
         // case "OBJ": // exploratory
         //     break;
 
+
+
+        // -=+=- 4) fs-extra -=+=-
+        case "FS_EXTRA":
+            pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/fs-extra/jprichardson_node-fs-extra/"
+            testFile = "lib/copy/__tests__/ncp/npc.test.js";
+            raceConditionTests.push("ncp regular files and directories when copying files using filter files are copied correctly");
+
+            testFile = "lib/remove/__tests__/remove.test.js";
+            raceConditionTests.push("remove + remove() should delete without a callback");
+            break;
         default:
             console.log("Esse projeto ainda nao esta nesse switch case!");
             process.exit();

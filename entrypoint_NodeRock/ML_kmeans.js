@@ -1,4 +1,4 @@
-// 6. Applying kmenas on the tests features to try to find a pattern
+// 8. Applying kmenas on the tests features to try to find tests that are most likely to have race conditions
 
 
 const fs = require('fs');

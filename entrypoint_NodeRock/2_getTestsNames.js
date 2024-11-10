@@ -170,7 +170,7 @@ function getTestsNamev3(filePath) {
 
 
 
-
+/*
 // ESSA ABORDAGEM ACABA GERANDO FALSO POSITIVOS SE O TEST/IT ESTIVER EM UM COMENTARIO DE BLOCO
 function getTestsNamev2(filePath) {
     const content = fs.readFileSync(filePath, 'utf8');
@@ -245,6 +245,6 @@ function getTestsNamev1(completCommand) {
     } catch (error) {
         console.error('Erro ao processar os elementos:', error);
     }
-} 
+} */
 
 module.exports = {getTestsNames};
