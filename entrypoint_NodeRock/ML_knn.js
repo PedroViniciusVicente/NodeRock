@@ -2,7 +2,9 @@
 
 const fs = require('fs');
 
-const pathExtractedFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesLabeled.json";
+//const pathExtractedFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesLabeled.json";
+
+const pathExtractedFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolderNEDB/extractedFeaturesLabeled.json";
 
 function carregarDados() {
     const featuresJSON = fs.readFileSync(pathExtractedFeatures, 'utf8');

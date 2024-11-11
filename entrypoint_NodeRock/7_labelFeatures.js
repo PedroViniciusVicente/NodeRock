@@ -32,7 +32,7 @@ function labelFeatures(normalizedObjects, raceConditionTests) {
 
     try {
         fs.writeFileSync(pathExtractedFeaturesLabeled, jsonData);
-        console.log("Arquivo 'dados.json' criado com sucesso!");
+        console.log("Arquivo 'extractedFeaturesLabeled.json' criado com sucesso!");
     } catch (err) {
         console.error("Erro ao escrever o arquivo", err);
     }

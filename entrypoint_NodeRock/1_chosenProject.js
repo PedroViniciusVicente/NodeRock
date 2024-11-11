@@ -1,5 +1,7 @@
 // 1. Selecting the test file/folder that you want to analyse
 
+const { test } = require("shelljs");
+
 function chosenProjectFunction() {
     let pathProjectFolder = "";
     let testFile = "";
@@ -7,7 +9,7 @@ function chosenProjectFunction() {
     let isMocha = true;
     let raceConditionTests = [];
 
-    let chosenProject = "ARC";
+    let chosenProject = "MeuTestBasico2";
 
     switch (chosenProject) {
 
@@ -20,7 +22,7 @@ function chosenProjectFunction() {
             break;
         
             // (757 linhas de trace)
-        case "MeuTestBasico2": // teste para ver melhor o tempo com cb assincrono
+        case "MeuTestBasico2": // main.js e testLeitura.js
             console.log("Executando analise do meu teste basico2 para ver o tempo ate chamar cb assincrono");
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testeBasico/";
             testFile = "test/testLeitura.js";
@@ -57,15 +59,16 @@ function chosenProjectFunction() {
         // -=+=- 2) known-bugs -=+=-
 
 
-        // Obs: o FPS "funciona", mas ele eh apenas 1 teste e ele so printa o sucesso do teste caso esteja usando o node v10 (nvm use 10) 
+        // Obs: Na analise com node v14 ele falha na maioria dos testes. isso nao ocorre ao executar os testes com node v10
         case "FPS": // known-bugs
             console.log("Executando analise do fiware-pep-steelskin");
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/fiware-pep-steelskin/";
-            testFile = "test/unit/race_simple.js";
-            parameters = "--timeout 50000";
+            //testFile = "test/unit/race_simple.js";
+            testFile = "test/unit";
+            parameters = "--timeout 5000";
             break;
 
-        // Obs: o NES nao conseguiu ser analisado, (apenas testado). Ele exige o node v10 e parece que ele usa uma lib que n eh mocha nem jest
+        // Obs: Na analise com node v14 ele falha na maioria dos testes. isso nao ocorre ao executar os testes com node v10
         case "NES": // known-bugs
             console.log("Executando analise do nes");
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/nes/";
@@ -86,19 +89,6 @@ function chosenProjectFunction() {
             parameters = "--timeout 20000 -g 'should\ read\ all\ columns\ and\ rows'";
             break;
 
-        // case "ME1": // known-bugs
-        //     break;
-        // case "ME2": // known-bugs
-        //     break;
-        // case "ME3": // known-bugs
-        //     break;
-        // case "ME4": // known-bugs
-        //     break;
-        // case "NEDB1": // known-bugs
-        //     break;
-        // case "NEDB2": // known-bugs
-        //     break;
-
 
         // -=+=- 2) open-issues -=+=-
 
@@ -106,38 +96,57 @@ function chosenProjectFunction() {
 
         // -=+=- 3) exploratory -=+=-
 
+        case "ME": // Mongo-express
+            pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/mongo-express/";
+            testFile = "test/lib";
+            parameters = "--exit -t 10000 -R spec";
 
-        case "NEDB": // exploratory
+            raceConditionTests.push("Router collection GET /db/.*dbName.*/.*collection.* should return html");
+            raceConditionTests.push("Router document GET /db/.*dbName.*/.*collection.*/.*document.* should return html");
+            raceConditionTests.push("Router database GET /db/.*dbName.* should return html");
+            raceConditionTests.push("Router index GET / should return html");
+            break;
+
+        case "NEDB":
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/nedb/";
             testFile = "test/db.test.js";
             parameters = `--exit -t 20000`;
 
-            raceConditionTests.push("ensureIndex can be called before a loadDatabase and still be initialized and filled correctly");
-            raceConditionTests.push("database loading will not work and no data will be inserted");
+            raceConditionTests.push("Database Using indexes ensureIndex can be called before a loadDatabase and still be initialized and filled correctly");
+            raceConditionTests.push("Database Using indexes ensureIndex and index initialization in database loading If a unique constraint is not respected, database loading will not work and no data will be inserted");
             break;
 
-        case "ARC": // exploratory
+        case "ARC":
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver/";
             testFile = "test/archiver.js";
             parameters = `--exit -t 10000`;
-            // Obs: O teste com a race condition era -g "archiver\ api\ #errors\ should\ allow\ continue\ on\ stat\ failing"
+
             raceConditionTests.push("archiver api #errors should allow continue on stat failing");
             break;
 
-        // case "OBJ": // exploratory
-        //     break;
+        case "OBJ":
+            pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/objection.js/";
+            testFile = "tests/unit/utils.js";
+            parameters = "--exit -t 10000 -R spec";
+
+            raceConditionTests.push("utils promiseUtils map should not start new operations after an error has been thrown");
+            break;
 
 
 
-        // -=+=- 4) fs-extra -=+=-
+        // -=+=- 4) fs-extra -=+=- // rever o ENSURE e o FS e o JSON e o mkdirs e __tests__
         case "FS_EXTRA":
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/fs-extra/jprichardson_node-fs-extra/"
-            testFile = "lib/copy/__tests__/ncp/npc.test.js";
+            testFile = "lib";
+            //testFile = "lib/copy/__tests__/ncp/npc.test.js";
             raceConditionTests.push("ncp regular files and directories when copying files using filter files are copied correctly");
 
-            testFile = "lib/remove/__tests__/remove.test.js";
-            raceConditionTests.push("remove + remove() should delete without a callback");
+            //testFile = "lib/remove/__tests__/remove.test.js";
+            raceConditionTests.push("remove .* remove.*.* should delete without a callback");
+            // "remove + remove() should delete without a callback"
             break;
+
+
         default:
             console.log("Esse projeto ainda nao esta nesse switch case!");
             process.exit();

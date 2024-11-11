@@ -20,7 +20,7 @@ shell.mkdir(destinationCopyFolder);
         try {
             // Diferenciando se o teste era de um folder inteiro ou de apenas um file especifico 
             if(tests.testNamesRespectiveFile.length > 0) {
-                semiCompleteCommand = "node ./dist/bin/nodeprof.js " + chosenProject.pathProjectFolder + " " + pathNode_modules + " " + chosenProject.testFile + "/" + tests.testNamesRespectiveFile[i] + " " + chosenProject.parameters;
+                semiCompleteCommand = "node ./dist/bin/nodeprof.js " + chosenProject.pathProjectFolder + " " + pathNode_modules + " " + tests.testNamesRespectiveFile[i] + " " + chosenProject.parameters;
             }
             else {
                 semiCompleteCommand = "node ./dist/bin/nodeprof.js " + chosenProject.pathProjectFolder + " " + pathNode_modules + " " + chosenProject.testFile + " " + chosenProject.parameters;

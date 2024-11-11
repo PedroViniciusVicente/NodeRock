@@ -437,7 +437,7 @@ export class MyFunctionCallAnalysis extends Analysis {
                 "loc": loc,
                 "Async_Hook_Id": async_hooks.executionAsyncId(),
                 "Function_Name": newFunctionName,
-                "Function_Arguments": args.join(", "),
+                //"Function_Arguments": args.join(", "),
                 "iid": iid,
                 //"Objeto_Base": base, // objeto base que vai receber a funcao, julgo que nao eh mt necessaria
                 "timer": performance.now(),

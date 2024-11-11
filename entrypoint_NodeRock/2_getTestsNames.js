@@ -3,11 +3,12 @@
 const fs = require('fs');
 const path = require('path');
 
+let testNames = [];
+let testNamesRespectiveFile = [];
+
 function getTestsNames(pathProjectFolder, testFile) {
     const entryFile = pathProjectFolder + testFile;
 
-    let testNames = [];
-    let testNamesRespectiveFile = [];
 
     try {
         const stats = fs.lstatSync(entryFile);
@@ -34,34 +35,11 @@ function getTestsNames(pathProjectFolder, testFile) {
         }
         else if (stats.isDirectory())
         {
-            //console.log(`${entryFile} é um diretório.`);
+            exploreDirectory(pathProjectFolder, testFile);
 
-            const files = fs.readdirSync(entryFile);
-        
-            const jsFiles = files.filter(file => path.extname(file) === '.js');
-
-            console.log(`\nForam encontrados ${jsFiles.length} Arquivos .js:`);
-            for(let i = 0; i < jsFiles.length; i++) {
-                console.log(`${i+1}. ${jsFiles[i]}`);
-            }
-
-            for(let i = 0; i < jsFiles.length; i++) {
-                const TemporaryTestName = getTestsNamev3(entryFile + "/" + jsFiles[i]);
-
-                if (TemporaryTestName.length === 0) {
-                    console.log('No tests were found in the file: ', entryFile);
-                }
-                else {
-                    for(let j = 0; j < TemporaryTestName.length; j++) {
-                        testNames.push(TemporaryTestName[j]);
-                        testNamesRespectiveFile.push(jsFiles[i]);
-                    }
-                }
-            }
-
-            console.log(`\nForam encontrados um total de ${testNames.length} testes no folder '${testFile}':`);
+            console.log(`\nForam encontrados um total de ${testNames.length} testes no folder '${testFile}'`);
             for(let i = 0; i < testNames.length; i++) {
-                console.log(`${i+1}. ${testNames[i]}; --- file: ${testNamesRespectiveFile[i]}`);
+                console.log(`${i+1}. ${testNames[i]}; \n--- file: ${testNamesRespectiveFile[i]}`);
             }
         }
         else {
@@ -80,6 +58,40 @@ function getTestsNames(pathProjectFolder, testFile) {
         }
         else {
             console.error(`Erro ao verificar o path do projeto desejado: ${error.message}`);
+        }
+    }
+}
+
+function exploreDirectory(pathProjectFolder, testFile) {
+    const entryFile = pathProjectFolder + testFile;
+    // console.log(`${entryFile} é um diretório.`);
+
+    const files = fs.readdirSync(entryFile);
+
+    for(let i = 0; i < files.length; i++) {
+        let currentFile = entryFile + "/" + files[i];
+        const statsInsideFolder = fs.lstatSync(currentFile);
+
+        if (statsInsideFolder.isFile()) {
+
+            if(currentFile.endsWith(".js")) {
+
+                console.log("Encontrou o file: ", files[i]);
+                const TemporaryTestName = getTestsNamev3(currentFile);
+
+                if (TemporaryTestName.length === 0) {
+                    console.log('No tests were found in the file: ', currentFile);
+                } else {
+                    for(let j = 0; j < TemporaryTestName.length; j++) {
+                        testNames.push(TemporaryTestName[j]);
+                        testNamesRespectiveFile.push(testFile + "/" + files[i]);
+                    }
+                }
+            }
+        }
+        else if (statsInsideFolder.isDirectory()) {
+            console.log("Encontrou o folder: ", files[i]);
+            exploreDirectory(pathProjectFolder, testFile + "/" + files[i]);
         }
     }
 }
@@ -164,6 +176,7 @@ function getTestsNamev3(filePath) {
         arrayTestFullNames[i] = `"` + arrayTestFullNames[i] + `"`;
         arrayTestFullNames[i] = arrayTestFullNames[i].replace(/\s/g, '\\ '); // Adicionando "\" antes dos espacos
 
+        arrayTestFullNames[i] = arrayTestFullNames[i].replace(/['`+\-()<>[\]]/g, '.*');
     }
     return arrayTestFullNames;
 }
