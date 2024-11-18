@@ -9,7 +9,7 @@ function chosenProjectFunction() {
     let isMocha = true;
     let raceConditionTests = [];
 
-    let chosenProject = "MeuTestBasico2";
+    let chosenProject = "FS_EXTRA";
 
     switch (chosenProject) {
 
