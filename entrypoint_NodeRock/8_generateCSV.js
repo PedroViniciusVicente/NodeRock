@@ -2,10 +2,10 @@
 
 const fs = require('fs');
 
-const pathRawFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesResume.json";
-const pathNormalizedFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesLabeled.json";
+const pathRawFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesRaw.json";
+const pathNormalizedFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesNormalized.json";
 
-function generateCSV() {
+function generateCSV(benchmarkName) {
     console.log("\nGerando o arquivo .CSV:");
 
     const rawFeaturesJSON = fs.readFileSync(pathRawFeatures, 'utf8');
@@ -30,39 +30,24 @@ function generateCSV() {
     // Adding the data to csv
     for (let i = 0; i < rawFeaturesObject.length; i++) {
 
-        let hasEventRace;
-        if(rawFeaturesObject[i].Has_RaceCondition === true) {
-            hasEventRace = "True";
-        }
-        else if(rawFeaturesObject[i].Has_RaceCondition === false) {
-            hasEventRace = "False";
-        }
-        else {
-            hasEventRace = "Undefined";
-        }
+        const line = [benchmarkName, "fix later!!!!", rawFeaturesObject[i].Test_Name,
+        rawFeaturesObject[i].InvokeFunPre_Count, normalizedFeaturesObject[i].InvokeFunPre_Count,
+        rawFeaturesObject[i].Invokes_with_callback, normalizedFeaturesObject[i].Invokes_with_callback,
+        rawFeaturesObject[i].Total_delay_ms, normalizedFeaturesObject[i].Total_delay_ms,
+        rawFeaturesObject[i].AsyncFunction_Count, normalizedFeaturesObject[i].AsyncFunction_Count,
+        rawFeaturesObject[i].Await_Count, normalizedFeaturesObject[i].Await_Count,
+        rawFeaturesObject[i].Unique_Asynchook_ids, normalizedFeaturesObject[i].Unique_Asynchook_ids,
+        rawFeaturesObject[i].hasEventRace];
 
-        const line = `${rawFeaturesObject[i].},${rawFeaturesObject[i].},${rawFeaturesObject[i].Test_Name},
-        ${rawFeaturesObject[i].InvokeFunPre_Count},${normalizedFeaturesObject[i].InvokeFunPre_Count},
-        ${rawFeaturesObject[i].Invokes_with_callback},${normalizedFeaturesObject[i].Invokes_with_callback},
-        ${rawFeaturesObject[i].Total_delay_ms}.${normalizedFeaturesObject[i].Total_delay_ms},
-        ${rawFeaturesObject[i].AsyncFunction_Count},${normalizedFeaturesObject[i].AsyncFunction_Count},
-        ${rawFeaturesObject[i].Await_Count},${normalizedFeaturesObject[i].Await_Count},
-        ${rawFeaturesObject[i].Unique_Asynchook_ids},${normalizedFeaturesObject[i].Unique_Asynchook_ids},
-        ${hasEventRace}`;
-
-        lines.push(line);
+        lines.push(line.join(','));
     }
 
     // Unir as linhas em uma string com quebras de linha
     const dataCSV = lines.join('\n');
 
-    // Escrever o arquivo CSV
+    // Writing the CSV File
     const pathCSV = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/data.csv";
-    fs.writeFile(pathCSV, dataCSV, 'utf8', (err) => {
-    if (err) {
-        console.error('Erro ao criar o arquivo CSV:', err);
-    } else {
-        console.log('Arquivo CSV criado com sucesso!');
-    }
-    });
+    fs.writeFileSync(pathCSV, dataCSV);
 }
+
+module.exports = { generateCSV };

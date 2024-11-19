@@ -2,9 +2,7 @@
 
 const fs = require('fs');
 
-const pathExtractedFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesResume.json";
-//const pathExtractedFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolderNodeArchiver/extractedFeaturesResume.json";
-
+const pathExtractedFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesRaw.json";
 
 // Função para normalizar um único valor
 const normalizeValue = (value, min, max) => {
@@ -69,8 +67,11 @@ function normalizeFeatures() {
         
         normalizedData.push(normalizedItem);
     }
-    
-    return normalizedData;
+
+    const pathExtractedFeaturesNormalized = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesNormalized.json";
+    const jsonData = JSON.stringify(normalizedData, null, 2);
+    fs.writeFileSync(pathExtractedFeaturesNormalized, jsonData);
+    //return normalizedData;
 }
 
 // const normalizedFeatures = normalizeFeatures();

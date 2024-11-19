@@ -8,14 +8,16 @@ function chosenProjectFunction() {
     let parameters = "";
     let isMocha = true;
     let raceConditionTests = [];
+    let benchmarkName = "";
 
-    let chosenProject = "FS_EXTRA";
+    let chosenProject = "MeuTestMocha";
 
     switch (chosenProject) {
 
         // -=+=- 1) Meus testes de exemplo -=+=-
 
         case "MeuTestBasico": // teste para ver melhor o tempo com cb assincrono
+            benchmarkName = "MeuTestBasico";
             console.log("Executando analise do meu teste basico para ver o tempo com cb assincrono");
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testeBasico/";
             testFile = "test/test.js";
@@ -23,19 +25,23 @@ function chosenProjectFunction() {
         
             // (757 linhas de trace)
         case "MeuTestBasico2": // main.js e testLeitura.js
+            benchmarkName = "MeuTestBasico2";
             console.log("Executando analise do meu teste basico2 para ver o tempo ate chamar cb assincrono");
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testeBasico/";
             testFile = "test/testLeitura.js";
             break;
 
         case "MeuTestMocha":
+            benchmarkName = "MeuTestMocha";
             console.log("Executando analise do meu teste simples em Mocha");
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/";
             testFile = "teste";
             //testFile = "teste/testeMenor.js";
+            raceConditionTests.push("1. Testes da Primeira funcao somarEdobrar com x e y positivos");
             break;
 
         case "MeuTestJest":
+            benchmarkName = "MeuTestJest";
             console.log("Executando analise do meu teste simples em Jest");
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/";
             testFile = "teste/testandoJest.test.js";
@@ -44,12 +50,14 @@ function chosenProjectFunction() {
             break;
         
         case "MeuTestVerificarRuntimes":
+            benchmarkName = "MeuTestVerificarRuntimes";
             console.log("Executando analise do runtime");
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesVerificarTempo/";
             testFile = "test/test.js";
             break;
 
         case "MeuTestAsyncFunctions":
+            benchmarkName = "MeuTestAsyncFunctions";
             console.log("Executando analise do async functions");
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testarAsyncfunctions/";
             testFile = "test/test.js";
@@ -61,6 +69,7 @@ function chosenProjectFunction() {
 
         // Obs: Na analise com node v14 ele falha na maioria dos testes. isso nao ocorre ao executar os testes com node v10
         case "FPS": // known-bugs
+            benchmarkName = "fiware-pep-steelskin";
             console.log("Executando analise do fiware-pep-steelskin");
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/fiware-pep-steelskin/";
             //testFile = "test/unit/race_simple.js";
@@ -70,12 +79,14 @@ function chosenProjectFunction() {
 
         // Obs: Na analise com node v14 ele falha na maioria dos testes. isso nao ocorre ao executar os testes com node v10
         case "NES": // known-bugs
+            benchmarkName = "nes";
             console.log("Executando analise do nes");
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/nes/";
             testFile = "test/client_TP.js";
             break;
 
         case "DEL": // known-bugs, funciona muito bem, porem estou usando outro arquivo como entrypoint para teste
+            benchmarkName = "del";
             console.log("Executando analise do del");
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del/";
             testFile = "test.js";
@@ -83,6 +94,7 @@ function chosenProjectFunction() {
 
         // Obs: o XLS nao conseguiu ser analisado, (apenas testado). Ele exige o node v10
         case "XLS": // known-bugs
+            benchmarkName = "xlsx-extract";
             console.log("Executando analise do xls");
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/xlsx-extract/";
             testFile = "test/tests.js";
@@ -97,6 +109,7 @@ function chosenProjectFunction() {
         // -=+=- 3) exploratory -=+=-
 
         case "ME": // Mongo-express
+            benchmarkName = "mongo-express";
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/mongo-express/";
             testFile = "test/lib";
             parameters = "--exit -t 10000 -R spec";
@@ -108,6 +121,7 @@ function chosenProjectFunction() {
             break;
 
         case "NEDB":
+            benchmarkName = "nedb";
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/nedb/";
             testFile = "test/db.test.js";
             parameters = `--exit -t 20000`;
@@ -117,6 +131,7 @@ function chosenProjectFunction() {
             break;
 
         case "ARC":
+            benchmarkName = "node-archiver";
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver/";
             testFile = "test/archiver.js";
             parameters = `--exit -t 10000`;
@@ -125,6 +140,7 @@ function chosenProjectFunction() {
             break;
 
         case "OBJ":
+            benchmarkName = "objection.js";
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/objection.js/";
             testFile = "tests/unit/utils.js";
             parameters = "--exit -t 10000 -R spec";
@@ -136,6 +152,7 @@ function chosenProjectFunction() {
 
         // -=+=- 4) fs-extra -=+=- // rever o ENSURE e o FS e o JSON e o mkdirs e __tests__
         case "FS_EXTRA":
+            benchmarkName = "fs-extra";
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/fs-extra/jprichardson_node-fs-extra/"
             testFile = "lib";
             //testFile = "lib/copy/__tests__/ncp/npc.test.js";
@@ -158,6 +175,7 @@ function chosenProjectFunction() {
         parameters: parameters,
         isMocha: isMocha,
         raceConditionTests: raceConditionTests,
+        benchmarkName: benchmarkName,
     };
 }
 

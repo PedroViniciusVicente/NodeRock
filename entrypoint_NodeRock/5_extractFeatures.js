@@ -8,8 +8,8 @@ function extractFeatures(tests) {
         const diretorio = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
         const files = fs.readdirSync(diretorio);
         
-        const pathExtractedFeaturesResume = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesResume.json";
-        fs.writeFileSync(pathExtractedFeaturesResume, '[\n');
+        const pathextractedFeaturesRaw = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesRaw.json";
+        fs.writeFileSync(pathextractedFeaturesRaw, '[\n');
 
         // Filtrar para ler apenas os arquivos de nome tracesFromIt_x.json;
         // const regex = /^functionsFromTest_\d+\.json$/;
@@ -96,10 +96,10 @@ function extractFeatures(tests) {
             const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
 
             if (i !== tests.testNames.length - 1) {
-                fs.writeFileSync(pathExtractedFeaturesResume, stringJSON + ',\n', {flag:'a'});
+                fs.writeFileSync(pathextractedFeaturesRaw, stringJSON + ',\n', {flag:'a'});
             }
             else {
-                fs.writeFileSync(pathExtractedFeaturesResume, stringJSON + '\n]', {flag:'a'});
+                fs.writeFileSync(pathextractedFeaturesRaw, stringJSON + '\n]', {flag:'a'});
             }
 
         }

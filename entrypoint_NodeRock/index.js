@@ -8,7 +8,8 @@ const { executeTests } = require('./3_executeTests');
 const { extractFunctions } = require('./4_extractFunctions'); 
 const { extractFeatures } = require('./5_extractFeatures');
 const { normalizeFeatures } = require('./6_normalizeFeatures'); 
-const { labelFeatures } = require('./7_labelFeatures'); 
+const { labelFeatures } = require('./7_labelFeatures');
+const { generateCSV } = require('./8_generateCSV'); 
 
 
 
@@ -28,20 +29,22 @@ const tests = getTestsNames(chosenProject.pathProjectFolder, chosenProject.testF
 
 
 // 3. Executing the tests individually and placing theirs traces in collectedTracesFolder
-//executeTests(tests, chosenProject);
+executeTests(tests, chosenProject);
 
 
 // 4. Extracting the functions from the traces and calculating their callback times
-//extractFunctions();
+extractFunctions();
 
 
 // 5. Extracting the main features from each test
-//extractFeatures(tests);
+extractFeatures(tests);
 
 // 6. Normalizing the extracted features before applying the ML methods
-//const normalizedObjects = normalizeFeatures();
+normalizeFeatures();
 
 // 7. Labeling the extracted features before applying the ML methods
-//labelFeatures(normalizedObjects, chosenProject.raceConditionTests);
+labelFeatures(chosenProject.raceConditionTests);
 
+// 8. Generating the .csv file based on the .json files
+generateCSV(chosenProject.benchmarkName);
 shell.echo("TERMINOU!");

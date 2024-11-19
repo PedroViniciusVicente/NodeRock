@@ -4,13 +4,13 @@
 const fs = require('fs');
 const { kmeans } = require('ml-kmeans');
 
-const pathExtractedFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesResume.json";
+const pathExtractedFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesRaw.json";
 
 // 77 e 79: testes que apresentam race condition 
-//const pathExtractedFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolderNEDB/extractedFeaturesResume.json";
+//const pathExtractedFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolderNEDB/extractedFeaturesRaw.json";
 
 // 21: teste que apresenta race condition
-//const pathExtractedFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolderNodeArchiver/extractedFeaturesResume.json";
+//const pathExtractedFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolderNodeArchiver/extractedFeaturesRaw.json";
 
 // Carregar dados do JSON
 function carregarDados() {
