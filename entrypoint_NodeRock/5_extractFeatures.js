@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 
-function extractFeatures(tests) {
+function extractFeatures(testsFullNameList) {
     console.log("\nExtracao das features a partir dos traces gerados:");
     try {
         const diretorio = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
@@ -16,12 +16,12 @@ function extractFeatures(tests) {
         // const filteredFiles = files.filter(file => regex.test(file));
 
         //console.log("files eh: ", files);
-        for(let i = 0; i < tests.testNames.length; i++) {
+        for(let i = 0; i < testsFullNameList.length; i++) {
 
             let pathExtractFile = "";
             //pathExtractFile = diretorio + filteredFiles[i];
             pathExtractFile = diretorio + "functionsFromTest_" + i + ".json";
-            console.log(`${i+1}/${tests.testNames.length}. Extraindo features do arquivo: ${"functionsFromTest_" + i + ".json"}`);
+            console.log(`${i+1}/${testsFullNameList.length}. Extraindo features do arquivo: ${"functionsFromTest_" + i + ".json"}`);
 
             const logHooks = fs.readFileSync(pathExtractFile, 'utf8');
             const objectsExtractFeatures = JSON.parse(logHooks);
@@ -72,7 +72,7 @@ function extractFeatures(tests) {
             }
             const unique_asynchook_ids = unique_asynchook_ids_set.size;
 
-            let testName = tests.testNames[i];
+            let testName = testsFullNameList[i];
             // Remove as aspas iniciais e finais
             testName = testName.replace(/^"|"$/g, '');
             // Remove as barras invertidas antes dos espaços
@@ -95,7 +95,7 @@ function extractFeatures(tests) {
 
             const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
 
-            if (i !== tests.testNames.length - 1) {
+            if (i !== testsFullNameList.length - 1) {
                 fs.writeFileSync(pathextractedFeaturesRaw, stringJSON + ',\n', {flag:'a'});
             }
             else {

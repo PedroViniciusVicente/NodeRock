@@ -2,43 +2,39 @@
 
 const shell = require('shelljs');
 
-function executeTests(tests, chosenProject) {
-    const sourceCopyPath = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/MyFunctionCallAnalysis/logHooks.json";
-    const destinationCopyFolder = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
+const sourceCopyPath = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/MyFunctionCallAnalysis/logHooks.json";
+const destinationCopyFolder = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
+
+function executeTests(testsFullNameList, testsRespectiveFile, chosenProject) {
     let copiedFileName;
 
-// Refazendo o diretorio do collectedTracesFolder
-shell.rm('-rf', destinationCopyFolder);
-shell.mkdir(destinationCopyFolder);
+
+    // Refazendo o diretorio do collectedTracesFolder
+    shell.rm('-rf', destinationCopyFolder);
+    shell.mkdir(destinationCopyFolder);
 
     let pathNode_modules = chosenProject.isMocha ? "node_modules/.bin/_mocha" : "node_modules/.bin/jest";
 
     let semiCompleteCommand;
     let completCommand;
     console.log("\nExecucao dos testes individualmente:");
-    for(let i = 0; i < tests.testNames.length; i++) {
+    for(let i = 0; i < testsFullNameList.length; i++) {
         try {
-            // Diferenciando se o teste era de um folder inteiro ou de apenas um file especifico 
-            if(tests.testNamesRespectiveFile.length > 0) {
-                semiCompleteCommand = "node ./dist/bin/nodeprof.js " + chosenProject.pathProjectFolder + " " + pathNode_modules + " " + tests.testNamesRespectiveFile[i] + " " + chosenProject.parameters;
-            }
-            else {
-                semiCompleteCommand = "node ./dist/bin/nodeprof.js " + chosenProject.pathProjectFolder + " " + pathNode_modules + " " + chosenProject.testFile + " " + chosenProject.parameters;
-            }
+            semiCompleteCommand = "node ./dist/bin/nodeprof.js " + chosenProject.pathProjectFolder + " " + pathNode_modules + " " + testsRespectiveFile[i] + " " + chosenProject.parameters;
 
             // Diferenciando se o teste eh Mocha ou Jest
             if(chosenProject.isMocha) {
-                completCommand = semiCompleteCommand + " -g " + tests.testNames[i];
-                //shell.exec(semiCompletCommand + " -g " + tests.testNames[i]);
+                completCommand = semiCompleteCommand + " -g " + testsFullNameList[i];
+                //shell.exec(semiCompletCommand + " -g " + testsFullNameList[i]);
                 //console.log("Comando com o -g eh: ", completCommand);
             }
             else {
-                completCommand = semiCompleteCommand + " --testNamePattern " + tests.testNames[i];
-                //shell.exec(semiCompletCommand + " --testNamePattern " + tests.testNames[i]);
+                completCommand = semiCompleteCommand + " --testNamePattern " + testsFullNameList[i];
+                //shell.exec(semiCompletCommand + " --testNamePattern " + testsFullNameList[i]);
                 //console.log("Comando com o --testNamePattern eh: ", completCommand);
             }
 
-            console.log(`\n${i+1}/${tests.testNames.length}. Executando o teste: ${tests.testNames[i]}`);
+            console.log(`\n${i+1}/${testsFullNameList.length}. Executando o teste: ${testsFullNameList[i]}`);
             console.log("Comando usado foi: ", completCommand);
 
             shell.exec(completCommand);

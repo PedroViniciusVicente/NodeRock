@@ -6,8 +6,10 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 filesList = [];
+
 testsFullNameList = [];
 testsRespectiveFile = [];
+const pathRaizNodeRock = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource";
 
 function getTestsNames(pathProjectFolder, testFile) {
     
@@ -15,14 +17,31 @@ function getTestsNames(pathProjectFolder, testFile) {
 
     extractFiles(pathProjectFolder, testFile);
 
-    console.log(`Foram encontrados ${filesList.length} arquivos!`);
+    console.log(`Foram encontrados ${filesList.length} arquivos:`);
     for(let i = 0; i < filesList.length; i++) {
         console.log(`${i+1}. ${filesList[i]}`);
     }
 
     extractTestNames(pathProjectFolder);
 
-    console.log(`Foram encontrados ${testsFullNameList.length} testes!`);
+    console.log(`Foram encontrados ${testsFullNameList.length} testes:`);
+    for(let i = 0; i < testsFullNameList.length; i++) {
+        console.log(`${i+1}. ${testsFullNameList[i]}`);
+    }
+
+    // Adaptando os nomes dos testes e removendo caracteres especiais
+    // SUGESTAO: TALVEZ SEJA NECESSARIO FAZER ESSAS MESMAS ALTERACOES NAS STRINGS DOS TESTES QUE JA SAO SABIDOS COMO TENDO EVENT RACE
+    for(let i = 0; i < testsFullNameList.length; i++) {
+        testsFullNameList[i] = `"` + testsFullNameList[i] + `"`;
+        testsFullNameList[i] = testsFullNameList[i].replace(/\s/g, '\\ '); // Adicionando "\" antes dos espacos
+
+        testsFullNameList[i] = testsFullNameList[i].replace(/['`+\-()<>[\]]/g, '.*');
+    }
+
+    return {
+        testsFullNameList: testsFullNameList,
+        testsRespectiveFile: testsRespectiveFile,
+    };
 
 }
 
@@ -71,6 +90,9 @@ function extractTestNames(pathProjectFolder) {
                 testsRespectiveFile.push(filesList[i]);
             });
         }
+
+        // Voltando para a raiz do noderock para as execucoes dos testes funcionarem depois...
+        process.chdir(pathRaizNodeRock);
     
     } catch (err) {
         console.error('Erro ao extrair nomes de testes:', err);
