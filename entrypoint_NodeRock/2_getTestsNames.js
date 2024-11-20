@@ -3,6 +3,83 @@
 const fs = require('fs');
 const path = require('path');
 //const Mocha = require('mocha');
+const { execSync } = require('child_process');
+
+filesList = [];
+testsFullNameList = [];
+testsRespectiveFile = [];
+
+function getTestsNames(pathProjectFolder, testFile) {
+    
+    console.log(`Buscando os testes em: ${pathProjectFolder} / ${testFile}`);
+
+    extractFiles(pathProjectFolder, testFile);
+
+    console.log(`Foram encontrados ${filesList.length} arquivos!`);
+    for(let i = 0; i < filesList.length; i++) {
+        console.log(`${i+1}. ${filesList[i]}`);
+    }
+
+    extractTestNames(pathProjectFolder);
+
+    console.log(`Foram encontrados ${testsFullNameList.length} testes!`);
+
+}
+
+function extractFiles(pathProjectFolder, testFile) {
+
+    const entryFile = path.join(pathProjectFolder, testFile);
+    const stats = fs.lstatSync(entryFile);
+
+    if (stats.isFile()) {
+        if(entryFile.endsWith(".js")) {
+            filesList.push(testFile);
+        }
+    }
+    else if(stats.isDirectory()) {
+
+        const innerFiles = fs.readdirSync(entryFile);
+
+        for(let i = 0; i < innerFiles.length; i++) {
+            extractFiles(pathProjectFolder, path.join(testFile, innerFiles[i]));
+        }
+    }
+}
+
+// SUGESTAO: TALVEZ TENTAR CRIAR UM NOVO TRY CATCH PARA SEPARAR MELHOR A PARTE DO EXECSYNC DA PARTE DE PEGAR OS FULLTITLES E ADICIONAR AO VETOR
+function extractTestNames(pathProjectFolder) {
+    try {
+
+        // Primeiro, muda para o diretório do projeto
+        process.chdir(pathProjectFolder);
+    
+        for(let i = 0; i < filesList.length; i++) {
+            // Depois executa o comando mocha
+            const resultado = execSync(`npx mocha --reporter json ${filesList[i]}`, { encoding: 'utf-8' });
+            //console.log(resultado);
+        
+            const resultadoJSON = JSON.parse(resultado);
+        
+            // Extrai apenas os fullTitles dos testes
+            const fullTitles = resultadoJSON.tests.map(test => test.fullTitle);
+            
+            // Imprime os títulos
+            //console.log('Títulos completos dos testes:');
+            fullTitles.forEach((titulo, index) => {
+                //console.log(`${index + 1}. ${titulo}`);
+                testsFullNameList.push(titulo);
+                testsRespectiveFile.push(filesList[i]);
+            });
+        }
+    
+    } catch (err) {
+        console.error('Erro ao extrair nomes de testes:', err);
+    }
+}
+
+module.exports = {getTestsNames};
+
+/*
 
 let testNames = [];
 let testNamesRespectiveFile = [];
@@ -181,7 +258,7 @@ function getTestsNamev3(filePath) {
     }
     return arrayTestFullNames;
 }
-
+*/
 
 
 /*
@@ -259,160 +336,7 @@ function getTestsNamev1(completCommand) {
     } catch (error) {
         console.error('Erro ao processar os elementos:', error);
     }
-} */
-
+}
+    
 module.exports = {getTestsNames};
-/*
-
-// Outra tentativa usando o MochaReporter
-
-const fs = require('fs');
-const path = require('path');
-const Mocha = require('mocha');
-
-function getTestsNamev5(filePath) {
-    return new Promise((resolve, reject) => {
-        console.log("Extraindo os testes do arquivo: ", filePath);
-        let arrayTestFullNames = [];
-        
-        const mocha = new Mocha();
-        mocha.addFile(filePath);
-
-        // Prevent Mocha from actually running tests
-        mocha.files = [filePath];
-        mocha.loadFiles();
-
-        // Traverse Mocha's test suite to collect full test names
-        function traverseSuite(suite) {
-            suite.suites.forEach(subSuite => {
-                traverseSuite(subSuite);
-            });
-
-            suite.tests.forEach(test => {
-                arrayTestFullNames.push(test.fullTitle());
-            });
-        }
-
-        // Use Mocha's main suite to collect all test names
-        traverseSuite(mocha.suite);
-
-        // Resolve the promise with the collected test names
-        resolve(arrayTestFullNames);
-    });
-}
-
-async function getTestsNamev4(filePath) {
-    try {
-        const testNames = await getTestsNamev5(filePath);
-        return testNames;
-    } catch (error) {
-        console.error(`Erro no arquivo ${filePath} ao coletar nomes dos testes: ${error}`);
-        return [];
-    }
-}
-
-function getTestsNames(pathProjectFolder, testFile) {
-    let testNames = [];
-    let testNamesRespectiveFile = [];
-
-    const entryFile = pathProjectFolder + testFile;
-
-    try {
-        const stats = fs.lstatSync(entryFile);
-        
-        if (stats.isFile()) {
-            return getTestsNamev4(entryFile).then(TemporaryTestName => {
-                if (TemporaryTestName.length === 0) {
-                    console.log('No tests were found in the file: ', entryFile);
-                } else {
-                    testNames.push(...TemporaryTestName);
-
-                    console.log(`\nForam encontrados um total de ${testNames.length} testes no file '${testFile}':`);
-                    testNames.forEach((testName, i) => {
-                        console.log(`${i+1}. ${testName};`);
-                    });
-                }
-
-                return {
-                    testNames: testNames,
-                    testNamesRespectiveFile: testNamesRespectiveFile,
-                };
-            });
-        } else if (stats.isDirectory()) {
-            return exploreDirectory(pathProjectFolder, testFile).then(results => {
-                testNames = results.testNames;
-                testNamesRespectiveFile = results.testNamesRespectiveFile;
-
-                console.log(`\nForam encontrados um total de ${testNames.length} testes no folder '${testFile}'`);
-                testNames.forEach((testName, i) => {
-                    console.log(`${i+1}. ${testName}; \n--- file: ${testNamesRespectiveFile[i]}`);
-                });
-
-                return {
-                    testNames: testNames,
-                    testNamesRespectiveFile: testNamesRespectiveFile,
-                };
-            });
-        } else {
-            console.log(`${entryFile} existe, mas não é um arquivo nem um diretório.`);
-            return {
-                testNames: [],
-                testNamesRespectiveFile: [],
-            };
-        }
-    } catch (error) {
-        if (error.code === 'ENOENT') {
-            console.log(`${entryFile} não existe.`);
-        } else {
-            console.error(`Erro ao verificar o path do projeto desejado: ${error.message}`);
-        }
-        return {
-            testNames: [],
-            testNamesRespectiveFile: [],
-        };
-    }
-}
-
-async function exploreDirectory(pathProjectFolder, testFile) {
-    const entryFile = pathProjectFolder + testFile;
-    let testNames = [];
-    let testNamesRespectiveFile = [];
-
-    const files = fs.readdirSync(entryFile);
-
-    for (let i = 0; i < files.length; i++) {
-        let currentFile = entryFile + "/" + files[i];
-        const statsInsideFolder = fs.lstatSync(currentFile);
-
-        if (statsInsideFolder.isFile()) {
-            if (currentFile.endsWith(".js")) {
-                console.log("Encontrou o file: ", files[i]);
-                const TemporaryTestName = await getTestsNamev4(currentFile);
-
-                if (TemporaryTestName.length === 0) {
-                    //console.log('No tests were found in the file: ', currentFile);
-                    let a = 0;
-                } else {
-                    testNames.push(...TemporaryTestName);
-                    testNamesRespectiveFile.push(...TemporaryTestName.map(() => testFile + "/" + files[i]));
-                }
-            }
-        } else if (statsInsideFolder.isDirectory()) {
-            console.log("Encontrou o folder: ", files[i]);
-            const subResults = await exploreDirectory(pathProjectFolder, testFile + "/" + files[i]);
-            testNames.push(...subResults.testNames);
-            testNamesRespectiveFile.push(...subResults.testNamesRespectiveFile);
-        }
-    }
-
-    return {
-        testNames,
-        testNamesRespectiveFile
-    };
-}
-
-
-module.exports = {
-    getTestsNames
-};
 */

@@ -21,7 +21,10 @@ const chosenProject = chosenProjectFunction();
 
 
 // 2. Treatments and Path Verifications to Get the test names
-const tests = getTestsNames(chosenProject.pathProjectFolder, chosenProject.testFile);
+// const tests = getTestsNames(chosenProject.pathProjectFolder, chosenProject.testFile);
+
+getTestsNames(chosenProject.pathProjectFolder, chosenProject.testFile);
+
 //console.log(tests.testNames);
 // for(let i = 0; i < tests.testNames.length; i++) {
 //     console.log(i+1 + ". " + tests.testNames[i]);
@@ -29,22 +32,25 @@ const tests = getTestsNames(chosenProject.pathProjectFolder, chosenProject.testF
 
 
 // 3. Executing the tests individually and placing theirs traces in collectedTracesFolder
-executeTests(tests, chosenProject);
+//executeTests(tests, chosenProject);
 
 
 // 4. Extracting the functions from the traces and calculating their callback times
-extractFunctions();
+//extractFunctions();
 
 
 // 5. Extracting the main features from each test
-extractFeatures(tests);
+//extractFeatures(tests);
 
 // 6. Normalizing the extracted features before applying the ML methods
-normalizeFeatures();
+//normalizeFeatures();
 
 // 7. Labeling the extracted features before applying the ML methods
-labelFeatures(chosenProject.raceConditionTests);
+//labelFeatures(chosenProject.raceConditionTests);
 
 // 8. Generating the .csv file based on the .json files
-generateCSV(chosenProject.benchmarkName);
+//generateCSV(chosenProject.benchmarkName);
+
+
+
 shell.echo("TERMINOU!");

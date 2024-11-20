@@ -10,7 +10,7 @@ function chosenProjectFunction() {
     let raceConditionTests = [];
     let benchmarkName = "";
 
-    let chosenProject = "MeuTestMocha";
+    let chosenProject = "FS_EXTRA";
 
     switch (chosenProject) {
 
@@ -151,11 +151,15 @@ function chosenProjectFunction() {
 
 
         // -=+=- 4) fs-extra -=+=- // rever o ENSURE e o FS e o JSON e o mkdirs e __tests__
+        // pedroubuntu@Aspire-A514-54:~/coisasNodeRT/datasetNodeRT/fs-extra/jprichardson_node-fs-extra$ npx mocha lib/ensure/__tests__/link.test.js 
+        // (tem 101 testes)
         case "FS_EXTRA":
             benchmarkName = "fs-extra";
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/fs-extra/jprichardson_node-fs-extra/"
+            //testFile = "lib";
+            //testFile = "lib/ensure/__tests__/link.test.js";
             testFile = "lib";
-            //testFile = "lib/copy/__tests__/ncp/npc.test.js";
+
             raceConditionTests.push("ncp regular files and directories when copying files using filter files are copied correctly");
 
             //testFile = "lib/remove/__tests__/remove.test.js";
