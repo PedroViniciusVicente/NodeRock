@@ -5,7 +5,7 @@ const fs = require('fs');
 const pathRawFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesRaw.json";
 const pathNormalizedFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesNormalized.json";
 
-function generateCSV(benchmarkName) {
+function generateCSV(benchmarkName, testsRespectiveFile) {
     console.log("\nGerando o arquivo .CSV:");
 
     const rawFeaturesJSON = fs.readFileSync(pathRawFeatures, 'utf8');
@@ -30,7 +30,7 @@ function generateCSV(benchmarkName) {
     // Adding the data to csv
     for (let i = 0; i < rawFeaturesObject.length; i++) {
 
-        const line = [benchmarkName, "fix later!!!!", rawFeaturesObject[i].Test_Name,
+        const line = [benchmarkName, testsRespectiveFile[i], rawFeaturesObject[i].Test_Name,
         rawFeaturesObject[i].InvokeFunPre_Count, normalizedFeaturesObject[i].InvokeFunPre_Count,
         rawFeaturesObject[i].Invokes_with_callback, normalizedFeaturesObject[i].Invokes_with_callback,
         rawFeaturesObject[i].Total_delay_ms, normalizedFeaturesObject[i].Total_delay_ms,

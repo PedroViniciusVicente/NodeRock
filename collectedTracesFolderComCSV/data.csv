@@ -1,0 +1,11 @@
+BenchmarkName,TestFilePath,TestCaseName,InvokeFunPre_Count_Raw,InvokeFunPre_Count_Normalized,Invokes_with_callback_Raw,Invokes_with_callback_Normalized,Total_delay_ms_Raw,Total_delay_ms_Normalized,AsyncFunction_Count_Raw,AsyncFunction_Count_Raw,Await_Count_Raw,Await_Count_Normalized,Unique_Asynchook_ids_Raw,Unique_Asynchook_ids_Normalized,HasEventRace
+MeuTestMocha,teste/arquivoTestesMocha.js,Testes da Primeira funcao somarEdobrar com x e y positivos,14,0.5,4,0.3333333333333333,84.7086930051446,0.16446138604421442,0,0,0,0,2,0,Undefined
+MeuTestMocha,teste/arquivoTestesMocha.js,Testes da Primeira funcao somarEdobrar com x e y negativos,14,0.5,4,0.3333333333333333,72.57634799927473,0.08950470404749515,0,0,0,0,2,0,Undefined
+MeuTestMocha,teste/arquivoTestesMocha.js,Testes da Primeira funcao somarEdobrar com x e y iguais a zero,14,0.5,4,0.3333333333333333,171.39949100092053,0.7000589621325403,0,0,0,0,2,0,Undefined
+MeuTestMocha,teste/arquivoTestesMocha.js,Testes da Segunda funcao Leitura do arquivo com path correto,18,1,6,1,219.94737300276756,1,1,0.5,1,0.25,3,1,Undefined
+MeuTestMocha,teste/arquivoTestesMocha.js,Testes da Terceira funcao FuncaoComAwait usando o true e formato de await para receber o resultado,17,0.875,4,0.3333333333333333,197.72237699851394,0.8626883791168818,2,1,4,1,2,0,Undefined
+MeuTestMocha,teste/arquivoTestesMocha.js,Testes da Terceira funcao FuncaoComAwait usando o false e formato de promise para receber o resultado,17,0.875,4,0.3333333333333333,130.39247199892998,0.4467072744350267,2,1,4,1,2,0,Undefined
+MeuTestMocha,teste/testeMenor.js,1. Testes da Primeira funcao somarEdobrar com x e y positivos,10,0,3,0,72.45768900215626,0.08877159888861978,0,0,0,0,2,0,True
+MeuTestMocha,teste/testeMenor.js,1. Testes da Primeira funcao somarEdobrar com x e y negativos,10,0,3,0,116.29385799914598,0.3596024875479896,0,0,0,0,2,0,Undefined
+MeuTestMocha,teste/testeMenor.js,2. Testes da Segunda funcao subtrairEdividir com x e y positivos,10,0,3,0,68.4443200007081,0.06397599475508309,0,0,0,0,2,0,Undefined
+MeuTestMocha,teste/testeMenor.js,2. Testes da Segunda funcao subtrairEdividir com x e y negativos,10,0,3,0,58.089288003742695,0,0,0,0,0,2,0,Undefined

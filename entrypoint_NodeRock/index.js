@@ -47,7 +47,7 @@ normalizeFeatures();
 labelFeatures(chosenProject.raceConditionTests);
 
 // 8. Generating the .csv file based on the .json files
-generateCSV(chosenProject.benchmarkName);
+generateCSV(chosenProject.benchmarkName, tests.testsRespectiveFile);
 
 
 
