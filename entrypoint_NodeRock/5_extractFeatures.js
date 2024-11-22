@@ -6,7 +6,7 @@ function extractFeatures(testsFullNameList) {
     console.log("\nExtracao das features a partir dos traces gerados:");
     try {
         const diretorio = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
-        const files = fs.readdirSync(diretorio);
+        //const files = fs.readdirSync(diretorio);
         
         const pathextractedFeaturesRaw = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesRaw.json";
         fs.writeFileSync(pathextractedFeaturesRaw, '[\n');

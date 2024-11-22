@@ -10,8 +10,6 @@ function executeTests(testsFullNameList, testsRespectiveFile, chosenProject) {
 
 
     // Refazendo o diretorio do collectedTracesFolder
-    shell.rm('-rf', destinationCopyFolder);
-    shell.mkdir(destinationCopyFolder);
 
     let pathNode_modules = chosenProject.isMocha ? "node_modules/.bin/_mocha" : "node_modules/.bin/jest";
 

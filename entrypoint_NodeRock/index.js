@@ -32,10 +32,8 @@ const tests = getTestsNames(chosenProject.pathProjectFolder, chosenProject.testF
 // 3. Executing the tests individually and placing theirs traces in collectedTracesFolder
 executeTests(tests.testsFullNameList, tests.testsRespectiveFile, chosenProject);
 
-
 // 4. Extracting the functions from the traces and calculating their callback times
 extractFunctions();
-
 
 // 5. Extracting the main features from each test
 extractFeatures(tests.testsFullNameList);

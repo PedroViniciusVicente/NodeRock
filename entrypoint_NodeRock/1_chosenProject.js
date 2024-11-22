@@ -1,7 +1,5 @@
 // 1. Selecting the test file/folder that you want to analyse
 
-const { test } = require("shelljs");
-
 function chosenProjectFunction() {
     let pathProjectFolder = "";
     let testFile = "";
@@ -133,7 +131,8 @@ function chosenProjectFunction() {
         case "ARC":
             benchmarkName = "node-archiver";
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver/";
-            testFile = "test/archiver.js";
+            //testFile = "test/archiver.js";
+            testFile = "test/"
             parameters = `--exit -t 10000`;
 
             raceConditionTests.push("archiver api #errors should allow continue on stat failing");
@@ -158,7 +157,7 @@ function chosenProjectFunction() {
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/fs-extra/jprichardson_node-fs-extra/"
             //testFile = "lib";
             //testFile = "lib/ensure/__tests__/link.test.js";
-            testFile = "lib";
+            testFile = "lib/";
 
             raceConditionTests.push("ncp regular files and directories when copying files using filter files are copied correctly");
 

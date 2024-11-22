@@ -7,7 +7,12 @@ function extractFunctions() {
     console.log("\nGerando a lista com todas as funcoes presentes");
     try {
         const diretorio = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
-        const files = fs.readdirSync(diretorio);
+        const notFilteredFiles = fs.readdirSync(diretorio);
+
+        // Filtrar para ler apenas os arquivos de nome tracesFromIt_x.json;
+        const regex = /^tracesFromIt_\d+\.json$/;
+        const files = notFilteredFiles.filter(file => regex.test(file));
+
 
         let destinationFile = "";
         let pathExtractFile = "";
