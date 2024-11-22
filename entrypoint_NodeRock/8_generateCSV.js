@@ -5,7 +5,7 @@ const fs = require('fs');
 const pathRawFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesRaw.json";
 const pathNormalizedFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesNormalized.json";
 
-function generateCSV(benchmarkName, testsRespectiveFile) {
+function generateCSV(benchmarkName, testsRespectiveFile, testsTotalDuration) {
     console.log("\nGerando o arquivo .CSV:");
 
     const rawFeaturesJSON = fs.readFileSync(pathRawFeatures, 'utf8');
@@ -19,7 +19,7 @@ function generateCSV(benchmarkName, testsRespectiveFile) {
         'InvokeFunPre_Count_Raw', 'InvokeFunPre_Count_Normalized','Invokes_with_callback_Raw', 'Invokes_with_callback_Normalized',
         'Total_delay_ms_Raw', 'Total_delay_ms_Normalized', 'AsyncFunction_Count_Raw', 'AsyncFunction_Count_Raw',
         'Await_Count_Raw', 'Await_Count_Normalized', 'Unique_Asynchook_ids_Raw', 'Unique_Asynchook_ids_Normalized',
-        'HasEventRace']
+        'Total_duration_s', 'HasEventRace']
     // adicionar: funcoes com > 100 ms de delay; tempo total do teste; e se o teste falhou ou foi sucesso
 
     const lines = [];
@@ -37,7 +37,7 @@ function generateCSV(benchmarkName, testsRespectiveFile) {
         rawFeaturesObject[i].AsyncFunction_Count, normalizedFeaturesObject[i].AsyncFunction_Count,
         rawFeaturesObject[i].Await_Count, normalizedFeaturesObject[i].Await_Count,
         rawFeaturesObject[i].Unique_Asynchook_ids, normalizedFeaturesObject[i].Unique_Asynchook_ids,
-        rawFeaturesObject[i].hasEventRace];
+        testsTotalDuration[i], rawFeaturesObject[i].hasEventRace];
 
         lines.push(line.join(','));
     }

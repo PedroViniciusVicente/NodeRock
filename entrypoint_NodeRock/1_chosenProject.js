@@ -8,7 +8,7 @@ function chosenProjectFunction() {
     let raceConditionTests = [];
     let benchmarkName = "";
 
-    let chosenProject = "MeuTestMocha";
+    let chosenProject = "ARC";
 
     switch (chosenProject) {
 

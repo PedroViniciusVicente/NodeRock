@@ -15,7 +15,7 @@
     "Async_Hook_Id": 0,
     "Function_Name": "Anonymous Function ",
     "iid": 1,
-    "timer": 6746.871097996831,
+    "timer": 6926.746361998841,
     "is_Callback": false
 },
 {
@@ -36,7 +36,7 @@
     "Returned_Value": "{\"returnVal\":\"// TODO:\\n// testar com a keyword \\\"test\\\", acredito que precisa do jest para usar elas\\n\\nconst assert = require('assert');\\nconst { somarEdobrar, lerArquivo,funcaoComAwait } = require('../arquivoPrincipal');\\n\\n// Testes com Mocha\\n\\n// Uso apenas do it\\ndescribe('Testes da Primeira funcao', function () {\\n    it('somarEdobrar com x e y positivos', function () {\\n        const resultado1 = somarEdobrar(8, 12);\\n        assert.equal(resultado1, 40);\\n    });\\n\\n    it('somarEdobrar com x e y negativos', function () {\\n        const resultado2 = somarEdobrar(-10, -20);\\n        assert.equal(resultado2, -60);\\n    });\\n\\n    it('somarEdobrar com x e y iguais a zero', function () {\\n        const resultado3 = somarEdobrar(0, 0);\\n        assert.equal(resultado3, 0);\\n    });\\n});\\n\\n// Uso apenas do test\\ndescribe('Testes da Segunda funcao', function () {\\n    it('Leitura do arquivo com path correto', async function () {\\n        const conteudo1 = await lerArquivo('./exemploTexto.txt');\\n        assert.equal(conteudo1, 'texto lido do exemploTexto.txt');\\n    });\\n\\n    /*it('Leitura do arquivo com path errado', async function () {\\n        const conteudo2 = await lerArquivo('./arquivoInexistente.txt');\\n        assert.notEqual(conteudo2, 'texto lido corretamente');\\n    });*/\\n});\\n\\n// Uso do it e do test\\ndescribe('Testes da Terceira funcao', function () {\\n    it('FuncaoComAwait usando o true e formato de await para receber o resultado', async function () {\\n        const resultadoTrue = await funcaoComAwait(true);\\n        assert.equal(resultadoTrue, 30);\\n\\n        \\n    });\\n\\n    it('FuncaoComAwait usando o false e formato de promise para receber o resultado', async function () {\\n        const resultadoFalse = await funcaoComAwait(false);\\n        assert.equal(resultadoFalse, 5);\\n    });\\n});\"}",
     "Excession_Occurred": {},
     "iid": 1,
-    "timer": 6749.419329997152
+    "timer": 6929.257138999179
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -54,7 +54,7 @@
     "Async_Hook_Id": 0,
     "Function_Name": "Anonymous Function ",
     "iid": 1,
-    "timer": 6752.603677999228,
+    "timer": 6932.568275999278,
     "is_Callback": false
 },
 {
@@ -73,7 +73,7 @@
     "Async_Hook_Id": 0,
     "Function_Name": "require",
     "iid": 2,
-    "timer": 6761.864040996879,
+    "timer": 6936.477272000164,
     "Makes_CallBack": false
 },
 {
@@ -94,7 +94,7 @@
     "Tipo_Returned_Value": "function",
     "Returned_Value": "{\"result\":\"function ok(...args) {\\n  innerOk(ok, args.length, ...args);\\n}\"}",
     "iid": 2,
-    "timer": 6765.750076998025
+    "timer": 6938.768414000049
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -112,7 +112,7 @@
     "Async_Hook_Id": 0,
     "Function_Name": "require",
     "iid": 3,
-    "timer": 6766.616886999458,
+    "timer": 6939.467248000205,
     "Makes_CallBack": false
 },
 {
@@ -131,7 +131,7 @@
     "Async_Hook_Id": 0,
     "Function_Name": "Anonymous Function ",
     "iid": 4,
-    "timer": 6770.3171499967575,
+    "timer": 6941.782366000116,
     "is_Callback": false
 },
 {
@@ -152,7 +152,7 @@
     "Returned_Value": "{\"returnVal\":\"const fs = require('fs');\\n\\n/*respotafunc1 = somarEdobrar(8, 12);\\nconsole.log(respotafunc1);\\n\\nlerArquivo('exemploTexto.txt')\\n    .then(conteudo => {\\n        console.log(conteudo);\\n    });\\n\\n// Funcao async retorna uma Promise, por isso que para acessar o valor resolvido e não a Promise em si devemos usar o .then ou o await\\n(async () => {\\n    const respostafunc3 = await funcaoComAwait(true);\\n    console.log(respostafunc3); // Isso imprimirá o valor retornado pela função\\n})();*/\\n\\n\\n// Executar uma soma  e multiplicacao simples\\nfunction somarEdobrar(primeiro, segundo) {\\n    let resultado = primeiro + segundo;\\n    resultado = resultado*2;\\n    return resultado;\\n}\\n\\n// Executar uma leitura de arquivo com Promise\\nfunction lerArquivo(nomeArquivo) {\\n    return new Promise((resolve, reject) => {\\n        fs.readFile(nomeArquivo, (err, data) => {\\n            if (err) {\\n                reject(err);\\n            } else {\\n                resolve(data.toString());\\n            }\\n        });\\n    });\\n}\\n\\n// Executar algo com await\\nasync function funcaoComAwait(booleanoDoAND) {\\n    const resposta1 = await triplicarValor(10);\\n    const resposta2 = await subtrair10(15);\\n    const resposta3 = await funcaoAnd(true, booleanoDoAND);\\n\\n    if(resposta3)\\n        return resposta1; // 30\\n    else\\n        return resposta2; // 5\\n}\\n\\nfunction triplicarValor(valorRecebido1) {\\n    return valorRecebido1*3;\\n}\\nfunction subtrair10(valorRecebido2) {\\n    return valorRecebido2 - 10;\\n}\\nfunction funcaoAnd(valorRecebido3, valorRecebido4) {\\n    if(valorRecebido3 && valorRecebido4) {\\n        return true;\\n    }\\n    return false;\\n}\\n\\nmodule.exports = {\\n    somarEdobrar,\\n    lerArquivo,\\n    funcaoComAwait\\n};\\n\"}",
     "Excession_Occurred": {},
     "iid": 4,
-    "timer": 6771.36798799783
+    "timer": 6942.573454000056
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoPrincipal.js",
@@ -170,7 +170,7 @@
     "Async_Hook_Id": 0,
     "Function_Name": "Anonymous Function ",
     "iid": 4,
-    "timer": 6772.845757000148,
+    "timer": 6943.967421999201,
     "is_Callback": false
 },
 {
@@ -189,7 +189,7 @@
     "Async_Hook_Id": 0,
     "Function_Name": "require",
     "iid": 5,
-    "timer": 6773.673561997712,
+    "timer": 6944.627213999629,
     "Makes_CallBack": false
 },
 {
@@ -210,7 +210,7 @@
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"F_OK\":0,\"R_OK\":4,\"W_OK\":2,\"X_OK\":1,\"constants\":\"1\",\"promises\":\"2\"},{\"UV_FS_SYMLINK_DIR\":1,\"UV_FS_SYMLINK_JUNCTION\":2,\"O_RDONLY\":0,\"O_WRONLY\":1,\"O_RDWR\":2,\"UV_DIRENT_UNKNOWN\":0,\"UV_DIRENT_FILE\":1,\"UV_DIRENT_DIR\":2,\"UV_DIRENT_LINK\":3,\"UV_DIRENT_FIFO\":4,\"UV_DIRENT_SOCKET\":5,\"UV_DIRENT_CHAR\":6,\"UV_DIRENT_BLOCK\":7,\"S_IFMT\":61440,\"S_IFREG\":32768,\"S_IFDIR\":16384,\"S_IFCHR\":8192,\"S_IFBLK\":24576,\"S_IFIFO\":4096,\"S_IFLNK\":40960,\"S_IFSOCK\":49152,\"O_CREAT\":64,\"O_EXCL\":128,\"UV_FS_O_FILEMAP\":0,\"O_NOCTTY\":256,\"O_TRUNC\":512,\"O_APPEND\":1024,\"O_DIRECTORY\":65536,\"O_NOATIME\":262144,\"O_NOFOLLOW\":131072,\"O_SYNC\":1052672,\"O_DSYNC\":4096,\"O_DIRECT\":16384,\"O_NONBLOCK\":2048,\"S_IRWXU\":448,\"S_IRUSR\":256,\"S_IWUSR\":128,\"S_IXUSR\":64,\"S_IRWXG\":56,\"S_IRGRP\":32,\"S_IWGRP\":16,\"S_IXGRP\":8,\"S_IRWXO\":7,\"S_IROTH\":4,\"S_IWOTH\":2,\"S_IXOTH\":1,\"F_OK\":0,\"R_OK\":4,\"W_OK\":2,\"X_OK\":1,\"UV_FS_COPYFILE_EXCL\":1,\"COPYFILE_EXCL\":1,\"UV_FS_COPYFILE_FICLONE\":2,\"COPYFILE_FICLONE\":2,\"UV_FS_COPYFILE_FICLONE_FORCE\":4,\"COPYFILE_FICLONE_FORCE\":4},{}]",
     "iid": 5,
-    "timer": 6778.079223997891
+    "timer": 6949.276211999357
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoPrincipal.js",
@@ -230,7 +230,7 @@
     "Returned_Value": "[]",
     "Excession_Occurred": {},
     "iid": 4,
-    "timer": 6778.939682997763
+    "timer": 6949.98245099932
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -250,7 +250,7 @@
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{}]",
     "iid": 3,
-    "timer": 6779.838879998773
+    "timer": 6950.544786999002
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -268,7 +268,7 @@
     "Async_Hook_Id": 0,
     "Function_Name": "Anonymous Function ",
     "iid": 6,
-    "timer": 6780.7576669976115,
+    "timer": 6951.239210000262,
     "Makes_CallBack": true
 },
 {
@@ -287,7 +287,7 @@
     "Async_Hook_Id": 0,
     "Function_Name": "Anonymous Function ",
     "iid": 7,
-    "timer": 6785.178757999092,
+    "timer": 6957.092387000099,
     "is_Callback": true,
     "valueCallerIID": 6
 },
@@ -307,7 +307,7 @@
     "Async_Hook_Id": 0,
     "Function_Name": "Anonymous Function ",
     "iid": 9,
-    "timer": 6786.20681399852,
+    "timer": 6959.190222999081,
     "Makes_CallBack": true
 },
 {
@@ -328,7 +328,7 @@
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"type\":\"1\",\"title\":\"2\",\"body\":\"3\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},\"test\",\"somarEdobrar com x e y positivos\",\"function () {\\n        const resultado1 = somarEdobrar(8, 12);\\n        assert.equal(resultado1, 40);\\n    }\",\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js\",{\"title\":\"7\",\"ctx\":\"6\",\"suites\":\"8\",\"tests\":\"9\",\"root\":false,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"10\",\"_beforeAll\":\"11\",\"_afterEach\":\"12\",\"_afterAll\":\"13\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"14\",\"_onlySuites\":\"15\",\"delayed\":false,\"parent\":\"16\",\"file\":\"4\"},{},\"Testes da Primeira funcao\",[],[\"0\"],[],[],[],[],[],[],{\"title\":\"17\",\"ctx\":\"18\",\"suites\":\"19\",\"tests\":\"20\",\"root\":true,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"21\",\"_beforeAll\":\"22\",\"_afterEach\":\"23\",\"_afterAll\":\"24\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"25\",\"_onlySuites\":\"26\",\"delayed\":false,\"_events\":\"27\",\"_eventsCount\":1},\"\",{},[\"5\"],[],[],[],[],[],[],[],{\"pre-require\":\"28\"},[null,null]]",
     "iid": 9,
-    "timer": 6791.396709997207
+    "timer": 6966.347177999094
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -346,7 +346,7 @@
     "Async_Hook_Id": 0,
     "Function_Name": "Anonymous Function ",
     "iid": 10,
-    "timer": 6792.878298997879,
+    "timer": 6967.193953000009,
     "Makes_CallBack": true
 },
 {
@@ -367,7 +367,7 @@
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"type\":\"1\",\"title\":\"2\",\"body\":\"3\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},\"test\",\"somarEdobrar com x e y negativos\",\"function () {\\n        const resultado2 = somarEdobrar(-10, -20);\\n        assert.equal(resultado2, -60);\\n    }\",\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js\",{\"title\":\"7\",\"ctx\":\"6\",\"suites\":\"8\",\"tests\":\"9\",\"root\":false,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"10\",\"_beforeAll\":\"11\",\"_afterEach\":\"12\",\"_afterAll\":\"13\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"14\",\"_onlySuites\":\"15\",\"delayed\":false,\"parent\":\"16\",\"file\":\"4\"},{},\"Testes da Primeira funcao\",[],[\"17\",\"0\"],[],[],[],[],[],[],{\"title\":\"18\",\"ctx\":\"19\",\"suites\":\"20\",\"tests\":\"21\",\"root\":true,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"22\",\"_beforeAll\":\"23\",\"_afterEach\":\"24\",\"_afterAll\":\"25\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"26\",\"_onlySuites\":\"27\",\"delayed\":false,\"_events\":\"28\",\"_eventsCount\":1},{\"type\":\"1\",\"title\":\"29\",\"body\":\"30\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},\"\",{},[\"5\"],[],[],[],[],[],[],[],{\"pre-require\":\"31\"},\"somarEdobrar com x e y positivos\",\"function () {\\n        const resultado1 = somarEdobrar(8, 12);\\n        assert.equal(resultado1, 40);\\n    }\",[null,null]]",
     "iid": 10,
-    "timer": 6798.21048399806
+    "timer": 6974.0090079996735
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -385,7 +385,7 @@
     "Async_Hook_Id": 0,
     "Function_Name": "Anonymous Function ",
     "iid": 11,
-    "timer": 6799.320200998336,
+    "timer": 6979.123038999736,
     "Makes_CallBack": true
 },
 {
@@ -406,7 +406,7 @@
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"type\":\"1\",\"title\":\"2\",\"body\":\"3\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},\"test\",\"somarEdobrar com x e y iguais a zero\",\"function () {\\n        const resultado3 = somarEdobrar(0, 0);\\n        assert.equal(resultado3, 0);\\n    }\",\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js\",{\"title\":\"7\",\"ctx\":\"6\",\"suites\":\"8\",\"tests\":\"9\",\"root\":false,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"10\",\"_beforeAll\":\"11\",\"_afterEach\":\"12\",\"_afterAll\":\"13\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"14\",\"_onlySuites\":\"15\",\"delayed\":false,\"parent\":\"16\",\"file\":\"4\"},{},\"Testes da Primeira funcao\",[],[\"17\",\"18\",\"0\"],[],[],[],[],[],[],{\"title\":\"19\",\"ctx\":\"20\",\"suites\":\"21\",\"tests\":\"22\",\"root\":true,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"23\",\"_beforeAll\":\"24\",\"_afterEach\":\"25\",\"_afterAll\":\"26\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"27\",\"_onlySuites\":\"28\",\"delayed\":false,\"_events\":\"29\",\"_eventsCount\":1},{\"type\":\"1\",\"title\":\"30\",\"body\":\"31\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},{\"type\":\"1\",\"title\":\"32\",\"body\":\"33\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},\"\",{},[\"5\"],[],[],[],[],[],[],[],{\"pre-require\":\"34\"},\"somarEdobrar com x e y positivos\",\"function () {\\n        const resultado1 = somarEdobrar(8, 12);\\n        assert.equal(resultado1, 40);\\n    }\",\"somarEdobrar com x e y negativos\",\"function () {\\n        const resultado2 = somarEdobrar(-10, -20);\\n        assert.equal(resultado2, -60);\\n    }\",[null,null]]",
     "iid": 11,
-    "timer": 6801.744975998998
+    "timer": 6981.214422000572
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -426,7 +426,7 @@
     "Returned_Value": "[]",
     "Excession_Occurred": {},
     "iid": 7,
-    "timer": 6802.440409999341
+    "timer": 6981.749590000138
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -446,7 +446,7 @@
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"title\":\"1\",\"ctx\":\"2\",\"suites\":\"3\",\"tests\":\"4\",\"root\":false,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"5\",\"_beforeAll\":\"6\",\"_afterEach\":\"7\",\"_afterAll\":\"8\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"9\",\"_onlySuites\":\"10\",\"delayed\":false,\"parent\":\"11\",\"file\":\"12\"},\"Testes da Primeira funcao\",{},[],[\"13\",\"14\",\"15\"],[],[],[],[],[],[],{\"title\":\"16\",\"ctx\":\"17\",\"suites\":\"18\",\"tests\":\"19\",\"root\":true,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"20\",\"_beforeAll\":\"21\",\"_afterEach\":\"22\",\"_afterAll\":\"23\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"24\",\"_onlySuites\":\"25\",\"delayed\":false,\"_events\":\"26\",\"_eventsCount\":1},\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js\",{\"type\":\"27\",\"title\":\"28\",\"body\":\"29\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"12\",\"parent\":\"0\",\"ctx\":\"2\"},{\"type\":\"27\",\"title\":\"30\",\"body\":\"31\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"12\",\"parent\":\"0\",\"ctx\":\"2\"},{\"type\":\"27\",\"title\":\"32\",\"body\":\"33\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"12\",\"parent\":\"0\",\"ctx\":\"2\"},\"\",{},[\"0\"],[],[],[],[],[],[],[],{\"pre-require\":\"34\"},\"test\",\"somarEdobrar com x e y positivos\",\"function () {\\n        const resultado1 = somarEdobrar(8, 12);\\n        assert.equal(resultado1, 40);\\n    }\",\"somarEdobrar com x e y negativos\",\"function () {\\n        const resultado2 = somarEdobrar(-10, -20);\\n        assert.equal(resultado2, -60);\\n    }\",\"somarEdobrar com x e y iguais a zero\",\"function () {\\n        const resultado3 = somarEdobrar(0, 0);\\n        assert.equal(resultado3, 0);\\n    }\",[null,null]]",
     "iid": 6,
-    "timer": 6804.503617998213
+    "timer": 6987.183282999322
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -464,7 +464,7 @@
     "Async_Hook_Id": 0,
     "Function_Name": "Anonymous Function ",
     "iid": 12,
-    "timer": 6805.455513998866,
+    "timer": 6988.098657999188,
     "Makes_CallBack": true
 },
 {
@@ -483,7 +483,7 @@
     "Async_Hook_Id": 0,
     "Function_Name": "Anonymous Function ",
     "iid": 13,
-    "timer": 6807.909537997097,
+    "timer": 6990.421589000151,
     "is_Callback": true,
     "valueCallerIID": 12
 },
@@ -503,7 +503,7 @@
     "Async_Hook_Id": 0,
     "Function_Name": "Anonymous Function ",
     "iid": 15,
-    "timer": 6808.863322999328,
+    "timer": 6991.230866000056,
     "Makes_CallBack": true
 },
 {
@@ -524,7 +524,7 @@
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"type\":\"1\",\"title\":\"2\",\"body\":\"3\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},\"test\",\"Leitura do arquivo com path correto\",\"async function () {\\n        const conteudo1 = await lerArquivo('./exemploTexto.txt');\\n        assert.equal(conteudo1, 'texto lido do exemploTexto.txt');\\n    }\",\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js\",{\"title\":\"7\",\"ctx\":\"6\",\"suites\":\"8\",\"tests\":\"9\",\"root\":false,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"10\",\"_beforeAll\":\"11\",\"_afterEach\":\"12\",\"_afterAll\":\"13\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"14\",\"_onlySuites\":\"15\",\"delayed\":false,\"parent\":\"16\",\"file\":\"4\"},{},\"Testes da Segunda funcao\",[],[\"0\"],[],[],[],[],[],[],{\"title\":\"17\",\"ctx\":\"18\",\"suites\":\"19\",\"tests\":\"20\",\"root\":true,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"21\",\"_beforeAll\":\"22\",\"_afterEach\":\"23\",\"_afterAll\":\"24\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"25\",\"_onlySuites\":\"26\",\"delayed\":false,\"_events\":\"27\",\"_eventsCount\":1},\"\",{},[\"28\",\"5\"],[],[],[],[],[],[],[],{\"pre-require\":\"29\"},{\"title\":\"30\",\"ctx\":\"31\",\"suites\":\"32\",\"tests\":\"33\",\"root\":false,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"34\",\"_beforeAll\":\"35\",\"_afterEach\":\"36\",\"_afterAll\":\"37\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"38\",\"_onlySuites\":\"39\",\"delayed\":false,\"parent\":\"16\",\"file\":\"4\"},[null,null],\"Testes da Primeira funcao\",{},[],[\"40\",\"41\",\"42\"],[],[],[],[],[],[],{\"type\":\"1\",\"title\":\"43\",\"body\":\"44\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"28\",\"ctx\":\"31\"},{\"type\":\"1\",\"title\":\"45\",\"body\":\"46\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"28\",\"ctx\":\"31\"},{\"type\":\"1\",\"title\":\"47\",\"body\":\"48\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"28\",\"ctx\":\"31\"},\"somarEdobrar com x e y positivos\",\"function () {\\n        const resultado1 = somarEdobrar(8, 12);\\n        assert.equal(resultado1, 40);\\n    }\",\"somarEdobrar com x e y negativos\",\"function () {\\n        const resultado2 = somarEdobrar(-10, -20);\\n        assert.equal(resultado2, -60);\\n    }\",\"somarEdobrar com x e y iguais a zero\",\"function () {\\n        const resultado3 = somarEdobrar(0, 0);\\n        assert.equal(resultado3, 0);\\n    }\"]",
     "iid": 15,
-    "timer": 6816.165673997253
+    "timer": 6993.70901099965
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -544,7 +544,7 @@
     "Returned_Value": "[]",
     "Excession_Occurred": {},
     "iid": 13,
-    "timer": 6817.047352999449
+    "timer": 6994.373626999557
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -564,7 +564,7 @@
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"title\":\"1\",\"ctx\":\"2\",\"suites\":\"3\",\"tests\":\"4\",\"root\":false,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"5\",\"_beforeAll\":\"6\",\"_afterEach\":\"7\",\"_afterAll\":\"8\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"9\",\"_onlySuites\":\"10\",\"delayed\":false,\"parent\":\"11\",\"file\":\"12\"},\"Testes da Segunda funcao\",{},[],[\"13\"],[],[],[],[],[],[],{\"title\":\"14\",\"ctx\":\"15\",\"suites\":\"16\",\"tests\":\"17\",\"root\":true,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"18\",\"_beforeAll\":\"19\",\"_afterEach\":\"20\",\"_afterAll\":\"21\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"22\",\"_onlySuites\":\"23\",\"delayed\":false,\"_events\":\"24\",\"_eventsCount\":1},\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js\",{\"type\":\"25\",\"title\":\"26\",\"body\":\"27\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"12\",\"parent\":\"0\",\"ctx\":\"2\"},\"\",{},[\"28\",\"0\"],[],[],[],[],[],[],[],{\"pre-require\":\"29\"},\"test\",\"Leitura do arquivo com path correto\",\"async function () {\\n        const conteudo1 = await lerArquivo('./exemploTexto.txt');\\n        assert.equal(conteudo1, 'texto lido do exemploTexto.txt');\\n    }\",{\"title\":\"30\",\"ctx\":\"31\",\"suites\":\"32\",\"tests\":\"33\",\"root\":false,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"34\",\"_beforeAll\":\"35\",\"_afterEach\":\"36\",\"_afterAll\":\"37\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"38\",\"_onlySuites\":\"39\",\"delayed\":false,\"parent\":\"11\",\"file\":\"12\"},[null,null],\"Testes da Primeira funcao\",{},[],[\"40\",\"41\",\"42\"],[],[],[],[],[],[],{\"type\":\"25\",\"title\":\"43\",\"body\":\"44\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"12\",\"parent\":\"28\",\"ctx\":\"31\"},{\"type\":\"25\",\"title\":\"45\",\"body\":\"46\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"12\",\"parent\":\"28\",\"ctx\":\"31\"},{\"type\":\"25\",\"title\":\"47\",\"body\":\"48\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"12\",\"parent\":\"28\",\"ctx\":\"31\"},\"somarEdobrar com x e y positivos\",\"function () {\\n        const resultado1 = somarEdobrar(8, 12);\\n        assert.equal(resultado1, 40);\\n    }\",\"somarEdobrar com x e y negativos\",\"function () {\\n        const resultado2 = somarEdobrar(-10, -20);\\n        assert.equal(resultado2, -60);\\n    }\",\"somarEdobrar com x e y iguais a zero\",\"function () {\\n        const resultado3 = somarEdobrar(0, 0);\\n        assert.equal(resultado3, 0);\\n    }\"]",
     "iid": 12,
-    "timer": 6819.725293997675
+    "timer": 6996.332572000101
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -582,7 +582,7 @@
     "Async_Hook_Id": 0,
     "Function_Name": "Anonymous Function ",
     "iid": 16,
-    "timer": 6820.76797599718,
+    "timer": 6997.16811599955,
     "Makes_CallBack": true
 },
 {
@@ -601,7 +601,7 @@
     "Async_Hook_Id": 0,
     "Function_Name": "Anonymous Function ",
     "iid": 17,
-    "timer": 6822.1757509969175,
+    "timer": 6998.316219000146,
     "is_Callback": true,
     "valueCallerIID": 16
 },
@@ -621,7 +621,7 @@
     "Async_Hook_Id": 0,
     "Function_Name": "Anonymous Function ",
     "iid": 19,
-    "timer": 6825.385079000145,
+    "timer": 6998.93577699922,
     "Makes_CallBack": true
 },
 {
@@ -642,7 +642,7 @@
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"type\":\"1\",\"title\":\"2\",\"body\":\"3\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},\"test\",\"FuncaoComAwait usando o true e formato de await para receber o resultado\",\"async function () {\\n        const resultadoTrue = await funcaoComAwait(true);\\n        assert.equal(resultadoTrue, 30);\\n\\n        \\n    }\",\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js\",{\"title\":\"7\",\"ctx\":\"6\",\"suites\":\"8\",\"tests\":\"9\",\"root\":false,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"10\",\"_beforeAll\":\"11\",\"_afterEach\":\"12\",\"_afterAll\":\"13\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"14\",\"_onlySuites\":\"15\",\"delayed\":false,\"parent\":\"16\",\"file\":\"4\"},{},\"Testes da Terceira funcao\",[],[\"0\"],[],[],[],[],[],[],{\"title\":\"17\",\"ctx\":\"18\",\"suites\":\"19\",\"tests\":\"20\",\"root\":true,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"21\",\"_beforeAll\":\"22\",\"_afterEach\":\"23\",\"_afterAll\":\"24\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"25\",\"_onlySuites\":\"26\",\"delayed\":false,\"_events\":\"27\",\"_eventsCount\":1},\"\",{},[\"28\",\"29\",\"5\"],[],[],[],[],[],[],[],{\"pre-require\":\"30\"},{\"title\":\"31\",\"ctx\":\"32\",\"suites\":\"33\",\"tests\":\"34\",\"root\":false,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"35\",\"_beforeAll\":\"36\",\"_afterEach\":\"37\",\"_afterAll\":\"38\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"39\",\"_onlySuites\":\"40\",\"delayed\":false,\"parent\":\"16\",\"file\":\"4\"},{\"title\":\"41\",\"ctx\":\"42\",\"suites\":\"43\",\"tests\":\"44\",\"root\":false,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"45\",\"_beforeAll\":\"46\",\"_afterEach\":\"47\",\"_afterAll\":\"48\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"49\",\"_onlySuites\":\"50\",\"delayed\":false,\"parent\":\"16\",\"file\":\"4\"},[null,null],\"Testes da Primeira funcao\",{},[],[\"51\",\"52\",\"53\"],[],[],[],[],[],[],\"Testes da Segunda funcao\",{},[],[\"54\"],[],[],[],[],[],[],{\"type\":\"1\",\"title\":\"55\",\"body\":\"56\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"28\",\"ctx\":\"32\"},{\"type\":\"1\",\"title\":\"57\",\"body\":\"58\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"28\",\"ctx\":\"32\"},{\"type\":\"1\",\"title\":\"59\",\"body\":\"60\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"28\",\"ctx\":\"32\"},{\"type\":\"1\",\"title\":\"61\",\"body\":\"62\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"29\",\"ctx\":\"42\"},\"somarEdobrar com x e y positivos\",\"function () {\\n        const resultado1 = somarEdobrar(8, 12);\\n        assert.equal(resultado1, 40);\\n    }\",\"somarEdobrar com x e y negativos\",\"function () {\\n        const resultado2 = somarEdobrar(-10, -20);\\n        assert.equal(resultado2, -60);\\n    }\",\"somarEdobrar com x e y iguais a zero\",\"function () {\\n        const resultado3 = somarEdobrar(0, 0);\\n        assert.equal(resultado3, 0);\\n    }\",\"Leitura do arquivo com path correto\",\"async function () {\\n        const conteudo1 = await lerArquivo('./exemploTexto.txt');\\n        assert.equal(conteudo1, 'texto lido do exemploTexto.txt');\\n    }\"]",
     "iid": 19,
-    "timer": 6832.1042969971895
+    "timer": 7001.645128000528
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -660,7 +660,7 @@
     "Async_Hook_Id": 0,
     "Function_Name": "Anonymous Function ",
     "iid": 20,
-    "timer": 6833.359067000449,
+    "timer": 7002.5727359987795,
     "Makes_CallBack": true
 },
 {
@@ -681,7 +681,7 @@
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"type\":\"1\",\"title\":\"2\",\"body\":\"3\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},\"test\",\"FuncaoComAwait usando o false e formato de promise para receber o resultado\",\"async function () {\\n        const resultadoFalse = await funcaoComAwait(false);\\n        assert.equal(resultadoFalse, 5);\\n    }\",\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js\",{\"title\":\"7\",\"ctx\":\"6\",\"suites\":\"8\",\"tests\":\"9\",\"root\":false,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"10\",\"_beforeAll\":\"11\",\"_afterEach\":\"12\",\"_afterAll\":\"13\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"14\",\"_onlySuites\":\"15\",\"delayed\":false,\"parent\":\"16\",\"file\":\"4\"},{},\"Testes da Terceira funcao\",[],[\"17\",\"0\"],[],[],[],[],[],[],{\"title\":\"18\",\"ctx\":\"19\",\"suites\":\"20\",\"tests\":\"21\",\"root\":true,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"22\",\"_beforeAll\":\"23\",\"_afterEach\":\"24\",\"_afterAll\":\"25\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"26\",\"_onlySuites\":\"27\",\"delayed\":false,\"_events\":\"28\",\"_eventsCount\":1},{\"type\":\"1\",\"title\":\"29\",\"body\":\"30\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"5\",\"ctx\":\"6\"},\"\",{},[\"31\",\"32\",\"5\"],[],[],[],[],[],[],[],{\"pre-require\":\"33\"},\"FuncaoComAwait usando o true e formato de await para receber o resultado\",\"async function () {\\n        const resultadoTrue = await funcaoComAwait(true);\\n        assert.equal(resultadoTrue, 30);\\n\\n        \\n    }\",{\"title\":\"34\",\"ctx\":\"35\",\"suites\":\"36\",\"tests\":\"37\",\"root\":false,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"38\",\"_beforeAll\":\"39\",\"_afterEach\":\"40\",\"_afterAll\":\"41\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"42\",\"_onlySuites\":\"43\",\"delayed\":false,\"parent\":\"16\",\"file\":\"4\"},{\"title\":\"44\",\"ctx\":\"45\",\"suites\":\"46\",\"tests\":\"47\",\"root\":false,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"48\",\"_beforeAll\":\"49\",\"_afterEach\":\"50\",\"_afterAll\":\"51\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"52\",\"_onlySuites\":\"53\",\"delayed\":false,\"parent\":\"16\",\"file\":\"4\"},[null,null],\"Testes da Primeira funcao\",{},[],[\"54\",\"55\",\"56\"],[],[],[],[],[],[],\"Testes da Segunda funcao\",{},[],[\"57\"],[],[],[],[],[],[],{\"type\":\"1\",\"title\":\"58\",\"body\":\"59\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"31\",\"ctx\":\"35\"},{\"type\":\"1\",\"title\":\"60\",\"body\":\"61\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"31\",\"ctx\":\"35\"},{\"type\":\"1\",\"title\":\"62\",\"body\":\"63\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"31\",\"ctx\":\"35\"},{\"type\":\"1\",\"title\":\"64\",\"body\":\"65\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"4\",\"parent\":\"32\",\"ctx\":\"45\"},\"somarEdobrar com x e y positivos\",\"function () {\\n        const resultado1 = somarEdobrar(8, 12);\\n        assert.equal(resultado1, 40);\\n    }\",\"somarEdobrar com x e y negativos\",\"function () {\\n        const resultado2 = somarEdobrar(-10, -20);\\n        assert.equal(resultado2, -60);\\n    }\",\"somarEdobrar com x e y iguais a zero\",\"function () {\\n        const resultado3 = somarEdobrar(0, 0);\\n        assert.equal(resultado3, 0);\\n    }\",\"Leitura do arquivo com path correto\",\"async function () {\\n        const conteudo1 = await lerArquivo('./exemploTexto.txt');\\n        assert.equal(conteudo1, 'texto lido do exemploTexto.txt');\\n    }\"]",
     "iid": 20,
-    "timer": 6837.416735999286
+    "timer": 7005.490632999688
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -701,7 +701,7 @@
     "Returned_Value": "[]",
     "Excession_Occurred": {},
     "iid": 17,
-    "timer": 6838.496555998921
+    "timer": 7006.195042999461
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -721,7 +721,7 @@
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{\"title\":\"1\",\"ctx\":\"2\",\"suites\":\"3\",\"tests\":\"4\",\"root\":false,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"5\",\"_beforeAll\":\"6\",\"_afterEach\":\"7\",\"_afterAll\":\"8\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"9\",\"_onlySuites\":\"10\",\"delayed\":false,\"parent\":\"11\",\"file\":\"12\"},\"Testes da Terceira funcao\",{},[],[\"13\",\"14\"],[],[],[],[],[],[],{\"title\":\"15\",\"ctx\":\"16\",\"suites\":\"17\",\"tests\":\"18\",\"root\":true,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"19\",\"_beforeAll\":\"20\",\"_afterEach\":\"21\",\"_afterAll\":\"22\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"23\",\"_onlySuites\":\"24\",\"delayed\":false,\"_events\":\"25\",\"_eventsCount\":1},\"/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js\",{\"type\":\"26\",\"title\":\"27\",\"body\":\"28\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"12\",\"parent\":\"0\",\"ctx\":\"2\"},{\"type\":\"26\",\"title\":\"29\",\"body\":\"30\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"12\",\"parent\":\"0\",\"ctx\":\"2\"},\"\",{},[\"31\",\"32\",\"0\"],[],[],[],[],[],[],[],{\"pre-require\":\"33\"},\"test\",\"FuncaoComAwait usando o true e formato de await para receber o resultado\",\"async function () {\\n        const resultadoTrue = await funcaoComAwait(true);\\n        assert.equal(resultadoTrue, 30);\\n\\n        \\n    }\",\"FuncaoComAwait usando o false e formato de promise para receber o resultado\",\"async function () {\\n        const resultadoFalse = await funcaoComAwait(false);\\n        assert.equal(resultadoFalse, 5);\\n    }\",{\"title\":\"34\",\"ctx\":\"35\",\"suites\":\"36\",\"tests\":\"37\",\"root\":false,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"38\",\"_beforeAll\":\"39\",\"_afterEach\":\"40\",\"_afterAll\":\"41\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"42\",\"_onlySuites\":\"43\",\"delayed\":false,\"parent\":\"11\",\"file\":\"12\"},{\"title\":\"44\",\"ctx\":\"45\",\"suites\":\"46\",\"tests\":\"47\",\"root\":false,\"pending\":false,\"_retries\":-1,\"_beforeEach\":\"48\",\"_beforeAll\":\"49\",\"_afterEach\":\"50\",\"_afterAll\":\"51\",\"_timeout\":2000,\"_slow\":75,\"_bail\":false,\"_onlyTests\":\"52\",\"_onlySuites\":\"53\",\"delayed\":false,\"parent\":\"11\",\"file\":\"12\"},[null,null],\"Testes da Primeira funcao\",{},[],[\"54\",\"55\",\"56\"],[],[],[],[],[],[],\"Testes da Segunda funcao\",{},[],[\"57\"],[],[],[],[],[],[],{\"type\":\"26\",\"title\":\"58\",\"body\":\"59\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"12\",\"parent\":\"31\",\"ctx\":\"35\"},{\"type\":\"26\",\"title\":\"60\",\"body\":\"61\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"12\",\"parent\":\"31\",\"ctx\":\"35\"},{\"type\":\"26\",\"title\":\"62\",\"body\":\"63\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"12\",\"parent\":\"31\",\"ctx\":\"35\"},{\"type\":\"26\",\"title\":\"64\",\"body\":\"65\",\"async\":0,\"sync\":true,\"_timeout\":2000,\"_slow\":75,\"_retries\":-1,\"timedOut\":false,\"_currentRetry\":0,\"pending\":false,\"file\":\"12\",\"parent\":\"32\",\"ctx\":\"45\"},\"somarEdobrar com x e y positivos\",\"function () {\\n        const resultado1 = somarEdobrar(8, 12);\\n        assert.equal(resultado1, 40);\\n    }\",\"somarEdobrar com x e y negativos\",\"function () {\\n        const resultado2 = somarEdobrar(-10, -20);\\n        assert.equal(resultado2, -60);\\n    }\",\"somarEdobrar com x e y iguais a zero\",\"function () {\\n        const resultado3 = somarEdobrar(0, 0);\\n        assert.equal(resultado3, 0);\\n    }\",\"Leitura do arquivo com path correto\",\"async function () {\\n        const conteudo1 = await lerArquivo('./exemploTexto.txt');\\n        assert.equal(conteudo1, 'texto lido do exemploTexto.txt');\\n    }\"]",
     "iid": 16,
-    "timer": 6842.059761997312
+    "timer": 7008.7845389992
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -741,7 +741,7 @@
     "Returned_Value": "[]",
     "Excession_Occurred": {},
     "iid": 1,
-    "timer": 6843.021664999425
+    "timer": 7009.47001099959
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -757,7 +757,7 @@
         }
     },
     "Async_Hook_Id": 13,
-    "timer": 6924.49975399673,
+    "timer": 7064.974639998749,
     "iid": 21
 },
 {
@@ -776,7 +776,7 @@
     "Async_Hook_Id": 13,
     "Function_Name": "Anonymous Function ",
     "iid": 22,
-    "timer": 6926.153906997293,
+    "timer": 7069.357155999169,
     "is_Callback": true,
     "valueCallerIID": 15
 },
@@ -796,7 +796,7 @@
     "Async_Hook_Id": 13,
     "Function_Name": "lerArquivo",
     "iid": 24,
-    "timer": 6927.687489997596,
+    "timer": 7070.716975999996,
     "Makes_CallBack": false
 },
 {
@@ -815,7 +815,7 @@
     "Async_Hook_Id": 13,
     "Function_Name": "lerArquivo",
     "iid": 26,
-    "timer": 6928.837085999548,
+    "timer": 7071.604032998905,
     "is_Callback": false
 },
 {
@@ -834,7 +834,7 @@
     "Async_Hook_Id": 13,
     "Function_Name": "Promise",
     "iid": 27,
-    "timer": 6929.888306997716,
+    "timer": 7072.384780999273,
     "Makes_CallBack": true
 },
 {
@@ -853,7 +853,7 @@
     "Async_Hook_Id": 13,
     "Function_Name": "Anonymous Function ",
     "iid": 28,
-    "timer": 6930.910891000181,
+    "timer": 7073.136776000261,
     "is_Callback": true,
     "valueCallerIID": 27
 },
@@ -873,7 +873,7 @@
     "Async_Hook_Id": 13,
     "Function_Name": "readFile",
     "iid": 30,
-    "timer": 6931.882282998413,
+    "timer": 7080.890970999375,
     "Makes_CallBack": true
 },
 {
@@ -894,7 +894,7 @@
     "Tipo_Returned_Value": "undefined",
     "Returned_Value": "[]",
     "iid": 30,
-    "timer": 6943.951217997819
+    "timer": 7088.922939999029
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoPrincipal.js",
@@ -914,7 +914,7 @@
     "Returned_Value": "[]",
     "Excession_Occurred": {},
     "iid": 28,
-    "timer": 6944.769630998373
+    "timer": 7089.517849000171
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoPrincipal.js",
@@ -934,7 +934,7 @@
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{}]",
     "iid": 27,
-    "timer": 6945.423296999186
+    "timer": 7089.995084999129
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoPrincipal.js",
@@ -954,7 +954,7 @@
     "Returned_Value": "[{}]",
     "Excession_Occurred": {},
     "iid": 26,
-    "timer": 6946.0404529981315
+    "timer": 7090.331729998812
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -974,7 +974,7 @@
     "Tipo_Returned_Value": "object",
     "Returned_Value": "[{}]",
     "iid": 24,
-    "timer": 6946.643683999777
+    "timer": 7090.639783998951
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -991,7 +991,7 @@
     },
     "Async_Hook_Id": 13,
     "Expected_Value": "[{}]",
-    "timer": 6948.583567999303,
+    "timer": 7091.94262399897,
     "iid": 23
 },
 {
@@ -1014,7 +1014,7 @@
         "yield": true
     },
     "iid": 22,
-    "timer": 6952.367740999907
+    "timer": 7092.500273000449
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -1032,7 +1032,7 @@
     "Async_Hook_Id": 13,
     "Returned_Value": {},
     "Excession_Occurred": {},
-    "timer": 6953.677555996925,
+    "timer": 7093.2006649989635,
     "iid": 21
 },
 {
@@ -1051,7 +1051,7 @@
     "Async_Hook_Id": 18,
     "Function_Name": "Anonymous Function ",
     "iid": 31,
-    "timer": 6970.219613999128,
+    "timer": 7100.337528999895,
     "is_Callback": true,
     "valueCallerIID": 30
 },
@@ -1071,7 +1071,7 @@
     "Async_Hook_Id": 18,
     "Function_Name": "toString",
     "iid": 35,
-    "timer": 6972.187819998711,
+    "timer": 7101.2036210000515,
     "Makes_CallBack": false
 },
 {
@@ -1092,7 +1092,7 @@
     "Tipo_Returned_Value": "string",
     "Returned_Value": "[\"texto lido do exemploTexto.txt\"]",
     "iid": 35,
-    "timer": 6973.777934998274
+    "timer": 7101.731544999406
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoPrincipal.js",
@@ -1110,7 +1110,7 @@
     "Async_Hook_Id": 18,
     "Function_Name": "Anonymous Function ",
     "iid": 34,
-    "timer": 6974.3836070001125,
+    "timer": 7102.044923000038,
     "Makes_CallBack": false
 },
 {
@@ -1131,7 +1131,7 @@
     "Tipo_Returned_Value": "undefined",
     "Returned_Value": "[]",
     "iid": 34,
-    "timer": 6978.550708997995
+    "timer": 7102.4105629995465
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/arquivoPrincipal.js",
@@ -1151,7 +1151,7 @@
     "Returned_Value": "[]",
     "Excession_Occurred": {},
     "iid": 31,
-    "timer": 6980.376142997295
+    "timer": 7102.719257999212
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -1169,7 +1169,7 @@
     "Async_Hook_Id": 0,
     "Function_Name": "Anonymous Function ",
     "iid": 22,
-    "timer": 6981.167890999466,
+    "timer": 7103.251671999693,
     "is_Callback": true,
     "valueCallerIID": 15
 },
@@ -1192,7 +1192,7 @@
     "Expected_Value": "[{}]",
     "Resolved_Value_Type": "string",
     "Resolved_Value": "[\"texto lido do exemploTexto.txt\"]",
-    "timer": 6993.033111996949,
+    "timer": 7105.2333760000765,
     "iid": 23
 },
 {
@@ -1211,7 +1211,7 @@
     "Async_Hook_Id": 0,
     "Function_Name": "equal",
     "iid": 36,
-    "timer": 6997.622757997364,
+    "timer": 7106.242342999205,
     "Makes_CallBack": false
 },
 {
@@ -1232,7 +1232,7 @@
     "Tipo_Returned_Value": "undefined",
     "Returned_Value": "[]",
     "iid": 36,
-    "timer": 6999.005052000284
+    "timer": 7107.009547999129
 },
 {
     "File_Path": "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/teste/arquivoTestesMocha.js",
@@ -1252,6 +1252,6 @@
     "Returned_Value": "[]",
     "Excession_Occurred": {},
     "iid": 22,
-    "timer": 7000.4520149976015
+    "timer": 7107.402482999489
 }
 ]

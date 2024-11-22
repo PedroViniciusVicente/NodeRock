@@ -8,13 +8,13 @@ const destinationCopyFolder = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/
 function executeTests(testsFullNameList, testsRespectiveFile, chosenProject) {
     let copiedFileName;
 
-
-    // Refazendo o diretorio do collectedTracesFolder
-
     let pathNode_modules = chosenProject.isMocha ? "node_modules/.bin/_mocha" : "node_modules/.bin/jest";
 
     let semiCompleteCommand;
     let completCommand;
+
+    let testsDuration = [];
+
     console.log("\nExecucao dos testes individualmente:");
     for(let i = 0; i < testsFullNameList.length; i++) {
         try {
@@ -23,19 +23,24 @@ function executeTests(testsFullNameList, testsRespectiveFile, chosenProject) {
             // Diferenciando se o teste eh Mocha ou Jest
             if(chosenProject.isMocha) {
                 completCommand = semiCompleteCommand + " -g " + testsFullNameList[i];
-                //shell.exec(semiCompletCommand + " -g " + testsFullNameList[i]);
-                //console.log("Comando com o -g eh: ", completCommand);
             }
             else {
                 completCommand = semiCompleteCommand + " --testNamePattern " + testsFullNameList[i];
-                //shell.exec(semiCompletCommand + " --testNamePattern " + testsFullNameList[i]);
-                //console.log("Comando com o --testNamePattern eh: ", completCommand);
             }
 
             console.log(`\n${i+1}/${testsFullNameList.length}. Executando o teste: ${testsFullNameList[i]}`);
             console.log("Comando usado foi: ", completCommand);
 
-            shell.exec(completCommand);
+
+            const stringExecutedTest = shell.exec(completCommand);
+
+            const match = stringExecutedTest.match(/analysis: ([\d.]+)s/);
+            const AnalysisTime = match ? match[1] : null;
+
+            // console.log("\n\nTEMPO ANALISE EH: ");
+            // console.log(AnalysisTime);
+            const NumericAnalysisTime = parseFloat(AnalysisTime);
+            testsDuration.push(NumericAnalysisTime);
 
             copiedFileName = "tracesFromIt_" + i.toString() + ".json";
             shell.cp(sourceCopyPath, (destinationCopyFolder + copiedFileName));
@@ -44,6 +49,7 @@ function executeTests(testsFullNameList, testsRespectiveFile, chosenProject) {
             console.log("Erro ao executar a iteracao do teste individual com i=", i);
         }
     }
+    return testsDuration;
 }
 
 module.exports = { executeTests };

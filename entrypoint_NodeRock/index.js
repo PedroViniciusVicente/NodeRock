@@ -30,8 +30,10 @@ const tests = getTestsNames(chosenProject.pathProjectFolder, chosenProject.testF
 
 
 // 3. Executing the tests individually and placing theirs traces in collectedTracesFolder
-executeTests(tests.testsFullNameList, tests.testsRespectiveFile, chosenProject);
-
+testsTotalDuration = executeTests(tests.testsFullNameList, tests.testsRespectiveFile, chosenProject);
+// for(let i = 0; i < testsTotalDuration.length; i++) {
+//     console.log("Duracao foi: ", testsTotalDuration[i]);
+// }
 // 4. Extracting the functions from the traces and calculating their callback times
 extractFunctions();
 
@@ -45,7 +47,7 @@ normalizeFeatures();
 labelFeatures(chosenProject.raceConditionTests);
 
 // 8. Generating the .csv file based on the .json files
-generateCSV(chosenProject.benchmarkName, tests.testsRespectiveFile);
+generateCSV(chosenProject.benchmarkName, tests.testsRespectiveFile, testsTotalDuration);
 
 
 
