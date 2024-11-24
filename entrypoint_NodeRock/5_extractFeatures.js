@@ -31,7 +31,7 @@ function extractFeatures(testsFullNameList) {
             let countInvokesWithCallback = 0;
             let totalDelay = 0;
             for(let j = 0; j < objectsExtractFeatures.length; j++) {
-                if(objectsExtractFeatures[j].Called_iid.length > 0) {
+                if(objectsExtractFeatures[j].Called_iid.length > 0 && objectsExtractFeatures[j].callbackFromItOrDescribe === false) {
                     countInvokesWithCallback++;
                     totalDelay += objectsExtractFeatures[j].delayCb_ms;
                 }

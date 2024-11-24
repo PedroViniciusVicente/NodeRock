@@ -35,7 +35,7 @@ testsTotalDuration = executeTests(tests.testsFullNameList, tests.testsRespective
 //     console.log("Duracao foi: ", testsTotalDuration[i]);
 // }
 // 4. Extracting the functions from the traces and calculating their callback times
-extractFunctions();
+extractFunctions(tests.testsRespectiveFile);
 
 // 5. Extracting the main features from each test
 extractFeatures(tests.testsFullNameList);

@@ -33,8 +33,10 @@ function chosenProjectFunction() {
             benchmarkName = "MeuTestMocha";
             console.log("Executando analise do meu teste simples em Mocha");
             pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesSimplesMocha/";
-            testFile = "teste";
+            // testFile = "teste";
             //testFile = "teste/testeMenor.js";
+            testFile = "teste/arquivoTestesMocha.js";
+
             raceConditionTests.push("1. Testes da Primeira funcao somarEdobrar com x e y positivos");
             break;
 

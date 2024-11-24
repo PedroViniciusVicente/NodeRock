@@ -3,8 +3,11 @@
 
 const fs = require('fs');
 
-function extractFunctions() {
+function extractFunctions(testsRespectiveFile) {
     console.log("\nGerando a lista com todas as funcoes presentes");
+
+    
+
     try {
         const diretorio = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
         const notFilteredFiles = fs.readdirSync(diretorio);
@@ -16,8 +19,25 @@ function extractFunctions() {
 
         let destinationFile = "";
         let pathExtractFile = "";
+
         for(let i = 0; i < files.length; i++) {
-            
+
+            // Antes, precisamos pegar quais são as linhas dos "describe" ou "it" para que eles nao interfiram na contagem de callbacks do teste
+            const linhas = fs.readFileSync(testsRespectiveFile[i], 'utf-8').split('\n');
+
+            const resultado = linhas
+                .map((linha, index) => ({ linha: linha.trim(), numero: index + 1 }))
+                .filter(l => l.linha.startsWith('it(') || l.linha.startsWith('describe('));
+
+            // console.log("Linhas para excluir do teste: ", i);
+            // for(let j = 0; j < resultado.length; j++) {
+            //     console.log(resultado[j].numero);
+            // }
+
+            const numerosLinhas = resultado.map(teste => teste.numero); // Extrair os números das linhas
+
+
+
             destinationFile = diretorio + "functionsFromTest_" + i + ".json";
 
             console.log(`${i+1}/${files.length}. Selecionando funcoes e calculando delays de Callbacks do arquivo: ${destinationFile}`);
@@ -42,11 +62,11 @@ function extractFunctions() {
                     if (objectsExtractFeatures[j].Makes_CallBack === true)
                     {
                         if(DEBUG) {
-                            console.log(`a) A FUNCAO DE IID = ${objectsExtractFeatures[j].iid} FAZ CALLBACKS, 
-                                E SEU TIMER EH: ${objectsExtractFeatures[j].timer}`);
+                            console.log(`a) A FUNCAO DE IID = ${objectsExtractFeatures[j].iid} FAZ CALLBACKS, E SEU TIMER EH: ${objectsExtractFeatures[j].timer}`);
                         }
 
                         // o objeto na posicao k eh o funtionEnter da funcao de callback
+                        // NOTE: UM CALLBACKMADE SERA MARCADO APENAS SE TIVER O RESPECTIVO FUNCTIONENTER DO INVOKEFUNPRE
                         for (let k = j; k < objectsExtractFeatures.length; k++)
                         {
                             if (objectsExtractFeatures[k].Detected_Hook === "functionEnter" &&
@@ -55,29 +75,12 @@ function extractFunctions() {
                             {
 
                                 if(DEBUG) {
-                                    console.log(`b) A FUNCAO DE IID = ${objectsExtractFeatures[k].iid} EH O CALLBACK DA ${objectsExtractFeatures[j].iid}`);
+                                    console.log(`b) A FUNCAO DE IID = ${objectsExtractFeatures[k].iid} EH O CALLBACK DA ${objectsExtractFeatures[j].iid}\n`);
                                 }
 
                                 callbackMade.push(objectsExtractFeatures[k].iid);
                                 delayCb = objectsExtractFeatures[k].timer - objectsExtractFeatures[j].timer;
 
-                                // o objeto na posicao l eh o functionExit da funcao de callback
-                                // for (l = k; l < objectsExtractFeatures.length; l++)
-                                // {
-                                //     if (objectsExtractFeatures[l].Detected_Hook === "functionExit" &&
-                                //         objectsExtractFeatures[l].iid === objectsExtractFeatures[k].iid)
-                                //     {
-                                //         if(DEBUG) {
-                                //             console.log(`c) A FUNCAO DE CALLBACK TERMINA NO TIMER: ${objectsExtractFeatures[l].timer}`);
-                                //         }
-
-                                //         // delayCb = timerDoFunctionExit - timerDoInvokeFunPre
-                                //         // ESSE RUNTIME NA VERDADE SERIA A DEMORA PARA UM CALLBACK COMECAR A SER EXECUTADO A PARTIR DO MOMENTO QUE ELE FOI INVOCADO
-                                //         delayCb = objectsExtractFeatures[l].timer - objectsExtractFeatures[j].timer;
-                                //         // TALVEZ LEMBRAR DE ZERAR O delayCb PRA NAO DAR ERRO??
-                                //         break;
-                                //     }
-                                // }
                             }
                         }
                     }
@@ -92,6 +95,10 @@ function extractFunctions() {
                     //     }
                     // }
                     
+                    let callbackFromItOrDescribe = false;
+                    if (objectsExtractFeatures[j].File_Path === testsRespectiveFile[i] && numerosLinhas.includes(objectsExtractFeatures[j].loc.start.line)) {
+                        callbackFromItOrDescribe = true;
+                    }
 
                     const ObjectLogMessage = {
                         "Name": objectsExtractFeatures[j].Function_Name,
@@ -101,6 +108,7 @@ function extractFunctions() {
                         "delayCb_ms": delayCb,
                         //"Args": objectsExtractFeatures[j].args,
                         "Called_iid": callbackMade,
+                        "callbackFromItOrDescribe": callbackFromItOrDescribe,
                     };
                     callbackMade = [] // zerando o vetor
                     delayCb = 0;
