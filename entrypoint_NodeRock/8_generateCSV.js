@@ -17,7 +17,7 @@ function generateCSV(benchmarkName, testsRespectiveFile, testsTotalDuration) {
  
     const columns = ['BenchmarkName', 'TestFilePath', 'TestCaseName',
         'InvokeFunPre_Count_Raw', 'InvokeFunPre_Count_Normalized','Invokes_with_callback_Raw', 'Invokes_with_callback_Normalized',
-        'Total_delay_ms_Raw', 'Total_delay_ms_Normalized', 'AsyncFunction_Count_Raw', 'AsyncFunction_Count_Raw',
+        'Total_delay_ms_Raw', 'Total_delay_ms_Normalized', 'AsyncFunction_Count_Raw', 'AsyncFunction_Count_Normalized',
         'Await_Count_Raw', 'Await_Count_Normalized', 'Unique_Asynchook_ids_Raw', 'Unique_Asynchook_ids_Normalized',
         'Total_duration_s', 'HasEventRace']
     // adicionar: funcoes com > 100 ms de delay; tempo total do teste; e se o teste falhou ou foi sucesso

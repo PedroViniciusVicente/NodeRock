@@ -22,6 +22,7 @@ function getTestsNames(pathProjectFolder, testFile) {
     shell.cd(`${pathProjectFolder}`);
 
     let out = shell.exec(`npx mocha ${testFile} --recursive --exit -R ${CUSTOM_REPORTER}`, { silent: false });
+    //shell.exec(`./node_modules/.bin/_mocha --exit -t 20000 test/db.test.js -R ${CUSTOM_REPORTER}`, {silent: false}); // para o nedb
 
     shell.cd(`${pathRaizNodeRock}`);
 
@@ -62,14 +63,13 @@ function getTestsNames(pathProjectFolder, testFile) {
         testsFullNameList[i] = `"` + testsFullNameList[i] + `"`;
         testsFullNameList[i] = testsFullNameList[i].replace(/\s/g, '\\ '); // Adicionando "\" antes dos espacos
 
-        testsFullNameList[i] = testsFullNameList[i].replace(/['`+\-()<>[\]]/g, '.*');
+        testsFullNameList[i] = testsFullNameList[i].replace(/['`+\-()<>[\],]/g, '.*');
     }
 
     return {
         testsFullNameList: testsFullNameList,
         testsRespectiveFile: testsRespectiveFile,
     };
-
 }
 
 module.exports = {getTestsNames};

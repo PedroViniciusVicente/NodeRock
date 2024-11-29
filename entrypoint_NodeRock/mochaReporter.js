@@ -19,16 +19,18 @@ function MochaReporter(runner, options) {
 
     runner.on(EVENT_TEST_PASS, function (test) {
         passedTests.push({
+            //file: "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/nedb/test/db.test.js", // para o nedb
             file: test.file,
             title: test.fullTitle()
         });
     });
 
     runner.on(EVENT_RUN_END, function () {
-        console.log(`\n${runner.stats.tests} tests were found!`);
-        console.log(`${runner.stats.passes} passed and ${runner.stats.failures} failed.`);
+        //console.log(`\n${runner.stats.tests} tests were found!`);
+        //console.log(`${runner.stats.passes} passed and ${runner.stats.failures} failed.`);
         //console.log('mocha ends: %d-%d / %d', runner.stats.passes, runner.stats.failures, runner.stats.tests);
 
+        console.log("o destination eh: ", destinationCopyFolder);
         let passedTestsJsonPath = destinationCopyFolder + "passingTests.json.log";
         fs.writeFileSync(passedTestsJsonPath, JSON.stringify(passedTests, null, 4), 'utf8');
     });
