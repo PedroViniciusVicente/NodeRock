@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const Mocha = require('mocha');
+const path = require('path');
 
 const destinationCopyFolder = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
 
@@ -16,6 +17,10 @@ function MochaReporter(runner, options) {
     Base.call(this, runner, options);
 
     let passedTests = [];
+    const destinationFolder = options.reporterOptions && options.reporterOptions.pathProjectFolder 
+        ? options.reporterOptions.pathProjectFolder 
+        : __dirname; // Usa o diretório atual como fallback
+
 
     runner.on(EVENT_TEST_PASS, function (test) {
         passedTests.push({
@@ -30,9 +35,15 @@ function MochaReporter(runner, options) {
         //console.log(`${runner.stats.passes} passed and ${runner.stats.failures} failed.`);
         //console.log('mocha ends: %d-%d / %d', runner.stats.passes, runner.stats.failures, runner.stats.tests);
 
-        console.log("o destination eh: ", destinationCopyFolder);
-        let passedTestsJsonPath = destinationCopyFolder + "passingTests.json.log";
-        fs.writeFileSync(passedTestsJsonPath, JSON.stringify(passedTests, null, 4), 'utf8');
+        // console.log("\nCHEGOU O PATH PARA CRIAR O PASSINGTESTS.JSON.LOG:", PASSING_TESTS_PATH);
+        const PASSING_TESTS_PATH = path.join(destinationFolder, "NodeRock_Info", "passingTests.json.log");
+        fs.writeFileSync(PASSING_TESTS_PATH, JSON.stringify(passedTests, null, 4), 'utf8');
+
+        /*
+        ** console.log("o destination eh: ", destinationCopyFolder);
+        ** let passedTestsJsonPath = destinationCopyFolder + "passingTests.json.log";
+        ** fs.writeFileSync(passedTestsJsonPath, JSON.stringify(passedTests, null, 4), 'utf8');
+        */
     });
 }
 module.exports = MochaReporter;

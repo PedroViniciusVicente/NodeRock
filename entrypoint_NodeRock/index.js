@@ -24,7 +24,7 @@ if(rodarTestesCompleto) {
 
 
     // 2. Treatments and Path Verifications to Get the test names
-    const tests = getTestsNames(chosenProject.pathProjectFolder, chosenProject.testFile);
+    const tests = getTestsNames(chosenProject.pathProjectFolder, chosenProject.testFile, chosenProject.parameters);
 
     //console.log(tests.testsFullNameList);
     // for(let i = 0; i < tests.testsFullNameList.length; i++) {

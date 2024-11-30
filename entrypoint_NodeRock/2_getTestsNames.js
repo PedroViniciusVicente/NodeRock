@@ -3,30 +3,46 @@
 const fs = require('fs');
 const path = require('path');
 const shell = require('shelljs');
+const config = require('./NodeRockConfig.js');
+
 
 const sourceCopyPath = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/MyFunctionCallAnalysis/logHooks.json";
 const destinationCopyFolder = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
-let passedTestsJsonPath = destinationCopyFolder + "passingTests.json.log"
 
-const pathRaizNodeRock = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource";
 const CUSTOM_REPORTER = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/entrypoint_NodeRock/mochaReporter.js";
 
-function getTestsNames(pathProjectFolder, testFile) {
+function getTestsNames(pathProjectFolder, testFile, parameters) {
     
+    const NODEROCK_INFO_PATH = path.join(pathProjectFolder, "NodeRock_Info");
+
+
+    if (!fs.existsSync(NODEROCK_INFO_PATH)) {
+
+        console.log(`\nCreating NodeRock_Info folder in ${pathProjectFolder}\n`);
+        fs.mkdirSync(NODEROCK_INFO_PATH);
+
+    } else {
+        console.log(`\nNodeRock_Info folder already exists in ${pathProjectFolder}\n`);
+    }
+
     shell.rm('-rf', destinationCopyFolder);
     shell.mkdir(destinationCopyFolder);
 
 
-    console.log(`Buscando os testes em: ${pathProjectFolder} / ${testFile}`);
+    const PASSING_TESTS_PATH = path.join(pathProjectFolder, "NodeRock_Info", "passingTests.json.log");
+    if (!fs.existsSync(PASSING_TESTS_PATH)) {
 
-    shell.cd(`${pathProjectFolder}`);
+        console.log(`\nCreating the PassingTests.json.log in: ${PASSING_TESTS_PATH}\n`);
+        shell.cd(`${pathProjectFolder}`);
+        let out = shell.exec(`npx mocha ${testFile} --recursive --exit -R ${CUSTOM_REPORTER} ${parameters} --reporter-options pathProjectFolder=${pathProjectFolder}`, { silent: false });
+        // //shell.exec(`./node_modules/.bin/_mocha --exit -t 20000 test/db.test.js -R ${CUSTOM_REPORTER}`, {silent: false}); // SOMENTE PARA O NEDB
+        shell.cd(`${config.NODEROCK_ROOT_PATH}`);
 
-    let out = shell.exec(`npx mocha ${testFile} --recursive --exit -R ${CUSTOM_REPORTER}`, { silent: false });
-    //shell.exec(`./node_modules/.bin/_mocha --exit -t 20000 test/db.test.js -R ${CUSTOM_REPORTER}`, {silent: false}); // para o nedb
+    } else {
+        console.log(`Using the existing PassingTests.json.log in: ${PASSING_TESTS_PATH}\n`);
+    }
 
-    shell.cd(`${pathRaizNodeRock}`);
-
-    const testsJSON = fs.readFileSync(passedTestsJsonPath, 'utf8');
+    const testsJSON = fs.readFileSync(PASSING_TESTS_PATH, 'utf8');
     const testsObject = JSON.parse(testsJSON);
 
 
@@ -60,9 +76,9 @@ function getTestsNames(pathProjectFolder, testFile) {
     // Adaptando os nomes dos testes e removendo caracteres especiais
     // SUGESTAO: TALVEZ SEJA NECESSARIO FAZER ESSAS MESMAS ALTERACOES NAS STRINGS DOS TESTES QUE JA SAO SABIDOS COMO TENDO EVENT RACE NO 1_chosenProject.js
     for(let i = 0; i < testsFullNameList.length; i++) {
+        
         testsFullNameList[i] = `"` + testsFullNameList[i] + `"`;
         testsFullNameList[i] = testsFullNameList[i].replace(/\s/g, '\\ '); // Adicionando "\" antes dos espacos
-
         testsFullNameList[i] = testsFullNameList[i].replace(/['`+\-()<>[\],]/g, '.*');
     }
 
