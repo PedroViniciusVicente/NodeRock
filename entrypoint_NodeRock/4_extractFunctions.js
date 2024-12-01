@@ -2,136 +2,144 @@
 
 
 const fs = require('fs');
+const path = require('path');
 
-function extractFunctions(testsRespectiveFile) {
+function extractFunctions(pathProjectFolder, testsRespectiveFile) {
     console.log("\nGerando a lista com todas as funcoes presentes");
 
-    
+    const NODEROCK_INFO_PATH = path.join(pathProjectFolder, "NodeRock_Info");
+    const NODEROCK_INFO_TRACES_PATH = path.join(pathProjectFolder, "NodeRock_Info", "tracesFolder");
+    const NODEROCK_INFO_FUNCTIONS_PATH = path.join(pathProjectFolder, "NodeRock_Info", "functionsFolder");
 
-    try {
-        const diretorio = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
-        const notFilteredFiles = fs.readdirSync(diretorio);
+    if (!fs.existsSync(NODEROCK_INFO_FUNCTIONS_PATH)) {
 
-        // Filtrar para ler apenas os arquivos de nome tracesFromIt_x.json;
-        const regex = /^tracesFromIt_\d+\.json$/;
-        const files = notFilteredFiles.filter(file => regex.test(file));
+        console.log(`\nCreating NodeRock_Info/functionsFolder in ${pathProjectFolder}\n`);
+        fs.mkdirSync(NODEROCK_INFO_FUNCTIONS_PATH);
+        
+        try {
+            const files = fs.readdirSync(NODEROCK_INFO_TRACES_PATH);
 
+            for(let i = 0; i < files.length; i++) {
 
-        let destinationFile = "";
-        let pathExtractFile = "";
+                // Antes, precisamos pegar quais são as linhas dos "describe" ou "it" para que eles nao interfiram na contagem de callbacks do teste
+                const linhas = fs.readFileSync(testsRespectiveFile[i], 'utf-8').split('\n');
 
-        for(let i = 0; i < files.length; i++) {
+                const resultado = linhas
+                    .map((linha, index) => ({ linha: linha.trim(), numero: index + 1 }))
+                    .filter(l => l.linha.startsWith('it(') || l.linha.startsWith('describe('));
 
-            // Antes, precisamos pegar quais são as linhas dos "describe" ou "it" para que eles nao interfiram na contagem de callbacks do teste
-            const linhas = fs.readFileSync(testsRespectiveFile[i], 'utf-8').split('\n');
+                // console.log("Linhas para excluir do teste: ", i);
+                // for(let j = 0; j < resultado.length; j++) {
+                //     console.log(resultado[j].numero);
+                // }
 
-            const resultado = linhas
-                .map((linha, index) => ({ linha: linha.trim(), numero: index + 1 }))
-                .filter(l => l.linha.startsWith('it(') || l.linha.startsWith('describe('));
-
-            // console.log("Linhas para excluir do teste: ", i);
-            // for(let j = 0; j < resultado.length; j++) {
-            //     console.log(resultado[j].numero);
-            // }
-
-            const numerosLinhas = resultado.map(teste => teste.numero); // Extrair os números das linhas
+                const numerosLinhas = resultado.map(teste => teste.numero); // Extrair os números das linhas
 
 
+                const functionFileName = "functionsFromTest_" + i + ".json";
+                const destinationFile = path.join(NODEROCK_INFO_FUNCTIONS_PATH, functionFileName);
 
-            destinationFile = diretorio + "functionsFromTest_" + i + ".json";
+                console.log(`${i+1}/${files.length}. Selecionando funcoes e calculando delays de Callbacks do arquivo: ${destinationFile}`);
 
-            console.log(`${i+1}/${files.length}. Selecionando funcoes e calculando delays de Callbacks do arquivo: ${destinationFile}`);
-
-            fs.writeFileSync(destinationFile, '[\n');
+                fs.writeFileSync(destinationFile, '[\n');
 
 
-            pathExtractFile = diretorio + "tracesFromIt_" + i + ".json";
-            const logHooks = fs.readFileSync(pathExtractFile, 'utf8');
-            const objectsExtractFeatures = JSON.parse(logHooks);
+                const tracesFileName = "tracesFromIt_" + i + ".json";
+                const pathExtractFile = path.join(NODEROCK_INFO_TRACES_PATH, tracesFileName);
 
-            let delayCb = 0;
-            let callbackMade = [];
-            let firstWrite = true;
+                const logHooks = fs.readFileSync(pathExtractFile, 'utf8');
+                const objectsExtractFeatures = JSON.parse(logHooks);
 
-            let DEBUG = false;
-            // LEMBRAR QUE NESSE LACO EH PARA USAR O J
-            for (let j = 0; j < objectsExtractFeatures.length; j++)
-            {
-                if (objectsExtractFeatures[j].Detected_Hook === "invokeFunPre")
+                let delayCb = 0;
+                let callbackMade = [];
+                let firstWrite = true;
+
+                let DEBUG = false;
+                // LEMBRAR QUE NESSE LACO EH PARA USAR O J
+                for (let j = 0; j < objectsExtractFeatures.length; j++)
                 {
-                    if (objectsExtractFeatures[j].Makes_CallBack === true)
+                    if (objectsExtractFeatures[j].Detected_Hook === "invokeFunPre")
                     {
-                        if(DEBUG) {
-                            console.log(`a) A FUNCAO DE IID = ${objectsExtractFeatures[j].iid} FAZ CALLBACKS, E SEU TIMER EH: ${objectsExtractFeatures[j].timer}`);
-                        }
-
-                        // o objeto na posicao k eh o funtionEnter da funcao de callback
-                        // NOTE: UM CALLBACKMADE SERA MARCADO APENAS SE TIVER O RESPECTIVO FUNCTIONENTER DO INVOKEFUNPRE
-                        for (let k = j; k < objectsExtractFeatures.length; k++)
+                        if (objectsExtractFeatures[j].Makes_CallBack === true)
                         {
-                            if (objectsExtractFeatures[k].Detected_Hook === "functionEnter" &&
-                                objectsExtractFeatures[k].is_Callback === true &&
-                                objectsExtractFeatures[k].valueCallerIID === objectsExtractFeatures[j].iid)
+                            if(DEBUG) {
+                                console.log(`a) A FUNCAO DE IID = ${objectsExtractFeatures[j].iid} FAZ CALLBACKS, E SEU TIMER EH: ${objectsExtractFeatures[j].timer}`);
+                            }
+
+                            // o objeto na posicao k eh o funtionEnter da funcao de callback
+                            // NOTE: UM CALLBACKMADE SERA MARCADO APENAS SE TIVER O RESPECTIVO FUNCTIONENTER DO INVOKEFUNPRE
+                            for (let k = j; k < objectsExtractFeatures.length; k++)
                             {
+                                if (objectsExtractFeatures[k].Detected_Hook === "functionEnter" &&
+                                    objectsExtractFeatures[k].is_Callback === true &&
+                                    objectsExtractFeatures[k].valueCallerIID === objectsExtractFeatures[j].iid)
+                                {
 
-                                if(DEBUG) {
-                                    console.log(`b) A FUNCAO DE IID = ${objectsExtractFeatures[k].iid} EH O CALLBACK DA ${objectsExtractFeatures[j].iid}\n`);
+                                    if(DEBUG) {
+                                        console.log(`b) A FUNCAO DE IID = ${objectsExtractFeatures[k].iid} EH O CALLBACK DA ${objectsExtractFeatures[j].iid}\n`);
+                                    }
+
+                                    callbackMade.push(objectsExtractFeatures[k].iid);
+                                    delayCb = objectsExtractFeatures[k].timer - objectsExtractFeatures[j].timer;
+
                                 }
-
-                                callbackMade.push(objectsExtractFeatures[k].iid);
-                                delayCb = objectsExtractFeatures[k].timer - objectsExtractFeatures[j].timer;
-
                             }
                         }
-                    }
-                    // else { // funcoes invocadas que nao fazem callback
-                    //     for (let k = 0; k < objectsExtractFeatures.length; k++)
-                    //     {
-                    //         if (objectsExtractFeatures[k].Detected_Hook === "invokeFun" && 
-                    //             objectsExtractFeatures[k].iid === objectsExtractFeatures[j].iid)
-                    //         {
-                    //             delayCb = objectsExtractFeatures[k].timer - objectsExtractFeatures[j].timer;
-                    //         }
-                    //     }
-                    // }
-                    
-                    let callbackFromItOrDescribe = false;
-                    if (objectsExtractFeatures[j].File_Path === testsRespectiveFile[i] && numerosLinhas.includes(objectsExtractFeatures[j].loc.start.line)) {
-                        callbackFromItOrDescribe = true;
+                        // else { // funcoes invocadas que nao fazem callback
+                        //     for (let k = 0; k < objectsExtractFeatures.length; k++)
+                        //     {
+                        //         if (objectsExtractFeatures[k].Detected_Hook === "invokeFun" && 
+                        //             objectsExtractFeatures[k].iid === objectsExtractFeatures[j].iid)
+                        //         {
+                        //             delayCb = objectsExtractFeatures[k].timer - objectsExtractFeatures[j].timer;
+                        //         }
+                        //     }
+                        // }
+                        
+                        let callbackFromItOrDescribe = false;
+                        if (objectsExtractFeatures[j].File_Path === testsRespectiveFile[i] && numerosLinhas.includes(objectsExtractFeatures[j].loc.start.line)) {
+                            callbackFromItOrDescribe = true;
+                        }
+
+                        const ObjectLogMessage = {
+                            "Name": objectsExtractFeatures[j].Function_Name,
+                            "iid": objectsExtractFeatures[j].iid,
+                            "File_Path": objectsExtractFeatures[j].File_Path,
+                            "loc": objectsExtractFeatures[j].loc,
+                            "delayCb_ms": delayCb,
+                            //"Args": objectsExtractFeatures[j].args,
+                            "Called_iid": callbackMade,
+                            "callbackFromItOrDescribe": callbackFromItOrDescribe,
+                        };
+                        callbackMade = [] // zerando o vetor
+                        delayCb = 0;
+                
+                        const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
+                        if(firstWrite) {
+                            fs.writeFileSync(destinationFile, stringJSON, {flag:'a'});
+                            firstWrite = false;
+                        }
+                        else {
+                            fs.writeFileSync(destinationFile, ',\n' + stringJSON, {flag:'a'});
+                        }
                     }
 
-                    const ObjectLogMessage = {
-                        "Name": objectsExtractFeatures[j].Function_Name,
-                        "iid": objectsExtractFeatures[j].iid,
-                        "File_Path": objectsExtractFeatures[j].File_Path,
-                        "loc": objectsExtractFeatures[j].loc,
-                        "delayCb_ms": delayCb,
-                        //"Args": objectsExtractFeatures[j].args,
-                        "Called_iid": callbackMade,
-                        "callbackFromItOrDescribe": callbackFromItOrDescribe,
-                    };
-                    callbackMade = [] // zerando o vetor
-                    delayCb = 0;
-            
-                    const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
-                    if(firstWrite) {
-                        fs.writeFileSync(destinationFile, stringJSON, {flag:'a'});
-                        firstWrite = false;
+                    if(j === objectsExtractFeatures.length - 1) {
+                        fs.writeFileSync(destinationFile, '\n]', {flag:'a'});
                     }
-                    else {
-                        fs.writeFileSync(destinationFile, ',\n' + stringJSON, {flag:'a'});
-                    }
-                }
-
-                if(j === objectsExtractFeatures.length - 1) {
-                    fs.writeFileSync(destinationFile, '\n]', {flag:'a'});
                 }
             }
+
+        } catch(error) {
+            console.error("Erro foi detectado no gerando a lista das funcoes: ", error);
         }
 
-    } catch(error) {
-        console.error("Erro foi detectado no gerando a lista das funcoes: ", error);
+    } else {
+        console.log(`\nNodeRock_Info/functionsFolder already exists in ${pathProjectFolder}\n`);
     }
+
+
+
 }
 
 module.exports = { extractFunctions };

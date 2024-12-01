@@ -15,6 +15,8 @@ import path from 'path'; // lib to get full path in file name
 import { stringify } from 'flatted'; // lib to remove json circular reference with objects
 import { parse } from 'flatted';
 
+//const config = require('../../../../entrypoint_NodeRock/NodeRockConfig.js');
+
 if(false) { // temporary instructions to remember to try later the use of parse from 'flatted'
     const jsonString = 'object that received stringify';
     const parsedObj = parse(jsonString);

@@ -33,24 +33,24 @@ if(rodarTestesCompleto) {
 
 
     // 3. Executing the tests individually and placing theirs traces in collectedTracesFolder
-    testsTotalDuration = executeTests(tests.testsFullNameList, tests.testsRespectiveFile, chosenProject);
+    testsTotalDuration = executeTests(chosenProject.pathProjectFolder, tests.testsFullNameList, tests.testsRespectiveFile, chosenProject);
     // for(let i = 0; i < testsTotalDuration.length; i++) {
     //     console.log("Duracao foi: ", testsTotalDuration[i]);
     // }
     // 4. Extracting the functions from the traces and calculating their callback times
-    extractFunctions(tests.testsRespectiveFile);
+    extractFunctions(chosenProject.pathProjectFolder, tests.testsRespectiveFile);
 
     // 5. Extracting the main features from each test
-    extractFeatures(tests.testsFullNameList);
+    extractFeatures(chosenProject.pathProjectFolder, tests.testsFullNameList);
 
     // 6. Normalizing the extracted features before applying the ML methods
-    normalizeFeatures();
+    normalizeFeatures(chosenProject.pathProjectFolder);
 
     // 7. Labeling the extracted features before applying the ML methods
-    labelFeatures(chosenProject.raceConditionTests);
+    labelFeatures(chosenProject.pathProjectFolder, chosenProject.raceConditionTests);
 
     // 8. Generating the .csv file based on the .json files
-    generateCSV(chosenProject.benchmarkName, tests.testsRespectiveFile, testsTotalDuration);
+    generateCSV(chosenProject.pathProjectFolder, chosenProject.benchmarkName, tests.testsRespectiveFile, testsTotalDuration);
 }
 else {
     // so dar o node ./dist/bin/nodeprof.js /home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/agentkeepalive-23/ fuzz_test/triggerRace

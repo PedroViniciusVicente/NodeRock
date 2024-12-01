@@ -138,8 +138,8 @@ function chosenProjectFunction() {
         case "ARC":
             benchmarkName = "node-archiver";
             pathProjectFolder = path.join(config.BENCHMARK_PATH, "datasetDoNodeRacer/exploratory/node-archiver/");
-            // testFile = "test/archiver.js";
-            testFile = "test/"
+            testFile = "test/archiver.js";
+            // testFile = "test/"
             parameters = `--exit -t 10000`;
             raceConditionTests.push("archiver api #errors should allow continue on stat failing");
             break;

@@ -1,17 +1,20 @@
 // 8. Generating the .csv file based on the .json files
 
 const fs = require('fs');
+const path = require('path');
 
-const pathRawFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesRaw.json";
-const pathNormalizedFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesNormalized.json";
 
-function generateCSV(benchmarkName, testsRespectiveFile, testsTotalDuration) {
+function generateCSV(pathProjectFolder, benchmarkName, testsRespectiveFile, testsTotalDuration) {
     console.log("\nGerando o arquivo .CSV:");
 
-    const rawFeaturesJSON = fs.readFileSync(pathRawFeatures, 'utf8');
+    const NODEROCK_INFO_EXTRACTED_RAW_PATH = path.join(pathProjectFolder, "NodeRock_Info", "extractedFeaturesRaw.json");
+    const NODEROCK_INFO_EXTRACTED_NORMALIZED_PATH = path.join(pathProjectFolder, "NodeRock_Info", "extractedFeaturesNormalized.json");
+
+
+    const rawFeaturesJSON = fs.readFileSync(NODEROCK_INFO_EXTRACTED_RAW_PATH, 'utf8');
     const rawFeaturesObject = JSON.parse(rawFeaturesJSON);
 
-    const normalizedFeaturesJSON = fs.readFileSync(pathNormalizedFeatures, 'utf8');
+    const normalizedFeaturesJSON = fs.readFileSync(NODEROCK_INFO_EXTRACTED_NORMALIZED_PATH, 'utf8');
     const normalizedFeaturesObject = JSON.parse(normalizedFeaturesJSON);
 
  
@@ -45,9 +48,41 @@ function generateCSV(benchmarkName, testsRespectiveFile, testsTotalDuration) {
     // Unir as linhas em uma string com quebras de linha
     const dataCSV = lines.join('\n');
 
+    const COLLECTED_CSV_PATH = path.resolve(__dirname, "../collectedCsvFolder");
+
+    if (!fs.existsSync(COLLECTED_CSV_PATH)) {
+
+        console.log(`\nCreating the collectedCsvFolder\n`);
+        fs.mkdirSync(COLLECTED_CSV_PATH);
+
+    } else {
+        console.log(`\nthe collectedCsvFolder already exists\n`);
+    }
+
     // Writing the CSV File
-    const pathCSV = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/data.csv";
-    fs.writeFileSync(pathCSV, dataCSV);
+    const csvName = benchmarkName + ".csv";
+    const pathCSV = path.resolve(__dirname, "../collectedCsvFolder/data.csv");
+    if (!fs.existsSync(pathCSV)) {
+
+        console.log(`\nCreating the CSV file in collectedCsvFolder\n`);
+        fs.writeFileSync(pathCSV, dataCSV);
+
+    } else {
+        console.log(`\nthe CSV file in the collectedCsvFolder already exists\n`);
+    }
+    
+
+    const NODEROCK_INFO_CSV_PATH = path.join(pathProjectFolder, "NodeRock_Info", csvName);
+
+    if (!fs.existsSync(NODEROCK_INFO_CSV_PATH)) {
+
+        console.log(`\nCreating the CSV file in NodeRock_Info\n`);
+        fs.writeFileSync(NODEROCK_INFO_CSV_PATH, dataCSV);
+        
+    } else {
+        console.log(`\nthe CSV file already exists in NodeRock_Info\n`);
+    }
+
 }
 
 module.exports = { generateCSV };

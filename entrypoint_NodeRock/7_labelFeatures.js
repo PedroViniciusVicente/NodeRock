@@ -1,12 +1,14 @@
 // 7. Labeling the extracted features before applying the ML methods
 
 const fs = require('fs');
+const path = require('path');
 
-const pathRawFeatures = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/extractedFeaturesRaw.json";
 
-function labelFeatures(raceConditionTests) {
+function labelFeatures(pathProjectFolder, raceConditionTests) {
 
-    const rawFeaturesJSON = fs.readFileSync(pathRawFeatures, 'utf8');
+    const NODEROCK_INFO_EXTRACTED_RAW_PATH = path.join(pathProjectFolder, "NodeRock_Info", "extractedFeaturesRaw.json");
+
+    const rawFeaturesJSON = fs.readFileSync(NODEROCK_INFO_EXTRACTED_RAW_PATH, 'utf8');
     const rawFeaturesObject = JSON.parse(rawFeaturesJSON);
 
     let raceConditionTestsFound = 0;
@@ -31,7 +33,7 @@ function labelFeatures(raceConditionTests) {
     }
 
     const jsonData = JSON.stringify(rawFeaturesObject, null, 2);
-    fs.writeFileSync(pathRawFeatures, jsonData);
+    fs.writeFileSync(NODEROCK_INFO_EXTRACTED_RAW_PATH, jsonData);
 
 }
 

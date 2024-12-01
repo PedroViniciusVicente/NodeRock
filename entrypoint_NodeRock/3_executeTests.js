@@ -1,55 +1,81 @@
 // 3. Executing the tests individually and placing theirs traces in collectedTracesFolder
 
 const shell = require('shelljs');
+const fs = require('fs');
+const path = require('path');
 
 const sourceCopyPath = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/MyFunctionCallAnalysis/logHooks.json";
-const destinationCopyFolder = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
 
-function executeTests(testsFullNameList, testsRespectiveFile, chosenProject) {
-    let copiedFileName;
+function executeTests(pathProjectFolder, testsFullNameList, testsRespectiveFile, chosenProject) {
 
-    let pathNode_modules = chosenProject.isMocha ? "node_modules/.bin/_mocha" : "node_modules/.bin/jest";
-
-    let semiCompleteCommand;
-    let completCommand;
+    const NODEROCK_INFO_TRACES_PATH = path.join(pathProjectFolder, "NodeRock_Info", "tracesFolder");
+    const NODEROCK_INFO_DURATIONS_PATH = path.join(pathProjectFolder, "NodeRock_Info", "testsDuration.json");
 
     let testsDuration = [];
 
-    console.log("\nExecucao dos testes individualmente:");
-    for(let i = 0; i < testsFullNameList.length; i++) {
-        try {
-            semiCompleteCommand = "node ./dist/bin/nodeprof.js " + chosenProject.pathProjectFolder + " " + pathNode_modules + " " + testsRespectiveFile[i] + " " + chosenProject.parameters;
+    if (!fs.existsSync(NODEROCK_INFO_TRACES_PATH)) {
 
-            // Diferenciando se o teste eh Mocha ou Jest
-            if(chosenProject.isMocha) {
-                completCommand = semiCompleteCommand + " -g " + testsFullNameList[i];
+        console.log(`\nCreating NodeRock_Info/tracesFolder in ${pathProjectFolder}\n`);
+        fs.mkdirSync(NODEROCK_INFO_TRACES_PATH);
+
+        let pathNode_modules = chosenProject.isMocha ? "node_modules/.bin/_mocha" : "node_modules/.bin/jest";
+
+        let semiCompleteCommand;
+        let completCommand;
+
+        console.log("\nExecucao dos testes individualmente:");
+        for(let i = 0; i < testsFullNameList.length; i++) {
+            try {
+                semiCompleteCommand = "node ./dist/bin/nodeprof.js " + chosenProject.pathProjectFolder + " " + pathNode_modules + " " + testsRespectiveFile[i] + " " + chosenProject.parameters;
+
+                // Diferenciando se o teste eh Mocha ou Jest
+                if(chosenProject.isMocha) {
+                    completCommand = semiCompleteCommand + " -g " + testsFullNameList[i];
+                }
+                else {
+                    completCommand = semiCompleteCommand + " --testNamePattern " + testsFullNameList[i];
+                }
+
+                console.log(`\n${i+1}/${testsFullNameList.length}. Executando o teste: ${testsFullNameList[i]}`);
+                console.log("Comando usado foi: ", completCommand);
+
+
+                const stringExecutedTest = shell.exec(completCommand);
+
+                
+                const match = stringExecutedTest.match(/analysis: ([\d.]+)s/);
+                const AnalysisTime = match ? match[1] : null;
+                // console.log("\n\nTEMPO ANALISE EH: ", AnalysisTime);
+                const NumericAnalysisTime = parseFloat(AnalysisTime);
+                testsDuration.push(NumericAnalysisTime);
+
+                let copiedFileName = "tracesFromIt_" + i + ".json";
+                shell.cp(sourceCopyPath, path.join(NODEROCK_INFO_TRACES_PATH, copiedFileName));
+
+            } catch (error) {
+                console.error('Erro executar testes individuais:', error);
+                console.log("Erro ao executar a iteracao do teste individual com i=", i);
             }
-            else {
-                completCommand = semiCompleteCommand + " --testNamePattern " + testsFullNameList[i];
-            }
-
-            console.log(`\n${i+1}/${testsFullNameList.length}. Executando o teste: ${testsFullNameList[i]}`);
-            console.log("Comando usado foi: ", completCommand);
-
-
-            const stringExecutedTest = shell.exec(completCommand);
-
-            const match = stringExecutedTest.match(/analysis: ([\d.]+)s/);
-            const AnalysisTime = match ? match[1] : null;
-
-            // console.log("\n\nTEMPO ANALISE EH: ");
-            // console.log(AnalysisTime);
-            const NumericAnalysisTime = parseFloat(AnalysisTime);
-            testsDuration.push(NumericAnalysisTime);
-
-            copiedFileName = "tracesFromIt_" + i.toString() + ".json";
-            shell.cp(sourceCopyPath, (destinationCopyFolder + copiedFileName));
-        } catch (error) {
-            console.error('Erro executar testes individuais:', error);
-            console.log("Erro ao executar a iteracao do teste individual com i=", i);
         }
+
+        // Saving the duration of the tests in a file
+        if (!fs.existsSync(NODEROCK_INFO_DURATIONS_PATH)) {
+
+            console.log(`\nCreating NodeRock_Info/testsDuration.json in ${pathProjectFolder}\n`);
+            fs.writeFileSync(NODEROCK_INFO_DURATIONS_PATH, JSON.stringify(testsDuration));
+
+        } else {
+            console.log(`\nNodeRock_Info/testsDuration.json  already exists in ${pathProjectFolder}\n`);
+        }
+
+    } else {
+        console.log(`\nNodeRock_Info/tracesFolder already exists in ${pathProjectFolder}\n`);
     }
-    return testsDuration;
+
+
+    const testsDurationRecovered = JSON.parse(fs.readFileSync(NODEROCK_INFO_DURATIONS_PATH, 'utf8'));
+
+    return testsDurationRecovered;
 }
 
 module.exports = { executeTests };
