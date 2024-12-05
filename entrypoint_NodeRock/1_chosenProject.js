@@ -13,7 +13,7 @@ function chosenProjectFunction() {
     let benchmarkName = "";
 
 
-    let chosenProject = "ARC";
+    let chosenProject = "MeuTestAwait";
 
     switch (chosenProject) {
 
@@ -68,6 +68,13 @@ function chosenProjectFunction() {
             testFile = "test/test.js";
             break;
 
+        case "MeuTestAwait":
+            benchmarkName = "MeuTestAwait";
+            console.log("Executando analise do teste com await para medir o tempo de functions com tempo > 100 ms");
+            pathProjectFolder = path.join(config.BENCHMARK_PATH, "meuDatasetParaTestes/coletarTempoFunctions");
+            testFile = "test/";
+            parameters = "-t 50000";
+            break;
 
         // -=+=- 2) known-bugs -=+=-
 

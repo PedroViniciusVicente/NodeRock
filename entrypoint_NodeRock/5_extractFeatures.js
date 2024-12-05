@@ -58,15 +58,15 @@ function extractFeatures(pathProjectFolder, testsFullNameList) {
 
                 for(let j = 0; j < objectsExtractFeaturesAsyncAwait.length; j++) {
 
-                    if(objectsExtractFeaturesAsyncAwait[j].Async_Hook_Id > max_asynchook_id) {
+                    if (objectsExtractFeaturesAsyncAwait[j].Async_Hook_Id > max_asynchook_id) {
                         max_asynchook_id = objectsExtractFeaturesAsyncAwait[j].Async_Hook_Id;
                     }
 
-                    if(objectsExtractFeaturesAsyncAwait[j].Detected_Hook === "awaitPre") {
+                    if (objectsExtractFeaturesAsyncAwait[j].Detected_Hook === "awaitPre") {
                         countAwaits++;
                     }
 
-                    if(objectsExtractFeaturesAsyncAwait[j].Detected_Hook === "asyncFunctionEnter") {
+                    if (objectsExtractFeaturesAsyncAwait[j].Detected_Hook === "asyncFunctionEnter") {
                         countAsyncFunctions++;
                         asyncLines += objectsExtractFeaturesAsyncAwait[j].loc.end.line - objectsExtractFeaturesAsyncAwait[j].loc.start.line;
                     }

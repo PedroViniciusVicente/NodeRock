@@ -1,4 +1,6 @@
 // Customized Mocha report to collect all passing tests
+// PRECISA REVER COMO PEGAR O DESTINATIONFOLDER DIRETO PRA NÃO PRECISAR ESCREVER ARQUIVO TEMPORARIO EM: 
+// /home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/temporaryPassingTests.json.log
 
 const fs = require('fs');
 const Mocha = require('mocha');
@@ -17,9 +19,9 @@ function MochaReporter(runner, options) {
     Base.call(this, runner, options);
 
     let passedTests = [];
-    const destinationFolder = options.reporterOptions && options.reporterOptions.pathProjectFolder 
-        ? options.reporterOptions.pathProjectFolder 
-        : __dirname; // Usa o diretório atual como fallback
+    // const destinationFolder = options.reporterOptions && options.reporterOptions.pathProjectFolder 
+    //     ? options.reporterOptions.pathProjectFolder 
+    //     : __dirname; // Usa o diretório atual como fallback
 
 
     runner.on(EVENT_TEST_PASS, function (test) {
@@ -31,13 +33,16 @@ function MochaReporter(runner, options) {
     });
 
     runner.on(EVENT_RUN_END, function () {
-        //console.log(`\n${runner.stats.tests} tests were found!`);
-        //console.log(`${runner.stats.passes} passed and ${runner.stats.failures} failed.`);
+        // const PASSING_TESTS_PATH = path.join(destinationFolder, "NodeRock_Info", "passingTests.json.log");
+
+        // console.log(`\n${runner.stats.tests} tests were found!`);
+        // console.log(`${runner.stats.passes} passed and ${runner.stats.failures} failed.`);
         //console.log('mocha ends: %d-%d / %d', runner.stats.passes, runner.stats.failures, runner.stats.tests);
 
-        // console.log("\nCHEGOU O PATH PARA CRIAR O PASSINGTESTS.JSON.LOG:", PASSING_TESTS_PATH);
-        const PASSING_TESTS_PATH = path.join(destinationFolder, "NodeRock_Info", "passingTests.json.log");
-        fs.writeFileSync(PASSING_TESTS_PATH, JSON.stringify(passedTests, null, 4), 'utf8');
+        console.log("ACHOU O: ", JSON.stringify(passedTests, null, 4));
+        console.log("\nCHEGOU O PATH PARA CRIAR O PASSINGTESTS.JSON.LOG:", destinationCopyFolder);
+
+        fs.writeFileSync(destinationCopyFolder + "temporaryPassingTests.json.log", JSON.stringify(passedTests, null, 4), 'utf8');
 
         /*
         ** console.log("o destination eh: ", destinationCopyFolder);

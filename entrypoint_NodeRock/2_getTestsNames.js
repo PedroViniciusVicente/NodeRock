@@ -37,13 +37,18 @@ function getTestsNames(pathProjectFolder, testFile, parameters) {
         // //shell.exec(`./node_modules/.bin/_mocha --exit -t 20000 test/db.test.js -R ${CUSTOM_REPORTER}`, {silent: false}); // SOMENTE PARA O NEDB
         shell.cd(`${config.NODEROCK_ROOT_PATH}`);
 
+        const testsJSON = fs.readFileSync(path.join(destinationCopyFolder, "temporaryPassingTests.json.log"), 'utf8');
+        const testsObject = JSON.parse(testsJSON);
+
+        fs.writeFileSync(PASSING_TESTS_PATH, JSON.stringify(testsObject, null, 4), 'utf8');
+
     } else {
         console.log(`Using the existing PassingTests.json.log in: ${PASSING_TESTS_PATH}\n`);
     }
 
+    
     const testsJSON = fs.readFileSync(PASSING_TESTS_PATH, 'utf8');
     const testsObject = JSON.parse(testsJSON);
-
 
     // Obtendo a quantidade de arquivos únicos
     const uniqueFilesNames = new Set();
