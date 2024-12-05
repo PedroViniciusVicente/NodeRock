@@ -35,10 +35,20 @@ function extractFeatures(pathProjectFolder, testsFullNameList) {
                 let countInvokeFunPre = objectsExtractFeatures.length;
                 let countInvokesWithCallback = 0;
                 let totalDelay = 0;
+                let delaysGreaterThan100 = 0;
+                let invokesIntervalGreaterThan100 = 0;
                 for(let j = 0; j < objectsExtractFeatures.length; j++) {
+
+                    if(objectsExtractFeatures[j].Invokes_Interval_ms > 100) {
+                        invokesIntervalGreaterThan100++;
+                    }
+
                     if(objectsExtractFeatures[j].Called_iid.length > 0 && objectsExtractFeatures[j].callbackFromItOrDescribe === false) {
                         countInvokesWithCallback++;
                         totalDelay += objectsExtractFeatures[j].delayCb_ms;
+                        if(objectsExtractFeatures[j].delayCb_ms > 100) {
+                            delaysGreaterThan100++;
+                        }
                     }
                 }
                 let avgDelay = 0;
@@ -88,8 +98,10 @@ function extractFeatures(pathProjectFolder, testsFullNameList) {
                     "File_Extract_Features": pathExtractFile,
                     "InvokeFunPre_Count": countInvokeFunPre,
                     "Invokes_with_callback": countInvokesWithCallback,
-                    "Total_delay_ms": totalDelay,
+                    "Cbs_Total_delay_ms": totalDelay,
                     "Average_delay_ms": avgDelay, // total_delay / invokes_with_callback
+                    "Cb_Delays_Greater_Than_100_ms": delaysGreaterThan100,
+                    "InvokesInterval_Greater_Than_100_ms": invokesIntervalGreaterThan100,
                     "AsyncFunction_Count": countAsyncFunctions,
                     "AsyncFunction_lines": asyncLines,
                     "Await_Count": countAwaits,

@@ -69,6 +69,12 @@ function normalizeFeatures(pathProjectFolder) {
                     if (min !== max) {
                         normalizedItem[key] = normalizeValue(value, min, max);
                     }
+                    else if (min === max && min !== 0) { // os valores sao iguais e diferentes de zero
+                        normalizedItem[key] = 1;
+                    }
+                    else { // os valores sao iguais a zero
+                        normalizedItem[key] = 0;
+                    }
                 }
             }
             

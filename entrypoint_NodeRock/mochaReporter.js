@@ -39,8 +39,8 @@ function MochaReporter(runner, options) {
         // console.log(`${runner.stats.passes} passed and ${runner.stats.failures} failed.`);
         //console.log('mocha ends: %d-%d / %d', runner.stats.passes, runner.stats.failures, runner.stats.tests);
 
-        console.log("ACHOU O: ", JSON.stringify(passedTests, null, 4));
-        console.log("\nCHEGOU O PATH PARA CRIAR O PASSINGTESTS.JSON.LOG:", destinationCopyFolder);
+        // console.log("ACHOU O: ", JSON.stringify(passedTests, null, 4));
+        // console.log("\nCHEGOU O PATH PARA CRIAR O PASSINGTESTS.JSON.LOG:", destinationCopyFolder);
 
         fs.writeFileSync(destinationCopyFolder + "temporaryPassingTests.json.log", JSON.stringify(passedTests, null, 4), 'utf8');
 

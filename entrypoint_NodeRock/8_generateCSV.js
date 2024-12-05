@@ -19,9 +19,14 @@ function generateCSV(pathProjectFolder, benchmarkName, testsRespectiveFile, test
 
  
     const columns = ['BenchmarkName', 'TestFilePath', 'TestCaseName',
-        'InvokeFunPre_Count_Raw', 'InvokeFunPre_Count_Normalized','Invokes_with_callback_Raw', 'Invokes_with_callback_Normalized',
-        'Total_delay_ms_Raw', 'Total_delay_ms_Normalized', 'AsyncFunction_Count_Raw', 'AsyncFunction_Count_Normalized',
-        'Await_Count_Raw', 'Await_Count_Normalized', 'Unique_Asynchook_ids_Raw', 'Unique_Asynchook_ids_Normalized',
+        'InvokeFunPre_Count_Raw', 'InvokeFunPre_Count_Normalized',
+        'Invokes_with_callback_Raw', 'Invokes_with_callback_Normalized',
+        'Cbs_Total_delay_ms_Raw', 'Cbs_Total_delay_ms_Normalized',
+        'Cb_Delays_Greater_Than_100_ms_Raw', 'Cb_Delays_Greater_Than_100_ms_Normalized',
+        'InvokesInterval_Greater_Than_100_ms_Raw', 'InvokesInterval_Greater_Than_100_ms_Normalized',
+        'AsyncFunction_Count_Raw', 'AsyncFunction_Count_Normalized',
+        'Await_Count_Raw', 'Await_Count_Normalized',
+        'Unique_Asynchook_ids_Raw', 'Unique_Asynchook_ids_Normalized',
         'Total_duration_s', 'HasEventRace']
     // adicionar: funcoes com > 100 ms de delay; tempo total do teste; e se o teste falhou ou foi sucesso
 
@@ -36,7 +41,9 @@ function generateCSV(pathProjectFolder, benchmarkName, testsRespectiveFile, test
         const line = [benchmarkName, testsRespectiveFile[i], rawFeaturesObject[i].Test_Name,
         rawFeaturesObject[i].InvokeFunPre_Count, normalizedFeaturesObject[i].InvokeFunPre_Count,
         rawFeaturesObject[i].Invokes_with_callback, normalizedFeaturesObject[i].Invokes_with_callback,
-        rawFeaturesObject[i].Total_delay_ms, normalizedFeaturesObject[i].Total_delay_ms,
+        rawFeaturesObject[i].Cbs_Total_delay_ms, normalizedFeaturesObject[i].Cbs_Total_delay_ms,
+        rawFeaturesObject[i].Cb_Delays_Greater_Than_100_ms, normalizedFeaturesObject[i].Cb_Delays_Greater_Than_100_ms,
+        rawFeaturesObject[i].InvokesInterval_Greater_Than_100_ms, normalizedFeaturesObject[i].InvokesInterval_Greater_Than_100_ms,
         rawFeaturesObject[i].AsyncFunction_Count, normalizedFeaturesObject[i].AsyncFunction_Count,
         rawFeaturesObject[i].Await_Count, normalizedFeaturesObject[i].Await_Count,
         rawFeaturesObject[i].Unique_Asynchook_ids, normalizedFeaturesObject[i].Unique_Asynchook_ids,

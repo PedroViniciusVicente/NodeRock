@@ -24,6 +24,7 @@ function extractFunctions(pathProjectFolder, testsRespectiveFile) {
                 // Antes, precisamos pegar quais são as linhas dos "describe" ou "it" para que eles nao interfiram na contagem de callbacks do teste
                 const linhas = fs.readFileSync(testsRespectiveFile[i], 'utf-8').split('\n');
 
+                // Desconsidera as funcoes do it e do Describe
                 const resultado = linhas
                     .map((linha, index) => ({ linha: linha.trim(), numero: index + 1 }))
                     .filter(l => l.linha.startsWith('it(') || l.linha.startsWith('describe('));
@@ -51,6 +52,7 @@ function extractFunctions(pathProjectFolder, testsRespectiveFile) {
                 const objectsExtractFeatures = JSON.parse(logHooks);
 
                 let delayCb = 0;
+                let invokesInterval = 0;
                 let callbackMade = [];
                 let firstWrite = true;
 
@@ -60,6 +62,16 @@ function extractFunctions(pathProjectFolder, testsRespectiveFile) {
                 {
                     if (objectsExtractFeatures[j].Detected_Hook === "invokeFunPre")
                     {
+                        for(let l = j; l < objectsExtractFeatures.length; l++)
+                        {
+                            if(objectsExtractFeatures[l].Detected_Hook === "invokeFun" && 
+                                objectsExtractFeatures[l].iid === objectsExtractFeatures[j].iid)
+                            {
+                                invokesInterval = objectsExtractFeatures[l].timer - objectsExtractFeatures[j].timer;
+                                break;
+                            }
+                        }
+
                         if (objectsExtractFeatures[j].Makes_CallBack === true)
                         {
                             if(DEBUG) {
@@ -81,7 +93,7 @@ function extractFunctions(pathProjectFolder, testsRespectiveFile) {
 
                                     callbackMade.push(objectsExtractFeatures[k].iid);
                                     delayCb = objectsExtractFeatures[k].timer - objectsExtractFeatures[j].timer;
-
+                                    break;
                                 }
                             }
                         }
@@ -110,6 +122,7 @@ function extractFunctions(pathProjectFolder, testsRespectiveFile) {
                             //"Args": objectsExtractFeatures[j].args,
                             "Called_iid": callbackMade,
                             "callbackFromItOrDescribe": callbackFromItOrDescribe,
+                            "Invokes_Interval_ms": invokesInterval,
                         };
                         callbackMade = [] // zerando o vetor
                         delayCb = 0;
