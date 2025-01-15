@@ -1,0 +1,15 @@
+Node.fz: Fuzzing the Server-Side Event-Driven Architecture
+https://dl.acm.org/doi/10.1145/3064176.3064188
+
+NodeRacer: Event Race Detection for Node.js Applications
+https://ieeexplore.ieee.org/document/9159075
+
+Race Detection for Event-Driven Node.js Applications (NRace)
+https://ieeexplore.ieee.org/document/9678814
+
+NodeRT: Detecting Races in Node.js Applications Practically
+https://dl.acm.org/doi/10.1145/3597926.3598139
+
+
+A comprehensive study on real world concurrency bugs in Node.js (Wang)
+https://ieeexplore.ieee.org/document/8115663

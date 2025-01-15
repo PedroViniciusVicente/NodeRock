@@ -53,13 +53,28 @@ function extractFunctions(pathProjectFolder, testsRespectiveFile) {
 
                 let delayCb = 0;
                 let invokesInterval = 0;
+                // let awaitsInterval = 0;
                 let callbackMade = [];
                 let firstWrite = true;
 
                 let DEBUG = false;
                 // LEMBRAR QUE NESSE LACO EH PARA USAR O J
+                
                 for (let j = 0; j < objectsExtractFeatures.length; j++)
                 {
+                    // if (objectsExtractFeatures[j].Detected_Hook === "awaitPre")
+                    // {
+                    //     for(let l = j; l < objectsExtractFeatures.length; l++)
+                    //     {
+                    //         if(objectsExtractFeatures[l].Detected_Hook === "awaitPost" && 
+                    //             objectsExtractFeatures[l].iid === objectsExtractFeatures[j].iid)
+                    //         {
+                    //             awaitsInterval = objectsExtractFeatures[l].timer - objectsExtractFeatures[j].timer;
+                    //             break;
+                    //         }
+                    //     }
+                    // }
+
                     if (objectsExtractFeatures[j].Detected_Hook === "invokeFunPre")
                     {
                         for(let l = j; l < objectsExtractFeatures.length; l++)

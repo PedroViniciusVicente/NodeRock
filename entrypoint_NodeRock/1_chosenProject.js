@@ -13,7 +13,7 @@ function chosenProjectFunction() {
     let benchmarkName = "";
 
 
-    let chosenProject = "MeuTestAwait";
+    let chosenProject = "MeuTestVerificarRuntimes";
 
     switch (chosenProject) {
 
@@ -45,7 +45,9 @@ function chosenProjectFunction() {
             raceConditionTests.push("1. Testes da Primeira funcao somarEdobrar com x e y positivos");
             break;
 
-        case "MeuTestJest":
+        case "MeuTestJest": 
+        // comando rodar testes jest direto:
+        // node ./dist/bin/nodeprof.js /home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/ node_modules/.bin/jest teste/testandoJest.test.js
             benchmarkName = "MeuTestJest";
             console.log("Executando analise do meu teste simples em Jest");
             pathProjectFolder = path.join(config.BENCHMARK_PATH, "meuDatasetParaTestes/testesJest");
@@ -110,7 +112,7 @@ function chosenProjectFunction() {
             console.log("Executando analise do xls");
             pathProjectFolder = path.join(config.BENCHMARK_PATH, "datasetDoNodeRacer/known-bugs/xlsx-extract");
             testFile = "test/tests.js";
-            parameters = "--timeout 20000 -g 'should\ read\ all\ columns\ and\ rows'";
+            parameters = "--timeout 20000";
             break;
 
 
@@ -124,7 +126,7 @@ function chosenProjectFunction() {
             benchmarkName = "mongo-express";
             pathProjectFolder = path.join(config.BENCHMARK_PATH, "datasetDoNodeRacer/exploratory/mongo-express");
             testFile = "test/lib";
-            parameters = "--exit -t 10000 -R spec";
+            parameters = "--exit -t 10000";
 
             raceConditionTests.push("Router collection GET /db/.*dbName.*/.*collection.* should return html");
             raceConditionTests.push("Router document GET /db/.*dbName.*/.*collection.*/.*document.* should return html");
@@ -145,8 +147,8 @@ function chosenProjectFunction() {
         case "ARC":
             benchmarkName = "node-archiver";
             pathProjectFolder = path.join(config.BENCHMARK_PATH, "datasetDoNodeRacer/exploratory/node-archiver/");
-            testFile = "test/archiver.js";
-            // testFile = "test/"
+            //testFile = "test/archiver.js";
+            testFile = "test/"
             parameters = `--exit -t 10000`;
             raceConditionTests.push("archiver api #errors should allow continue on stat failing");
             break;
@@ -155,7 +157,7 @@ function chosenProjectFunction() {
             benchmarkName = "objection.js";
             pathProjectFolder = path.join(config.BENCHMARK_PATH, "datasetDoNodeRacer/exploratory/objection.js");
             testFile = "tests/unit/utils.js";
-            parameters = "--exit -t 10000 -R spec";
+            parameters = "--exit -t 10000";
 
             raceConditionTests.push("utils promiseUtils map should not start new operations after an error has been thrown");
             break;
@@ -168,15 +170,16 @@ function chosenProjectFunction() {
         case "FS_EXTRA":
             benchmarkName = "fs-extra";
             pathProjectFolder = path.join(config.BENCHMARK_PATH, "fs-extra/jprichardson_node-fs-extra/");
-            //testFile = "lib";
-            //testFile = "lib/ensure/__tests__/link.test.js";
-            testFile = "lib/";
+            testFile = "lib";
 
+            // testFile = "lib/ensure/__tests__/link.test.js";
             raceConditionTests.push("ncp regular files and directories when copying files using filter files are copied correctly");
 
             //testFile = "lib/remove/__tests__/remove.test.js";
             raceConditionTests.push("remove .* remove.*.* should delete without a callback");
             // "remove + remove() should delete without a callback"
+
+            parameters = "--exit -t 10000";
             break;
 
 

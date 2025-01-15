@@ -193,3 +193,6 @@ Csv*
 collectedTracesFolder*
 collectedTracesFolder*/
 collectedCsvFolder/
+
+csvBenchmarks/
+CsvFsExtra/

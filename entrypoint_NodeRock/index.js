@@ -1,6 +1,6 @@
-const shell = require('shelljs');
 const fs = require('fs');
-//const path = require('path');
+const path = require('path');
+const shell = require('shelljs');
 
 const { chosenProjectFunction } = require('./1_chosenProject');
 const { getTestsNames } = require('./2_getTestsNames');
@@ -10,13 +10,12 @@ const { extractFeatures } = require('./5_extractFeatures');
 const { normalizeFeatures } = require('./6_normalizeFeatures'); 
 const { labelFeatures } = require('./7_labelFeatures');
 const { generateCSV } = require('./8_generateCSV'); 
-const path = require('path');
 
 
 
 shell.echo("COMECOU!");
 
-let rodarTestesCompleto = true;
+let rodarTestesCompleto = true; // true para caso tenha testes e false para caso seja script
 if(rodarTestesCompleto) {
     // 1. Selecting the test file/folder that you want to analyse
     const chosenProject = chosenProjectFunction();
@@ -53,15 +52,120 @@ if(rodarTestesCompleto) {
     generateCSV(chosenProject.pathProjectFolder, chosenProject.benchmarkName, tests.testsRespectiveFile, testsTotalDuration);
 }
 else {
+    // -=+=- Escolha do Script -=+=-
+
+    let nomeScript;
+    //nomeScript = "Script do Agent Keep Alive";
+    // nomeScript = "Script do WhiteboxGhost";
+    // nomeScript = "Script do node-mkdirp";
+    // nomeScript = "Script do node-logger-file-1";
+    nomeScript = "Script do socket.io-1862";
+    // nomeScript = "Script do del";
+    // nomeScript = "Script do linter-stylint";
+    //nomeScript = "Script do node-simpleCrawler";
+
+    //nomeScript = "Script do bluebird-2";
+    // nomeScript = "Script do express-user";
+    //nomeScript = "Script do get-port";
+    //nomeScript = "Script do live-server-potential-race";
+    // nomeScript = "Script do socket.io-client";
+    
+    let pathProjectFolder;
+    //pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/agentkeepalive-23";
+    // pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/WhiteboxGhost";
+    // pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/node-mkdirp";
+    // pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/node-logger-file-1";
+    pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/socket.io-1862";
+    // pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del";
+    // pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/linter-stylint";
+    // pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/node-simplecrawler-i298";
+
+    //pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/open-issues/bluebird-2";
+    // pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/open-issues/nodesamples";
+    //pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/open-issues/get-port";
+    //pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/open-issues/live-server-potential-race";
+    // pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/open-issues/socket.io-client";
+
+    
+    let testFile;
+    //testFile = "fuzz_test/triggerRace.js";
+    // testFile = "fuzz_test/add_mock.js";
+    // testFile = "fuzz_test/race_subtle.js";
+    //testFile = "fuzz_test/triggerRace.js";
+    testFile = "fuzz_test/triggerRace.js";
+    // testFile = "testissue43.js";
+    // testFile = "syntetic/test.js";
+    //testFile = "merged-test.js";
+
+    //testFile = "race.js";
+    // testFile = "express01/server-test.js";
+    //testFile = "triggerRace.js";
+    //testFile = "race-root-dir-test.js";
+    // testFile = "race.js";
+
+    
+    const pathScript = path.join(pathProjectFolder, testFile);
+    
+    let parameters = "";
+    //parameters = "--timeout 20000";
+    // parameters = 10; //node-logger-file-1
+
+
+    //-=+=- Criacao das folders necessarias -=+=-
+    const NODEROCK_INFO_PATH = path.join(pathProjectFolder, "NodeRock_Info");
+    fs.mkdirSync(NODEROCK_INFO_PATH);
+    
+    const NODEROCK_INFO_TRACES_PATH = path.join(pathProjectFolder, "NodeRock_Info", "tracesFolder");
+    fs.mkdirSync(NODEROCK_INFO_TRACES_PATH); // (era feito no 3_executeTests.js)
+    
+    // -=+=- Coleta dos traces -=+=-
+    let completCommand = "timeout 20 node ./dist/bin/nodeprof.js" + " " + pathProjectFolder + " " + testFile + " " + parameters;
+    // let completCommand = "node ./dist/bin/nodeprof.js" + " " + pathProjectFolder + " " + testFile + " " + parameters;
+    const stringExecutedTest = shell.exec(completCommand);
+    
+    const sourceCopyPath = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/MyFunctionCallAnalysis/logHooks.json";
+    let copiedFileName = "tracesFromIt_" + 0 + ".json";
+    shell.cp(sourceCopyPath, path.join(NODEROCK_INFO_TRACES_PATH, copiedFileName));
+    
+
+    // -=+=- Coleta do tempo total do script -=+=-
+    const match = stringExecutedTest.match(/analysis: ([\d.]+)s/);
+    const AnalysisTime = match ? match[1] : null;
+    // console.log("\n\nTEMPO ANALISE EH: ", AnalysisTime);
+    const NumericAnalysisTime = parseFloat(AnalysisTime);
+    let scriptDuration = [];
+    scriptDuration.push(NumericAnalysisTime);
+    
+
+    // -=+=- Realizacao do Extract Functions -=+=-
+    let testsRespectiveFile = [];
+    testsRespectiveFile.push(pathScript);
+    extractFunctions(pathProjectFolder, testsRespectiveFile);
+    
+    // -=+=- Realizacao do Extract Features -=+=-
+    let testsFullNameList = [];
+    testsFullNameList.push(nomeScript);
+    extractFeatures(pathProjectFolder, testsFullNameList);
+
+    // -=+=- Realizando a Normalizacao das features -=+=-
+    normalizeFeatures(pathProjectFolder);
+    
+    // -=+=- Marcando o hasEventRace como true -=+=-
+    let raceConditionTests = [];
+    raceConditionTests.push(nomeScript);
+    labelFeatures(pathProjectFolder, raceConditionTests);
+    
+    // -=+=- Geracao do CSV -=+=-
+    generateCSV(pathProjectFolder, nomeScript, testsRespectiveFile, scriptDuration);
+
+/*    
     // so dar o node ./dist/bin/nodeprof.js /home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/agentkeepalive-23/ fuzz_test/triggerRace
     // node ./dist/bin/nodeprof.js /home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/WhiteboxGhost/ fuzz_test/add_mock.js 
 
-    /*
+    
 mkdir collectedTracesFolder
 touch collectedTracesFolder/tracesFromIt_0.json
-    */
-
-    ///home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/WhiteboxGhost
+    
 
     let testsRespectiveFile = [];
     let pathScript;
@@ -73,7 +177,9 @@ touch collectedTracesFolder/tracesFromIt_0.json
     pathScript = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/node-simplecrawler-i298/merged-test.js";
     testsRespectiveFile.push(pathScript);
 
-    let testsFullNameList = []
+    extractFunctions(testsRespectiveFile);
+
+    let testsFullNameList = [];
     let nomeScript;
     //nomeScript = "Script do Agent Keep Alive"
     //nomeScript = "Script do WhiteboxGhost"
@@ -82,7 +188,6 @@ touch collectedTracesFolder/tracesFromIt_0.json
     nomeScript = "Script do node-simpleCrawler";
     testsFullNameList.push(nomeScript);
 
-    extractFunctions(testsRespectiveFile);
     extractFeatures(testsFullNameList);
     normalizeFeatures();
 
@@ -95,6 +200,7 @@ touch collectedTracesFolder/tracesFromIt_0.json
     testsTotalDuration.push(6.602);
 
     generateCSV(nomeScript, testsRespectiveFile, testsTotalDuration);
+*/
 }
 
 

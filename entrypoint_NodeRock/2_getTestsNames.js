@@ -33,8 +33,14 @@ function getTestsNames(pathProjectFolder, testFile, parameters) {
 
         console.log(`\nCreating the PassingTests.json.log in: ${PASSING_TESTS_PATH}\n`);
         shell.cd(`${pathProjectFolder}`);
+
+        // const commandGetTests = `npx mocha ${testFile} --recursive --exit -R ${CUSTOM_REPORTER} ${parameters} --reporter-options pathProjectFolder=${pathProjectFolder}` + ", { silent: false }";
+        // console.log("Comando usado para extrair os testes: ", commandGetTests);
+
         let out = shell.exec(`npx mocha ${testFile} --recursive --exit -R ${CUSTOM_REPORTER} ${parameters} --reporter-options pathProjectFolder=${pathProjectFolder}`, { silent: false });
-        // //shell.exec(`./node_modules/.bin/_mocha --exit -t 20000 test/db.test.js -R ${CUSTOM_REPORTER}`, {silent: false}); // SOMENTE PARA O NEDB
+        // shell.exec(`./node_modules/.bin/_mocha --exit -t 20000 test/db.test.js -R ${CUSTOM_REPORTER}`, {silent: false}); // SOMENTE PARA O NEDB
+        // shell.exec(`./node_modules/.bin/_mocha ${testFile} ${parameters} -R ${CUSTOM_REPORTER}`, {silent: false}); // para o fps
+
         shell.cd(`${config.NODEROCK_ROOT_PATH}`);
 
         const testsJSON = fs.readFileSync(path.join(destinationCopyFolder, "temporaryPassingTests.json.log"), 'utf8');
