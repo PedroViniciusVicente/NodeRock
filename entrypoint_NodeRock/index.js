@@ -10,13 +10,14 @@ const { extractFeatures } = require('./5_extractFeatures');
 const { normalizeFeatures } = require('./6_normalizeFeatures'); 
 const { labelFeatures } = require('./7_labelFeatures');
 const { generateCSV } = require('./8_generateCSV'); 
-
+const { executePythonML } = require('./9_executePythonML'); 
 
 
 shell.echo("COMECOU!");
 
 let rodarTestesCompleto = true; // true para caso tenha testes e false para caso seja script
 if(rodarTestesCompleto) {
+    
     // 1. Selecting the test file/folder that you want to analyse
     const chosenProject = chosenProjectFunction();
     //console.log("The selected project is: ", chosenProject);
@@ -50,6 +51,10 @@ if(rodarTestesCompleto) {
 
     // 8. Generating the .csv file based on the .json files
     generateCSV(chosenProject.pathProjectFolder, chosenProject.benchmarkName, tests.testsRespectiveFile, testsTotalDuration);
+    
+    // 9. Executes the Python script with the Machine Learning Supervised Models and generate the result.csv
+    executePythonML();
+
 }
 else {
     // -=+=- Escolha do Script -=+=-

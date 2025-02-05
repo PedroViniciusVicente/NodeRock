@@ -21,32 +21,33 @@ from sklearn.metrics import confusion_matrix, roc_auc_score, roc_curve, classifi
 
 
 # =============== IMPORTANDO OS CVS ===============
+# No futuro automatizar esse processo pra ele pegar todos os csv de csvBenchmarks automaticamente
 
 # -=+=- Known bugs -=+=-
-df_aka = pd.read_csv('../../csvBenchmarks/dataAKA.csv')
-df_fps = pd.read_csv('../../csvBenchmarks/dataFPS.csv')
-df_gho = pd.read_csv('../../csvBenchmarks/dataGHO.csv')
-df_mkd = pd.read_csv('../../csvBenchmarks/dataMKD.csv')
+df_aka = pd.read_csv('./csvBenchmarks/dataAKA.csv')
+df_fps = pd.read_csv('./csvBenchmarks/dataFPS.csv')
+df_gho = pd.read_csv('./csvBenchmarks/dataGHO.csv')
+df_mkd = pd.read_csv('./csvBenchmarks/dataMKD.csv')
 # nes
-df_nlf = pd.read_csv('../../csvBenchmarks/dataNLF.csv')
-df_sio = pd.read_csv('../../csvBenchmarks/dataSIO.csv')
-df_del = pd.read_csv('../../csvBenchmarks/dataDel.csv')
-df_lst = pd.read_csv('../../csvBenchmarks/dataLST.csv')
-df_nsc = pd.read_csv('../../csvBenchmarks/dataNSC.csv')
+df_nlf = pd.read_csv('./csvBenchmarks/dataNLF.csv')
+df_sio = pd.read_csv('./csvBenchmarks/dataSIO.csv')
+df_del = pd.read_csv('./csvBenchmarks/dataDel.csv')
+df_lst = pd.read_csv('./csvBenchmarks/dataLST.csv')
+df_nsc = pd.read_csv('./csvBenchmarks/dataNSC.csv')
 # xls
 # -=+=- Open issues -=+=-
-df_blueblird = pd.read_csv('../../csvBenchmarks/dataBluebird.csv')
-df_express_user = pd.read_csv('../../csvBenchmarks/dataExpressUser.csv')
-df_gpt = pd.read_csv('../../csvBenchmarks/dataGPT.csv')
-df_lvs = pd.read_csv('../../csvBenchmarks/dataLVS.csv')
-df_sioc = pd.read_csv('../../csvBenchmarks/dataSIOC.csv')
+df_blueblird = pd.read_csv('./csvBenchmarks/dataBluebird.csv')
+df_express_user = pd.read_csv('./csvBenchmarks/dataExpressUser.csv')
+df_gpt = pd.read_csv('./csvBenchmarks/dataGPT.csv')
+df_lvs = pd.read_csv('./csvBenchmarks/dataLVS.csv')
+df_sioc = pd.read_csv('./csvBenchmarks/dataSIOC.csv')
 # -=+=- Exploratory -=+=-
-df_mongoexpress = pd.read_csv('../../csvBenchmarks/dataMongoExpress.csv')
-df_nedb = pd.read_csv('../../csvBenchmarks/dataNEDB.csv')
-df_arc = pd.read_csv('../../csvBenchmarks/dataARC.csv')
-df_obj = pd.read_csv('../../csvBenchmarks/dataOBJ.csv')
+df_mongoexpress = pd.read_csv('./csvBenchmarks/dataMongoExpress.csv')
+df_nedb = pd.read_csv('./csvBenchmarks/dataNEDB.csv')
+df_arc = pd.read_csv('./csvBenchmarks/dataARC.csv')
+df_obj = pd.read_csv('./csvBenchmarks/dataOBJ.csv')
 # -=+=- Fs-Extra -=+=-
-df_fsextra = pd.read_csv('../../csvBenchmarks/dataFsExtra.csv')
+df_fsextra = pd.read_csv('./csvBenchmarks/dataFsExtra.csv')
 
 # print(df_aka)
 
@@ -116,9 +117,9 @@ svm.fit(x_scaled, y)
 
 # =============== CARREGAMENTO DA ENTRADA ===============
 
-df_entrada = pd.read_csv('../../collectedCsvFolder/data.csv')
+df_entrada = pd.read_csv('./collectedCsvFolder/data.csv')
 
-df_testsInfo = df_entrada[["BenchmarkName", "TestFilePath", "TestCaseName"]]
+df_testsInfo = df_entrada[["BenchmarkName", "TestFilePath", "TestCaseName"]].copy()
 # print(df_testsInfo)
 
 
@@ -132,6 +133,7 @@ x_entrada_scaled = scaler.transform(x_entrada)
 
 
 # =============== FAZENDO A PREVISAO ===============
+
 rotulo_previsto = []
 
 for i in range(len(x_entrada_scaled)):
@@ -143,7 +145,16 @@ for i in range(len(x_entrada_scaled)):
     rotulo_previsto[i] += svm.predict([x_entrada_scaled[i]])[0]
 
 # Imprimindo o rótulo previsto
-for i in range (len(x_entrada_scaled)):
-    print(f"Qtd de modelos que deram true para a linha {i} sao: {rotulo_previsto[i]}")
+# for i in range (len(x_entrada_scaled)):
+#     print(f"Qtd de modelos que deram true para a linha {i} sao: {rotulo_previsto[i]}")
+
+
+# =============== GERANDO O CSV DE SAIDA ===============
+df_testsInfo['QuantidadeRotulosPositivo'] = rotulo_previsto
+# print(df_testsInfo)
+
+df_testsInfo.to_csv('collectedResultsMLFolder/resultados_testes.csv')
+
+
 
 print("finalizou")
