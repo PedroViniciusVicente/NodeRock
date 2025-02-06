@@ -1,26 +1,26 @@
 [
   {
     "promiseID": 1,
-    "createdAt": "2025-02-06T01:05:02.634Z",
+    "createdAt": "2025-02-06T01:43:12.195Z",
     "status": "pending"
   },
   {
     "promiseID": 2,
-    "createdAt": "2025-02-06T01:05:02.663Z",
+    "createdAt": "2025-02-06T01:43:12.226Z",
     "status": "pending"
   },
   {
     "promiseID": 1,
-    "createdAt": "2025-02-06T01:05:02.634Z",
+    "createdAt": "2025-02-06T01:43:12.195Z",
     "status": "resolved",
-    "durationMs": 40,
-    "resolvedAt": "2025-02-06T01:05:02.674Z"
+    "durationMs": 52,
+    "resolvedAt": "2025-02-06T01:43:12.247Z"
   },
   {
     "promiseID": 2,
-    "createdAt": "2025-02-06T01:05:02.663Z",
+    "createdAt": "2025-02-06T01:43:12.226Z",
     "status": "resolved",
-    "durationMs": 12,
-    "resolvedAt": "2025-02-06T01:05:02.675Z"
+    "durationMs": 22,
+    "resolvedAt": "2025-02-06T01:43:12.248Z"
   }
 ]

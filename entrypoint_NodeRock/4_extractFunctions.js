@@ -11,6 +11,8 @@ function extractFunctions(pathProjectFolder, testsRespectiveFile) {
     const NODEROCK_INFO_TRACES_PATH = path.join(pathProjectFolder, "NodeRock_Info", "tracesFolder");
     const NODEROCK_INFO_FUNCTIONS_PATH = path.join(pathProjectFolder, "NodeRock_Info", "functionsFolder");
 
+    let awaitIntervalsFromTests = [];
+
     if (!fs.existsSync(NODEROCK_INFO_FUNCTIONS_PATH)) {
 
         console.log(`\nCreating NodeRock_Info/functionsFolder in ${pathProjectFolder}\n`);
@@ -53,7 +55,7 @@ function extractFunctions(pathProjectFolder, testsRespectiveFile) {
 
                 let delayCb = 0;
                 let invokesInterval = 0;
-                // let awaitsInterval = 0;
+                let awaitsInterval = 0;
                 let callbackMade = [];
                 let firstWrite = true;
 
@@ -62,18 +64,18 @@ function extractFunctions(pathProjectFolder, testsRespectiveFile) {
                 
                 for (let j = 0; j < objectsExtractFeatures.length; j++)
                 {
-                    // if (objectsExtractFeatures[j].Detected_Hook === "awaitPre")
-                    // {
-                    //     for(let l = j; l < objectsExtractFeatures.length; l++)
-                    //     {
-                    //         if(objectsExtractFeatures[l].Detected_Hook === "awaitPost" && 
-                    //             objectsExtractFeatures[l].iid === objectsExtractFeatures[j].iid)
-                    //         {
-                    //             awaitsInterval = objectsExtractFeatures[l].timer - objectsExtractFeatures[j].timer;
-                    //             break;
-                    //         }
-                    //     }
-                    // }
+                    if (objectsExtractFeatures[j].Detected_Hook === "awaitPre")
+                    {
+                        for(let l = j; l < objectsExtractFeatures.length; l++)
+                        {
+                            if(objectsExtractFeatures[l].Detected_Hook === "awaitPost" && 
+                                objectsExtractFeatures[l].iid === objectsExtractFeatures[j].iid)
+                            {
+                                awaitsInterval += objectsExtractFeatures[l].timer - objectsExtractFeatures[j].timer;
+                                break;
+                            }
+                        }
+                    }
 
                     if (objectsExtractFeatures[j].Detected_Hook === "invokeFunPre")
                     {
@@ -156,7 +158,11 @@ function extractFunctions(pathProjectFolder, testsRespectiveFile) {
                         fs.writeFileSync(destinationFile, '\n]', {flag:'a'});
                     }
                 }
+                
+                awaitIntervalsFromTests.push(awaitsInterval);
             }
+
+            return awaitIntervalsFromTests;
 
         } catch(error) {
             console.error("Erro foi detectado no gerando a lista das funcoes: ", error);

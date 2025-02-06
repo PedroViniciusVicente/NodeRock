@@ -24,6 +24,7 @@ function getTestsNames(pathProjectFolder, testFile, parameters) {
         console.log(`\nNodeRock_Info folder already exists in ${pathProjectFolder}\n`);
     }
 
+    // TALVEZ SUBSTITUIR POR UM fs.truncateSync('destinationCopyFolder', 0); COMPARAR SE É MAIS RAPIDO
     shell.rm('-rf', destinationCopyFolder);
     shell.mkdir(destinationCopyFolder);
 

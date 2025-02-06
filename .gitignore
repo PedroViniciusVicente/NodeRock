@@ -196,3 +196,5 @@ collectedCsvFolder/
 
 
 CsvFsExtra/
+
+promise_logs/promises.json

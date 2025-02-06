@@ -39,8 +39,10 @@ if(rodarTestesCompleto) {
     // for(let i = 0; i < testsTotalDuration.length; i++) {
     //     console.log("Duracao foi: ", testsTotalDuration[i]);
     // }
+
     // 4. Extracting the functions from the traces and calculating their callback times
-    extractFunctions(chosenProject.pathProjectFolder, tests.testsRespectiveFile);
+    const awaitIntervalsFromTests = extractFunctions(chosenProject.pathProjectFolder, tests.testsRespectiveFile);
+    console.log("AWAIT INTERVALS EH: ", awaitIntervalsFromTests);
 
     // 5. Extracting the main features from each test
     extractFeatures(chosenProject.pathProjectFolder, tests.testsFullNameList);
@@ -48,7 +50,7 @@ if(rodarTestesCompleto) {
     // 6. Monkey Patching the promises to collect data about the promises executed
     const monkeyPatchedPromisesData = executeMonkeyPatching(tests.testsRespectiveFile, tests.testsFullNameList);
     console.log(monkeyPatchedPromisesData);
-    
+
     // 7. Normalizing the extracted features before applying the ML methods
     normalizeFeatures(chosenProject.pathProjectFolder);
 
