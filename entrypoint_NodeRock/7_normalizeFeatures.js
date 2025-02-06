@@ -1,4 +1,4 @@
-// 6. Normalizing the extracted features before applying the ML methods
+// 7. Normalizing the extracted features before applying the ML methods
 
 const fs = require('fs');
 const path = require('path');

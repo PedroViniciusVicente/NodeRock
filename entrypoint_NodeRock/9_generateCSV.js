@@ -1,4 +1,4 @@
-// 8. Generating the .csv file based on the .json files
+// 9. Generating the .csv file based on the .json files
 
 const fs = require('fs');
 const path = require('path');

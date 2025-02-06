@@ -21,9 +21,10 @@ function saveLog(logData) {
     if (fs.existsSync(logFilePath)) {
         try {
             const existingData = fs.readFileSync(logFilePath, 'utf8');
-            allLogs = JSON.parse(existingData);
+            allLogs = existingData.trim() ? JSON.parse(existingData) : []; // Evita erro em arquivo vazio
         } catch (err) {
             console.error('Erro ao ler o arquivo de logs:', err);
+            allLogs = []; // Se der erro, inicializa como array vazio
         }
     }
 
@@ -45,7 +46,7 @@ global.Promise = class Promise extends OldPromise {
                     status: 'pending',
                 };
 
-                console.log(`Promise criada: { promiseID: ${promiseID}, time: ${creationTime} }`);
+                // console.log(`Promise criada: { promiseID: ${promiseID}, time: ${creationTime} }`);
                 saveLog(logData);
 
                 if (argsList.length > 0 && typeof argsList[0] === 'function') {
@@ -56,7 +57,7 @@ global.Promise = class Promise extends OldPromise {
                             logData.durationMs = duration;
                             logData.resolvedAt = new Date().toISOString();
 
-                            console.log(`Promise resolvida: { promiseID: ${promiseID}, duration: ${duration}ms }`);
+                            // console.log(`Promise resolvida: { promiseID: ${promiseID}, duration: ${duration}ms }`);
                             saveLog(logData);
                             return Reflect.apply(target, thisArg, argsList);
                         }
@@ -71,7 +72,7 @@ global.Promise = class Promise extends OldPromise {
                             logData.durationMs = duration;
                             logData.rejectedAt = new Date().toISOString();
 
-                            console.log(`Promise rejeitada: { promiseID: ${promiseID}, duration: ${duration}ms }`);
+                            // console.log(`Promise rejeitada: { promiseID: ${promiseID}, duration: ${duration}ms }`);
                             saveLog(logData);
                             return Reflect.apply(target, thisArg, argsList);
                         }

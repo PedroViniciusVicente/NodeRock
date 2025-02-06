@@ -1,4 +1,4 @@
-// 7. Labeling the extracted features before applying the ML methods
+// 8. Labeling the extracted features before applying the ML methods
 
 const fs = require('fs');
 const path = require('path');

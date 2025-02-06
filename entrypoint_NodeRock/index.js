@@ -7,10 +7,12 @@ const { getTestsNames } = require('./2_getTestsNames');
 const { executeTests } = require('./3_executeTests');
 const { extractFunctions } = require('./4_extractFunctions'); 
 const { extractFeatures } = require('./5_extractFeatures');
-const { normalizeFeatures } = require('./6_normalizeFeatures'); 
-const { labelFeatures } = require('./7_labelFeatures');
-const { generateCSV } = require('./8_generateCSV'); 
-const { executePythonML } = require('./9_executePythonML'); 
+const { executeMonkeyPatching } = require('./6_executeMonkeyPatching');
+const { normalizeFeatures } = require('./7_normalizeFeatures'); 
+const { labelFeatures } = require('./8_labelFeatures');
+const { generateCSV } = require('./9_generateCSV'); 
+const { executePythonML } = require('./10_executePythonML'); 
+
 
 
 shell.echo("COMECOU!");
@@ -33,7 +35,7 @@ if(rodarTestesCompleto) {
 
 
     // 3. Executing the tests individually and placing theirs traces in collectedTracesFolder
-    testsTotalDuration = executeTests(chosenProject.pathProjectFolder, tests.testsFullNameList, tests.testsRespectiveFile, chosenProject);
+    const testsTotalDuration = executeTests(chosenProject.pathProjectFolder, tests.testsFullNameList, tests.testsRespectiveFile, chosenProject);
     // for(let i = 0; i < testsTotalDuration.length; i++) {
     //     console.log("Duracao foi: ", testsTotalDuration[i]);
     // }
@@ -43,16 +45,20 @@ if(rodarTestesCompleto) {
     // 5. Extracting the main features from each test
     extractFeatures(chosenProject.pathProjectFolder, tests.testsFullNameList);
 
-    // 6. Normalizing the extracted features before applying the ML methods
+    // 6. Monkey Patching the promises to collect data about the promises executed
+    const monkeyPatchedPromisesData = executeMonkeyPatching(tests.testsRespectiveFile, tests.testsFullNameList);
+    console.log(monkeyPatchedPromisesData);
+    
+    // 7. Normalizing the extracted features before applying the ML methods
     normalizeFeatures(chosenProject.pathProjectFolder);
 
-    // 7. Labeling the extracted features before applying the ML methods
+    // 8. Labeling the extracted features before applying the ML methods
     labelFeatures(chosenProject.pathProjectFolder, chosenProject.raceConditionTests);
 
-    // 8. Generating the .csv file based on the .json files
+    // 9. Generating the .csv file based on the .json files
     generateCSV(chosenProject.pathProjectFolder, chosenProject.benchmarkName, tests.testsRespectiveFile, testsTotalDuration);
     
-    // 9. Executes the Python script with the Machine Learning Supervised Models and generate the result.csv
+    // 10. Executes the Python script with the Machine Learning Supervised Models and generate the result.csv
     executePythonML();
 
 }
