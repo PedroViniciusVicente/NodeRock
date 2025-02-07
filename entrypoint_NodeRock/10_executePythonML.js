@@ -2,10 +2,10 @@
 
 const shell = require('shelljs');
 
-function executePythonML(pathProjectFolder) {
+function executePythonML() {
 
     // shell.exec("pwd"); // /home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource pois eh o endereco que vc esta antes de executar o comando
-    const command = "python3 entrypoint_NodeRock/testsPython/main.py"
+    const command = "python3 entrypoint_NodeRock/pythonML_scripts/main.py"
     shell.exec(command);
 
 }

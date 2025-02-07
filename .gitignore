@@ -198,3 +198,5 @@ collectedCsvFolder/
 CsvFsExtra/
 
 promise_logs/promises.json
+
+entrypoint_NodeRock/11_executeAnalysis.js
