@@ -1,0 +1,36 @@
+pathProjectFolder,testFile,testName,positiveLabels,numberOfIteration,numberOfFails,firstFail
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,archiver core #_normalizeEntryData should support prefix of the entry name,0,3,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,archiver core #_normalizeEntryData should support special bits on unix,0,3,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,archiver api #abort should have a state of aborted,0,3,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,archiver api #append should append multiple entries,0,3,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,archiver api #append should append buffer,0,3,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,archiver api #append should append stream,0,3,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,archiver api #append should append directory,0,3,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,archiver api #directory should append multiple entries,2,11,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,archiver api #directory should support setting data properties via function,2,11,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,archiver api #directory should support ignoring matches via function,2,11,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,archiver api #directory should find dot files,2,11,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,archiver api #directory should handle windows path separators in prefix,2,11,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,archiver api #file should append multiple entries,2,11,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,archiver api #file should append filepath,1,7,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,archiver api #file should fallback to filepath when no name is set,1,7,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,archiver api #file should fallback to file stats when applicable,1,7,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,archiver api #glob should append multiple entries,0,3,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,archiver api #promise should use a promise,0,3,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,archiver api #errors should allow continue on stat failing,2,11,2,5
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,plugins tar should append multiple entries,0,3,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,plugins tar should append buffer,1,7,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,plugins tar should append stream,2,11,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,plugins tar should append folder,1,7,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,plugins tar should append manual symlink,0,3,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,plugins tar should append via directory,1,7,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,plugins tar should retain symlinks via directory,1,7,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,plugins zip should append multiple entries,4,19,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,plugins zip should append buffer,4,19,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,plugins zip should append stream,4,19,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,plugins zip should append via file,3,15,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,plugins zip should append via directory,4,19,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,plugins zip should append manual symlink,4,19,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,plugins zip should allow for custom unix mode,2,11,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,plugins zip should allow for entry comments,2,11,0,0
+/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver,test/,plugins zip should allow for archive comment,4,19,0,0

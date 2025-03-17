@@ -13,7 +13,9 @@ function chosenProjectFunction() {
     let benchmarkName = "";
 
 
-    let chosenProject = "MeuTestVerificarRuntimes";
+    // let chosenProject = "MeuTestVerificarRuntimes";
+    let chosenProject = "ARC";
+
 
     switch (chosenProject) {
 
@@ -182,6 +184,15 @@ function chosenProjectFunction() {
             parameters = "--exit -t 10000";
             break;
 
+        // NNNN OTHER PROJECTS
+        case "ZEN":
+            benchmarkName = "zenparsing";
+            pathProjectFolder = path.join(config.BENCHMARK_PATH, "nnnnOtherProjects/zenparsing_zen-observable-20250224T152549Z-001/zenparsing_zen-observable");
+            testFile = "test";
+            parameters = "--exit -t 10000";
+
+            raceConditionTests.push("utils promiseUtils map should not start new operations after an error has been thrown");
+            break;
 
         default:
             console.log("Esse projeto ainda nao esta nesse switch case!");

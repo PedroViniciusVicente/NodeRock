@@ -8,7 +8,7 @@ const normalizeValue = (value, min, max) => {
     return (value - min) / (max - min);
 };
 
-function normalizeFeatures(pathProjectFolder) {
+function normalizeFeatures(pathProjectFolder, awaitIntervalsFromTests, monkeyPatchedPromisesData) {
     
     const NODEROCK_INFO_EXTRACTED_RAW_PATH = path.join(pathProjectFolder, "NodeRock_Info", "extractedFeaturesRaw.json");
     const NODEROCK_INFO_EXTRACTED_NORMALIZED_PATH = path.join(pathProjectFolder, "NodeRock_Info", "extractedFeaturesNormalized.json");
@@ -19,6 +19,13 @@ function normalizeFeatures(pathProjectFolder) {
 
         const featuresJSON = fs.readFileSync(NODEROCK_INFO_EXTRACTED_RAW_PATH, 'utf8');
         const featuresObject = JSON.parse(featuresJSON);
+
+        // Adicionando os valores coletados no Moneky Patching
+        for(let i = 0; i < featuresObject.length; i++) {
+            featuresObject[i] = {...featuresObject[i], ...monkeyPatchedPromisesData[i], awaitIntervals: awaitIntervalsFromTests[i] }
+            // console.log("\n\nO OBJETO CONCATENADO FICOU ASSIM: ");
+            // console.log(featuresObject[i]);
+        }
 
 
         // Obter os valores min e max de cada atributo numerico que é colocado no extract features

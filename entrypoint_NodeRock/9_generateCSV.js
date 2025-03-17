@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 
-function generateCSV(pathProjectFolder, benchmarkName, testsRespectiveFile, testsTotalDuration) {
+function generateCSV(pathProjectFolder, benchmarkName, testsRespectiveFile, testsTotalDuration, awaitIntervalsFromTests, monkeyPatchedPromisesData) {
     console.log("\nGerando o arquivo .CSV:");
 
     const NODEROCK_INFO_EXTRACTED_RAW_PATH = path.join(pathProjectFolder, "NodeRock_Info", "extractedFeaturesRaw.json");
@@ -27,6 +27,14 @@ function generateCSV(pathProjectFolder, benchmarkName, testsRespectiveFile, test
         'AsyncFunction_Count_Raw', 'AsyncFunction_Count_Normalized',
         'Await_Count_Raw', 'Await_Count_Normalized',
         'Unique_Asynchook_ids_Raw', 'Unique_Asynchook_ids_Normalized',
+
+        'totalSettledPromises_Raw', 'totalSettledPromises_Normalized',
+        'avgResolved_Raw', 'avgResolved_Normalized',
+        'avgRejected_Raw', 'avgRejected_Normalized',
+        'longestResolved_Raw', 'longestResolved_Normalized',
+        'resolvedPercentage_Raw', 'resolvedPercentage_Normalized',
+        'awaitIntervals_Raw', 'awaitIntervals_Normalized',
+
         'Total_duration_s', 'HasEventRace']
     // adicionar: funcoes com > 100 ms de delay; tempo total do teste; e se o teste falhou ou foi sucesso
 
@@ -47,6 +55,14 @@ function generateCSV(pathProjectFolder, benchmarkName, testsRespectiveFile, test
         rawFeaturesObject[i].AsyncFunction_Count, normalizedFeaturesObject[i].AsyncFunction_Count,
         rawFeaturesObject[i].Await_Count, normalizedFeaturesObject[i].Await_Count,
         rawFeaturesObject[i].Unique_Asynchook_ids, normalizedFeaturesObject[i].Unique_Asynchook_ids,
+
+        monkeyPatchedPromisesData[i].totalSettledPromises, normalizedFeaturesObject[i].totalSettledPromises,
+        monkeyPatchedPromisesData[i].avgResolved, normalizedFeaturesObject[i].avgResolved,
+        monkeyPatchedPromisesData[i].avgRejected, normalizedFeaturesObject[i].avgRejected,
+        monkeyPatchedPromisesData[i].longestResolved, normalizedFeaturesObject[i].longestResolved,
+        monkeyPatchedPromisesData[i].resolvedPercentage, normalizedFeaturesObject[i].resolvedPercentage,
+        awaitIntervalsFromTests[i], normalizedFeaturesObject[i].awaitIntervals,
+
         testsTotalDuration[i], rawFeaturesObject[i].hasEventRace];
 
         lines.push(line.join(','));

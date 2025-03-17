@@ -143,6 +143,7 @@ function extractFunctions(pathProjectFolder, testsRespectiveFile) {
                         };
                         callbackMade = [] // zerando o vetor
                         delayCb = 0;
+                        // awaitsInterval = 0;
                 
                         const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
                         if(firstWrite) {
@@ -160,6 +161,7 @@ function extractFunctions(pathProjectFolder, testsRespectiveFile) {
                 }
                 
                 awaitIntervalsFromTests.push(awaitsInterval);
+                awaitsInterval = 0;
             }
 
             return awaitIntervalsFromTests;

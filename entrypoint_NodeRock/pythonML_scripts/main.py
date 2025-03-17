@@ -125,7 +125,9 @@ df_testsInfo = df_entrada[["BenchmarkName", "TestFilePath", "TestCaseName"]].cop
 
 # =============== PRE PROCESSAMENTO DA ENTRADA ===============
 
-x_entrada = df_entrada.drop(columns=["BenchmarkName", "TestFilePath", "TestCaseName", "HasEventRace"])
+x_entrada = df_entrada.drop(columns=["BenchmarkName", "TestFilePath", "TestCaseName", "HasEventRace", 
+                                     "avgRejected_Normalized", "avgRejected_Raw", "avgResolved_Normalized", "avgResolved_Raw", "awaitIntervals_Normalized", "awaitIntervals_Raw",
+                                     "longestResolved_Normalized", "longestResolved_Raw", "resolvedPercentage_Normalized", "resolvedPercentage_Raw", "totalSettledPromises_Normalized", "totalSettledPromises_Raw"])
 # print(x_entrada)
 x_entrada_scaled = scaler.transform(x_entrada)
 # print(x_entrada_scaled)

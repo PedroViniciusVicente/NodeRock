@@ -46,10 +46,10 @@ function extractedFeaturesMonkeyPatching() {
 
         return {
             totalSettledPromises: totalSettled,
-            avgResolved: avgResolved.toFixed(2),
-            avgRejected: avgRejected.toFixed(2),
+            avgResolved: avgResolved,
+            avgRejected: avgRejected,
             longestResolved: maxResolved,
-            resolvedPercentage: resolutionPercentage.toFixed(2)
+            resolvedPercentage: resolutionPercentage
         };
 
     } catch (err) {

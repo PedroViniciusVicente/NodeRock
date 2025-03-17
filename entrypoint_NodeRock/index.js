@@ -12,7 +12,7 @@ const { normalizeFeatures } = require('./7_normalizeFeatures');
 const { labelFeatures } = require('./8_labelFeatures');
 const { generateCSV } = require('./9_generateCSV'); 
 const { executePythonML } = require('./10_executePythonML'); 
-
+const { executeRaceDetection } = require('./11_executeRaceDetection');
 
 
 shell.echo("COMECOU!");
@@ -49,19 +49,23 @@ if(rodarTestesCompleto) {
 
     // 6. Monkey Patching the promises to collect data about the promises executed
     const monkeyPatchedPromisesData = executeMonkeyPatching(tests.testsRespectiveFile, tests.testsFullNameList);
-    console.log(monkeyPatchedPromisesData);
+    // console.log("MONKEY PATCHING RESULTOU EM: ", monkeyPatchedPromisesData);
 
     // 7. Normalizing the extracted features before applying the ML methods
-    normalizeFeatures(chosenProject.pathProjectFolder);
+    normalizeFeatures(chosenProject.pathProjectFolder, awaitIntervalsFromTests, monkeyPatchedPromisesData);
 
     // 8. Labeling the extracted features before applying the ML methods
     labelFeatures(chosenProject.pathProjectFolder, chosenProject.raceConditionTests);
 
     // 9. Generating the .csv file based on the .json files
-    generateCSV(chosenProject.pathProjectFolder, chosenProject.benchmarkName, tests.testsRespectiveFile, testsTotalDuration);
+    // OBS: ESSES 2 ULTIMOS VALORES PODEM SER ESCRITOS DIRETO NO ARQUIVO FEATURES_RAW PRA N PRECISAR PASSAR POR PARAMETRO
+    generateCSV(chosenProject.pathProjectFolder, chosenProject.benchmarkName, tests.testsRespectiveFile, testsTotalDuration, awaitIntervalsFromTests, monkeyPatchedPromisesData);
     
     // 10. Executes the Python script with the Machine Learning Supervised Models and generate the result.csv
-    executePythonML();
+    // executePythonML();
+
+    // 11. Executes the race detection based on collectedResultsMLFolder to find the event races 
+    // executeRaceDetection(chosenProject.pathProjectFolder, chosenProject.testFile);
 
 }
 else {

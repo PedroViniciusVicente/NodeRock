@@ -41,7 +41,7 @@ function getTestsNames(pathProjectFolder, testFile, parameters) {
         let out = shell.exec(`npx mocha ${testFile} --recursive --exit -R ${CUSTOM_REPORTER} ${parameters} --reporter-options pathProjectFolder=${pathProjectFolder}`, { silent: false });
         // shell.exec(`./node_modules/.bin/_mocha --exit -t 20000 test/db.test.js -R ${CUSTOM_REPORTER}`, {silent: false}); // SOMENTE PARA O NEDB
         // shell.exec(`./node_modules/.bin/_mocha ${testFile} ${parameters} -R ${CUSTOM_REPORTER}`, {silent: false}); // para o fps
-
+        // shell.exec(`mocha --recursive --require ./scripts/mocha-require`) // PARA O ZENPARSING
         shell.cd(`${config.NODEROCK_ROOT_PATH}`);
 
         const testsJSON = fs.readFileSync(path.join(destinationCopyFolder, "temporaryPassingTests.json.log"), 'utf8');
