@@ -6,8 +6,8 @@ const fs = require('fs');
 const Mocha = require('mocha');
 const path = require('path');
 
-const destinationCopyFolder = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
-
+// const destinationCopyFolder = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
+const destinationCopyFolder = path.join(__dirname,"../collectedTracesFolder");
 
 const Base = Mocha.reporters.Base;
 const {
@@ -44,7 +44,7 @@ function MochaReporter(runner, options) {
         // console.log("ACHOU O: ", JSON.stringify(passedTests, null, 4));
         // console.log("\nCHEGOU O PATH PARA CRIAR O PASSINGTESTS.JSON.LOG:", destinationCopyFolder);
 
-        fs.writeFileSync(destinationCopyFolder + "temporaryPassingTests.json.log", JSON.stringify(passedTests, null, 4), 'utf8');
+        fs.writeFileSync(path.join(destinationCopyFolder, "temporaryPassingTests.json.log"), JSON.stringify(passedTests, null, 4), 'utf8');
 
         /*
         ** console.log("o destination eh: ", destinationCopyFolder);

@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 
-function generateCSV(pathProjectFolder, benchmarkName, testsRespectiveFile, testsTotalDuration, awaitIntervalsFromTests, monkeyPatchedPromisesData) {
+function generateCSV(pathProjectFolder, benchmarkName, testsRespectiveFile, testsOriginalFullNameList, testsTotalDuration, awaitIntervalsFromTests, monkeyPatchedPromisesData) {
     console.log("\nGerando o arquivo .CSV:");
 
     const NODEROCK_INFO_EXTRACTED_RAW_PATH = path.join(pathProjectFolder, "NodeRock_Info", "extractedFeaturesRaw.json");
@@ -46,7 +46,7 @@ function generateCSV(pathProjectFolder, benchmarkName, testsRespectiveFile, test
     // Adding the data to csv
     for (let i = 0; i < rawFeaturesObject.length; i++) {
 
-        const line = [benchmarkName, testsRespectiveFile[i], rawFeaturesObject[i].Test_Name,
+        const line = [benchmarkName, testsRespectiveFile[i], testsOriginalFullNameList[i],
         rawFeaturesObject[i].InvokeFunPre_Count, normalizedFeaturesObject[i].InvokeFunPre_Count,
         rawFeaturesObject[i].Invokes_with_callback, normalizedFeaturesObject[i].Invokes_with_callback,
         rawFeaturesObject[i].Cbs_Total_delay_ms, normalizedFeaturesObject[i].Cbs_Total_delay_ms,

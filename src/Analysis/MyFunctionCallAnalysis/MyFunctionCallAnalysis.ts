@@ -80,6 +80,7 @@ export class MyFunctionCallAnalysis extends Analysis {
         MyFunctionCallAnalysis.eventEmitter.on('addLogToVector', MyFunctionCallAnalysis.addHookToLog);
         super(sandbox); // Chamada para o construtor de Analysis, que armazena o sandbox e chama o registerHooks
         //this.timeConsumed = 0;
+        // console.log(path.join(__dirname,"../src/Analysis/MyFunctionCallAnalysis/logHooks.json"));
 
     }
 
@@ -112,8 +113,8 @@ export class MyFunctionCallAnalysis extends Analysis {
         //console.log("Starting registerHooks from MyFunctionCallAnalysis:");
         
         // -=+=- Initializing with the right path to the file address -=+=-
-        MyFunctionCallAnalysis.pathLogHooks = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/MyFunctionCallAnalysis/logHooks.json";
-
+        // MyFunctionCallAnalysis.pathLogHooks = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/MyFunctionCallAnalysis/logHooks.json";
+        MyFunctionCallAnalysis.pathLogHooks = path.join(__dirname,"../src/Analysis/MyFunctionCallAnalysis/logHooks.json");
 
         // -=+=- Detecting and registering hooks -=+=-
         //console.log("Calling all hooks!");

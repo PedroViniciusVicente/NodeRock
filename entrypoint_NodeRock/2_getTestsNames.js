@@ -6,9 +6,11 @@ const shell = require('shelljs');
 const config = require('./NodeRockConfig.js');
 
 
-const destinationCopyFolder = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
+// const destinationCopyFolder = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
+const destinationCopyFolder = path.join(__dirname,"../collectedTracesFolder");
 
-const CUSTOM_REPORTER = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/entrypoint_NodeRock/mochaReporter.js";
+// const CUSTOM_REPORTER = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/entrypoint_NodeRock/mochaReporter.js";
+const CUSTOM_REPORTER = path.join(__dirname,"mochaReporter.js");
 
 function getTestsNames(pathProjectFolder, testFile, parameters) {
     
@@ -72,7 +74,9 @@ function getTestsNames(pathProjectFolder, testFile, parameters) {
     // Obtendo os nomes dos testes
     let testsFullNameList = [];
     let testsRespectiveFile = [];
+    let testsOriginalFullNameList = [];
     for(let i = 0; i < testsObject.length; i++) {
+        testsOriginalFullNameList.push(testsObject[i].title);
         testsFullNameList.push(testsObject[i].title);
         testsRespectiveFile.push(testsObject[i].file);
     }
@@ -94,6 +98,7 @@ function getTestsNames(pathProjectFolder, testFile, parameters) {
     }
 
     return {
+        testsOriginalFullNameList: testsOriginalFullNameList,
         testsFullNameList: testsFullNameList,
         testsRespectiveFile: testsRespectiveFile,
     };

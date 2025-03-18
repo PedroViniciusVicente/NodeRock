@@ -4,7 +4,7 @@ const shell = require('shelljs');
 const fs = require('fs');
 const path = require('path');
 
-const sourceCopyPath = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/MyFunctionCallAnalysis/logHooks.json";
+const sourceCopyPath = path.join(__dirname,"../src/Analysis/MyFunctionCallAnalysis/logHooks.json");
 
 function executeTests(pathProjectFolder, testsFullNameList, testsRespectiveFile, chosenProject) {
 
@@ -50,7 +50,7 @@ function executeTests(pathProjectFolder, testsFullNameList, testsRespectiveFile,
                 testsDuration.push(NumericAnalysisTime);
 
                 let copiedFileName = "tracesFromIt_" + i + ".json";
-                shell.cp(sourceCopyPath, path.join(NODEROCK_INFO_TRACES_PATH, copiedFileName));
+                fs.copyFileSync(sourceCopyPath, path.join(NODEROCK_INFO_TRACES_PATH, copiedFileName));
 
             } catch (error) {
                 console.error('Erro executar testes individuais:', error);

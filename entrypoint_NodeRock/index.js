@@ -59,7 +59,7 @@ if(rodarTestesCompleto) {
 
     // 9. Generating the .csv file based on the .json files
     // OBS: ESSES 2 ULTIMOS VALORES PODEM SER ESCRITOS DIRETO NO ARQUIVO FEATURES_RAW PRA N PRECISAR PASSAR POR PARAMETRO
-    generateCSV(chosenProject.pathProjectFolder, chosenProject.benchmarkName, tests.testsRespectiveFile, testsTotalDuration, awaitIntervalsFromTests, monkeyPatchedPromisesData);
+    generateCSV(chosenProject.pathProjectFolder, chosenProject.benchmarkName, tests.testsRespectiveFile, tests.testsOriginalFullNameList, testsTotalDuration, awaitIntervalsFromTests, monkeyPatchedPromisesData);
     
     // 10. Executes the Python script with the Machine Learning Supervised Models and generate the result.csv
     // executePythonML();
