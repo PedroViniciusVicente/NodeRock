@@ -1,7 +1,6 @@
 // 1. Selecting the test file/folder that you want to analyse
 
 const path = require('path');
-const config = require('./NodeRockConfig.js');
 
 
 function chosenProjectFunction() {
@@ -24,7 +23,7 @@ function chosenProjectFunction() {
         case "MeuTestBasico": // teste para ver melhor o tempo com cb assincrono
             benchmarkName = "MeuTestBasico";
             console.log("Executando analise do meu teste basico para ver o tempo com cb assincrono");
-            pathProjectFolder = path.join(config.BENCHMARK_PATH, "meuDatasetParaTestes/testeBasico");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "meuDatasetParaTestes/testeBasico");
             testFile = "test/test.js";
             break;
         
@@ -32,14 +31,14 @@ function chosenProjectFunction() {
         case "MeuTestBasico2": // main.js e testLeitura.js
             benchmarkName = "MeuTestBasico2";
             console.log("Executando analise do meu teste basico2 para ver o tempo ate chamar cb assincrono");
-            pathProjectFolder = path.join(config.BENCHMARK_PATH, "meuDatasetParaTestes/testeBasico");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "meuDatasetParaTestes/testeBasico");
             testFile = "test/testLeitura.js";
             break;
 
         case "MeuTestMocha":
             benchmarkName = "MeuTestMocha";
             console.log("Executando analise do meu teste simples em Mocha");
-            pathProjectFolder = path.join(config.BENCHMARK_PATH, "meuDatasetParaTestes/testesSimplesMocha");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "meuDatasetParaTestes/testesSimplesMocha");
             // testFile = "teste";
             //testFile = "teste/testeMenor.js";
             testFile = "teste/arquivoTestesMocha.js";
@@ -52,7 +51,7 @@ function chosenProjectFunction() {
         // node ./dist/bin/nodeprof.js /home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/ node_modules/.bin/jest teste/testandoJest.test.js
             benchmarkName = "MeuTestJest";
             console.log("Executando analise do meu teste simples em Jest");
-            pathProjectFolder = path.join(config.BENCHMARK_PATH, "meuDatasetParaTestes/testesJest");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "meuDatasetParaTestes/testesJest");
             testFile = "teste/testandoJest.test.js";
             parameters = "--runInBand"; // Roda os testes sequenciamente (em batch), e não paralelamente
             isMocha = false;
@@ -61,21 +60,21 @@ function chosenProjectFunction() {
         case "MeuTestVerificarRuntimes":
             benchmarkName = "MeuTestVerificarRuntimes";
             console.log("Executando analise do runtime");
-            pathProjectFolder = path.join(config.BENCHMARK_PATH, "meuDatasetParaTestes/testesVerificarTempo");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "meuDatasetParaTestes/testesVerificarTempo");
             testFile = "test/test.js";
             break;
 
         case "MeuTestAsyncFunctions":
             benchmarkName = "MeuTestAsyncFunctions";
             console.log("Executando analise do async functions");
-            pathProjectFolder = path.join(config.BENCHMARK_PATH, "meuDatasetParaTestes/testarAsyncfunctions");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "meuDatasetParaTestes/testarAsyncfunctions");
             testFile = "test/test.js";
             break;
 
         case "MeuTestAwait":
             benchmarkName = "MeuTestAwait";
             console.log("Executando analise do teste com await para medir o tempo de functions com tempo > 100 ms");
-            pathProjectFolder = path.join(config.BENCHMARK_PATH, "meuDatasetParaTestes/coletarTempoFunctions");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "meuDatasetParaTestes/coletarTempoFunctions");
             testFile = "test/";
             parameters = "-t 50000";
             break;
@@ -87,7 +86,7 @@ function chosenProjectFunction() {
         case "FPS": // known-bugs
             benchmarkName = "fiware-pep-steelskin";
             console.log("Executando analise do fiware-pep-steelskin");
-            pathProjectFolder = path.join(config.BENCHMARK_PATH, "datasetDoNodeRacer/known-bugs/fiware-pep-steelskin");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "datasetDoNodeRacer/known-bugs/fiware-pep-steelskin");
             //testFile = "test/unit/race_simple.js";
             testFile = "test/unit";
             parameters = "--timeout 5000";
@@ -97,14 +96,14 @@ function chosenProjectFunction() {
         case "NES": // known-bugs
             benchmarkName = "nes";
             console.log("Executando analise do nes");
-            pathProjectFolder = path.join(config.BENCHMARK_PATH, "datasetDoNodeRacer/known-bugs/nes");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "datasetDoNodeRacer/known-bugs/nes");
             testFile = "test/client_TP.js";
             break;
 
         case "DEL": // known-bugs, funciona muito bem, porem estou usando outro arquivo como entrypoint para teste
             benchmarkName = "del";
             console.log("Executando analise do del");
-            pathProjectFolder = path.join(config.BENCHMARK_PATH, "datasetDoNodeRacer/known-bugs/del");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "datasetDoNodeRacer/known-bugs/del");
             testFile = "test.js";
             break;
 
@@ -112,7 +111,7 @@ function chosenProjectFunction() {
         case "XLS": // known-bugs
             benchmarkName = "xlsx-extract";
             console.log("Executando analise do xls");
-            pathProjectFolder = path.join(config.BENCHMARK_PATH, "datasetDoNodeRacer/known-bugs/xlsx-extract");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "datasetDoNodeRacer/known-bugs/xlsx-extract");
             testFile = "test/tests.js";
             parameters = "--timeout 20000";
             break;
@@ -126,7 +125,7 @@ function chosenProjectFunction() {
 
         case "ME": // Mongo-express
             benchmarkName = "mongo-express";
-            pathProjectFolder = path.join(config.BENCHMARK_PATH, "datasetDoNodeRacer/exploratory/mongo-express");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "datasetDoNodeRacer/exploratory/mongo-express");
             testFile = "test/lib";
             parameters = "--exit -t 10000";
 
@@ -138,7 +137,7 @@ function chosenProjectFunction() {
 
         case "NEDB":
             benchmarkName = "nedb";
-            pathProjectFolder = path.join(config.BENCHMARK_PATH, "datasetDoNodeRacer/exploratory/nedb");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "datasetDoNodeRacer/exploratory/nedb");
             testFile = "test/db.test.js";
             //testFile = "test/";
             parameters = `--exit -t 20000`;
@@ -148,7 +147,7 @@ function chosenProjectFunction() {
 
         case "ARC":
             benchmarkName = "node-archiver";
-            pathProjectFolder = path.join(config.BENCHMARK_PATH, "datasetDoNodeRacer/exploratory/node-archiver/");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "datasetDoNodeRacer/exploratory/node-archiver/");
             //testFile = "test/archiver.js";
             testFile = "test/"
             parameters = `--exit -t 10000`;
@@ -157,7 +156,7 @@ function chosenProjectFunction() {
 
         case "OBJ":
             benchmarkName = "objection.js";
-            pathProjectFolder = path.join(config.BENCHMARK_PATH, "datasetDoNodeRacer/exploratory/objection.js");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "datasetDoNodeRacer/exploratory/objection.js");
             testFile = "tests/unit/utils.js";
             parameters = "--exit -t 10000";
 
@@ -171,7 +170,7 @@ function chosenProjectFunction() {
         // (tem 101 testes)
         case "FS_EXTRA":
             benchmarkName = "fs-extra";
-            pathProjectFolder = path.join(config.BENCHMARK_PATH, "fs-extra/jprichardson_node-fs-extra/");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "fs-extra/jprichardson_node-fs-extra/");
             testFile = "lib";
 
             // testFile = "lib/ensure/__tests__/link.test.js";
@@ -187,7 +186,7 @@ function chosenProjectFunction() {
         // NNNN OTHER PROJECTS
         case "ZEN":
             benchmarkName = "zenparsing";
-            pathProjectFolder = path.join(config.BENCHMARK_PATH, "nnnnOtherProjects/zenparsing_zen-observable-20250224T152549Z-001/zenparsing_zen-observable");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "nnnnOtherProjects/zenparsing_zen-observable-20250224T152549Z-001/zenparsing_zen-observable");
             testFile = "test";
             parameters = "--exit -t 10000";
 

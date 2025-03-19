@@ -3,7 +3,6 @@
 const fs = require('fs');
 const path = require('path');
 const shell = require('shelljs');
-const config = require('./NodeRockConfig.js');
 
 
 // const destinationCopyFolder = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
@@ -12,10 +11,12 @@ const destinationCopyFolder = path.join(__dirname,"../collectedTracesFolder");
 // const CUSTOM_REPORTER = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/entrypoint_NodeRock/mochaReporter.js";
 const CUSTOM_REPORTER = path.join(__dirname,"mochaReporter.js");
 
+const ROOT_PATH_NODEROCK = path.join(__dirname, "../");
+
+
 function getTestsNames(pathProjectFolder, testFile, parameters) {
     
     const NODEROCK_INFO_PATH = path.join(pathProjectFolder, "NodeRock_Info");
-
 
     if (!fs.existsSync(NODEROCK_INFO_PATH)) {
 
@@ -44,7 +45,8 @@ function getTestsNames(pathProjectFolder, testFile, parameters) {
         // shell.exec(`./node_modules/.bin/_mocha --exit -t 20000 test/db.test.js -R ${CUSTOM_REPORTER}`, {silent: false}); // SOMENTE PARA O NEDB
         // shell.exec(`./node_modules/.bin/_mocha ${testFile} ${parameters} -R ${CUSTOM_REPORTER}`, {silent: false}); // para o fps
         // shell.exec(`mocha --recursive --require ./scripts/mocha-require`) // PARA O ZENPARSING
-        shell.cd(`${config.NODEROCK_ROOT_PATH}`);
+        //shell.cd("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource");
+        shell.cd(ROOT_PATH_NODEROCK);
 
         const testsJSON = fs.readFileSync(path.join(destinationCopyFolder, "temporaryPassingTests.json.log"), 'utf8');
         const testsObject = JSON.parse(testsJSON);
