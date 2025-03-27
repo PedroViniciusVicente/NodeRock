@@ -1,0 +1,11 @@
+BenchmarkName,TestFilePath,TestCaseName,QuantidadeRotulosPositivo
+almost,/home/pedroubuntu/Downloads/nacd/almost_through2-concurrent/tests.js,through2-concurrent object streams should initiially allow the maximum specified concurrency,0
+almost,/home/pedroubuntu/Downloads/nacd/almost_through2-concurrent/tests.js,through2-concurrent object streams should feed more through once the concurrency drops below the given limit,1
+almost,/home/pedroubuntu/Downloads/nacd/almost_through2-concurrent/tests.js,through2-concurrent object streams should wait for all transform calls to finish before running final and flush when processing > concurrency,5
+almost,/home/pedroubuntu/Downloads/nacd/almost_through2-concurrent/tests.js,through2-concurrent object streams should wait for all transform calls to finish before running final and flush when processing < concurrency,5
+almost,/home/pedroubuntu/Downloads/nacd/almost_through2-concurrent/tests.js,through2-concurrent object streams should wait for everything to complete before emitting "finish",0
+almost,/home/pedroubuntu/Downloads/nacd/almost_through2-concurrent/tests.js,through2-concurrent object streams should wait for everything to complete before emitting "end",0
+almost,/home/pedroubuntu/Downloads/nacd/almost_through2-concurrent/tests.js,through2-concurrent object streams should pass down the stream data added with this.push,2
+almost,/home/pedroubuntu/Downloads/nacd/almost_through2-concurrent/tests.js,through2-concurrent object streams should pass down the stream data added as arguments to the callback,1
+almost,/home/pedroubuntu/Downloads/nacd/almost_through2-concurrent/tests.js,through2-concurrent object streams without a flush argument or final option should wait for everything to complete before emitting "finish",0
+almost,/home/pedroubuntu/Downloads/nacd/almost_through2-concurrent/tests.js,through2-concurrent object streams without a flush argument or final option should wait for everything to complete before emitting "end",0

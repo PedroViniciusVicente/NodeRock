@@ -1,0 +1,88 @@
+BenchmarkName,TestFilePath,TestCaseName,QuantidadeRotulosPositivo
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/DLList.js,DLList Should be created and be empty,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/DLList.js,DLList Should be possible to append once,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/DLList.js,DLList Should be possible to append multiple times,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/DLList.js,DLList Should be possible to shift an empty list,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/DLList.js,DLList Should be possible to append then shift once,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/DLList.js,DLList Should be possible to append then shift multiple times,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/DLList.js,DLList Should pass a full test,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/DLList.js,DLList Should return the first value without shifting,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/batcher.js,Batcher Should batch by time and size,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/batcher.js,Batcher Should batch by time,2
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/batcher.js,Batcher Should batch by size,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/batcher.js,Batcher Should stagger flushes,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/batcher.js,Batcher Should force then stagger flushes,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Should prompt to upgrade,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Should allow null capacity,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Should keep scope,2
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Should pass multiple arguments back even on errors when using submit(),0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Should expose the Events library,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Counts and statuses Should check() and return the queued count with and without a priority value,2
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Counts and statuses Should return the running and done counts,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Counts and statuses Should refuse duplicate Job IDs,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Counts and statuses Should return job statuses,2
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Counts and statuses Should return jobs for a status,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Counts and statuses Should trigger events on status changes,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Events Should return itself,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Events Should fire events on empty queue,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Events Should fire events once,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Events Should support faulty event listeners,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Events Should wait for async event listeners,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General High water limit Should support highWater set to 0,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General High water limit Should support highWater set to 1,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Weight Should not add jobs with a weight above the maxConcurrent,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Weight Should support custom job weights,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Weight Should overflow at the correct rate,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Expiration Should cancel jobs,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Pubsub Should pass strings,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Pubsub Should pass objects,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Reservoir Refresh Should auto-refresh the reservoir,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Reservoir Refresh Should allow staggered X by Y type usage,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Reservoir Refresh Should keep process alive until queue is empty,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Reservoir Increase Should auto-increase the reservoir,5
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Reservoir Increase Should auto-increase the reservoir up to a maximum,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Reservoir Increase Should allow staggered X by Y type usage,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/general.js,General Reservoir Increase Should keep process alive until queue is empty,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/group.js,Group Should create limiters,4
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/group.js,Group Should set up the limiter IDs (default),0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/group.js,Group Should set up the limiter IDs (custom),0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/group.js,Group Should pass new limiter to 'created' event,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/group.js,Group Should pass error on failure,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/group.js,Group Should update its timeout,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/group.js,Group Should update its limiter options,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/group.js,Group Should call autocleanup,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/priority.js,Priority Should do basic ordering,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/priority.js,Priority Should support LEAK,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/priority.js,Priority Should support OVERFLOW,4
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/priority.js,Priority Should support OVERFLOW_PRIORITY,2
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/priority.js,Priority Should support BLOCK,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/priority.js,Priority Should have the right priority,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/promises.js,Promises Should support promises,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/promises.js,Promises Should pass error on failure,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/promises.js,Promises Should allow non-Promise returns,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/promises.js,Promises Should get rejected when rejectOnDrop is true,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/promises.js,Promises Should automatically wrap an exception in a rejected promise - schedule(),0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/promises.js,Promises Wrap Should wrap,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/promises.js,Promises Wrap Should automatically wrap a returned value in a resolved promise,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/promises.js,Promises Wrap Should automatically wrap an exception in a rejected promise,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/promises.js,Promises Wrap Should inherit the original target for wrapped methods,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/promises.js,Promises Wrap Should inherit the original target on prototype methods,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/promises.js,Promises Wrap Should pass errors back,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/promises.js,Promises Wrap Should allow passing options,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/retries.js,Retries Should retry when requested by the user (sync),4
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/retries.js,Retries Should retry when requested by the user (async),2
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/retries.js,Retries Should not retry when user returns an error (sync),2
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/retries.js,Retries Should not retry when user returns an error (async),2
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/retries.js,Retries Should not retry when user returns null (sync),3
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/retries.js,Retries Should not retry when user returns null (async),2
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/states.js,States Should be created and be empty,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/states.js,States Should start new series,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/states.js,States Should increment,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/states.js,States Should remove,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/states.js,States Should return current status,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/states.js,States Should return job ids for a status,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/stop.js,Stop Should stop and drop the queue,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/stop.js,Stop Should stop and let the queue finish,1
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/stop.js,Stop Should still resolve when rejectOnDrop is false,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/stop.js,Stop Should not allow calling stop() twice when dropWaitingJobs=true,0
+SGrodin,/home/pedroubuntu/Downloads/nacd/SGrondin_bottleneck/test/stop.js,Stop Should not allow calling stop() twice when dropWaitingJobs=false,0

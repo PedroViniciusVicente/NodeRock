@@ -13,7 +13,7 @@ function chosenProjectFunction() {
 
 
     // let chosenProject = "MeuTestVerificarRuntimes";
-    let chosenProject = "ARC";
+    let chosenProject = "ANIMIR";
 
 
     switch (chosenProject) {
@@ -184,13 +184,41 @@ function chosenProjectFunction() {
             break;
 
         // NNNN OTHER PROJECTS
-        case "ZEN":
-            benchmarkName = "zenparsing";
-            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "nnnnOtherProjects/zenparsing_zen-observable-20250224T152549Z-001/zenparsing_zen-observable");
+
+        case "ALMOST":
+            benchmarkName = "almost";
+            pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/almost_through2-concurrent");
+            testFile = "tests";
+            parameters = "--exit -t 10000";
+            break;
+
+        case "QINGWEI":
+            benchmarkName = "QingWei";
+            pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/QingWei-Li_docsify");
             testFile = "test";
             parameters = "--exit -t 10000";
+            break;
 
-            raceConditionTests.push("utils promiseUtils map should not start new operations after an error has been thrown");
+        case "SGRODIN":
+            benchmarkName = "SGrodin";
+            pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/SGrondin_bottleneck");
+            testFile = "test";
+            parameters = "--exit -t 10000";
+            break;
+            
+
+        case "SWAAGIE":
+            benchmarkName = "Swaagie_minimize";
+            pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/Swaagie_minimize");
+            testFile = "test";
+            parameters = "--exit -t 10000";
+            break;
+
+        case "ANIMIR":
+            benchmarkName = "animir_node-rate-limiter-flexible";
+            pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/animir_node-rate-limiter-flexible");
+            testFile = "test";
+            parameters = "--exit -t 10000";
             break;
 
         default:

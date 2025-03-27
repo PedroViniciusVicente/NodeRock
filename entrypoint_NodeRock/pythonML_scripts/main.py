@@ -4,6 +4,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
+import csv
 
 # Normalização Min-Max
 from sklearn.preprocessing import MinMaxScaler
@@ -155,8 +156,15 @@ for i in range(len(x_entrada_scaled)):
 df_testsInfo['QuantidadeRotulosPositivo'] = rotulo_previsto
 # print(df_testsInfo)
 
-df_testsInfo.to_csv('collectedResultsMLFolder/resultados_testes.csv')
+# df_testsInfo.to_csv('collectedResultsMLFolder/resultados_testes.csv')
 
+# Fix the problem that pandas double quotes (""testname"") if testname already had quotes. For example in: almost_through2-concurrent
+df_testsInfo.to_csv(
+    'collectedResultsMLFolder/resultados_testes.csv',
+    index=False,
+    quoting=csv.QUOTE_NONE,  # Do not unnecessarily quote fields
+    escapechar='\\'  # Escape special characters instead of adding extra quotes
+)
 
 
 print("finalizou")

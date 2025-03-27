@@ -45,28 +45,30 @@ function generateCSV(pathProjectFolder, benchmarkName, testsRespectiveFile, test
 
     // Adding the data to csv
     for (let i = 0; i < rawFeaturesObject.length; i++) {
-
-        const line = [benchmarkName, testsRespectiveFile[i], testsOriginalFullNameList[i],
-        rawFeaturesObject[i].InvokeFunPre_Count, normalizedFeaturesObject[i].InvokeFunPre_Count,
-        rawFeaturesObject[i].Invokes_with_callback, normalizedFeaturesObject[i].Invokes_with_callback,
-        rawFeaturesObject[i].Cbs_Total_delay_ms, normalizedFeaturesObject[i].Cbs_Total_delay_ms,
-        rawFeaturesObject[i].Cb_Delays_Greater_Than_100_ms, normalizedFeaturesObject[i].Cb_Delays_Greater_Than_100_ms,
-        rawFeaturesObject[i].InvokesInterval_Greater_Than_100_ms, normalizedFeaturesObject[i].InvokesInterval_Greater_Than_100_ms,
-        rawFeaturesObject[i].AsyncFunction_Count, normalizedFeaturesObject[i].AsyncFunction_Count,
-        rawFeaturesObject[i].Await_Count, normalizedFeaturesObject[i].Await_Count,
-        rawFeaturesObject[i].Unique_Asynchook_ids, normalizedFeaturesObject[i].Unique_Asynchook_ids,
-
-        monkeyPatchedPromisesData[i].totalSettledPromises, normalizedFeaturesObject[i].totalSettledPromises,
-        monkeyPatchedPromisesData[i].avgResolved, normalizedFeaturesObject[i].avgResolved,
-        monkeyPatchedPromisesData[i].avgRejected, normalizedFeaturesObject[i].avgRejected,
-        monkeyPatchedPromisesData[i].longestResolved, normalizedFeaturesObject[i].longestResolved,
-        monkeyPatchedPromisesData[i].resolvedPercentage, normalizedFeaturesObject[i].resolvedPercentage,
-        awaitIntervalsFromTests[i], normalizedFeaturesObject[i].awaitIntervals,
-
-        testsTotalDuration[i], rawFeaturesObject[i].hasEventRace];
-
+        const line = [
+            benchmarkName, testsRespectiveFile[i], testsOriginalFullNameList[i],
+            rawFeaturesObject[i].InvokeFunPre_Count, normalizedFeaturesObject[i].InvokeFunPre_Count,
+            rawFeaturesObject[i].Invokes_with_callback, normalizedFeaturesObject[i].Invokes_with_callback,
+            rawFeaturesObject[i].Cbs_Total_delay_ms, normalizedFeaturesObject[i].Cbs_Total_delay_ms,
+            rawFeaturesObject[i].Cb_Delays_Greater_Than_100_ms, normalizedFeaturesObject[i].Cb_Delays_Greater_Than_100_ms,
+            rawFeaturesObject[i].InvokesInterval_Greater_Than_100_ms, normalizedFeaturesObject[i].InvokesInterval_Greater_Than_100_ms,
+            rawFeaturesObject[i].AsyncFunction_Count, normalizedFeaturesObject[i].AsyncFunction_Count,
+            rawFeaturesObject[i].Await_Count, normalizedFeaturesObject[i].Await_Count,
+            rawFeaturesObject[i].Unique_Asynchook_ids, normalizedFeaturesObject[i].Unique_Asynchook_ids,
+    
+            monkeyPatchedPromisesData[i]?.totalSettledPromises ?? 0, normalizedFeaturesObject[i]?.totalSettledPromises ?? 0,
+            monkeyPatchedPromisesData[i]?.avgResolved ?? 0, normalizedFeaturesObject[i]?.avgResolved ?? 0,
+            monkeyPatchedPromisesData[i]?.avgRejected ?? 0, normalizedFeaturesObject[i]?.avgRejected ?? 0,
+            monkeyPatchedPromisesData[i]?.longestResolved ?? 0, normalizedFeaturesObject[i]?.longestResolved ?? 0,
+            monkeyPatchedPromisesData[i]?.resolvedPercentage ?? 0, normalizedFeaturesObject[i]?.resolvedPercentage ?? 0,
+            awaitIntervalsFromTests?.[i] ?? 0, normalizedFeaturesObject[i]?.awaitIntervals ?? 0,
+    
+            testsTotalDuration[i], rawFeaturesObject[i].hasEventRace
+        ];
+    
         lines.push(line.join(','));
     }
+    
 
     // Unir as linhas em uma string com quebras de linha
     const dataCSV = lines.join('\n');
