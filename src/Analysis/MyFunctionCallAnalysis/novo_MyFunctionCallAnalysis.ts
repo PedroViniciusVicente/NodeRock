@@ -27,8 +27,8 @@ export class MyFunctionCallAnalysis extends Analysis {
 
     constructor(sandbox: Sandbox) {
         super(sandbox);
-        MyFunctionCallAnalysis.pathLogHooks = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/MyFunctionCallAnalysis/logHooks.json";
-        console.log(path.join(__dirname,"../logHooks.json"));
+        MyFunctionCallAnalysis.pathLogHooks = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/NodeRock_src/FoldersUsedDuringExecution/temporary_logHooks/logHooks.json";
+        // console.log(path.join(__dirname,"../logHooks.json"));
     }
 
     protected override registerHooks() {

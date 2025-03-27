@@ -113,8 +113,8 @@ export class MyFunctionCallAnalysis extends Analysis {
         //console.log("Starting registerHooks from MyFunctionCallAnalysis:");
         
         // -=+=- Initializing with the right path to the file address -=+=-
-        // MyFunctionCallAnalysis.pathLogHooks = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/MyFunctionCallAnalysis/logHooks.json";
-        MyFunctionCallAnalysis.pathLogHooks = path.join(__dirname,"../src/Analysis/MyFunctionCallAnalysis/logHooks.json");
+        MyFunctionCallAnalysis.pathLogHooks = path.join(__dirname,"../NodeRock_src/FoldersUsedDuringExecution/temporary_logHooks/logHooks.json");
+        //console.log("\n\nPATH DO LOGHOOKS EH: \n", __dirname); // /home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/dist
 
         // -=+=- Detecting and registering hooks -=+=-
         //console.log("Calling all hooks!");

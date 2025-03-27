@@ -1,13 +1,13 @@
 // Customized Mocha report to collect all passing tests
-// PRECISA REVER COMO PEGAR O DESTINATIONFOLDER DIRETO PRA NÃO PRECISAR ESCREVER ARQUIVO TEMPORARIO EM: 
-// /home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/temporaryPassingTests.json.log
+// PRECISA REVER COMO PASSAR O temporary_TestsNamesAndFiles DIRETO PARA O NodeRock_Info PRA NÃO PRECISAR ESCREVER ARQUIVO TEMPORARIO EM: 
+// /home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/NodeRock_src/FoldersUsedDuringExecution/temporary_TestsNamesAndFiles/temporaryPassingTests.json.log
 
 const fs = require('fs');
 const Mocha = require('mocha');
 const path = require('path');
 
-// const destinationCopyFolder = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
-const destinationCopyFolder = path.join(__dirname,"../collectedTracesFolder");
+// const TEMPORARY_TESTS_NAMES_AND_FILES = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/NodeRock_src/FoldersUsedDuringExecution/temporary_TestsNamesAndFiles/";
+const TEMPORARY_TESTS_NAMES_AND_FILES = path.join(__dirname,"../NodeRock_src/FoldersUsedDuringExecution/temporary_TestsNamesAndFiles");
 
 const Base = Mocha.reporters.Base;
 const {
@@ -42,13 +42,13 @@ function MochaReporter(runner, options) {
         //console.log('mocha ends: %d-%d / %d', runner.stats.passes, runner.stats.failures, runner.stats.tests);
 
         // console.log("ACHOU O: ", JSON.stringify(passedTests, null, 4));
-        // console.log("\nCHEGOU O PATH PARA CRIAR O PASSINGTESTS.JSON.LOG:", destinationCopyFolder);
+        // console.log("\nCHEGOU O PATH PARA CRIAR O PASSINGTESTS.JSON.LOG:", TEMPORARY_TESTS_NAMES_AND_FILES);
 
-        fs.writeFileSync(path.join(destinationCopyFolder, "temporaryPassingTests.json.log"), JSON.stringify(passedTests, null, 4), 'utf8');
+        fs.writeFileSync(path.join(TEMPORARY_TESTS_NAMES_AND_FILES, "temporaryPassingTests.json.log"), JSON.stringify(passedTests, null, 4), 'utf8');
 
         /*
-        ** console.log("o destination eh: ", destinationCopyFolder);
-        ** let passedTestsJsonPath = destinationCopyFolder + "passingTests.json.log";
+        ** console.log("o destination eh: ", TEMPORARY_TESTS_NAMES_AND_FILES);
+        ** let passedTestsJsonPath = TEMPORARY_TESTS_NAMES_AND_FILES + "passingTests.json.log";
         ** fs.writeFileSync(passedTestsJsonPath, JSON.stringify(passedTests, null, 4), 'utf8');
         */
     });

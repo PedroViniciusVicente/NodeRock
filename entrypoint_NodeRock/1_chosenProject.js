@@ -13,7 +13,7 @@ function chosenProjectFunction() {
 
 
     // let chosenProject = "MeuTestVerificarRuntimes";
-    let chosenProject = "ANIMIR";
+    let chosenProject = "MeuTestMocha";
 
 
     switch (chosenProject) {

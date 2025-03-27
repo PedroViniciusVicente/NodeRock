@@ -15,7 +15,18 @@ const { executePythonML } = require('./10_executePythonML');
 const { executeRaceDetection } = require('./11_executeRaceDetection');
 
 
-shell.echo("COMECOU!");
+const startingNodeRockText = "____  _             _   _                   \n" +
+"/ ___|| |_ __ _ _ __| |_(_)_ __   __ _       \n" +
+"\\___ \\| __/ _' | '__| __| | '_ \\ / _' |      \n" +
+" ___) | || (_| | |  | |_| | | | | (_| |      \n" +
+"|____/ \\__\\__,_|_|   \\__|_|_| |_|\\__, |      \n" +
+" _   _           _      ____     |___/  _    \n" +
+"| \\ | | ___   __| | ___|  _ \\ ___   ___| | __\n" +
+"|  \\| |/ _ \\ / _' |/ _ \\ |_) / _ \\ / __| |/ /\n" +
+"| |\\  | (_) | (_| |  __/  _ < (_) | (__|   < \n" +
+"|_| \\_|\\___/ \\__,_|\\___|_| \\_\\___/ \\___|_|\\_\\";
+
+console.log(startingNodeRockText + "\n\n");
 
 let rodarTestesCompleto = true; // true para caso tenha testes e false para caso seja script
 if(rodarTestesCompleto) {
@@ -34,7 +45,7 @@ if(rodarTestesCompleto) {
     // }
 
 
-    // 3. Executing the tests individually and placing theirs traces in collectedTracesFolder
+    // 3. Executing the tests individually and placing theirs traces in NodeRock_Info/TracesFolder from loghooks.json
     const testsTotalDuration = executeTests(chosenProject.pathProjectFolder, tests.testsFullNameList, tests.testsRespectiveFile, chosenProject);
     // for(let i = 0; i < testsTotalDuration.length; i++) {
     //     console.log("Duracao foi: ", testsTotalDuration[i]);
@@ -140,7 +151,7 @@ else {
     // let completCommand = "node ./dist/bin/nodeprof.js" + " " + pathProjectFolder + " " + testFile + " " + parameters;
     const stringExecutedTest = shell.exec(completCommand);
     
-    const sourceCopyPath = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/src/Analysis/MyFunctionCallAnalysis/logHooks.json";
+    const sourceCopyPath = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/NodeRock_src/FoldersUsedDuringExecution/temporary_logHooks/logHooks.json";
     let copiedFileName = "tracesFromIt_" + 0 + ".json";
     shell.cp(sourceCopyPath, path.join(NODEROCK_INFO_TRACES_PATH, copiedFileName));
     
@@ -221,4 +232,20 @@ touch collectedTracesFolder/tracesFromIt_0.json
 }
 
 
-shell.echo("TERMINOU!");
+const finishedNodeRockText = " _   _           _      ____            _    \n" +
+"| \\ | | ___   __| | ___|  _ \\ ___   ___| | __\n" +
+"|  \\| |/ _ \\ / _\` |/ _ \\ |_) / _ \\ / __| |/ /\n" +
+"| |\\  | (_) | (_| |  __/  _ < (_) | (__|   < \n" +
+"|_| \\_|\\___/ \\__,_|\\___|_| \\_\\___/ \\___|_|\\_\\\n" +
+"    _                _           _           \n" +
+"   / \\   _ __   __ _| |_   _ ___(_)___       \n" +
+"  / _ \\ | '_ \\ / _\` | | | | / __| / __|      \n" +
+" / ___ \\| | | | (_| | | |_| \\__ \\ \\__ \\      \n" +
+"/_/   \\_\\_| |_|\\__,_|\\|\\__, |___/_|___/      \n" +
+" _____ _       _     _ |___/        _ _      \n" +
+"|  ___(_)_ __ (_)___| |__   ___  __| | |     \n" +
+"| |_  | | '_ \\| / __| '_ \\ / _ \\/ _\` | |     \n" +
+"|  _| | | | | | \\__ \\ | | |  __/ (_| |_|     \n" +
+"|_|   |_|_| |_|_|___/_| |_|\\___|\\__,_(_)";
+
+console.log(finishedNodeRockText + "\n");

@@ -170,6 +170,7 @@ Temporary Items
 
 # My Log Files that are too big to go to github
 src/Analysis/MyFunctionCallAnalysis/logHooks.json
+NodeRock_src/FoldersUsedDuringExecution/temporary_logHooks/logHooks.json
 src/Analysis/MyFunctionCallAnalysis/logExpress.json
 src/Analysis/MyFunctionCallAnalysis/logHooksComScopeModule.json
 src/Analysis/MyFunctionCallAnalysis/logHooksComScopeAll.json
@@ -194,9 +195,22 @@ collectedTracesFolder*
 collectedTracesFolder*/
 collectedCsvFolder/
 
+collectedResultsMLFolder/ALMOSTresultados_testes.csv
+collectedResultsMLFolder/ANIMIRresultados_testes.csv
+collectedResultsMLFolder/QINGresultados_testes.csv
+collectedResultsMLFolder/SGRODINresultados_testes.csv
+collectedResultsMLFolder/SWAGGIEresultados_testes.csv
+
+collectedResultsRaceDetectionFolder/ANIMIRraceDetectionCSV.csv
+collectedResultsRaceDetectionFolder/QingraceDetectionCSV.csv
+collectedResultsRaceDetectionFolder/SGRODINraceDetectionCSV.csv
+collectedResultsRaceDetectionFolder/SWAAGIEraceDetectionCSV.csv
+
+
 
 CsvFsExtra/
 
 promise_logs/promises.json
 
 entrypoint_NodeRock/11_executeRaceDetection.js
+NodeRock_src/FoldersUsedDuringExecution/

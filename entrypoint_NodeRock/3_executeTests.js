@@ -1,10 +1,10 @@
-// 3. Executing the tests individually and placing theirs traces in collectedTracesFolder
+// 3. Executing the tests individually and placing theirs traces in NodeRock_Info/TracesFolder from loghooks.json
 
 const shell = require('shelljs');
 const fs = require('fs');
 const path = require('path');
 
-const sourceCopyPath = path.join(__dirname,"../src/Analysis/MyFunctionCallAnalysis/logHooks.json");
+const sourceCopyPath = path.join(__dirname,"../NodeRock_src/FoldersUsedDuringExecution/temporary_logHooks/logHooks.json");
 
 function executeTests(pathProjectFolder, testsFullNameList, testsRespectiveFile, chosenProject) {
 

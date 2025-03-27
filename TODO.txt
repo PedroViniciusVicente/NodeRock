@@ -1,0 +1,8 @@
+Resolver o problema do csv de quando o teste tem virgula no nome aí ele ocupa dois espaços (talvez é só colocar entre aspas o nome do teste)
+Colocar o resto das coisas do noderock dentro da pasta noderock_src para organizar melhor
+Organizar para que o maximo de info possivel fique armazenado em arquivos e nao na ram
+Criar os letreiros para ir mostrando os steps da execução mais claramente, igual no vscode extension -> https://www.asciiart.eu/
+Verificar se deleta ou não o package-lock.json, pois em teoria já esta usando o yarn, então não precisaria do npm (eu acho)
+Remover a normalização do javascript e deixar para o python lidar com isso
+Ajeitar o funcionamento do monkeypatching, indo desde nome correto dos testes (talvez ver se precisa trocar os caracteres especiais por .* ou algo assim) e funcionamento geral (uso do truncate??, etc)
+Remover as pastas e arquivos inuteis do NodeRT (principalmente aquele que cria o violations.json, visto que não é mais usado)

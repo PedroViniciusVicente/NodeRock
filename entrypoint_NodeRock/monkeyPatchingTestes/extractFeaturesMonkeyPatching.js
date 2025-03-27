@@ -2,7 +2,9 @@ const fs = require('fs');
 
 
 function extractedFeaturesMonkeyPatching() {
-    const data = fs.readFileSync('promise_logs/promises.json', 'utf-8');
+    // const data = fs.readFileSync('promise_logs/promises.json', 'utf-8');
+    const data = fs.readFileSync('NodeRock_src/FoldersUsedDuringExecution/temporary_promises_logs/promises.json', 'utf-8');
+
 
     try {
         const promises = JSON.parse(data);

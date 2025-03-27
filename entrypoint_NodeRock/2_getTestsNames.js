@@ -5,12 +5,13 @@ const path = require('path');
 const shell = require('shelljs');
 
 
-// const destinationCopyFolder = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/collectedTracesFolder/";
-const destinationCopyFolder = path.join(__dirname,"../collectedTracesFolder");
+// "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/NodeRock_src/FoldersUsedDuringExecution/temporary_TestsNamesAndFiles";
+const TEMPORARY_TESTS_NAMES_AND_FILES = path.join(__dirname,"../NodeRock_src/FoldersUsedDuringExecution/temporary_TestsNamesAndFiles");
 
-// const CUSTOM_REPORTER = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/entrypoint_NodeRock/mochaReporter.js";
+// "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/entrypoint_NodeRock/mochaReporter.js";
 const CUSTOM_REPORTER = path.join(__dirname,"mochaReporter.js");
 
+// "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource";
 const ROOT_PATH_NODEROCK = path.join(__dirname, "../");
 
 
@@ -26,10 +27,6 @@ function getTestsNames(pathProjectFolder, testFile, parameters) {
     } else {
         console.log(`\nNodeRock_Info folder already exists in ${pathProjectFolder}\n`);
     }
-
-    // TALVEZ SUBSTITUIR POR UM fs.truncateSync('destinationCopyFolder', 0); COMPARAR SE É MAIS RAPIDO
-    shell.rm('-rf', destinationCopyFolder);
-    shell.mkdir(destinationCopyFolder);
 
 
     const PASSING_TESTS_PATH = path.join(pathProjectFolder, "NodeRock_Info", "passingTests.json.log");
@@ -48,7 +45,7 @@ function getTestsNames(pathProjectFolder, testFile, parameters) {
         //shell.cd("/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource");
         shell.cd(ROOT_PATH_NODEROCK);
 
-        const testsJSON = fs.readFileSync(path.join(destinationCopyFolder, "temporaryPassingTests.json.log"), 'utf8');
+        const testsJSON = fs.readFileSync(path.join(TEMPORARY_TESTS_NAMES_AND_FILES, "temporaryPassingTests.json.log"), 'utf8');
         const testsObject = JSON.parse(testsJSON);
 
         fs.writeFileSync(PASSING_TESTS_PATH, JSON.stringify(testsObject, null, 4), 'utf8');
@@ -94,9 +91,10 @@ function getTestsNames(pathProjectFolder, testFile, parameters) {
     // SUGESTAO: TALVEZ SEJA NECESSARIO FAZER ESSAS MESMAS ALTERACOES NAS STRINGS DOS TESTES QUE JA SAO SABIDOS COMO TENDO EVENT RACE NO 1_chosenProject.js
     for(let i = 0; i < testsFullNameList.length; i++) {
         
+        testsFullNameList[i] = testsFullNameList[i].replace(/\s/g, '\\ '); // Adiciona "\" antes dos espacos
+        testsFullNameList[i] = testsFullNameList[i].replace(/["'`+()[\]]/g, '.*'); // Substitui " ' ` + ( ) [ ] por .*
+        testsFullNameList[i] = testsFullNameList[i].replace(/[-<>]/g, '\\$&'); // Adiciona "\" antes de "-", "<", ">"
         testsFullNameList[i] = `"` + testsFullNameList[i] + `"`;
-        testsFullNameList[i] = testsFullNameList[i].replace(/\s/g, '\\ '); // Adicionando "\" antes dos espacos
-        testsFullNameList[i] = testsFullNameList[i].replace(/['`+\-()<>[\],]/g, '.*');
     }
 
     return {

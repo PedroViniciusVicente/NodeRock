@@ -21,7 +21,8 @@ function executeMonkeyPatching(testsRespectiveFile, testsFullNameList) {
     
     let extractedDataMonkeyTests = [];
     for(let i = 0; i < testsFullNameList.length; i++) {
-        fs.truncateSync('./promise_logs/promises.json', 0); // Zerando o conteudo do json em que se armazena as infos das promises
+        // fs.truncateSync('./promise_logs/promises.json', 0); // Zerando o conteudo do json em que se armazena as infos das promises
+        fs.truncateSync('./NodeRock_src/FoldersUsedDuringExecution/temporary_promises_logs/promises.json', 0); // Zerando o conteudo do json em que se armazena as infos das promises
 
         const command = `./node_modules/.bin/_mocha --exit -t 10000 --require ./entrypoint_NodeRock/monkeyPatchingTestes/monkeypatching.js ${testsRespectiveFile[i]} -f ${correctTestsFullNameList[i]}`;
         // console.log(command);
