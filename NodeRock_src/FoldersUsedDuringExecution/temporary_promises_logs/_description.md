@@ -1,0 +1,1 @@
+# This folder only stores the temporary file that has the collected promises from the monkey patching of the corresponding test.

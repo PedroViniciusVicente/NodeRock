@@ -15,7 +15,7 @@ const { executePythonML } = require('./10_executePythonML');
 const { executeRaceDetection } = require('./11_executeRaceDetection');
 
 
-const startingNodeRockText = "____  _             _   _                   \n" +
+const startingNodeRockText ="____  _             _   _                   \n" +
 "/ ___|| |_ __ _ _ __| |_(_)_ __   __ _       \n" +
 "\\___ \\| __/ _' | '__| __| | '_ \\ / _' |      \n" +
 " ___) | || (_| | |  | |_| | | | | (_| |      \n" +
@@ -59,7 +59,7 @@ if(rodarTestesCompleto) {
     extractFeatures(chosenProject.pathProjectFolder, tests.testsFullNameList);
 
     // 6. Monkey Patching the promises to collect data about the promises executed
-    const monkeyPatchedPromisesData = executeMonkeyPatching(tests.testsRespectiveFile, tests.testsFullNameList);
+    const monkeyPatchedPromisesData = executeMonkeyPatching(tests.testsRespectiveFile, tests.testsOriginalFullNameList);
     // console.log("MONKEY PATCHING RESULTOU EM: ", monkeyPatchedPromisesData);
 
     // 7. Normalizing the extracted features before applying the ML methods

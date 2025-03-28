@@ -73,20 +73,9 @@ function generateCSV(pathProjectFolder, benchmarkName, testsRespectiveFile, test
     // Unir as linhas em uma string com quebras de linha
     const dataCSV = lines.join('\n');
 
-    const COLLECTED_CSV_PATH = path.resolve(__dirname, "../collectedCsvFolder");
-
-    if (!fs.existsSync(COLLECTED_CSV_PATH)) {
-
-        console.log(`\nCreating the collectedCsvFolder\n`);
-        fs.mkdirSync(COLLECTED_CSV_PATH);
-
-    } else {
-        console.log(`\nthe collectedCsvFolder already exists\n`);
-    }
-
     // Writing the CSV File
     const csvName = benchmarkName + ".csv";
-    const pathCSV = path.resolve(__dirname, "../collectedCsvFolder/data.csv");
+    const pathCSV = path.resolve(__dirname, "../FoldersUsedDuringExecution/collectedCsvFolder/data.csv");
     if (!fs.existsSync(pathCSV)) {
 
         console.log(`\nCreating the CSV file in collectedCsvFolder\n`);

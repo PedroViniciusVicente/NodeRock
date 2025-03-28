@@ -1,0 +1,1 @@
+# This folder only stores the temporary file that has the names and files of all the tests from the analyzed project.

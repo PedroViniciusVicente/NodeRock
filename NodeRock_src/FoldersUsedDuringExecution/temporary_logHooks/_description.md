@@ -1,0 +1,1 @@
+# This folder only stores the temporary file that has the collected traces from the corresponding test.

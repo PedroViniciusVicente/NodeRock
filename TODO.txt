@@ -1,6 +1,6 @@
 Resolver o problema do csv de quando o teste tem virgula no nome aí ele ocupa dois espaços (talvez é só colocar entre aspas o nome do teste)
 Colocar o resto das coisas do noderock dentro da pasta noderock_src para organizar melhor
-Organizar para que o maximo de info possivel fique armazenado em arquivos e nao na ram
+Organizar para que o maximo de info possivel fique armazenado em arquivos e nao na ram (Rever para que o nomes dos testes com caracteres especiais seja usado apenas quando necessário talvez)
 Criar os letreiros para ir mostrando os steps da execução mais claramente, igual no vscode extension -> https://www.asciiart.eu/
 Verificar se deleta ou não o package-lock.json, pois em teoria já esta usando o yarn, então não precisaria do npm (eu acho)
 Remover a normalização do javascript e deixar para o python lidar com isso

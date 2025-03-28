@@ -5,9 +5,7 @@ const OldPromise = global.Promise;
 let ___promiseIDCounter = 0;
 
 // Caminho para o arquivo JSON que armazenará todas as informações das promises
-// const logFilePath = path.resolve('./promise_logs/promises.json');
-const logFilePath = path.resolve('./NodeRock_src/FoldersUsedDuringExecution/temporary_promises_logs/promises.json');
-
+const logFilePath = path.join(__dirname, "../../FoldersUsedDuringExecution/temporary_promises_logs/promises.json");
 
 // Certifique-se de que o diretório para o arquivo JSON exista
 const logsDirectory = path.dirname(logFilePath);

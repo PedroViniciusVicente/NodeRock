@@ -4,7 +4,7 @@ const shell = require('shelljs');
 const fs = require('fs');
 const path = require('path');
 
-const sourceCopyPath = path.join(__dirname,"../NodeRock_src/FoldersUsedDuringExecution/temporary_logHooks/logHooks.json");
+const sourceCopyPath = path.join(__dirname,"../FoldersUsedDuringExecution/temporary_logHooks/logHooks.json");
 
 function executeTests(pathProjectFolder, testsFullNameList, testsRespectiveFile, chosenProject) {
 
@@ -26,7 +26,7 @@ function executeTests(pathProjectFolder, testsFullNameList, testsRespectiveFile,
         console.log("\nExecucao dos testes individualmente:");
         for(let i = 0; i < testsFullNameList.length; i++) {
             try {
-                semiCompleteCommand = "node ./dist/bin/nodeprof.js " + chosenProject.pathProjectFolder + " " + pathNode_modules + " " + testsRespectiveFile[i] + " " + chosenProject.parameters;
+                semiCompleteCommand = "node ../dist/bin/nodeprof.js " + chosenProject.pathProjectFolder + " " + pathNode_modules + " " + testsRespectiveFile[i] + " " + chosenProject.parameters;
 
                 // Diferenciando se o teste eh Mocha ou Jest
                 if(chosenProject.isMocha) {

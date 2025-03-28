@@ -1,0 +1,1 @@
+# This folder stores the results of the Machine Learning algorithms used.

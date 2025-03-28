@@ -6,7 +6,7 @@ const shell = require('shelljs');
 
 
 // "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/NodeRock_src/FoldersUsedDuringExecution/temporary_TestsNamesAndFiles";
-const TEMPORARY_TESTS_NAMES_AND_FILES = path.join(__dirname,"../NodeRock_src/FoldersUsedDuringExecution/temporary_TestsNamesAndFiles");
+const TEMPORARY_TESTS_NAMES_AND_FILES = path.join(__dirname,"../FoldersUsedDuringExecution/temporary_TestsNamesAndFiles");
 
 // "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/entrypoint_NodeRock/mochaReporter.js";
 const CUSTOM_REPORTER = path.join(__dirname,"mochaReporter.js");

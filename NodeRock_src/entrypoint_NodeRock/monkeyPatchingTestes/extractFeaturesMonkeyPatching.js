@@ -1,9 +1,11 @@
 const fs = require('fs');
+const path = require('path');
 
+const PROMISES_LOG_PATH = path.join(__dirname, "../../FoldersUsedDuringExecution/temporary_promises_logs/promises.json");
 
 function extractedFeaturesMonkeyPatching() {
     // const data = fs.readFileSync('promise_logs/promises.json', 'utf-8');
-    const data = fs.readFileSync('NodeRock_src/FoldersUsedDuringExecution/temporary_promises_logs/promises.json', 'utf-8');
+    const data = fs.readFileSync(PROMISES_LOG_PATH, 'utf-8');
 
 
     try {

@@ -1,0 +1,1 @@
+# This folder stores all the metrics collected by instrumenting the investigated project.

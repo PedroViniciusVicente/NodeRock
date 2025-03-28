@@ -1,0 +1,1 @@
+# This folder stores the results of the Race Detection software to know if there is any Race Condition in each test.

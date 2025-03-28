@@ -1,13 +1,13 @@
 // Customized Mocha report to collect all passing tests
-// PRECISA REVER COMO PASSAR O temporary_TestsNamesAndFiles DIRETO PARA O NodeRock_Info PRA NÃO PRECISAR ESCREVER ARQUIVO TEMPORARIO EM: 
+// PRECISA REVER COMO PASSAR O temporary_TestsNamesAndFiles DIRETO PARA O NodeRock_Info PARA NÃO PRECISAR ESCREVER ARQUIVO TEMPORARIO EM: 
 // /home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/NodeRock_src/FoldersUsedDuringExecution/temporary_TestsNamesAndFiles/temporaryPassingTests.json.log
 
 const fs = require('fs');
 const Mocha = require('mocha');
 const path = require('path');
 
-// const TEMPORARY_TESTS_NAMES_AND_FILES = "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/NodeRock_src/FoldersUsedDuringExecution/temporary_TestsNamesAndFiles/";
-const TEMPORARY_TESTS_NAMES_AND_FILES = path.join(__dirname,"../NodeRock_src/FoldersUsedDuringExecution/temporary_TestsNamesAndFiles");
+// "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/NodeRock_src/FoldersUsedDuringExecution/temporary_TestsNamesAndFiles";
+const TEMPORARY_TESTS_NAMES_AND_FILES = path.join(__dirname,"../FoldersUsedDuringExecution/temporary_TestsNamesAndFiles");
 
 const Base = Mocha.reporters.Base;
 const {

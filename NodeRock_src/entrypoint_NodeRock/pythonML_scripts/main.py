@@ -25,30 +25,30 @@ from sklearn.metrics import confusion_matrix, roc_auc_score, roc_curve, classifi
 # No futuro automatizar esse processo pra ele pegar todos os csv de csvBenchmarks automaticamente
 
 # -=+=- Known bugs -=+=-
-df_aka = pd.read_csv('./csvBenchmarks/dataAKA.csv')
-df_fps = pd.read_csv('./csvBenchmarks/dataFPS.csv')
-df_gho = pd.read_csv('./csvBenchmarks/dataGHO.csv')
-df_mkd = pd.read_csv('./csvBenchmarks/dataMKD.csv')
+df_aka = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataAKA.csv')
+df_fps = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataFPS.csv')
+df_gho = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataGHO.csv')
+df_mkd = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataMKD.csv')
 # nes
-df_nlf = pd.read_csv('./csvBenchmarks/dataNLF.csv')
-df_sio = pd.read_csv('./csvBenchmarks/dataSIO.csv')
-df_del = pd.read_csv('./csvBenchmarks/dataDel.csv')
-df_lst = pd.read_csv('./csvBenchmarks/dataLST.csv')
-df_nsc = pd.read_csv('./csvBenchmarks/dataNSC.csv')
+df_nlf = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataNLF.csv')
+df_sio = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataSIO.csv')
+df_del = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataDel.csv')
+df_lst = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataLST.csv')
+df_nsc = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataNSC.csv')
 # xls
 # -=+=- Open issues -=+=-
-df_blueblird = pd.read_csv('./csvBenchmarks/dataBluebird.csv')
-df_express_user = pd.read_csv('./csvBenchmarks/dataExpressUser.csv')
-df_gpt = pd.read_csv('./csvBenchmarks/dataGPT.csv')
-df_lvs = pd.read_csv('./csvBenchmarks/dataLVS.csv')
-df_sioc = pd.read_csv('./csvBenchmarks/dataSIOC.csv')
+df_blueblird = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataBluebird.csv')
+df_express_user = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataExpressUser.csv')
+df_gpt = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataGPT.csv')
+df_lvs = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataLVS.csv')
+df_sioc = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataSIOC.csv')
 # -=+=- Exploratory -=+=-
-df_mongoexpress = pd.read_csv('./csvBenchmarks/dataMongoExpress.csv')
-df_nedb = pd.read_csv('./csvBenchmarks/dataNEDB.csv')
-df_arc = pd.read_csv('./csvBenchmarks/dataARC.csv')
-df_obj = pd.read_csv('./csvBenchmarks/dataOBJ.csv')
+df_mongoexpress = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataMongoExpress.csv')
+df_nedb = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataNEDB.csv')
+df_arc = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataARC.csv')
+df_obj = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataOBJ.csv')
 # -=+=- Fs-Extra -=+=-
-df_fsextra = pd.read_csv('./csvBenchmarks/dataFsExtra.csv')
+df_fsextra = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataFsExtra.csv')
 
 # print(df_aka)
 
@@ -118,7 +118,7 @@ svm.fit(x_scaled, y)
 
 # =============== CARREGAMENTO DA ENTRADA ===============
 
-df_entrada = pd.read_csv('./collectedCsvFolder/data.csv')
+df_entrada = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/collectedCsvFolder/data.csv')
 
 df_testsInfo = df_entrada[["BenchmarkName", "TestFilePath", "TestCaseName"]].copy()
 # print(df_testsInfo)
@@ -158,9 +158,9 @@ df_testsInfo['QuantidadeRotulosPositivo'] = rotulo_previsto
 
 # df_testsInfo.to_csv('collectedResultsMLFolder/resultados_testes.csv')
 
-# Fix the problem that pandas double quotes (""testname"") if testname already had quotes. For example in: almost_through2-concurrent
+# Fix the problem that Pandas doubles the double quotes (""testname"") if testname already had quotes. For example in: almost_through2-concurrent
 df_testsInfo.to_csv(
-    'collectedResultsMLFolder/resultados_testes.csv',
+    './NodeRock_src/FoldersUsedDuringExecution/collectedResultsMLFolder/resultados_testes.csv',
     index=False,
     quoting=csv.QUOTE_NONE,  # Do not unnecessarily quote fields
     escapechar='\\'  # Escape special characters instead of adding extra quotes
