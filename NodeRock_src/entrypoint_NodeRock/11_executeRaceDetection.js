@@ -3,6 +3,7 @@
 const shell = require('shelljs');
 const fs = require('fs');
 const path = require('path');
+const Papa = require('papaparse');
 
 
 const config = require('./NodeRockConfig.js');
@@ -10,32 +11,23 @@ const config = require('./NodeRockConfig.js');
 
 
 function executeRaceDetection(pathProjectFolder, testFile) {
-    
     // const errorMessage = ['0 passing', '1 test failed', 'timed out', 'Error: ENOENT:', '1 failing'];
     const errorMessage = ['0 passing'];
-
-    const RESULTS_CSV_PATH = "FoldersUsedDuringExecution/collectedResultsMLFolder/resultados_testes.csv";
+    
+    const RESULTS_CSV_PATH = path.join(__dirname, "../FoldersUsedDuringExecution/collectedResultsMLFolder/resultados_testes.csv");
+    console.log("RESULTS_CSV_PATH: ", RESULTS_CSV_PATH);
 
 
     // Read and collect data from csv
     const results_csv = fs.readFileSync(RESULTS_CSV_PATH, 'utf-8');
-    const lines_csv = results_csv.split('\n');
-    const header_csv = lines_csv[0].split(',');
-    
-    const indexTestCaseName = header_csv.indexOf('TestCaseName');
-    const indexQuantidadeRotulosPositivo = header_csv.indexOf('QuantidadeRotulosPositivo');
-    
-    const testCaseNames = [];
-    const positiveLabels = [];
-    for (let i = 1; i < lines_csv.length -1; i++) {
-        const columns = lines_csv[i].split(',');
-        if (columns[indexTestCaseName]) {
-          testCaseNames.push(columns[indexTestCaseName]);
-        }
-        if(columns[indexQuantidadeRotulosPositivo]) {
-            positiveLabels.push(columns[indexQuantidadeRotulosPositivo]);
-        }
-    }
+
+    const parsedData = Papa.parse(results_csv, {
+        header: true,  // Usa a primeira linha como cabeçalho
+        skipEmptyLines: true, // Ignora linhas vazias
+    });
+
+    const testCaseNames = parsedData.data.map(row => row.TestCaseName);
+    const positiveLabels = parsedData.data.map(row => row.QuantidadeRotulosPositivo);
     
     // Detecting races
     shell.cd(pathProjectFolder);
@@ -48,20 +40,26 @@ function executeRaceDetection(pathProjectFolder, testFile) {
     let numberOfFails = 0;
     let firstFail = 0;
 
-    const baseNumberOfIterations = 10;
-    const multiplyPositiveLabelsToIteration = 2;
+    const baseNumberOfIterations = 1;
+    const multiplyPositiveLabelsToIteration = 0;
     
     const NODEROCK_INFO_NACDRESULTS_PATH = path.join(pathProjectFolder, "NodeRock_Info", "nacdResultsFolder");
+
     fs.mkdirSync(NODEROCK_INFO_NACDRESULTS_PATH);
 
+    let currentTestWithQuotes; 
     for(let i = 0; i < testCaseNames.length; i++) { // i represents the test case
         
+        testCaseNames[i].includes('"') 
+        ? currentTestWithQuotes = `'${testCaseNames[i]}'` 
+        : currentTestWithQuotes = `"${testCaseNames[i]}"` 
+
         numberOfFails = 0;
         firstFail = 0;
         detectionIterations = baseNumberOfIterations + multiplyPositiveLabelsToIteration * positiveLabels[i];
-        let command = `nacd plain2 ./node_modules/.bin/mocha --exit -t 60000 -R spec ${testFile} -f '${testCaseNames[i]}'`;
+        let command = `nacd plain2 ./node_modules/.bin/mocha --exit -t 60000 -R spec ${testFile} -f ${currentTestWithQuotes}`;
         
-        console.log(`\n${i+1}/${testCaseNames.length}. Looking for event races in test: "${testCaseNames[i]}"`);
+        console.log(`\n${i+1}/${testCaseNames.length}. Looking for event races in test: ${currentTestWithQuotes}`);
         console.log(`${positiveLabels[i]} Positive Labels == ${detectionIterations} Iterations\n`);
         console.log(`Command used: ${command}`);
 
@@ -109,6 +107,11 @@ function executeRaceDetection(pathProjectFolder, testFile) {
     
     // adding data to the csv
     for(let i = 0; i < testCaseNames.length; i++) {
+
+        testCaseNames[i].includes('"') 
+        ? testCaseNames[i] = `"${testCaseNames[i].replace(/"/g, '""')}"`
+        : testCaseNames[i] = `"${testCaseNames[i]}"`;
+
         // talvez seria legal adicionar a procentagem das iteracoes que deram fail, e avaliar se os testes de maior iteracoes tambem apresentam maiores taxas de erro (indicando que o algoritmo de ML esta acertando bem)
         const line_csv_generate = [pathProjectFolder, testFile, testCaseNames[i], positiveLabels[i], baseNumberOfIterations+positiveLabels[i]*multiplyPositiveLabelsToIteration, arrayNumberOfFails[i], arrayFirstFail[i]];
 
@@ -156,4 +159,10 @@ function executeRaceDetection(pathProjectFolder, testFile) {
 // let pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/animir_node-rate-limiter-flexible");
 // let testFile = "test";
 
-// executeRaceDetection(pathProjectFolder, testFile);
+// let pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/animir_node-rate-limiter-flexible");
+// let testFile = "test";
+
+let pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "meuDatasetParaTestes/testesSimplesMocha");
+let testFile = "teste/arquivoTestesMocha.js";
+
+executeRaceDetection(pathProjectFolder, testFile);

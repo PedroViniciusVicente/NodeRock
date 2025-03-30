@@ -38,6 +38,7 @@ function generateCSV(pathProjectFolder, benchmarkName, testsRespectiveFile, test
         'Total_duration_s', 'HasEventRace']
     // adicionar: funcoes com > 100 ms de delay; tempo total do teste; e se o teste falhou ou foi sucesso
 
+
     const lines = [];
 
     // Adding the header line to the csv
@@ -45,8 +46,13 @@ function generateCSV(pathProjectFolder, benchmarkName, testsRespectiveFile, test
 
     // Adding the data to csv
     for (let i = 0; i < rawFeaturesObject.length; i++) {
+        
+        testsOriginalFullNameList[i].includes('"') 
+        ? currentTestWithQuotes = `"${testsOriginalFullNameList[i].replace(/"/g, '""')}"`
+        : currentTestWithQuotes = `"${testsOriginalFullNameList[i]}"`;
+
         const line = [
-            benchmarkName, testsRespectiveFile[i], testsOriginalFullNameList[i],
+            benchmarkName, testsRespectiveFile[i], currentTestWithQuotes,
             rawFeaturesObject[i].InvokeFunPre_Count, normalizedFeaturesObject[i].InvokeFunPre_Count,
             rawFeaturesObject[i].Invokes_with_callback, normalizedFeaturesObject[i].Invokes_with_callback,
             rawFeaturesObject[i].Cbs_Total_delay_ms, normalizedFeaturesObject[i].Cbs_Total_delay_ms,

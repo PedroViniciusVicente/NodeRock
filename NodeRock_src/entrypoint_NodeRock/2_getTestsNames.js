@@ -85,21 +85,9 @@ function getTestsNames(pathProjectFolder, testFile, parameters) {
         console.log(`${i+1}. ${testsFullNameList[i]}`);
     }
 
-    
-
-    // Adaptando os nomes dos testes e removendo caracteres especiais
-    // SUGESTAO: TALVEZ SEJA NECESSARIO FAZER ESSAS MESMAS ALTERACOES NAS STRINGS DOS TESTES QUE JA SAO SABIDOS COMO TENDO EVENT RACE NO 1_chosenProject.js
-    for(let i = 0; i < testsFullNameList.length; i++) {
-        
-        testsFullNameList[i] = testsFullNameList[i].replace(/\s/g, '\\ '); // Adiciona "\" antes dos espacos
-        testsFullNameList[i] = testsFullNameList[i].replace(/["'`+()[\]]/g, '.*'); // Substitui " ' ` + ( ) [ ] por .*
-        testsFullNameList[i] = testsFullNameList[i].replace(/[-<>]/g, '\\$&'); // Adiciona "\" antes de "-", "<", ">"
-        testsFullNameList[i] = `"` + testsFullNameList[i] + `"`;
-    }
 
     return {
         testsOriginalFullNameList: testsOriginalFullNameList,
-        testsFullNameList: testsFullNameList,
         testsRespectiveFile: testsRespectiveFile,
     };
 }

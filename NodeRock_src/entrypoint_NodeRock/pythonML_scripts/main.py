@@ -159,12 +159,15 @@ df_testsInfo['QuantidadeRotulosPositivo'] = rotulo_previsto
 # df_testsInfo.to_csv('collectedResultsMLFolder/resultados_testes.csv')
 
 # Fix the problem that Pandas doubles the double quotes (""testname"") if testname already had quotes. For example in: almost_through2-concurrent
-df_testsInfo.to_csv(
-    './NodeRock_src/FoldersUsedDuringExecution/collectedResultsMLFolder/resultados_testes.csv',
-    index=False,
-    quoting=csv.QUOTE_NONE,  # Do not unnecessarily quote fields
-    escapechar='\\'  # Escape special characters instead of adding extra quotes
-)
+# df_testsInfo.to_csv(
+#     './NodeRock_src/FoldersUsedDuringExecution/collectedResultsMLFolder/resultados_testes.csv',
+#     index=False,
+#     quoting=csv.QUOTE_NONE,  # Do not unnecessarily quote fields
+#     escapechar='\\'  # Escape special characters instead of adding extra quotes
+# )
+
+df_testsInfo.to_csv('./NodeRock_src/FoldersUsedDuringExecution/collectedResultsMLFolder/resultados_testes.csv');
+
 
 
 print("finalizou")

@@ -6,7 +6,7 @@ const path = require('path');
 
 const sourceCopyPath = path.join(__dirname,"../FoldersUsedDuringExecution/temporary_logHooks/logHooks.json");
 
-function executeTests(pathProjectFolder, testsFullNameList, testsRespectiveFile, chosenProject) {
+function executeTests(pathProjectFolder, testsOriginalFullNameList, testsRespectiveFile, chosenProject) {
 
     const NODEROCK_INFO_TRACES_PATH = path.join(pathProjectFolder, "NodeRock_Info", "tracesFolder");
     const NODEROCK_INFO_DURATIONS_PATH = path.join(pathProjectFolder, "NodeRock_Info", "testsDuration.json");
@@ -24,19 +24,30 @@ function executeTests(pathProjectFolder, testsFullNameList, testsRespectiveFile,
         let completCommand;
 
         console.log("\nExecucao dos testes individualmente:");
-        for(let i = 0; i < testsFullNameList.length; i++) {
+
+        let testsAdaptedName;
+        for(let i = 0; i < testsOriginalFullNameList.length; i++) {
+
+            testsAdaptedName = testsOriginalFullNameList[i];
+            testsAdaptedName = testsAdaptedName.replace(/\s/g, '\\ '); // Adiciona "\" antes dos espacos
+            testsAdaptedName = testsAdaptedName.replace(/["'`+()[\]]/g, '.*'); // Substitui " ' ` + ( ) [ ] por .*
+            testsAdaptedName = testsAdaptedName.replace(/[-<>]/g, '\\$&'); // Adiciona "\" antes de "-", "<", ">"
+
+            testsAdaptedName = `"${testsAdaptedName}"` 
+
+
             try {
                 semiCompleteCommand = "node ../dist/bin/nodeprof.js " + chosenProject.pathProjectFolder + " " + pathNode_modules + " " + testsRespectiveFile[i] + " " + chosenProject.parameters;
 
                 // Diferenciando se o teste eh Mocha ou Jest
                 if(chosenProject.isMocha) {
-                    completCommand = semiCompleteCommand + " -g " + testsFullNameList[i];
+                    completCommand = semiCompleteCommand + " -g " + testsAdaptedName;
                 }
                 else {
-                    completCommand = semiCompleteCommand + " --testNamePattern " + testsFullNameList[i];
+                    completCommand = semiCompleteCommand + " --testNamePattern " + testsAdaptedName;
                 }
 
-                console.log(`\n${i+1}/${testsFullNameList.length}. Executando o teste: ${testsFullNameList[i]}`);
+                console.log(`\n${i+1}/${testsOriginalFullNameList.length}. Executando o teste: ${testsOriginalFullNameList[i]}`);
                 console.log("Comando usado foi: ", completCommand);
 
 

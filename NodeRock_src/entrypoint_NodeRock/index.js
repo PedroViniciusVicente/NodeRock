@@ -12,7 +12,7 @@ const { normalizeFeatures } = require('./7_normalizeFeatures');
 const { labelFeatures } = require('./8_labelFeatures');
 const { generateCSV } = require('./9_generateCSV'); 
 const { executePythonML } = require('./10_executePythonML'); 
-const { executeRaceDetection } = require('./11_executeRaceDetection');
+// const { executeRaceDetection } = require('./11_executeRaceDetection');
 
 
 const startingNodeRockText ="____  _             _   _                   \n" +
@@ -46,7 +46,7 @@ if(rodarTestesCompleto) {
 
 
     // 3. Executing the tests individually and placing theirs traces in NodeRock_Info/TracesFolder from loghooks.json
-    const testsTotalDuration = executeTests(chosenProject.pathProjectFolder, tests.testsFullNameList, tests.testsRespectiveFile, chosenProject);
+    const testsTotalDuration = executeTests(chosenProject.pathProjectFolder, tests.testsOriginalFullNameList, tests.testsRespectiveFile, chosenProject);
     // for(let i = 0; i < testsTotalDuration.length; i++) {
     //     console.log("Duracao foi: ", testsTotalDuration[i]);
     // }
@@ -56,7 +56,7 @@ if(rodarTestesCompleto) {
     console.log("AWAIT INTERVALS EH: ", awaitIntervalsFromTests);
 
     // 5. Extracting the main features from each test
-    extractFeatures(chosenProject.pathProjectFolder, tests.testsFullNameList);
+    extractFeatures(chosenProject.pathProjectFolder, tests.testsOriginalFullNameList);
 
     // 6. Monkey Patching the promises to collect data about the promises executed
     const monkeyPatchedPromisesData = executeMonkeyPatching(tests.testsRespectiveFile, tests.testsOriginalFullNameList);

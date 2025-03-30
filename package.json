@@ -27,6 +27,7 @@
     "ml-kmeans": "^6.0.0",
     "mocha": "^10.8.2",
     "object-hash": "^2.2.0",
+    "papaparse": "^5.5.2",
     "shell-exec": "^1.1.2",
     "shelljs": "^0.8.5"
   },

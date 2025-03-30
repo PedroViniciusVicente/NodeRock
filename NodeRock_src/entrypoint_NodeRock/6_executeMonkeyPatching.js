@@ -15,11 +15,16 @@ function executeMonkeyPatching(testsRespectiveFile, testsOriginalFullNameList) {
     // console.log(testsFullNameList)
     
     let extractedDataMonkeyTests = [];
+    let currentTestWithQuotes;
     for(let i = 0; i < testsOriginalFullNameList.length; i++) {
         // fs.truncateSync('./promise_logs/promises.json', 0); // Zerando o conteudo do json em que se armazena as infos das promises
         fs.truncateSync('./FoldersUsedDuringExecution/temporary_promises_logs/promises.json', 0); // Zerando o conteudo do json em que se armazena as infos das promises
 
-        const command = `../node_modules/.bin/_mocha --exit -t 10000 --require ./entrypoint_NodeRock/monkeyPatchingTestes/monkeypatching.js ${testsRespectiveFile[i]} -f '${testsOriginalFullNameList[i]}'`;
+        testsOriginalFullNameList[i].includes('"') 
+        ? currentTestWithQuotes = `'${testsOriginalFullNameList[i]}'` 
+        : currentTestWithQuotes = `"${testsOriginalFullNameList[i]}"` 
+
+        const command = `../node_modules/.bin/_mocha --exit -t 10000 --require ./entrypoint_NodeRock/monkeyPatchingTestes/monkeypatching.js ${testsRespectiveFile[i]} -f ${currentTestWithQuotes}`;
         console.log("Comando usado para monkeyPatching foi: ", command);
         shell.exec(command);
 

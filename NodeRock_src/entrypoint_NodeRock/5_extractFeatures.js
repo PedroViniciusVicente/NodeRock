@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-function extractFeatures(pathProjectFolder, testsFullNameList) {
+function extractFeatures(pathProjectFolder, testsOriginalFullNameList) {
     console.log("\nExtracao das features a partir dos traces gerados:");
 
     const NODEROCK_INFO_TRACES_PATH = path.join(pathProjectFolder, "NodeRock_Info", "tracesFolder");
@@ -22,11 +22,11 @@ function extractFeatures(pathProjectFolder, testsFullNameList) {
             // const filteredFiles = files.filter(file => regex.test(file));
 
             //console.log("files eh: ", files);
-            for(let i = 0; i < testsFullNameList.length; i++) {
+            for(let i = 0; i < testsOriginalFullNameList.length; i++) {
 
                 functionFileName = "functionsFromTest_" + i + ".json";
                 pathExtractFile = path.join(NODEROCK_INFO_FUNCTIONS_PATH, functionFileName);
-                console.log(`${i+1}/${testsFullNameList.length}. Extraindo features do arquivo: ${"functionsFromTest_" + i + ".json"}`);
+                console.log(`${i+1}/${testsOriginalFullNameList.length}. Extraindo features do arquivo: ${"functionsFromTest_" + i + ".json"}`);
 
                 const logHooks = fs.readFileSync(pathExtractFile, 'utf8');
                 const objectsExtractFeatures = JSON.parse(logHooks);
@@ -86,12 +86,7 @@ function extractFeatures(pathProjectFolder, testsFullNameList) {
                 }
                 const unique_asynchook_ids = unique_asynchook_ids_set.size;
 
-                let testName = testsFullNameList[i];
-                // Remove as aspas iniciais e finais
-                testName = testName.replace(/^"|"$/g, '');
-                // Remove as barras invertidas antes dos espaços
-                testName = testName.replace(/\\ /g, ' ');
-
+                let testName = testsOriginalFullNameList[i];
 
                 const ObjectLogMessage = {
                     "Test_Name": testName,
@@ -111,7 +106,7 @@ function extractFeatures(pathProjectFolder, testsFullNameList) {
 
                 const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
 
-                if (i !== testsFullNameList.length - 1) {
+                if (i !== testsOriginalFullNameList.length - 1) {
                     fs.writeFileSync(NODEROCK_INFO_EXTRACTED_RAW_PATH, stringJSON + ',\n', {flag:'a'});
                 }
                 else {
