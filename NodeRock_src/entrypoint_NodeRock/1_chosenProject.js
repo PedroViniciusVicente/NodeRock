@@ -234,6 +234,7 @@ function chosenProjectFunction() {
         raceConditionTests: raceConditionTests,
         benchmarkName: benchmarkName,
     };
+
 }
 
 module.exports = { chosenProjectFunction };

@@ -15,18 +15,56 @@ const { executePythonML } = require('./10_executePythonML');
 // const { executeRaceDetection } = require('./11_executeRaceDetection');
 
 
-const startingNodeRockText ="____  _             _   _                   \n" +
-"/ ___|| |_ __ _ _ __| |_(_)_ __   __ _       \n" +
-"\\___ \\| __/ _' | '__| __| | '_ \\ / _' |      \n" +
-" ___) | || (_| | |  | |_| | | | | (_| |      \n" +
-"|____/ \\__\\__,_|_|   \\__|_|_| |_|\\__, |      \n" +
-" _   _           _      ____     |___/  _    \n" +
-"| \\ | | ___   __| | ___|  _ \\ ___   ___| | __\n" +
-"|  \\| |/ _ \\ / _' |/ _ \\ |_) / _ \\ / __| |/ /\n" +
-"| |\\  | (_) | (_| |  __/  _ < (_) | (__|   < \n" +
-"|_| \\_|\\___/ \\__,_|\\___|_| \\_\\___/ \\___|_|\\_\\";
+const startingNodeRockText = `
+ ____  _             _   _               _   _           _                     _    
+/ ___|| |_ __ _ _ __| |_(_)_ __   __ _  | \\ | | ___   __| | ___ _ __ ___   ___| | __
+\\___ \\| __/ _\` | '__| __| | '_ \\ / _\` | |  \\| |/ _ \\ / _\` |/ _ \\ '__/ _ \\ / __| |/ /
+ ___) | || (_| | |  | |_| | | | | (_| | | |\\  | (_) | (_| |  __/ | | (_) | (__|   < 
+|____/ \\__\\__,_|_|   \\__|_|_| |_|\\__, | |_| \\_|\\___/ \\__,_|\\___|_|  \\___/ \\___|_|\\_\\
+                                 |___/`;
 
 console.log(startingNodeRockText + "\n\n");
+
+const getTestsNamesText = `
+  ____      _   _   _               _____         _         _   _                                 
+ / ___| ___| |_| |_(_)_ __   __ _  |_   _|__  ___| |_ ___  | \\ | | __ _ _ __ ___   ___  ___       
+| |  _ / _ \\ __| __| | '_ \\ / _\` |   | |/ _ \\/ __| __/ __| |  \\| |/ _\` | '_ \` _ \\ / _ \\/ __|      
+| |_| |  __/ |_| |_| | | | | (_| |   | |  __/\\__ \\ |_\\__ \\ | |\\  | (_| | | | | | |  __/\\__ \\_ _ _ 
+ \\____|\\___|\\__|\\__|_|_| |_|\\__, |   |_|\\___||___/\\__|___/ |_| \\_|\\__,_|_| |_| |_|\\___||___(_|_|_)
+                            |___/`;
+
+const executingTestsText = `
+ _____                     _   _               _____         _             
+| ____|_  _____  ___ _   _| |_(_)_ __   __ _  |_   _|__  ___| |_ ___       
+|  _| \\ \\/ / _ \\/ __| | | | __| | '_ \\ / _\` |   | |/ _ \\/ __| __/ __|      
+| |___ >  <  __/ (__| |_| | |_| | | | | (_| |   | |  __/\\__ \\ |_\\__ \\_ _ _ 
+|_____/_/\\_\\___|\\___|\\__,_|\\__|_|_| |_|\\__, |   |_|\\___||___/\\__|___(_|_|_)
+                                       |___/`;
+
+const extractingFeaturesText = `
+ _____      _                  _   _               _____          _                             
+| ____|_  _| |_ _ __ __ _  ___| |_(_)_ __   __ _  |  ___|__  __ _| |_ _   _ _ __ ___  ___       
+|  _| \\ \\/ / __| '__/ _\` |/ __| __| | '_ \\ / _\` | | |_ / _ \\/ _\` | __| | | | '__/ _ \\/ __|      
+| |___ >  <| |_| | | (_| | (__| |_| | | | | (_| | |  _|  __/ (_| | |_| |_| | | |  __/\\__ \\_ _ _ 
+|_____/_/\\_\\\\__|_|  \\__,_|\\___|\\__|_|_| |_|\\__, | |_|  \\___|\\__,_|\\__|\\__,_|_|  \\___||___(_|_|_)
+                                           |___/`;
+
+const monkeyPatchingText = `
+ __  __             _                ____       _       _     _               ____                      _                     
+|  \\/  | ___  _ __ | | _____ _   _  |  _ \\ __ _| |_ ___| |__ (_)_ __   __ _  |  _ \\ _ __ ___  _ __ ___ (_)___  ___  ___       
+| |\\/| |/ _ \\| '_ \\| |/ / _ \\ | | | | |_) / _\` | __/ __| '_ \\| | '_ \\ / _\` | | |_) | '__/ _ \\| '_ \` _ \\| / __|/ _ \\/ __|      
+| |  | | (_) | | | |   <  __/ |_| | |  __/ (_| | || (__| | | | | | | | (_| | |  __/| | | (_) | | | | | | \\__ \\  __/\\__ \\_ _ _ 
+|_|  |_|\\___/|_| |_|_|\\_\\___|\\__, | |_|   \\__,_|\\__\\___|_| |_|_|_| |_|\\__, | |_|   |_|  \\___/|_| |_| |_|_|___/\\___||___(_|_|_)
+                             |___/                                    |___/`;
+
+const machineLearningClassifyingText = `
+ __  __            _     _              _                          _                ____ _               _  __       _                   
+|  \\/  | __ _  ___| |__ (_)_ __   ___  | |    ___  __ _ _ __ _ __ (_)_ __   __ _   / ___| | __ _ ___ ___(_)/ _|_   _(_)_ __   __ _       
+| |\\/| |/ _\` |/ __| '_ \\| | '_ \\ / _ \\ | |   / _ \\/ _\` | '__| '_ \\| | '_ \\ / _\` | | |   | |/ _\` / __/ __| | |_| | | | | '_ \\ / _\` |      
+| |  | | (_| | (__| | | | | | | |  __/ | |__|  __/ (_| | |  | | | | | | | | (_| | | |___| | (_| \\__ \\__ \\ |  _| |_| | | | | | (_| |_ _ _ 
+|_|  |_|\\__,_|\\___|_| |_|_|_| |_|\\___| |_____\\___|\\__,_|_|  |_| |_|_|_| |_|\\__, |  \\____|_|\\__,_|___/___/_|_|  \\__, |_|_| |_|\\__, (_|_|_)
+                                                                           |___/                               |___/         |___/`;
+
 
 let rodarTestesCompleto = true; // true para caso tenha testes e false para caso seja script
 if(rodarTestesCompleto) {
@@ -37,6 +75,7 @@ if(rodarTestesCompleto) {
 
 
     // 2. Treatments and Path Verifications to Get the test names
+    console.log(getTestsNamesText);
     const tests = getTestsNames(chosenProject.pathProjectFolder, chosenProject.testFile, chosenProject.parameters);
 
     //console.log(tests.testsFullNameList);
@@ -46,19 +85,22 @@ if(rodarTestesCompleto) {
 
 
     // 3. Executing the tests individually and placing theirs traces in NodeRock_Info/TracesFolder from loghooks.json
+    console.log(executingTestsText);
     const testsTotalDuration = executeTests(chosenProject.pathProjectFolder, tests.testsOriginalFullNameList, tests.testsRespectiveFile, chosenProject);
     // for(let i = 0; i < testsTotalDuration.length; i++) {
     //     console.log("Duracao foi: ", testsTotalDuration[i]);
     // }
 
     // 4. Extracting the functions from the traces and calculating their callback times
+    console.log(extractingFeaturesText);
     const awaitIntervalsFromTests = extractFunctions(chosenProject.pathProjectFolder, tests.testsRespectiveFile);
-    console.log("AWAIT INTERVALS EH: ", awaitIntervalsFromTests);
+    // console.log("AWAIT INTERVALS EH: ", awaitIntervalsFromTests);
 
     // 5. Extracting the main features from each test
     extractFeatures(chosenProject.pathProjectFolder, tests.testsOriginalFullNameList);
 
     // 6. Monkey Patching the promises to collect data about the promises executed
+    console.log(monkeyPatchingText);
     const monkeyPatchedPromisesData = executeMonkeyPatching(tests.testsRespectiveFile, tests.testsOriginalFullNameList);
     // console.log("MONKEY PATCHING RESULTOU EM: ", monkeyPatchedPromisesData);
 
@@ -73,6 +115,7 @@ if(rodarTestesCompleto) {
     generateCSV(chosenProject.pathProjectFolder, chosenProject.benchmarkName, tests.testsRespectiveFile, tests.testsOriginalFullNameList, testsTotalDuration, awaitIntervalsFromTests, monkeyPatchedPromisesData);
     
     // 10. Executes the Python script with the Machine Learning Supervised Models and generate the result.csv
+    // console.log(machineLearningClassifyingText);
     // executePythonML();
 
     // 11. Executes the race detection based on collectedResultsMLFolder to find the event races 
@@ -232,20 +275,12 @@ touch collectedTracesFolder/tracesFromIt_0.json
 }
 
 
-const finishedNodeRockText = " _   _           _      ____            _    \n" +
-"| \\ | | ___   __| | ___|  _ \\ ___   ___| | __\n" +
-"|  \\| |/ _ \\ / _\` |/ _ \\ |_) / _ \\ / __| |/ /\n" +
-"| |\\  | (_) | (_| |  __/  _ < (_) | (__|   < \n" +
-"|_| \\_|\\___/ \\__,_|\\___|_| \\_\\___/ \\___|_|\\_\\\n" +
-"    _                _           _           \n" +
-"   / \\   _ __   __ _| |_   _ ___(_)___       \n" +
-"  / _ \\ | '_ \\ / _\` | | | | / __| / __|      \n" +
-" / ___ \\| | | | (_| | | |_| \\__ \\ \\__ \\      \n" +
-"/_/   \\_\\_| |_|\\__,_|\\|\\__, |___/_|___/      \n" +
-" _____ _       _     _ |___/        _ _      \n" +
-"|  ___(_)_ __ (_)___| |__   ___  __| | |     \n" +
-"| |_  | | '_ \\| / __| '_ \\ / _ \\/ _\` | |     \n" +
-"|  _| | | | | | \\__ \\ | | |  __/ (_| |_|     \n" +
-"|_|   |_|_| |_|_|___/_| |_|\\___|\\__,_(_)";
+const finishedNodeRockText = `
+ _   _           _                     _         _                _           _        ____                      _      _           _ _ 
+| \\ | | ___   __| | ___ _ __ ___   ___| | __    / \\   _ __   __ _| |_   _ ___(_)___   / ___|___  _ __ ___  _ __ | | ___| |_ ___  __| | |
+|  \\| |/ _ \\ / _\` |/ _ \\ '__/ _ \\ / __| |/ /   / _ \\ | '_ \\ / _\` | | | | / __| / __| | |   / _ \\| '_ \` _ \\| '_ \\| |/ _ \\ __/ _ \\/ _\` | |
+| |\\  | (_) | (_| |  __/ | | (_) | (__|   <   / ___ \\| | | | (_| | | |_| \\__ \\ \\__ \\ | |__| (_) | | | | | | |_) | |  __/ ||  __/ (_| |_|
+|_| \\_|\\___/ \\__,_|\\___|_|  \\___/ \\___|_|\\_\\ /_/   \\_\\_| |_|\\__,_|_|\\__, |___/_|___/  \\____\\___/|_| |_| |_| .__/|_|\\___|\\__\\___|\\__,_(_)
+                                                                    |___/                                 |_|`;
 
 console.log(finishedNodeRockText + "\n");

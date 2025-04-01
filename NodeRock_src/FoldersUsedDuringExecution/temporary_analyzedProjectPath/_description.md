@@ -1,0 +1,1 @@
+# This folder only stores the temporary file that has the information about the project that is going to be analyzed.
