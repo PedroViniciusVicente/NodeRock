@@ -8,7 +8,13 @@ const normalizeValue = (value, min, max) => {
     return (value - min) / (max - min);
 };
 
-function normalizeFeatures(pathProjectFolder, awaitIntervalsFromTests, monkeyPatchedPromisesData) {
+function normalizeFeatures(awaitIntervalsFromTests, monkeyPatchedPromisesData) {
+
+    const ANALYZED_PROJECT_FILE = path.join(__dirname, "../FoldersUsedDuringExecution/temporary_analyzedProjectInfo/temporary_analyzedProject.json");
+    const analyzedProjectData = JSON.parse(fs.readFileSync(ANALYZED_PROJECT_FILE, 'utf8'));
+
+    const pathProjectFolder = analyzedProjectData.pathProjectFolder;
+
     
     const NODEROCK_INFO_EXTRACTED_RAW_PATH = path.join(pathProjectFolder, "NodeRock_Info", "extractedFeaturesRaw.json");
     const NODEROCK_INFO_EXTRACTED_NORMALIZED_PATH = path.join(pathProjectFolder, "NodeRock_Info", "extractedFeaturesNormalized.json");

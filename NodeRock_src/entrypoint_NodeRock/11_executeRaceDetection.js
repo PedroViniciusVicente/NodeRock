@@ -8,6 +8,7 @@ const Papa = require('papaparse');
 
 const config = require('./NodeRockConfig.js');
 
+const ROOT_PATH_NODEROCK = path.join(__dirname, "../");
 
 
 function executeRaceDetection(pathProjectFolder, testFile) {
@@ -95,7 +96,7 @@ function executeRaceDetection(pathProjectFolder, testFile) {
     }
 
     // Returns to NodeRock original path
-    shell.cd(`${config.NODEROCK_ROOT_PATH}`);
+    shell.cd(`${ROOT_PATH_NODEROCK}`);
 
 
     // Generates CSV with race detection results
@@ -162,7 +163,16 @@ function executeRaceDetection(pathProjectFolder, testFile) {
 // let pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/animir_node-rate-limiter-flexible");
 // let testFile = "test";
 
-let pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "meuDatasetParaTestes/testesSimplesMocha");
-let testFile = "teste/arquivoTestesMocha.js";
+// let pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "meuDatasetParaTestes/testesSimplesMocha");
+// let testFile = "teste/arquivoTestesMocha.js";
+
+
+
+
+const ANALYZED_PROJECT_FILE = path.join(__dirname, "../FoldersUsedDuringExecution/temporary_analyzedProjectInfo/temporary_analyzedProject.json");
+const analyzedProjectData = JSON.parse(fs.readFileSync(ANALYZED_PROJECT_FILE, 'utf8'));
+
+const pathProjectFolder = analyzedProjectData.pathProjectFolder;
+const testFile = analyzedProjectData.testFile;
 
 executeRaceDetection(pathProjectFolder, testFile);

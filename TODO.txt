@@ -1,5 +1,6 @@
 Organizar para que o maximo de info possivel fique armazenado em arquivos e nao na ram (Rever para que o nomes dos testes com caracteres especiais seja usado apenas quando necessário talvez)
-Criar os letreiros para ir mostrando os steps da execução mais claramente, igual no vscode extension -> https://www.asciiart.eu/
 Remover a normalização do javascript e deixar para o python lidar com isso
 corrigir o total_duration_s no csv final, pois em uns testes ele da 7373 e em outros ele da 0.5484193233622018 (nenhum dos dois em segundos), mas no testsDuration.json ele da certo em todos, como 7.373, etc
 Remover as pastas e arquivos inuteis do NodeRT (principalmente aquele que cria o violations.json, visto que não é mais usado)
+ajeitar o awaitIntervalsFromTests no arquivo 4_extractFunctions
+fazer com que ele não precise coletar o arquivo se ele já existir em todos apos a mundança dos arquivos

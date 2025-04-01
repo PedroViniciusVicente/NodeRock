@@ -4,11 +4,33 @@
 const fs = require('fs');
 const path = require('path');
 const shell = require('shelljs');
-
 const { extractedFeaturesMonkeyPatching } = require('./monkeyPatchingTestes/extractFeaturesMonkeyPatching'); 
 
-function executeMonkeyPatching(testsRespectiveFile, testsOriginalFullNameList) {
-    console.log("Extracting promises data from monkey patching");
+
+const monkeyPatchingText = `
+ __  __             _                ____       _       _     _               ____                      _                     
+|  \\/  | ___  _ __ | | _____ _   _  |  _ \\ __ _| |_ ___| |__ (_)_ __   __ _  |  _ \\ _ __ ___  _ __ ___ (_)___  ___  ___       
+| |\\/| |/ _ \\| '_ \\| |/ / _ \\ | | | | |_) / _\` | __/ __| '_ \\| | '_ \\ / _\` | | |_) | '__/ _ \\| '_ \` _ \\| / __|/ _ \\/ __|      
+| |  | | (_) | | | |   <  __/ |_| | |  __/ (_| | || (__| | | | | | | | (_| | |  __/| | | (_) | | | | | | \\__ \\  __/\\__ \\_ _ _ 
+|_|  |_|\\___/|_| |_|_|\\_\\___|\\__, | |_|   \\__,_|\\__\\___|_| |_|_|_| |_|\\__, | |_|   |_|  \\___/|_| |_| |_|_|___/\\___||___(_|_|_)
+                             |___/                                    |___/`;
+
+
+function executeMonkeyPatching() {
+
+    console.log(monkeyPatchingText);
+
+    const ANALYZED_PROJECT_FILE = path.join(__dirname, "../FoldersUsedDuringExecution/temporary_analyzedProjectInfo/temporary_analyzedProject.json");
+    const analyzedProjectData = JSON.parse(fs.readFileSync(ANALYZED_PROJECT_FILE, 'utf8'));
+
+    const pathProjectFolder = analyzedProjectData.pathProjectFolder;
+
+    
+    const TEST_NAMES_AND_FILES = path.join(pathProjectFolder, "NodeRock_Info/passingTests.json.log");
+    const analyzedProjectTestNamesAndFiles = JSON.parse(fs.readFileSync(TEST_NAMES_AND_FILES, 'utf8'));
+    
+    const testsOriginalFullNameList = analyzedProjectTestNamesAndFiles.map(test => test.title);
+    const testsRespectiveFile = analyzedProjectTestNamesAndFiles.map(test => test.file);
     
     // console.log("\nMONKEY PATCHING!!!\n");
     // console.log(testsRespectiveFile);

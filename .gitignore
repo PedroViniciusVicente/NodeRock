@@ -189,6 +189,6 @@ NodeRock_src/FoldersUsedDuringExecution/temporary_promises_logs/*
 NodeRock_src/FoldersUsedDuringExecution/temporary_TestsNamesAndFiles/*
 !NodeRock_src/FoldersUsedDuringExecution/temporary_TestsNamesAndFiles/_description.md
 
-NodeRock_src/FoldersUsedDuringExecution/temporary_analyzedProjectPath/*
-!NodeRock_src/FoldersUsedDuringExecution/temporary_analyzedProjectPath/_description.md
+NodeRock_src/FoldersUsedDuringExecution/temporary_analyzedProjectInfo/*
+!NodeRock_src/FoldersUsedDuringExecution/temporary_analyzedProjectInfo/_description.md
 

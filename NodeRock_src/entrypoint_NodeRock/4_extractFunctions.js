@@ -4,10 +4,31 @@
 const fs = require('fs');
 const path = require('path');
 
-function extractFunctions(pathProjectFolder, testsRespectiveFile) {
+const extractingFeaturesText = `
+ _____      _                  _   _               _____          _                             
+| ____|_  _| |_ _ __ __ _  ___| |_(_)_ __   __ _  |  ___|__  __ _| |_ _   _ _ __ ___  ___       
+|  _| \\ \\/ / __| '__/ _\` |/ __| __| | '_ \\ / _\` | | |_ / _ \\/ _\` | __| | | | '__/ _ \\/ __|      
+| |___ >  <| |_| | | (_| | (__| |_| | | | | (_| | |  _|  __/ (_| | |_| |_| | | |  __/\\__ \\_ _ _ 
+|_____/_/\\_\\\\__|_|  \\__,_|\\___|\\__|_|_| |_|\\__, | |_|  \\___|\\__,_|\\__|\\__,_|_|  \\___||___(_|_|_)
+                                           |___/`;
+
+function extractFunctions() {
+
+    console.log(extractingFeaturesText);
+
+    const ANALYZED_PROJECT_FILE = path.join(__dirname, "../FoldersUsedDuringExecution/temporary_analyzedProjectInfo/temporary_analyzedProject.json");
+    const analyzedProjectData = JSON.parse(fs.readFileSync(ANALYZED_PROJECT_FILE, 'utf8'));
+
+    const pathProjectFolder = analyzedProjectData.pathProjectFolder;
+
+
+    const TEST_NAMES_AND_FILES = path.join(pathProjectFolder, "NodeRock_Info/passingTests.json.log");
+    const analyzedProjectTestNamesAndFiles = JSON.parse(fs.readFileSync(TEST_NAMES_AND_FILES, 'utf8'));
+    
+    const testsRespectiveFile = analyzedProjectTestNamesAndFiles.map(test => test.file);
+
     console.log("\nGerando a lista com todas as funcoes presentes");
 
-    const NODEROCK_INFO_PATH = path.join(pathProjectFolder, "NodeRock_Info");
     const NODEROCK_INFO_TRACES_PATH = path.join(pathProjectFolder, "NodeRock_Info", "tracesFolder");
     const NODEROCK_INFO_FUNCTIONS_PATH = path.join(pathProjectFolder, "NodeRock_Info", "functionsFolder");
 

@@ -1,6 +1,7 @@
 // 1. Selecting the test file/folder that you want to analyse
 
 const path = require('path');
+const fs = require('fs');
 
 
 function chosenProjectFunction() {
@@ -226,7 +227,7 @@ function chosenProjectFunction() {
             process.exit();
     }
 
-    return {
+    const data = {
         pathProjectFolder: pathProjectFolder,
         testFile: testFile,
         parameters: parameters,
@@ -235,6 +236,20 @@ function chosenProjectFunction() {
         benchmarkName: benchmarkName,
     };
 
+    const TEMPORARY_ANALYZED_PROJECT = path.join(__dirname, "../FoldersUsedDuringExecution/temporary_analyzedProjectInfo/temporary_analyzedProject.json");
+    fs.writeFileSync(TEMPORARY_ANALYZED_PROJECT, JSON.stringify(data, null, 2));
+
+    console.log("Analyzed Project Path: ", data.pathProjectFolder);
+    console.log("Analyzed Root Test Folder / Test File", data.testFile);
+    
+    return {
+        pathProjectFolder: pathProjectFolder,
+        testFile: testFile,
+        parameters: parameters,
+        isMocha: isMocha,
+        raceConditionTests: raceConditionTests,
+        benchmarkName: benchmarkName,
+    };
 }
 
 module.exports = { chosenProjectFunction };

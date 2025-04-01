@@ -3,7 +3,19 @@
 const fs = require('fs');
 const path = require('path');
 
-function extractFeatures(pathProjectFolder, testsOriginalFullNameList) {
+function extractFeatures() {
+
+    const ANALYZED_PROJECT_FILE = path.join(__dirname, "../FoldersUsedDuringExecution/temporary_analyzedProjectInfo/temporary_analyzedProject.json");
+    const analyzedProjectData = JSON.parse(fs.readFileSync(ANALYZED_PROJECT_FILE, 'utf8'));
+
+    const pathProjectFolder = analyzedProjectData.pathProjectFolder;
+
+
+    const TEST_NAMES_AND_FILES = path.join(pathProjectFolder, "NodeRock_Info/passingTests.json.log");
+    const analyzedProjectTestNamesAndFiles = JSON.parse(fs.readFileSync(TEST_NAMES_AND_FILES, 'utf8'));
+    
+    const testsOriginalFullNameList = analyzedProjectTestNamesAndFiles.map(test => test.title);
+
     console.log("\nExtracao das features a partir dos traces gerados:");
 
     const NODEROCK_INFO_TRACES_PATH = path.join(pathProjectFolder, "NodeRock_Info", "tracesFolder");

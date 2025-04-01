@@ -4,27 +4,50 @@ const shell = require('shelljs');
 const fs = require('fs');
 const path = require('path');
 
-const sourceCopyPath = path.join(__dirname,"../FoldersUsedDuringExecution/temporary_logHooks/logHooks.json");
+const sourceCopyPath = path.join(__dirname, "../FoldersUsedDuringExecution/temporary_logHooks/logHooks.json");
 
-function executeTests(pathProjectFolder, testsOriginalFullNameList, testsRespectiveFile, chosenProject) {
+const executingTestsText = `
+ _____                     _   _               _____         _             
+| ____|_  _____  ___ _   _| |_(_)_ __   __ _  |_   _|__  ___| |_ ___       
+|  _| \\ \\/ / _ \\/ __| | | | __| | '_ \\ / _\` |   | |/ _ \\/ __| __/ __|      
+| |___ >  <  __/ (__| |_| | |_| | | | | (_| |   | |  __/\\__ \\ |_\\__ \\_ _ _ 
+|_____/_/\\_\\___|\\___|\\__,_|\\__|_|_| |_|\\__, |   |_|\\___||___/\\__|___(_|_|_)
+                                       |___/`;
 
-    const NODEROCK_INFO_TRACES_PATH = path.join(pathProjectFolder, "NodeRock_Info", "tracesFolder");
+function executeTests() {
+
+    console.log(executingTestsText);
+
+    const ANALYZED_PROJECT_FILE = path.join(__dirname, "../FoldersUsedDuringExecution/temporary_analyzedProjectInfo/temporary_analyzedProject.json");
+    const analyzedProjectData = JSON.parse(fs.readFileSync(ANALYZED_PROJECT_FILE, 'utf8'));
+
+    const pathProjectFolder = analyzedProjectData.pathProjectFolder;
+    const parameters = analyzedProjectData.parameters; 
+    const isMocha = analyzedProjectData.isMocha;
+
+
+    const TEST_NAMES_AND_FILES = path.join(pathProjectFolder, "NodeRock_Info/passingTests.json.log");
+    const analyzedProjectTestNamesAndFiles = JSON.parse(fs.readFileSync(TEST_NAMES_AND_FILES, 'utf8'));
+    
+    const testsOriginalFullNameList = analyzedProjectTestNamesAndFiles.map(test => test.title);
+    const testsRespectiveFile = analyzedProjectTestNamesAndFiles.map(test => test.file);
+
+    
     const NODEROCK_INFO_DURATIONS_PATH = path.join(pathProjectFolder, "NodeRock_Info", "testsDuration.json");
 
-    let testsDuration = [];
-
+    const NODEROCK_INFO_TRACES_PATH = path.join(pathProjectFolder, "NodeRock_Info", "tracesFolder");
     if (!fs.existsSync(NODEROCK_INFO_TRACES_PATH)) {
 
-        console.log(`\nCreating NodeRock_Info/tracesFolder in ${pathProjectFolder}\n`);
         fs.mkdirSync(NODEROCK_INFO_TRACES_PATH);
 
-        let pathNode_modules = chosenProject.isMocha ? "node_modules/.bin/_mocha" : "node_modules/.bin/jest";
+        let pathNode_modules = isMocha ? "node_modules/.bin/mocha" : "node_modules/.bin/jest";
 
         let semiCompleteCommand;
         let completCommand;
 
-        console.log("\nExecucao dos testes individualmente:");
+        console.log("\nExecuting all the Tests Individually to Collect Their Traces:");
 
+        let testsDuration = [];
         let testsAdaptedName;
         for(let i = 0; i < testsOriginalFullNameList.length; i++) {
 
@@ -37,19 +60,13 @@ function executeTests(pathProjectFolder, testsOriginalFullNameList, testsRespect
 
 
             try {
-                semiCompleteCommand = "node ../dist/bin/nodeprof.js " + chosenProject.pathProjectFolder + " " + pathNode_modules + " " + testsRespectiveFile[i] + " " + chosenProject.parameters;
+                semiCompleteCommand = "node ../dist/bin/nodeprof.js " + pathProjectFolder + " " + pathNode_modules + " " + testsRespectiveFile[i] + " " + parameters;
 
                 // Diferenciando se o teste eh Mocha ou Jest
-                if(chosenProject.isMocha) {
-                    completCommand = semiCompleteCommand + " -g " + testsAdaptedName;
-                }
-                else {
-                    completCommand = semiCompleteCommand + " --testNamePattern " + testsAdaptedName;
-                }
+                isMocha ? completCommand = semiCompleteCommand + " -g " + testsAdaptedName : completCommand = semiCompleteCommand + " --testNamePattern " + testsAdaptedName;
 
-                console.log(`\n${i+1}/${testsOriginalFullNameList.length}. Executando o teste: ${testsOriginalFullNameList[i]}`);
-                console.log("Comando usado foi: ", completCommand);
-
+                console.log(`\n${i+1}/${testsOriginalFullNameList.length}. Executing: ${testsOriginalFullNameList[i]}`);
+                console.log("Command used: ", completCommand);
 
                 const stringExecutedTest = shell.exec(completCommand);
 
@@ -80,7 +97,8 @@ function executeTests(pathProjectFolder, testsOriginalFullNameList, testsRespect
         }
 
     } else {
-        console.log(`\nNodeRock_Info/tracesFolder already exists in ${pathProjectFolder}\n`);
+        console.log("The Test Traces were already collected in a previos NodeRock Analysis!");
+        console.log("Using the existing Traces in: ", NODEROCK_INFO_TRACES_PATH);
     }
 
 

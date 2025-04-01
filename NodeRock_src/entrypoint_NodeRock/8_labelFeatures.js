@@ -4,7 +4,13 @@ const fs = require('fs');
 const path = require('path');
 
 
-function labelFeatures(pathProjectFolder, raceConditionTests) {
+function labelFeatures() {
+
+    const ANALYZED_PROJECT_FILE = path.join(__dirname, "../FoldersUsedDuringExecution/temporary_analyzedProjectInfo/temporary_analyzedProject.json");
+    const analyzedProjectData = JSON.parse(fs.readFileSync(ANALYZED_PROJECT_FILE, 'utf8'));
+
+    const pathProjectFolder = analyzedProjectData.pathProjectFolder;
+    const raceConditionTests = analyzedProjectData.raceConditionTests;
 
     const NODEROCK_INFO_EXTRACTED_RAW_PATH = path.join(pathProjectFolder, "NodeRock_Info", "extractedFeaturesRaw.json");
 
