@@ -30,7 +30,7 @@ function generateCSV() {
     const NODEROCK_INFO_DURATIONS_PATH = path.join(pathProjectFolder, "NodeRock_Info", "testsDuration.json");
     const testsDurationData = JSON.parse(fs.readFileSync(NODEROCK_INFO_DURATIONS_PATH, 'utf8'));
     const testsTotalDuration = testsDurationData;
-    console.log("TESTS DURATION EH: ", testsTotalDuration);
+    // console.log("TESTS DURATION EH: ", testsTotalDuration);
 
 
     console.log("\nGerando o arquivo .CSV:");
