@@ -30,6 +30,7 @@ function generateCSV() {
     const NODEROCK_INFO_DURATIONS_PATH = path.join(pathProjectFolder, "NodeRock_Info", "testsDuration.json");
     const testsDurationData = JSON.parse(fs.readFileSync(NODEROCK_INFO_DURATIONS_PATH, 'utf8'));
     const testsTotalDuration = testsDurationData;
+    console.log("TESTS DURATION EH: ", testsTotalDuration);
 
 
     console.log("\nGerando o arquivo .CSV:");
@@ -74,7 +75,7 @@ function generateCSV() {
 
         // Adding the header line to the csv
         lines.push(columns.join(','));
-
+        
         // Adding the data to csv
         for (let i = 0; i < rawFeaturesObject.length; i++) {
             
@@ -100,7 +101,7 @@ function generateCSV() {
                 monkeyPatchedPromisesData[i]?.resolvedPercentage ?? 0, normalizedFeaturesObject[i]?.resolvedPercentage ?? 0,
                 awaitIntervalsFromTests?.[i] ?? 0, normalizedFeaturesObject[i]?.awaitIntervals ?? 0,
         
-                testsTotalDuration[i], rawFeaturesObject[i].hasEventRace
+                `"${testsTotalDuration[i].toFixed(3)}"`, rawFeaturesObject[i].hasEventRace
             ];
         
             lines.push(line.join(','));
