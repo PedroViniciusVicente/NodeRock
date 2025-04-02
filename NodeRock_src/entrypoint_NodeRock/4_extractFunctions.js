@@ -18,19 +18,17 @@ function extractFunctions() {
 
     const ANALYZED_PROJECT_FILE = path.join(__dirname, "../FoldersUsedDuringExecution/temporary_analyzedProjectInfo/temporary_analyzedProject.json");
     const analyzedProjectData = JSON.parse(fs.readFileSync(ANALYZED_PROJECT_FILE, 'utf8'));
-
     const pathProjectFolder = analyzedProjectData.pathProjectFolder;
-
 
     const TEST_NAMES_AND_FILES = path.join(pathProjectFolder, "NodeRock_Info/passingTests.json.log");
     const analyzedProjectTestNamesAndFiles = JSON.parse(fs.readFileSync(TEST_NAMES_AND_FILES, 'utf8'));
-    
     const testsRespectiveFile = analyzedProjectTestNamesAndFiles.map(test => test.file);
 
-    console.log("\nGerando a lista com todas as funcoes presentes");
-
     const NODEROCK_INFO_TRACES_PATH = path.join(pathProjectFolder, "NodeRock_Info", "tracesFolder");
+    
     const NODEROCK_INFO_FUNCTIONS_PATH = path.join(pathProjectFolder, "NodeRock_Info", "functionsFolder");
+
+    const NODEROCK_INFO_AWAITS_FILE = path.join(pathProjectFolder, "NodeRock_Info", "awaitIntervals.json")
 
     let awaitIntervalsFromTests = [];
 
@@ -185,7 +183,14 @@ function extractFunctions() {
                 awaitsInterval = 0;
             }
 
-            return awaitIntervalsFromTests;
+            if (!fs.existsSync(NODEROCK_INFO_AWAITS_FILE)) {
+            
+                console.log(`\nCreating NodeRock_Info/awaitIntervals.json in ${NODEROCK_INFO_AWAITS_FILE}\n`);
+                fs.writeFileSync(NODEROCK_INFO_AWAITS_FILE, JSON.stringify(awaitIntervalsFromTests));
+    
+            } else {
+                console.log(`\nNodeRock_Info/awaitIntervals.json already exists in ${NODEROCK_INFO_AWAITS_FILE}\n`);
+            }
 
         } catch(error) {
             console.error("Erro foi detectado no gerando a lista das funcoes: ", error);

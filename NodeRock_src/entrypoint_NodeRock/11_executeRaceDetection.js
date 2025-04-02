@@ -6,8 +6,6 @@ const path = require('path');
 const Papa = require('papaparse');
 
 
-const config = require('./NodeRockConfig.js');
-
 const ROOT_PATH_NODEROCK = path.join(__dirname, "../");
 
 

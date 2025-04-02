@@ -100,11 +100,6 @@ function executeTests() {
         console.log("The Test Traces were already collected in a previos NodeRock Analysis!");
         console.log("Using the existing Traces in: ", NODEROCK_INFO_TRACES_PATH);
     }
-
-
-    const testsDurationRecovered = JSON.parse(fs.readFileSync(NODEROCK_INFO_DURATIONS_PATH, 'utf8'));
-
-    return testsDurationRecovered;
 }
 
 module.exports = { executeTests };

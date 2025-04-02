@@ -96,11 +96,6 @@ function getTestsNames() {
         console.log(`${i+1}. ${testsOriginalFullNameList[i]}`);
     }
 
-
-    return {
-        testsOriginalFullNameList: testsOriginalFullNameList,
-        testsRespectiveFile: testsRespectiveFile,
-    };
 }
 
 module.exports = {getTestsNames};

@@ -242,14 +242,6 @@ function chosenProjectFunction() {
     console.log("Analyzed Project Path: ", data.pathProjectFolder);
     console.log("Analyzed Root Test Folder / Test File", data.testFile);
     
-    return {
-        pathProjectFolder: pathProjectFolder,
-        testFile: testFile,
-        parameters: parameters,
-        isMocha: isMocha,
-        raceConditionTests: raceConditionTests,
-        benchmarkName: benchmarkName,
-    };
 }
 
 module.exports = { chosenProjectFunction };

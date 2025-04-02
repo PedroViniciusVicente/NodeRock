@@ -39,45 +39,33 @@ let rodarTestesCompleto = true; // true para caso tenha testes e false para caso
 if(rodarTestesCompleto) {
     
     // 1. Selecting the test file/folder that you want to analyse
-    const chosenProject = chosenProjectFunction();
-    //console.log("The selected project is: ", chosenProject);
-
+    chosenProjectFunction();
 
     // 2. Treatments and Path Verifications to Get the test names
-    const tests = getTestsNames();
-    //console.log(tests.testsFullNameList);
-    // for(let i = 0; i < tests.testsFullNameList.length; i++) {
-    //     console.log(i+1 + ". " + tests.testsFullNameList[i]);
-    // }
-
+    getTestsNames();
 
     // 3. Executing the tests individually and placing theirs traces in NodeRock_Info/TracesFolder from loghooks.json
-    const testsTotalDuration = executeTests();
-    // for(let i = 0; i < testsTotalDuration.length; i++) {
-    //     console.log("Duracao foi: ", testsTotalDuration[i]);
-    // }
+    executeTests();
 
     // 4. Extracting the functions from the traces and calculating their callback times
-    const awaitIntervalsFromTests = extractFunctions();
-    // console.log("AWAIT INTERVALS EH: ", awaitIntervalsFromTests);
+    extractFunctions();
 
     // 5. Extracting the main features from each test
     extractFeatures();
 
     // 6. Monkey Patching the promises to collect data about the promises executed
-    const monkeyPatchedPromisesData = executeMonkeyPatching();
-    // console.log("MONKEY PATCHING RESULTOU EM: ", monkeyPatchedPromisesData);
+    executeMonkeyPatching();
 
     // 7. Normalizing the extracted features before applying the ML methods
-    normalizeFeatures(awaitIntervalsFromTests, monkeyPatchedPromisesData);
+    normalizeFeatures();
 
     // 8. Labeling the extracted features before applying the ML methods
     labelFeatures();
 
     // 9. Generating the .csv file based on the .json files
-    // OBS: ESSES 2 ULTIMOS VALORES PODEM SER ESCRITOS DIRETO NO ARQUIVO FEATURES_RAW PRA N PRECISAR PASSAR POR PARAMETRO
-    generateCSV(chosenProject.pathProjectFolder, chosenProject.benchmarkName, tests.testsRespectiveFile, tests.testsOriginalFullNameList, testsTotalDuration, awaitIntervalsFromTests, monkeyPatchedPromisesData);
+    generateCSV();
     
+
     // 10. Executes the Python script with the Machine Learning Supervised Models and generate the result.csv
     // console.log(machineLearningClassifyingText);
     // executePythonML();

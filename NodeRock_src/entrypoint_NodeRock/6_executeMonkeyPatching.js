@@ -36,25 +36,36 @@ function executeMonkeyPatching() {
     // console.log(testsRespectiveFile);
     // console.log(testsFullNameList)
     
-    let extractedDataMonkeyTests = [];
-    let currentTestWithQuotes;
-    for(let i = 0; i < testsOriginalFullNameList.length; i++) {
-        // fs.truncateSync('./promise_logs/promises.json', 0); // Zerando o conteudo do json em que se armazena as infos das promises
-        fs.truncateSync('./FoldersUsedDuringExecution/temporary_promises_logs/promises.json', 0); // Zerando o conteudo do json em que se armazena as infos das promises
+    const NODEROCK_INFO_MONKEYPATCH_FILE = path.join(pathProjectFolder, "NodeRock_Info", "monkeypatching.json");
 
-        testsOriginalFullNameList[i].includes('"') 
-        ? currentTestWithQuotes = `'${testsOriginalFullNameList[i]}'` 
-        : currentTestWithQuotes = `"${testsOriginalFullNameList[i]}"` 
 
-        const command = `../node_modules/.bin/_mocha --exit -t 10000 --require ./entrypoint_NodeRock/monkeyPatchingTestes/monkeypatching.js ${testsRespectiveFile[i]} -f ${currentTestWithQuotes}`;
-        console.log("Comando usado para monkeyPatching foi: ", command);
-        shell.exec(command);
+    if (!fs.existsSync(NODEROCK_INFO_MONKEYPATCH_FILE)) {
 
-        const testDataMonkey = extractedFeaturesMonkeyPatching();
-        extractedDataMonkeyTests.push(testDataMonkey);
+        let extractedDataMonkeyTests = [];
+        let currentTestWithQuotes;
+        for(let i = 0; i < testsOriginalFullNameList.length; i++) {
+            // fs.truncateSync('./promise_logs/promises.json', 0); // Zerando o conteudo do json em que se armazena as infos das promises
+            fs.truncateSync('./FoldersUsedDuringExecution/temporary_promises_logs/promises.json', 0); // Zerando o conteudo do json em que se armazena as infos das promises
+
+            testsOriginalFullNameList[i].includes('"') 
+            ? currentTestWithQuotes = `'${testsOriginalFullNameList[i]}'` 
+            : currentTestWithQuotes = `"${testsOriginalFullNameList[i]}"` 
+
+            const command = `../node_modules/.bin/_mocha --exit -t 10000 --require ./entrypoint_NodeRock/monkeyPatchingTestes/monkeypatching.js ${testsRespectiveFile[i]} -f ${currentTestWithQuotes}`;
+            console.log("Comando usado para monkeyPatching foi: ", command);
+            shell.exec(command);
+
+            const testDataMonkey = extractedFeaturesMonkeyPatching();
+            extractedDataMonkeyTests.push(testDataMonkey);
+        }
+
+                
+        console.log(`\nCreating NodeRock_Info/monkeypatching.json in ${NODEROCK_INFO_MONKEYPATCH_FILE}\n`);
+        fs.writeFileSync(NODEROCK_INFO_MONKEYPATCH_FILE, JSON.stringify(extractedDataMonkeyTests, null, 4));
+
+    } else {
+        console.log(`\nNodeRock_Info/monkeypatching.json already exists in ${NODEROCK_INFO_MONKEYPATCH_FILE}\n`);
     }
-
-    return extractedDataMonkeyTests;
 }
 
 module.exports = { executeMonkeyPatching };

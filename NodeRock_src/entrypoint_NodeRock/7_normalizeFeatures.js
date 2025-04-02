@@ -8,17 +8,23 @@ const normalizeValue = (value, min, max) => {
     return (value - min) / (max - min);
 };
 
-function normalizeFeatures(awaitIntervalsFromTests, monkeyPatchedPromisesData) {
+function normalizeFeatures() {
 
     const ANALYZED_PROJECT_FILE = path.join(__dirname, "../FoldersUsedDuringExecution/temporary_analyzedProjectInfo/temporary_analyzedProject.json");
     const analyzedProjectData = JSON.parse(fs.readFileSync(ANALYZED_PROJECT_FILE, 'utf8'));
-
     const pathProjectFolder = analyzedProjectData.pathProjectFolder;
 
-    
+    const NODEROCK_INFO_AWAITS_FILE = path.join(pathProjectFolder, "NodeRock_Info", "awaitIntervals.json");
+    const awaitFileData = JSON.parse(fs.readFileSync(NODEROCK_INFO_AWAITS_FILE, 'utf8'));
+    const awaitIntervalsFromTests = awaitFileData;
+
+    const NODEROCK_INFO_MONKEYPATCH_FILE = path.join(pathProjectFolder, "NodeRock_Info", "monkeypatching.json");
+    const monkeypatchData = JSON.parse(fs.readFileSync(NODEROCK_INFO_MONKEYPATCH_FILE, 'utf8'));
+    const monkeyPatchedPromisesData = monkeypatchData;
+
     const NODEROCK_INFO_EXTRACTED_RAW_PATH = path.join(pathProjectFolder, "NodeRock_Info", "extractedFeaturesRaw.json");
     const NODEROCK_INFO_EXTRACTED_NORMALIZED_PATH = path.join(pathProjectFolder, "NodeRock_Info", "extractedFeaturesNormalized.json");
-
+    
     if (!fs.existsSync(NODEROCK_INFO_EXTRACTED_NORMALIZED_PATH)) {
 
         console.log(`\nCreating the normalized features file in NodeRock_Info\n`);
