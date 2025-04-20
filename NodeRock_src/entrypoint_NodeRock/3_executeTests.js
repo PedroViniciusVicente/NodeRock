@@ -40,7 +40,7 @@ function executeTests() {
 
         fs.mkdirSync(NODEROCK_INFO_TRACES_PATH);
 
-        let pathNode_modules = isMocha ? "node_modules/.bin/mocha" : "node_modules/.bin/jest";
+        let pathNode_modules = isMocha ? "node_modules/.bin/_mocha" : "node_modules/.bin/jest";
 
         let semiCompleteCommand;
         let completCommand;
@@ -70,12 +70,16 @@ function executeTests() {
 
                 const stringExecutedTest = shell.exec(completCommand);
 
+
                 
                 const match = stringExecutedTest.match(/analysis: ([\d.]+)s/);
-                const AnalysisTime = match ? match[1] : null;
+                const AnalysisTime = match ? match[1] : 0;
                 // console.log("\n\nTEMPO ANALISE EH: ", AnalysisTime);
+
                 const NumericAnalysisTime = parseFloat(AnalysisTime);
                 testsDuration.push(NumericAnalysisTime);
+
+
 
                 let copiedFileName = "tracesFromIt_" + i + ".json";
                 fs.copyFileSync(sourceCopyPath, path.join(NODEROCK_INFO_TRACES_PATH, copiedFileName));

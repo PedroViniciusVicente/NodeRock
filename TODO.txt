@@ -1,3 +1,9 @@
-Remover as pastas e arquivos inuteis do NodeRT (principalmente aquele que cria o violations.json, visto que não é mais usado)
+Estrutura do NodeRock:
+- Remover a normalização do javascript e deixar para o python lidar com isso
+- Enxugar os Traces, removendo os nomes de funções, valores retornados e outras coisas que não são utilizadas
+- Ao rodar o nacd, se o nome do teste tiver `` ele dá errado direto
+- No 11_executeRaceDetection, na linha let command = `nacd plain2 ./node_modules/.bin/mocha --exit -t 60000 -R spec ${testFile} -f ${currentTestWithQuotes}`;
+em alguns casos, como nos BlockedKeys do animir, esse testFile não pode ser apenas o endereço local da pasta de testes, mas sim precisa ir em test/component/BlockedKeys/BlockedKeys.test.js
 
-Remover a normalização do javascript e deixar para o python lidar com isso
+Benchmarks:
+- Rodar o nacd no pencilllllll

@@ -39,8 +39,8 @@ function executeRaceDetection(pathProjectFolder, testFile) {
     let numberOfFails = 0;
     let firstFail = 0;
 
-    const baseNumberOfIterations = 1;
-    const multiplyPositiveLabelsToIteration = 0;
+    const baseNumberOfIterations = 10;
+    const multiplyPositiveLabelsToIteration = 10;
     
     const NODEROCK_INFO_NACDRESULTS_PATH = path.join(pathProjectFolder, "NodeRock_Info", "nacdResultsFolder");
 
@@ -87,6 +87,11 @@ function executeRaceDetection(pathProjectFolder, testFile) {
                 }
             }
             shell.exec(`sleep 0.5`);
+        }
+
+        if (numberOfFails === 0) {
+            fs.rmSync(PATH_NACD_TEST_FOLDERS, { recursive: true, force: true });
+            console.log(`Deleted folder: ${PATH_NACD_TEST_FOLDERS} since there were no fails.`);
         }
 
         arrayNumberOfFails.push(numberOfFails)
@@ -155,11 +160,17 @@ function executeRaceDetection(pathProjectFolder, testFile) {
 // let pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/Swaagie_minimize");
 // let testFile = "test";
 
-// let pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/animir_node-rate-limiter-flexible");
+let pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/animir_node-rate-limiter-flexible");
+// let testFile = "test";
+let testFile = "test/component/MemoryStorage";
+
+
+// let pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/s-a_iron-node");
 // let testFile = "test";
 
-// let pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/animir_node-rate-limiter-flexible");
+// let pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/pencilblue_pencilblue");
 // let testFile = "test";
+
 
 // let pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "meuDatasetParaTestes/testesSimplesMocha");
 // let testFile = "teste/arquivoTestesMocha.js";
@@ -167,10 +178,10 @@ function executeRaceDetection(pathProjectFolder, testFile) {
 
 
 
-const ANALYZED_PROJECT_FILE = path.join(__dirname, "../FoldersUsedDuringExecution/temporary_analyzedProjectInfo/temporary_analyzedProject.json");
-const analyzedProjectData = JSON.parse(fs.readFileSync(ANALYZED_PROJECT_FILE, 'utf8'));
+// const ANALYZED_PROJECT_FILE = path.join(__dirname, "../FoldersUsedDuringExecution/temporary_analyzedProjectInfo/temporary_analyzedProject.json");
+// const analyzedProjectData = JSON.parse(fs.readFileSync(ANALYZED_PROJECT_FILE, 'utf8'));
 
-const pathProjectFolder = analyzedProjectData.pathProjectFolder;
-const testFile = analyzedProjectData.testFile;
+// const pathProjectFolder = analyzedProjectData.pathProjectFolder;
+// const testFile = analyzedProjectData.testFile;
 
 executeRaceDetection(pathProjectFolder, testFile);

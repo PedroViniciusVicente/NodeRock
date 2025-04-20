@@ -14,7 +14,7 @@ function chosenProjectFunction() {
 
 
     // let chosenProject = "MeuTestVerificarRuntimes";
-    let chosenProject = "MeuTestMocha";
+    let chosenProject = "TJATSE";
 
 
     switch (chosenProject) {
@@ -149,8 +149,8 @@ function chosenProjectFunction() {
         case "ARC":
             benchmarkName = "node-archiver";
             pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "datasetDoNodeRacer/exploratory/node-archiver/");
-            //testFile = "test/archiver.js";
-            testFile = "test/"
+            testFile = "test/archiver.js";
+            // testFile = "test/"
             parameters = `--exit -t 10000`;
             raceConditionTests.push("archiver api #errors should allow continue on stat failing");
             break;
@@ -222,6 +222,64 @@ function chosenProjectFunction() {
             parameters = "--exit -t 10000";
             break;
 
+        case "BITINN":
+            benchmarkName = "bitinn_node-fetch";
+            pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/bitinn_node-fetch");
+            testFile = "test";
+            parameters = "--exit -t 10000";
+            break;
+
+        case "IRONNODE":
+            benchmarkName = "s-a_iron-node";
+            pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/s-a_iron-node");
+            testFile = "test";
+            parameters = "--exit -t 10000";
+            break;
+
+
+        case "YARGS":
+            benchmarkName = "yargs_yargs";
+            pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/yargs_yargs");
+            testFile = "test";
+            parameters = "--exit -t 10000";
+            break;
+
+        case "PENCIL":
+            benchmarkName = "pencilblue_pencilblue";
+            pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/pencilblue_pencilblue");
+            testFile = "test";
+            parameters = "--exit -t 10000";
+            break;
+
+        case "CODEKIREI":
+            benchmarkName = "codekirei_node-multispinner";
+            pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/codekirei_node-multispinner");
+            testFile = "test";
+            parameters = "--exit -t 10000";
+            break;
+
+        case "CGIFFARD":
+            benchmarkName = "cgiffard_node-simplecrawler";
+            pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/cgiffard_node-simplecrawler");
+            testFile = "test";
+            parameters = "--exit -t 10000";
+            break;
+
+        case "BBCFLASHHEART":
+            benchmarkName = "bbc_flashheart";
+            pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/bbc_flashheart");
+            testFile = "test";
+            parameters = "--exit -t 10000";
+            break;
+
+        case "TJATSE":
+            benchmarkName = "Tjatse_node-readability";
+            pathProjectFolder = path.join("/home/pedroubuntu/Downloads", "nacd/Tjatse_node-readability");
+            testFile = "test";
+            parameters = "--exit -t 10000";
+            break;
+            
+
         default:
             console.log("Esse projeto ainda nao esta nesse switch case!");
             process.exit();
@@ -240,7 +298,7 @@ function chosenProjectFunction() {
     fs.writeFileSync(TEMPORARY_ANALYZED_PROJECT, JSON.stringify(data, null, 2));
 
     console.log("Analyzed Project Path: ", data.pathProjectFolder);
-    console.log("Analyzed Root Test Folder / Test File", data.testFile);
+    console.log("Analyzed Root Test Folder/File: ", data.testFile);
     
 }
 
