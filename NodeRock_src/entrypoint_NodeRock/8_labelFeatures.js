@@ -38,7 +38,7 @@ function labelFeatures() {
         console.log("ERRO: ALGUM TESTE QUE EH RACECONDITION NAO FOI ENCONTRADO E ROTULADO CORRETAMENTE!!");
     }
 
-    const jsonData = JSON.stringify(rawFeaturesObject, null, 2);
+    const jsonData = JSON.stringify(rawFeaturesObject);
     fs.writeFileSync(NODEROCK_INFO_EXTRACTED_RAW_PATH, jsonData);
 
 }

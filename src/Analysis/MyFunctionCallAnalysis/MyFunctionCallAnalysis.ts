@@ -12,7 +12,7 @@ import async_hooks from 'async_hooks';
 const { performance } = require('perf_hooks'); // lib to calculate runtime in invokefun
 
 import path from 'path'; // lib to get full path in file name
-import { stringify } from 'flatted'; // lib to remove json circular reference with objects
+// import { stringify } from 'flatted'; // lib to remove json circular reference with objects
 import { parse } from 'flatted';
 
 
@@ -343,7 +343,7 @@ export class MyFunctionCallAnalysis extends Analysis {
             //     }
             // }
 
-            const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
+            const stringJSON = JSON.stringify(ObjectLogMessage);
             MyFunctionCallAnalysis.eventEmitter.emit('addLogToVector', stringJSON);
             // -=+=- prints para debugar o functionEnter: -=+=-
             // console.log("O nome da funcao eh: ", newFunctionName);
@@ -361,7 +361,7 @@ export class MyFunctionCallAnalysis extends Analysis {
         };
 
         
-        this.functionExit = (iid, returnVal, wrappedExceptionVal) => {
+        this.functionExit = (iid, _returnVal, _wrappedExceptionVal) => {
             const sourceObject = this.getSandbox().iidToSourceObject(iid);
             if(!sourceObject) { return }
             const {name: fileName, loc} = sourceObject;
@@ -374,22 +374,22 @@ export class MyFunctionCallAnalysis extends Analysis {
             // Removing startTime from the map
             //MyFunctionCallAnalysis.startTimesFunctionEnter.delete(iid);
 
-            let stringJSONdoreturnVal : string;
-            try {
-                if (typeof(returnVal) === 'function') {
-                    stringJSONdoreturnVal = JSON.stringify({ returnVal: returnVal.toString() });
-                }
-                else if (typeof(returnVal) === 'bigint') {
-                    stringJSONdoreturnVal = JSON.stringify({ returnVal: returnVal.toString() });
-                }
-                else {
-                    stringJSONdoreturnVal = stringify(returnVal);
-                }
-            } catch (err) {
-                stringJSONdoreturnVal = err instanceof Error
-                ? `{ "error": "Failed to stringify value", "details": "${err.message}" }`
-                : `{ "error": "Failed to stringify value", "details": "Unknown error" }`;
-            }
+            // let stringJSONdoreturnVal : string;
+            // try {
+            //     if (typeof(returnVal) === 'function') {
+            //         stringJSONdoreturnVal = JSON.stringify({ returnVal: returnVal.toString() });
+            //     }
+            //     else if (typeof(returnVal) === 'bigint') {
+            //         stringJSONdoreturnVal = JSON.stringify({ returnVal: returnVal.toString() });
+            //     }
+            //     else {
+            //         stringJSONdoreturnVal = stringify(returnVal);
+            //     }
+            // } catch (err) {
+            //     stringJSONdoreturnVal = err instanceof Error
+            //     ? `{ "error": "Failed to stringify value", "details": "${err.message}" }`
+            //     : `{ "error": "Failed to stringify value", "details": "Unknown error" }`;
+            // }
 
             const ObjectLogMessage = {
                 "File_Path": path.resolve(fileName),
@@ -398,15 +398,15 @@ export class MyFunctionCallAnalysis extends Analysis {
                 "Async_Hook_Id": async_hooks.executionAsyncId(),
                 // para saber o nome provavelmente vai ter de colocar uma pilha que da o push no functionEnter e pop no functionExit
                 //"Function_Name": 
-                "Returned_Type" : typeof(returnVal),
-                "Returned_Value": stringJSONdoreturnVal,
-                "Excession_Occurred": wrappedExceptionVal,
+                // "Returned_Type" : typeof(returnVal), // FEATURE NAO UTILIZADA
+                // "Returned_Value": stringJSONdoreturnVal, // FEATURE NAO UTILIZADA
+                //"Excession_Occurred": wrappedExceptionVal, // FEATURE NAO UTILIZADA
                 "iid": iid,
                 "timer": performance.now(),
                 //"Runtime_ms": runtime,
             };
         
-            const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
+            const stringJSON = JSON.stringify(ObjectLogMessage);
             MyFunctionCallAnalysis.eventEmitter.emit('addLogToVector', stringJSON);
             // Obs: Por algum motivo o functionExit consegue chamar o arguments.length sem ter esse parametro (???)
             //console.log(arguments.length);
@@ -477,13 +477,13 @@ export class MyFunctionCallAnalysis extends Analysis {
             //}
 
         
-            const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
+            const stringJSON = JSON.stringify(ObjectLogMessage);
             MyFunctionCallAnalysis.eventEmitter.emit('addLogToVector', stringJSON);
             //console.log("Essa base eh: ", base);
         }
 
 
-        this.invokeFun = (iid, f, _base, _args, result, _isConstructor, _isMethod, _functionIid) => {
+        this.invokeFun = (iid, f, _base, _args, _result, _isConstructor, _isMethod, _functionIid) => {
             const sourceObject = this.getSandbox().iidToSourceObject(iid);
             if(!sourceObject) { return }
             const {name: fileName, loc} = sourceObject;
@@ -499,22 +499,22 @@ export class MyFunctionCallAnalysis extends Analysis {
             let newFunctionName: String;
             f.name ? newFunctionName = f.name : newFunctionName = "Anonymous Function ";
 
-            let stringJSONdoResult : string;
-            try {
-                if (typeof(result) === 'function') {
-                    stringJSONdoResult = JSON.stringify({ result: result.toString() });
-                }
-                else if (typeof(result) === 'bigint') {
-                    stringJSONdoResult = JSON.stringify({ result: result.toString() });
-                }
-                else {
-                    stringJSONdoResult = stringify(result);
-                }
-            } catch (err) {
-                stringJSONdoResult = err instanceof Error
-                ? `{ "error": "Failed to stringify value", "details": "${err.message}" }`
-                : `{ "error": "Failed to stringify value", "details": "Unknown error" }`;
-            }
+            // let stringJSONdoResult : string;
+            // try {
+            //     if (typeof(result) === 'function') {
+            //         stringJSONdoResult = JSON.stringify({ result: result.toString() });
+            //     }
+            //     else if (typeof(result) === 'bigint') {
+            //         stringJSONdoResult = JSON.stringify({ result: result.toString() });
+            //     }
+            //     else {
+            //         stringJSONdoResult = stringify(result);
+            //     }
+            // } catch (err) {
+            //     stringJSONdoResult = err instanceof Error
+            //     ? `{ "error": "Failed to stringify value", "details": "${err.message}" }`
+            //     : `{ "error": "Failed to stringify value", "details": "Unknown error" }`;
+            // }
 
             const ObjectLogMessage = {
                 "File_Path": path.resolve(fileName),
@@ -523,15 +523,15 @@ export class MyFunctionCallAnalysis extends Analysis {
                 "Async_Hook_Id": async_hooks.executionAsyncId(),
                 "Function_Name": newFunctionName,
                 //"Function_Arguments": args.join(", "),
-                "Tipo_Returned_Value": typeof result,
-                "Returned_Value": stringJSONdoResult,
+                //"Tipo_Returned_Value": typeof result, // FEATURE NAO UTILIZADA
+                //"Returned_Value": stringJSONdoResult, // FEATURE NAO UTILIZADA
                 "iid": iid,
                 //"Runtime_ms": runtime,
                 //"Objeto_Base": base, // objeto base que vai receber a funcao, julgo que nao eh mt necessario
                 "timer": performance.now(),
             };
         
-            const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
+            const stringJSON = JSON.stringify(ObjectLogMessage);
             MyFunctionCallAnalysis.eventEmitter.emit('addLogToVector', stringJSON);
             //console.log("Essa base eh: ", base);
         };
@@ -673,11 +673,11 @@ export class MyFunctionCallAnalysis extends Analysis {
                 "timer": performance.now(),
                 "iid": iid,
             };
-            const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
+            const stringJSON = JSON.stringify(ObjectLogMessage);
             MyFunctionCallAnalysis.eventEmitter.emit('addLogToVector', stringJSON);
         };
 
-        this.asyncFunctionExit = (iid, result, wrappedExceptionVal) => {
+        this.asyncFunctionExit = (iid, _result, _wrappedExceptionVal) => {
             const sourceObject = this.getSandbox().iidToSourceObject(iid);
             if(!sourceObject) { return }
             const {name: fileName, loc} = sourceObject;
@@ -689,38 +689,38 @@ export class MyFunctionCallAnalysis extends Analysis {
                 "Detected_Hook": "asyncFunctionExit",
                 "loc": loc,
                 "Async_Hook_Id": async_hooks.executionAsyncId(),
-                "Returned_Value": result,
-                "Excession_Occurred": wrappedExceptionVal,
+                // "Returned_Value": result, // FEATURE NAO UTILIZADA
+                // "Excession_Occurred": wrappedExceptionVal, // FEATURE NAO UTILIZADA
                 "timer": performance.now(),
                 "iid": iid,
             };
 
-            const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
+            const stringJSON = JSON.stringify(ObjectLogMessage);
             MyFunctionCallAnalysis.eventEmitter.emit('addLogToVector', stringJSON);
         };
         
-        this.awaitPre = (iid, promiseOrValAwaited) => {
+        this.awaitPre = (iid, _promiseOrValAwaited) => {
             const sourceObject = this.getSandbox().iidToSourceObject(iid);
             if(!sourceObject) { return }
             const {name: fileName, loc} = sourceObject;
             
 
-            let stringJSONdopromiseOrValAwaited : string;
-            try {
-                if (typeof(promiseOrValAwaited) === 'function') {
-                    stringJSONdopromiseOrValAwaited = JSON.stringify({ promiseOrValAwaited: promiseOrValAwaited.toString() });
-                }
-                else if (typeof(promiseOrValAwaited) === 'bigint') {
-                    stringJSONdopromiseOrValAwaited = JSON.stringify({ promiseOrValAwaited: promiseOrValAwaited.toString() });
-                }
-                else {
-                    stringJSONdopromiseOrValAwaited = stringify(promiseOrValAwaited);
-                }
-            } catch (err) {
-                stringJSONdopromiseOrValAwaited = err instanceof Error
-                ? `{ "error": "Failed to stringify value", "details": "${err.message}" }`
-                : `{ "error": "Failed to stringify value", "details": "Unknown error" }`;
-            }
+            // let stringJSONdopromiseOrValAwaited : string;
+            // try {
+            //     if (typeof(promiseOrValAwaited) === 'function') {
+            //         stringJSONdopromiseOrValAwaited = JSON.stringify({ promiseOrValAwaited: promiseOrValAwaited.toString() });
+            //     }
+            //     else if (typeof(promiseOrValAwaited) === 'bigint') {
+            //         stringJSONdopromiseOrValAwaited = JSON.stringify({ promiseOrValAwaited: promiseOrValAwaited.toString() });
+            //     }
+            //     else {
+            //         stringJSONdopromiseOrValAwaited = stringify(promiseOrValAwaited);
+            //     }
+            // } catch (err) {
+            //     stringJSONdopromiseOrValAwaited = err instanceof Error
+            //     ? `{ "error": "Failed to stringify value", "details": "${err.message}" }`
+            //     : `{ "error": "Failed to stringify value", "details": "Unknown error" }`;
+            // }
 
             // nao tem como saber qual a funcao??
             const ObjectLogMessage = {
@@ -728,53 +728,53 @@ export class MyFunctionCallAnalysis extends Analysis {
                 "Detected_Hook": "awaitPre",
                 "loc": loc,
                 "Async_Hook_Id": async_hooks.executionAsyncId(),
-                "Expected_Value": stringJSONdopromiseOrValAwaited,
+                // "Expected_Value": stringJSONdopromiseOrValAwaited, // FEATURE NAO UTILIZADA
                 "timer": performance.now(),
                 "iid": iid,
             };
 
-            const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
+            const stringJSON = JSON.stringify(ObjectLogMessage);
             MyFunctionCallAnalysis.eventEmitter.emit('addLogToVector', stringJSON);
         };
 
-        this.awaitPost = (iid, promiseOrValAwaited, valResolveOrRejected, isPromiseRejected) => {
+        this.awaitPost = (iid, _promiseOrValAwaited, _valResolveOrRejected, _isPromiseRejected) => {
             const sourceObject = this.getSandbox().iidToSourceObject(iid);
             if(!sourceObject) { return }
             const {name: fileName, loc} = sourceObject;
             
-            let stringJSONdopromiseOrValAwaited : string;
-            try {
-                if (typeof(promiseOrValAwaited) === 'function') {
-                    stringJSONdopromiseOrValAwaited = JSON.stringify({ promiseOrValAwaited: promiseOrValAwaited.toString() });
-                }
-                else if (typeof(promiseOrValAwaited) === 'bigint') {
-                    stringJSONdopromiseOrValAwaited = JSON.stringify({ promiseOrValAwaited: promiseOrValAwaited.toString() });
-                }
-                else {
-                    stringJSONdopromiseOrValAwaited = stringify(promiseOrValAwaited);
-                }
-            } catch (err) {
-                stringJSONdopromiseOrValAwaited = err instanceof Error
-                ? `{ "error": "Failed to stringify value", "details": "${err.message}" }`
-                : `{ "error": "Failed to stringify value", "details": "Unknown error" }`;
-            }
+            // let stringJSONdopromiseOrValAwaited : string;
+            // try {
+            //     if (typeof(promiseOrValAwaited) === 'function') {
+            //         stringJSONdopromiseOrValAwaited = JSON.stringify({ promiseOrValAwaited: promiseOrValAwaited.toString() });
+            //     }
+            //     else if (typeof(promiseOrValAwaited) === 'bigint') {
+            //         stringJSONdopromiseOrValAwaited = JSON.stringify({ promiseOrValAwaited: promiseOrValAwaited.toString() });
+            //     }
+            //     else {
+            //         stringJSONdopromiseOrValAwaited = stringify(promiseOrValAwaited);
+            //     }
+            // } catch (err) {
+            //     stringJSONdopromiseOrValAwaited = err instanceof Error
+            //     ? `{ "error": "Failed to stringify value", "details": "${err.message}" }`
+            //     : `{ "error": "Failed to stringify value", "details": "Unknown error" }`;
+            // }
 
-            let stringJSONdovalResolveOrRejected : string;
-            try {
-                if (typeof(valResolveOrRejected) === 'function') {
-                    stringJSONdovalResolveOrRejected = JSON.stringify({ valResolveOrRejected: valResolveOrRejected.toString() });
-                }
-                else if (typeof(valResolveOrRejected) === 'bigint') {
-                    stringJSONdovalResolveOrRejected = JSON.stringify({ valResolveOrRejected: valResolveOrRejected.toString() });
-                }
-                else {
-                    stringJSONdovalResolveOrRejected = stringify(valResolveOrRejected);
-                }
-            } catch (err) {
-                stringJSONdovalResolveOrRejected = err instanceof Error
-                ? `{ "error": "Failed to stringify value", "details": "${err.message}" }`
-                : `{ "error": "Failed to stringify value", "details": "Unknown error" }`;
-            }
+            // let stringJSONdovalResolveOrRejected : string;
+            // try {
+            //     if (typeof(valResolveOrRejected) === 'function') {
+            //         stringJSONdovalResolveOrRejected = JSON.stringify({ valResolveOrRejected: valResolveOrRejected.toString() });
+            //     }
+            //     else if (typeof(valResolveOrRejected) === 'bigint') {
+            //         stringJSONdovalResolveOrRejected = JSON.stringify({ valResolveOrRejected: valResolveOrRejected.toString() });
+            //     }
+            //     else {
+            //         stringJSONdovalResolveOrRejected = stringify(valResolveOrRejected);
+            //     }
+            // } catch (err) {
+            //     stringJSONdovalResolveOrRejected = err instanceof Error
+            //     ? `{ "error": "Failed to stringify value", "details": "${err.message}" }`
+            //     : `{ "error": "Failed to stringify value", "details": "Unknown error" }`;
+            // }
 
             // nao tem como saber qual a funcao??
             const ObjectLogMessage = {
@@ -782,17 +782,17 @@ export class MyFunctionCallAnalysis extends Analysis {
                 "Detected_Hook": "awaitPost",
                 "loc": loc,
                 "Async_Hook_Id": async_hooks.executionAsyncId(),
-                "Is_Promise_Rejected": isPromiseRejected,
+                // "Is_Promise_Rejected": isPromiseRejected, // hum, interessante, talvez pode substituir o monkeypatching das promises
                 // !!! Por algum motivo esses valores esperados/resolvidos nao estao sendo armazenados no arquivo !!!
-                "Expected_Value_Type": typeof(promiseOrValAwaited),
-                "Expected_Value": stringJSONdopromiseOrValAwaited,
-                "Resolved_Value_Type": typeof(valResolveOrRejected),
-                "Resolved_Value": stringJSONdovalResolveOrRejected,
+                // "Expected_Value_Type": typeof(promiseOrValAwaited), // FEATURE NAO UTILIZADA
+                // "Expected_Value": stringJSONdopromiseOrValAwaited, // FEATURE NAO UTILIZADA
+                // "Resolved_Value_Type": typeof(valResolveOrRejected), // FEATURE NAO UTILIZADA
+                // "Resolved_Value": stringJSONdovalResolveOrRejected, // FEATURE NAO UTILIZADA
                 "timer": performance.now(),
                 "iid": iid,
             };
 
-            const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
+            const stringJSON = JSON.stringify(ObjectLogMessage);
             MyFunctionCallAnalysis.eventEmitter.emit('addLogToVector', stringJSON);
         };
         

@@ -14,7 +14,7 @@ function chosenProjectFunction() {
 
 
     // let chosenProject = "MeuTestVerificarRuntimes";
-    let chosenProject = "TJATSE";
+    let chosenProject = "ARC";
 
 
     switch (chosenProject) {

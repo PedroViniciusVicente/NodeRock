@@ -44,7 +44,7 @@ function MochaReporter(runner, options) {
         // console.log("ACHOU O: ", JSON.stringify(passedTests, null, 4));
         // console.log("\nCHEGOU O PATH PARA CRIAR O PASSINGTESTS.JSON.LOG:", TEMPORARY_TESTS_NAMES_AND_FILES);
 
-        fs.writeFileSync(path.join(TEMPORARY_TESTS_NAMES_AND_FILES, "temporaryPassingTests.json.log"), JSON.stringify(passedTests, null, 4), 'utf8');
+        fs.writeFileSync(path.join(TEMPORARY_TESTS_NAMES_AND_FILES, "temporaryPassingTests.json.log"), JSON.stringify(passedTests), 'utf8');
 
         /*
         ** console.log("o destination eh: ", TEMPORARY_TESTS_NAMES_AND_FILES);

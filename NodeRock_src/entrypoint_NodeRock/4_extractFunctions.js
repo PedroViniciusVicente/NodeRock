@@ -164,7 +164,7 @@ function extractFunctions() {
                         delayCb = 0;
                         // awaitsInterval = 0;
                 
-                        const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
+                        const stringJSON = JSON.stringify(ObjectLogMessage);
                         if(firstWrite) {
                             fs.writeFileSync(destinationFile, stringJSON, {flag:'a'});
                             firstWrite = false;

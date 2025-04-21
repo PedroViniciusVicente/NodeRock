@@ -5,5 +5,6 @@ Estrutura do NodeRock:
 - No 11_executeRaceDetection, na linha let command = `nacd plain2 ./node_modules/.bin/mocha --exit -t 60000 -R spec ${testFile} -f ${currentTestWithQuotes}`;
 em alguns casos, como nos BlockedKeys do animir, esse testFile não pode ser apenas o endereço local da pasta de testes, mas sim precisa ir em test/component/BlockedKeys/BlockedKeys.test.js
 
+- rever o monkeypatching: nao esta funfando no nodearchiver
 Benchmarks:
 - Rodar o nacd no pencilllllll

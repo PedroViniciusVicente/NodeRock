@@ -100,7 +100,7 @@ function normalizeFeatures() {
             normalizedData.push(normalizedItem);
         }
 
-        const jsonData = JSON.stringify(normalizedData, null, 2);
+        const jsonData = JSON.stringify(normalizedData);
         fs.writeFileSync(NODEROCK_INFO_EXTRACTED_NORMALIZED_PATH, jsonData);
         //return normalizedData;
     } else {

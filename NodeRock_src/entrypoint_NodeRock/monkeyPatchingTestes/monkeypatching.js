@@ -30,7 +30,7 @@ function saveLog(logData) {
 
     // Adiciona as novas informações e salva novamente
     allLogs.push(logData);
-    fs.writeFileSync(logFilePath, JSON.stringify(allLogs, null, 2));
+    fs.writeFileSync(logFilePath, JSON.stringify(allLogs));
 }
 
 global.Promise = class Promise extends OldPromise {

@@ -61,7 +61,7 @@ function executeMonkeyPatching() {
 
                 
         console.log(`\nCreating NodeRock_Info/monkeypatching.json in ${NODEROCK_INFO_MONKEYPATCH_FILE}\n`);
-        fs.writeFileSync(NODEROCK_INFO_MONKEYPATCH_FILE, JSON.stringify(extractedDataMonkeyTests, null, 4));
+        fs.writeFileSync(NODEROCK_INFO_MONKEYPATCH_FILE, JSON.stringify(extractedDataMonkeyTests));
 
     } else {
         console.log(`\nNodeRock_Info/monkeypatching.json already exists in ${NODEROCK_INFO_MONKEYPATCH_FILE}\n`);

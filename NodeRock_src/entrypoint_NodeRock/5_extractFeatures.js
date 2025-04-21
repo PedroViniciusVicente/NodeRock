@@ -116,7 +116,7 @@ function extractFeatures() {
                     "Unique_Asynchook_ids": unique_asynchook_ids,
                 };
 
-                const stringJSON = JSON.stringify(ObjectLogMessage, null, 4);
+                const stringJSON = JSON.stringify(ObjectLogMessage);
 
                 if (i !== testsOriginalFullNameList.length - 1) {
                     fs.writeFileSync(NODEROCK_INFO_EXTRACTED_RAW_PATH, stringJSON + ',\n', {flag:'a'});
