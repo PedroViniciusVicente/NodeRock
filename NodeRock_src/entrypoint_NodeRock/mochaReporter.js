@@ -27,8 +27,8 @@ function MochaReporter(runner, options) {
     runner.on(EVENT_TEST_PASS, function (test) {
         passedTests.push({
             // file: "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/nedb/test/db.test.js", // para o nedb
-            // file: "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/fiware-pep-steelskin/test/unit/race_simple.js", // para o fiware
-            file: test.file, // default
+            file: "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/fiware-pep-steelskin/test/unit/race_simple.js", // para o FPS
+            // file: test.file, // default
 
             title: test.fullTitle()
         });

@@ -24,6 +24,7 @@ function executeTests() {
     const pathProjectFolder = analyzedProjectData.pathProjectFolder;
     const parameters = analyzedProjectData.parameters; 
     const isMocha = analyzedProjectData.isMocha;
+    const isScript = analyzedProjectData.isScript;
 
 
     const TEST_NAMES_AND_FILES = path.join(pathProjectFolder, "NodeRock_Info/passingTests.json.log");
@@ -60,16 +61,27 @@ function executeTests() {
 
 
             try {
-                semiCompleteCommand = "node ../dist/bin/nodeprof.js " + pathProjectFolder + " " + pathNode_modules + " " + testsRespectiveFile[i] + " " + parameters;
+                let stringExecutedTest;
+                if(!isScript) {
 
-                // Diferenciando se o teste eh Mocha ou Jest
-                isMocha ? completCommand = semiCompleteCommand + " -g " + testsAdaptedName : completCommand = semiCompleteCommand + " --testNamePattern " + testsAdaptedName;
+                    semiCompleteCommand = "node ../dist/bin/nodeprof.js " + pathProjectFolder + " " + pathNode_modules + " " + testsRespectiveFile[i] + " " + parameters;
 
-                console.log(`\n${i+1}/${testsOriginalFullNameList.length}. Executing: ${testsOriginalFullNameList[i]}`);
-                console.log("Command used: ", completCommand);
+                    // Diferenciando se o teste eh Mocha ou Jest
+                    isMocha ? completCommand = semiCompleteCommand + " -g " + testsAdaptedName : completCommand = semiCompleteCommand + " --testNamePattern " + testsAdaptedName;
 
-                const stringExecutedTest = shell.exec(completCommand);
+                    console.log(`\n${i+1}/${testsOriginalFullNameList.length}. Executing: ${testsOriginalFullNameList[i]}`);
+                    console.log("Command used: ", completCommand);
 
+                    stringExecutedTest = shell.exec(completCommand);
+                }
+                else {
+                    // let local = shell.exec("pwd");
+                    // console.log("local eh: ", local);
+                    let commandScript = "timeout 20 node ../dist/bin/nodeprof.js" + " " + pathProjectFolder + " " + testsRespectiveFile[0] + " " + parameters;
+                    // let commandScript = "node ./dist/bin/nodeprof.js" + " " + pathProjectFolder + " " + testFile + " " + parameters;
+                    console.log("Command used: ", commandScript);
+                    stringExecutedTest = shell.exec(commandScript);
+                }
 
                 
                 const match = stringExecutedTest.match(/analysis: ([\d.]+)s/);

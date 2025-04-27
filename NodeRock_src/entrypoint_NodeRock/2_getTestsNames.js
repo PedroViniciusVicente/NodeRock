@@ -23,8 +23,6 @@ const getTestsNamesText = `
                             
 function getTestsNames() {
     
-    console.log(getTestsNamesText);
-
     const ANALYZED_PROJECT_FILE = path.join(__dirname, "../FoldersUsedDuringExecution/temporary_analyzedProjectInfo/temporary_analyzedProject.json");
     const analyzedProjectData = JSON.parse(fs.readFileSync(ANALYZED_PROJECT_FILE, 'utf8'));
     // console.log(analyzedProjectData);
@@ -32,35 +30,58 @@ function getTestsNames() {
     const pathProjectFolder = analyzedProjectData.pathProjectFolder;
     const testFile = analyzedProjectData.testFile;
     const parameters = analyzedProjectData.parameters;
+    const isScript = analyzedProjectData.isScript;
+    const benchmarkName = analyzedProjectData.benchmarkName;
 
     // Creates NodeRock_Info folder in the analyzed project if it does not exists yet
     const NODEROCK_INFO_PATH = path.join(pathProjectFolder, "NodeRock_Info");
     fs.mkdirSync(NODEROCK_INFO_PATH, { recursive: true });
+    
+    if(!isScript) {
+        console.log(getTestsNamesText);
+    }
 
 
     const PASSING_TESTS_PATH = path.join(pathProjectFolder, "NodeRock_Info", "passingTests.json.log");
     if (!fs.existsSync(PASSING_TESTS_PATH)) {
 
-        shell.cd(`${pathProjectFolder}`);
+        let testsObject;
+        if(!isScript) {
+            shell.cd(`${pathProjectFolder}`);
 
-        // console.log("Comando usado para extrair os testes: ", commandGetTests);
+            // console.log("Comando usado para extrair os testes: ", commandGetTests);
+            
+            // O trecho --reporter-options pathProjectFolder=${pathProjectFolder} só serve para passar o pathProjectFolder como argumento
+            // let out = shell.exec(`npx mocha ${testFile} --recursive --exit -R ${CUSTOM_REPORTER} ${parameters} --reporter-options pathProjectFolder=${pathProjectFolder}`, { silent: false }); // default
+
+            // let out = shell.exec(`./node_modules/.bin/mocha ${testFile} --recursive --exit -R ${CUSTOM_REPORTER} ${parameters}`, { silent: false });
+
+            // shell.exec(`./node_modules/.bin/_mocha --exit -t 20000 test/db.test.js -R ${CUSTOM_REPORTER}`, {silent: false}); // SOMENTE PARA O NEDB
+            shell.exec(`./node_modules/.bin/_mocha ${testFile} ${parameters} -R ${CUSTOM_REPORTER}`, {silent: false}); // para o fps
+            // shell.exec(`mocha --recursive --require ./scripts/mocha-require`) // PARA O ZENPARSING
+
+            shell.cd(ROOT_PATH_NODEROCK);
+
+            // "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/NodeRock_src/FoldersUsedDuringExecution/temporary_TestsNamesAndFiles";
+            const TEMPORARY_TESTS_NAMES_AND_FILES = path.join(__dirname,"../FoldersUsedDuringExecution/temporary_TestsNamesAndFiles/temporaryPassingTests.json.log");
+    
+            // Writing the passed tests names and files to NodeRock_Info
+            testsObject = JSON.parse(fs.readFileSync(TEMPORARY_TESTS_NAMES_AND_FILES, 'utf8'));
+        }
+        else {
+            let scriptFileAndName = [];
+            scriptFileAndName.push({
+                file: path.join(pathProjectFolder, testFile),
+                title: `Script for ${benchmarkName}`
+            });
+            testsObject = scriptFileAndName;
+            shell.cd(ROOT_PATH_NODEROCK);
+        }
+
+        // let local = shell.exec("pwd");
+        // console.log("\nO LOCAL EH: ", local);
+
         
-        // O trecho --reporter-options pathProjectFolder=${pathProjectFolder} só serve para passar o pathProjectFolder como argumento
-        let out = shell.exec(`npx mocha ${testFile} --recursive --exit -R ${CUSTOM_REPORTER} ${parameters} --reporter-options pathProjectFolder=${pathProjectFolder}`, { silent: false });
-
-        // let out = shell.exec(`./node_modules/.bin/mocha ${testFile} --recursive --exit -R ${CUSTOM_REPORTER} ${parameters}`, { silent: false });
-
-        // shell.exec(`./node_modules/.bin/_mocha --exit -t 20000 test/db.test.js -R ${CUSTOM_REPORTER}`, {silent: false}); // SOMENTE PARA O NEDB
-        // shell.exec(`./node_modules/.bin/_mocha ${testFile} ${parameters} -R ${CUSTOM_REPORTER}`, {silent: false}); // para o fps
-        // shell.exec(`mocha --recursive --require ./scripts/mocha-require`) // PARA O ZENPARSING
-
-        shell.cd(ROOT_PATH_NODEROCK);
-
-        // "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/NodeRock_src/FoldersUsedDuringExecution/temporary_TestsNamesAndFiles";
-        const TEMPORARY_TESTS_NAMES_AND_FILES = path.join(__dirname,"../FoldersUsedDuringExecution/temporary_TestsNamesAndFiles/temporaryPassingTests.json.log");
-
-        // Writing the passed tests names and files to NodeRock_Info
-        const testsObject = JSON.parse(fs.readFileSync(TEMPORARY_TESTS_NAMES_AND_FILES, 'utf8'));
         fs.writeFileSync(PASSING_TESTS_PATH, JSON.stringify(testsObject, null, 4), 'utf8');
 
     } else {

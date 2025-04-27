@@ -24,6 +24,7 @@ function executeMonkeyPatching() {
     const analyzedProjectData = JSON.parse(fs.readFileSync(ANALYZED_PROJECT_FILE, 'utf8'));
 
     const pathProjectFolder = analyzedProjectData.pathProjectFolder;
+    const isScript = analyzedProjectData.isScript;
 
     
     const TEST_NAMES_AND_FILES = path.join(pathProjectFolder, "NodeRock_Info/passingTests.json.log");
@@ -32,6 +33,10 @@ function executeMonkeyPatching() {
     const testsOriginalFullNameList = analyzedProjectTestNamesAndFiles.map(test => test.title);
     const testsRespectiveFile = analyzedProjectTestNamesAndFiles.map(test => test.file);
     
+    // "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource";
+    const ROOT_PATH_NODEROCK = path.join(__dirname, "../");
+
+
     // console.log("\nMONKEY PATCHING!!!\n");
     // console.log(testsRespectiveFile);
     // console.log(testsFullNameList)
@@ -51,9 +56,37 @@ function executeMonkeyPatching() {
             ? currentTestWithQuotes = `'${testsOriginalFullNameList[i]}'` 
             : currentTestWithQuotes = `"${testsOriginalFullNameList[i]}"` 
 
-            const command = `../node_modules/.bin/_mocha --exit -t 10000 --require ./entrypoint_NodeRock/monkeyPatchingTestes/monkeypatching.js ${testsRespectiveFile[i]} -f ${currentTestWithQuotes}`;
+            let command;
+            if(!isScript) {
+                command = `../node_modules/.bin/_mocha --exit -t 10000 --require ./entrypoint_NodeRock/monkeyPatchingTestes/monkeypatching.js ${testsRespectiveFile[i]} -f ${currentTestWithQuotes}`;
+            }
+            else {
+                command = `../node_modules/.bin/_mocha --exit -t 10000 --require ./entrypoint_NodeRock/monkeyPatchingTestes/monkeypatching.js ${testsRespectiveFile[i]}`;
+            }
+            
             console.log("Comando usado para monkeyPatching foi: ", command);
             shell.exec(command);
+
+            // para o node-archiver que aparentemente tem uns testes hardcoded que dependem de estar no respectivo diretorio
+            // shell.cd(pathProjectFolder);
+            // const comando_novo = `./node_modules/.bin/_mocha --exit -t 10000 --require /home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/NodeRock_src/entrypoint_NodeRock/monkeyPatchingTestes/monkeypatching.js ${testsRespectiveFile[i]} -f ${currentTestWithQuotes}`;
+            // console.log("Comando novo eh: ", comando_novo);
+            // shell.exec(comando_novo);
+            // shell.cd(ROOT_PATH_NODEROCK);
+
+            // para o FPS tambem
+            // shell.cd(pathProjectFolder);
+            // const comando_novo = `./node_modules/.bin/_mocha --exit -t 10000 --require /home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/NodeRock_src/entrypoint_NodeRock/monkeyPatchingTestes/monkeypatching.js ${testsRespectiveFile[i]} -f ${currentTestWithQuotes}`;
+            // console.log("Comando novo para monkey patching eh: ", comando_novo);
+            // shell.exec(comando_novo);
+            // shell.cd(ROOT_PATH_NODEROCK);
+
+            // na verdade, isso aqui que funcionou para o FPS:
+            // pedroubuntu@Aspire-A514-54:~/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/fiware-pep-steelskin$ ../../../../NodeRT-OpenSource/node_modules/.bin/_mocha --exit -t 10000 --require ../../../../NodeRT-OpenSource/NodeRock_src/entrypoint_NodeRock/monkeyPatchingTestes/monkeypatching.js ./test/unit/race_simple.js -f "Reuse authentication tokens When a the PEP Proxy has an expired token and another request arrives to the proxy both requests should finish"
+
+
+
+            
 
             const testDataMonkey = extractedFeaturesMonkeyPatching();
             extractedDataMonkeyTests.push(testDataMonkey);

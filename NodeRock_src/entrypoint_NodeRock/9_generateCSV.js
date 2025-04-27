@@ -116,14 +116,16 @@ function generateCSV() {
 
         // Writing the CSV File
         const pathCSV = path.resolve(__dirname, "../FoldersUsedDuringExecution/collectedCsvFolder/data.csv");
-        if (!fs.existsSync(pathCSV)) {
+        console.log(`\nCreating the CSV file in collectedCsvFolder\n`);
+        fs.writeFileSync(pathCSV, dataCSV);
+        // if (!fs.existsSync(pathCSV)) {
 
-            console.log(`\nCreating the CSV file in collectedCsvFolder\n`);
-            fs.writeFileSync(pathCSV, dataCSV);
+        //     console.log(`\nCreating the CSV file in collectedCsvFolder\n`);
+        //     fs.writeFileSync(pathCSV, dataCSV);
 
-        } else {
-            console.log(`\nthe CSV file in the collectedCsvFolder already exists\n`);
-        }
+        // } else {
+        //     console.log(`\nthe CSV file in the collectedCsvFolder already exists\n`);
+        // }
 
     } else {
         console.log(`\nthe CSV file already exists in NodeRock_Info\n`);

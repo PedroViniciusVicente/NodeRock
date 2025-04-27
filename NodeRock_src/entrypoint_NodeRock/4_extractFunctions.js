@@ -39,9 +39,8 @@ function extractFunctions() {
         
         try {
             const files = fs.readdirSync(NODEROCK_INFO_TRACES_PATH);
-
             for(let i = 0; i < files.length; i++) {
-
+                
                 // Antes, precisamos pegar quais são as linhas dos "describe" ou "it" para que eles nao interfiram na contagem de callbacks do teste
                 const linhas = fs.readFileSync(testsRespectiveFile[i], 'utf-8').split('\n');
 

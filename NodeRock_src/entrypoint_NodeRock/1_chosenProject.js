@@ -11,10 +11,15 @@ function chosenProjectFunction() {
     let isMocha = true;
     let raceConditionTests = [];
     let benchmarkName = "";
+    let isScript = false;
 
 
     // let chosenProject = "MeuTestVerificarRuntimes";
-    let chosenProject = "ARC";
+    // let chosenProject = "ARC";
+    // let chosenProject = "socket.io-1862";
+    let chosenProject = "FPS";
+
+
 
 
     switch (chosenProject) {
@@ -84,13 +89,15 @@ function chosenProjectFunction() {
 
 
         // Obs: Na analise com node v14 ele falha na maioria dos testes. isso nao ocorre ao executar os testes com node v10
+        // PRECISA MODIFICAR NO GETTESTSNAMES
         case "FPS": // known-bugs
             benchmarkName = "fiware-pep-steelskin";
             console.log("Executando analise do fiware-pep-steelskin");
             pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "datasetDoNodeRacer/known-bugs/fiware-pep-steelskin");
-            //testFile = "test/unit/race_simple.js";
+            // testFile = "test/unit/race_simple.js";
             testFile = "test/unit";
             parameters = "--timeout 5000";
+            raceConditionTests.push("Reuse authentication tokens When a the PEP Proxy has an expired token and another request arrives to the proxy both requests should finish");
             break;
 
         // Obs: Na analise com node v14 ele falha na maioria dos testes. isso nao ocorre ao executar os testes com node v10
@@ -140,17 +147,17 @@ function chosenProjectFunction() {
             benchmarkName = "nedb";
             pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "datasetDoNodeRacer/exploratory/nedb");
             testFile = "test/db.test.js";
-            //testFile = "test/";
+            // testFile = "test/";
             parameters = `--exit -t 20000`;
             raceConditionTests.push("Database Using indexes ensureIndex and index initialization in database loading ensureIndex can be called before a loadDatabase and still be initialized and filled correctly");
-            raceConditionTests.push("Database Using indexes ensureIndex and index initialization in database loading If a unique constraint is not respected.* database loading will not work and no data will be inserted");
+            raceConditionTests.push("Database Using indexes ensureIndex and index initialization in database loading If a unique constraint is not respected, database loading will not work and no data will be inserted");
             break;
 
         case "ARC":
             benchmarkName = "node-archiver";
             pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "datasetDoNodeRacer/exploratory/node-archiver/");
-            testFile = "test/archiver.js";
-            // testFile = "test/"
+            // testFile = "test/archiver.js";
+            testFile = "test/"
             parameters = `--exit -t 10000`;
             raceConditionTests.push("archiver api #errors should allow continue on stat failing");
             break;
@@ -173,12 +180,13 @@ function chosenProjectFunction() {
             benchmarkName = "fs-extra";
             pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "fs-extra/jprichardson_node-fs-extra/");
             testFile = "lib";
+            // testFile = "lib/__tests__/promise.test.js";
 
             // testFile = "lib/ensure/__tests__/link.test.js";
             raceConditionTests.push("ncp regular files and directories when copying files using filter files are copied correctly");
 
             //testFile = "lib/remove/__tests__/remove.test.js";
-            raceConditionTests.push("remove .* remove.*.* should delete without a callback");
+            raceConditionTests.push("remove + remove() should delete without a callback");
             // "remove + remove() should delete without a callback"
 
             parameters = "--exit -t 10000";
@@ -280,6 +288,138 @@ function chosenProjectFunction() {
             break;
             
 
+
+
+        // SCRIPTS (NÃO TEM TESTES AUTOMATIZADOS, É APENAS UM SCRIPT)
+        
+        case "AKA":
+            benchmarkName = "Script do Agent Keep Alive";
+            pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/agentkeepalive-23";
+            testFile = "fuzz_test/triggerRace.js";
+            // parameters = "--timeout 20000";
+            raceConditionTests.push(`Script for ${benchmarkName}`);
+            isScript = true;
+            break;
+            
+        case "WBG":
+            benchmarkName = "Script do WhiteboxGhost";
+            pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/WhiteboxGhost";
+            testFile = "fuzz_test/add_mock.js";
+            // parameters = "--timeout 20000";
+            raceConditionTests.push(`Script for ${benchmarkName}`);
+            isScript = true;
+            break;
+                
+        case "node-mkdirp":
+            benchmarkName = "Script do node-mkdirp";
+            pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/node-mkdirp";
+            testFile = "fuzz_test/race_subtle.js";
+            // parameters = "--timeout 20000";
+            raceConditionTests.push(`Script for ${benchmarkName}`);
+            isScript = true;
+            break;
+                    
+        case "node-logger-file-1":
+            benchmarkName = "Script do node-logger-file-1";
+            pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/node-logger-file-1";
+            testFile = "fuzz_test/triggerRace.js";
+            parameters = 10;
+            raceConditionTests.push(`Script for ${benchmarkName}`);
+            isScript = true;
+            break;
+                        
+        case "socket.io-1862":
+            benchmarkName = "Script do socket.io-1862";
+            pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/socket.io-1862";
+            testFile = "fuzz_test/triggerRace.js";
+            // parameters = "--timeout 20000";
+            raceConditionTests.push(`Script for ${benchmarkName}`);
+            isScript = true;
+            break;
+                            
+        case "del":
+            benchmarkName = "Script do del";
+            pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/del";
+            testFile = "testissue43.js";
+            // parameters = "--timeout 20000";
+            raceConditionTests.push(`Script for ${benchmarkName}`);
+            isScript = true;
+            break;
+                                
+        case "linter-stylint":
+            benchmarkName = "Script do linter-stylint";
+            pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/linter-stylint";
+            testFile = "syntetic/test.js";
+            // parameters = "--timeout 20000";
+            raceConditionTests.push(`Script for ${benchmarkName}`);
+            isScript = true;
+            break;
+            
+        case "node-simpleCrawler":
+            benchmarkName = "Script do node-simpleCrawler";
+            pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/node-simplecrawler-i298";
+            testFile = "merged-test.js";
+            // parameters = "--timeout 20000";
+            raceConditionTests.push(`Script for ${benchmarkName}`);
+            isScript = true;
+            break;
+            
+        case "bluebird-2":
+            benchmarkName = "Script do bluebird-2";
+            pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/open-issues/bluebird-2";
+            testFile = "race.js";
+            // parameters = "--timeout 20000";
+            raceConditionTests.push(`Script for ${benchmarkName}`);
+            isScript = true;
+            break;
+                                            
+        case "express-user":
+            benchmarkName = "Script do express-user";
+            pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/open-issues/nodesamples";
+            testFile = "express01/server-test.js";
+            // parameters = "--timeout 20000";
+            raceConditionTests.push(`Script for ${benchmarkName}`);
+            isScript = true;
+            break;
+                                                
+        case "get-port":
+            benchmarkName = "Script do get-port";
+            pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/open-issues/get-port";
+            testFile = "triggerRace.js";
+            // parameters = "--timeout 20000";
+            raceConditionTests.push(`Script for ${benchmarkName}`);
+            isScript = true;
+            break;
+                                                    
+        case "live-server":
+            benchmarkName = "Script do live-server-potential-race";
+            pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/open-issues/live-server-potential-race";
+            testFile = "race-root-dir-test.js";
+            // parameters = "--timeout 20000";
+            raceConditionTests.push(`Script for ${benchmarkName}`);
+            isScript = true;
+            break;
+            
+        case "socket.io-client":
+            benchmarkName = "Script do socket.io-client";
+            pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/open-issues/socket.io-client";
+            testFile = "race.js";
+            // parameters = "--timeout 20000";
+            raceConditionTests.push(`Script for ${benchmarkName}`);
+            isScript = true;
+            break;
+
+        // case "fiware-pep-steelskin":
+        //     benchmarkName = "Script do fiware-pep-steelskin";
+        //     pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/fiware-pep-steelskin";
+        //     testFile = "test/unit/race_simple.js";
+        //     // parameters = "--timeout 20000";
+        //     raceConditionTests.push(`Script for ${benchmarkName}`);
+        //     isScript = true;
+        //     break;
+
+
+
         default:
             console.log("Esse projeto ainda nao esta nesse switch case!");
             process.exit();
@@ -292,6 +432,7 @@ function chosenProjectFunction() {
         isMocha: isMocha,
         raceConditionTests: raceConditionTests,
         benchmarkName: benchmarkName,
+        isScript: isScript,
     };
 
     const TEMPORARY_ANALYZED_PROJECT = path.join(__dirname, "../FoldersUsedDuringExecution/temporary_analyzedProjectInfo/temporary_analyzedProject.json");
