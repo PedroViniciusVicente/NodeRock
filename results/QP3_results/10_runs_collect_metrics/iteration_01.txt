@@ -1,0 +1,17 @@
+Creating NodeRock_Info/monkeypatching.json in /home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/projects/exploratory/node-archiver/NodeRock_Info/monkeypatching.json
+
+
+Creating the normalized features file in NodeRock_Info
+
+
+Gerando o arquivo .CSV:
+
+Creating the CSV file in NodeRock_Info
+
+
+Creating the CSV file in collectedCsvFolder
+
+
+real	12m49,695s
+user	40m47,147s
+sys	1m11,452s
