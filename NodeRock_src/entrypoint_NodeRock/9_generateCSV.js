@@ -30,6 +30,15 @@ function generateCSV() {
     const NODEROCK_INFO_DURATIONS_PATH = path.join(pathProjectFolder, "NodeRock_Info", "testsDuration.json");
     const testsDurationData = JSON.parse(fs.readFileSync(NODEROCK_INFO_DURATIONS_PATH, 'utf8'));
     const testsTotalDuration = testsDurationData;
+
+    // FUTURO FIX: ALTERAR O temporary_analyzedProject E REVER SE CONSERTARA OS .dtype DO 'Total_duration_s' DOS PROJETOS:
+    // mongo-express;
+    // node-logger-file-1
+    // socket.io-client
+    // json-fs-store-4e75c4f
+    // const testsDurationData = fs.readFileSync(NODEROCK_INFO_DURATIONS_PATH, 'utf8');
+    // const testsTotalDuration = testsDurationData.replace(/[\[\]]/g, '').split(',').map(num => parseFloat(num.trim()));
+
     // console.log("TESTS DURATION EH: ", testsTotalDuration);
 
 

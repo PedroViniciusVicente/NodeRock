@@ -1,13 +1,16 @@
 // Customized Mocha report to collect all passing tests
-// PRECISA REVER COMO PASSAR O temporary_TestsNamesAndFiles DIRETO PARA O NodeRock_Info PARA NÃO PRECISAR ESCREVER ARQUIVO TEMPORARIO EM: 
-// /home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/NodeRock_src/FoldersUsedDuringExecution/temporary_TestsNamesAndFiles/temporaryPassingTests.json.log
 
 const fs = require('fs');
 const Mocha = require('mocha');
 const path = require('path');
 
-// "/home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/NodeRock_src/FoldersUsedDuringExecution/temporary_TestsNamesAndFiles";
-const TEMPORARY_TESTS_NAMES_AND_FILES = path.join(__dirname,"../FoldersUsedDuringExecution/temporary_TestsNamesAndFiles");
+const ANALYZED_PROJECT_FILE = path.join(__dirname, "../FoldersUsedDuringExecution/temporary_analyzedProjectInfo/temporary_analyzedProject.json");
+const analyzedProjectData = JSON.parse(fs.readFileSync(ANALYZED_PROJECT_FILE, 'utf8'));
+
+const pathProjectFolder = analyzedProjectData.pathProjectFolder;
+const benchmarkName = analyzedProjectData.benchmarkName;
+
+const PASSING_TESTS_PATH = path.join(pathProjectFolder, "NodeRock_Info", "passingTests.json.log");
 
 const Base = Mocha.reporters.Base;
 const {
@@ -25,10 +28,16 @@ function MochaReporter(runner, options) {
 
 
     runner.on(EVENT_TEST_PASS, function (test) {
+        // caso preise setar o arquivo "na marra" para algum benchmark especifico
+        if(benchmarkName === "xxx") {
+            correctFile = path.join(pathProjectFolder, "test", "api.js");
+        }
+        else { // default
+            correctFile = test.file;
+        }
+
         passedTests.push({
-            // file: "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/nedb/test/db.test.js", // para o nedb
-            file: "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/fiware-pep-steelskin/test/unit/race_simple.js", // para o FPS
-            // file: test.file, // default
+            file: correctFile,
 
             title: test.fullTitle()
         });
@@ -42,15 +51,9 @@ function MochaReporter(runner, options) {
         //console.log('mocha ends: %d-%d / %d', runner.stats.passes, runner.stats.failures, runner.stats.tests);
 
         // console.log("ACHOU O: ", JSON.stringify(passedTests, null, 4));
-        // console.log("\nCHEGOU O PATH PARA CRIAR O PASSINGTESTS.JSON.LOG:", TEMPORARY_TESTS_NAMES_AND_FILES);
 
-        fs.writeFileSync(path.join(TEMPORARY_TESTS_NAMES_AND_FILES, "temporaryPassingTests.json.log"), JSON.stringify(passedTests), 'utf8');
+        fs.writeFileSync(PASSING_TESTS_PATH, JSON.stringify(passedTests, null, 4), 'utf8');
 
-        /*
-        ** console.log("o destination eh: ", TEMPORARY_TESTS_NAMES_AND_FILES);
-        ** let passedTestsJsonPath = TEMPORARY_TESTS_NAMES_AND_FILES + "passingTests.json.log";
-        ** fs.writeFileSync(passedTestsJsonPath, JSON.stringify(passedTests, null, 4), 'utf8');
-        */
     });
 }
 module.exports = MochaReporter;

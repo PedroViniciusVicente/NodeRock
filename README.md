@@ -1,137 +1,70 @@
-# NodeRock
+# NodeRock: A Machine Learning Approach to Select Node.js Tests with Event Races
 
-<!-- **NodeRock** is a tool... that does this and can be used for thiss... designed by... and .. acknoledgemts... the implementation is made with ... -->
+NodeRock is a dynamic analysis tool designed to address the challenge of detecting event races in Node.js applications. Event races are subtle concurrency bugs that are notoriously difficult to find and reproduce.
 
-## Guide for installing NodeRock
+Instead of attempting to detect these bugs directly, which can be computationally expensive , NodeRock uses a machine learning approach to analyze and select tests that have the highest probability of containing event races. The tool operates by collecting detailed execution traces, extracting a set of 15 dynamic features that characterize asynchronous behavior (like callback usage and Promise lifecycles), and then using an ML model to classify and prioritize tests.
 
-_Adapted from [Matheus Ranzani's NodeRT installation Guide](https://github.com/matheusranzani/Desenvolvimento-TT1/blob/main/README.md)._
+This allows developers to focus their debugging efforts and run expensive detection tools (like [NACD](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ECOOP.2025.9)) only on the most critical, high-risk tests, making the entire process more efficient.
 
-**NodeRock** is built on top of **NodeRT**, and therefore a basic installation guide can be found in the official [project repository](https://github.com/NodeRT-OpenSource/NodeRT-OpenSource). However, some errors may occur during the installation of the tool. \
-Therefore, here is a more detailed guide for installing **NodeRock**. \
-_Note: the commands used here are for Debian/Ubuntu-based Linux distributions._
+This repository contains the source code for the NodeRock tool and the analysis scripts associated.
 
-### Prerequisites
+## Installation and Requirements
 
-To use NodeRT, you first need to have Node.js and yarn installed on your machine.
+All prerequisites and installation steps, including setting up GraalVM (v21.2.0), Node.js (v14.16.1), and the underlying NodeProf framework, are detailed in the [INSTALLATION_GUIDE.md](INSTALLATION_GUIDE.md) file.
 
-#### Installing Node.js
-```sh
-curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-sudo apt-get install -y nodejs
-```
+## The NodeRock Pipeline
+The core logic of the NodeRock execution pipeline is implemented as a series of sequential scripts located in the [NodeRock_src/entrypoint_NodeRock/directory](NodeRock_src/entrypoint_NodeRock/directory). The pipeline is divided into three main stages:
 
-#### Installing yarn
-```sh
-npm install --global yarn
-```
+- **Test Info Runner:** Sets the configuration for the target project ([1_chosenProject.js](NodeRock_src/entrypoint_NodeRock/1_chosenProject.js)) and discovers all executable, passing tests within it using a custom reporter ([2_getTestsNames.js](NodeRock_src/entrypoint_NodeRock/2_getTestsNames.js).
 
-### Installing GraalVM
+- **Metric Extractor:** Executes each test individually to capture raw execution traces ([3_executeTests.js](NodeRock_src/entrypoint_NodeRock/3_executeTests.js)), parses these traces to extract function details and callback delays ([4_extractFunctions.js](NodeRock_src/entrypoint_NodeRock/4_extractFunctions.js)), aggregates trace data into a high-level feature set ([5_extractFeatures.js](NodeRock_src/entrypoint_NodeRock/5_extractFeatures.js)), and runs a second, separate execution with monkey-patching to capture detailed Promise lifecycle metrics ([6_executeMonkeyPatching.js](NodeRock_src/entrypoint_NodeRock/6_executeMonkeyPatching.js)).
 
-Now that the basic tools are installed, you need to install GraalVM, which is a JDK capable of running Node.js applications. In the case of **NodeRock**, version 21.2.0 was used. \
-The link to download version 21.2.0 is [here](https://github.com/graalvm/graalvm-ce-builds/releases/tag/vm-21.2.0). There are various options available — here, the file graalvm-ce-java11-linux-amd64-21.2.0.tar.gz was used. \
-Once the file is downloaded, extract it to a directory of your choice on your machine. \
-After extracting the file, you'll have access to the folder graalvm-ce-java11-21.2.0. Now, you can set the `JAVA_HOME` environment variable and add GraalVM to your `PATH`.\
-To do both, add the following lines to your `~/.bashrc` or `~/.zshrc` file (if you're using Z shell):
+- **Machine Learning Detector:** Executes the main Python script to classify tests based on their features ([10_executePythonML.js](NodeRock_src/entrypoint_NodeRock/10_executePythonML.js)) and (for validation) runs an external race detection tool like NACD only on the tests flagged as "suspicious" by the model ([11_executeRaceDetection.js](NodeRock_src/entrypoint_NodeRock/11_executeRaceDetection.js)).
 
-Open the file for editing:
-```sh
-nano ~/.bashrc
-```
-Add the following lines:
-```bash
-export PATH=$PATH:/path_to/graalvm-ce-java11-21.2.0/bin
-export PATH=/path_to/graalvm-ce-java11-21.2.0/bin:$PATH
-export JAVA_HOME=/path_to/graalvm-ce-java11-21.2.0
-```
 
-Save the file, then run:
-```sh
-source ~/.bashrc
-```
+## Instrumentation Hooks
+The core data collection logic is powered by NodeProf (which runs on GraalVM). The specific hooks used to intercept asynchronous events and gather trace data are implemented in:
 
-To confirm everything is working, run:
-```sh
-java --version
-```
+[src/Analysis/MyFunctionCallAnalysis/novo_MyFunctionCallAnalysis.ts](src/Analysis/MyFunctionCallAnalysis/novo_MyFunctionCallAnalysis.ts)
 
-Your shell should display something like (you may need to restart the shell):
-```
-openjdk 11.0.12 2021-07-20
-OpenJDK Runtime Environment GraalVM CE 21.2.0 (build 11.0.12+6-jvmci-21.2-b08)
-OpenJDK 64-Bit Server VM GraalVM CE 21.2.0 (build 11.0.12+6-jvmci-21.2-b08, mixed mode, sharing)
-```
+This file defines the analysis class (MyFunctionCallAnalysis) that instruments the JavaScript code. It is responsible for capturing:
 
-With GraalVM installed, now install Node.js through it. To do so, run the following commands:
-```sh
-cd /path_to/graalvm-ce-java11-21.2.0/bin
-gu install nodejs
-```
+- Function entries and exits (functionEnter, functionExit).
 
-Now, create a symbolic link for the _node_ binary in the _graalvm-ce-java11-21.2.0/bin_ folder as follows:
+- Function invocations, identifying which ones use callbacks (invokeFunPre).
 
-```sh
-ln -s node graalnode
-```
+- The lifecycle of async/await operations (asyncFunctionEnter, awaitPre, awaitPost).
 
-Check if the installation was successful by executing the symbolic link:
-```sh
-graalnode -v
-```
+- Timestamps (using performance.now()) for calculating delays between asynchronous operations.
 
-If everything worked, your shell should display `v14.16.1`, which is the Node.js version installed via GraalVM.
+## Research Questions (RQs) and Analysis
 
-## Example Usage
+This repository supports the research conducted. The analysis for each Research Question (QP) can be found in the following Jupyter Notebooks:
 
-With the tools described above installed, you can now test **NodeRT**. To do so, first clone the [project repository](https://github.com/PedroViniciusVicente/NodeRock):
-```sh
-git clone https://github.com/PedroViniciusVicente/NodeRock
-```
+### [QP1_Model_Evaluation.ipynb]()
 
-Navigate to the root of the **NodeRT** project using the shell and run the following command to build the tool:
-```sh
-yarn && yarn build
-```
+**Question:** How effective are different machine learning models at selecting tests with event races? 
 
-(Terminar o tutorial com a instalação dos projetos de teste, npm install neles, colocar o path direitinho no 1_chosenProject.js e depois dar `node NodeRock_src entrypoint_NodeRock`, talvez deixar um arquivo main.js na raiz do NodeRock para apenas dar o node main.js mais facilmente com o path já configurado certinho nele...)
+**Analysis:** This notebook evaluates various classifiers (SVM, KNN, Random Forest, etc.) and demonstrates the high effectiveness of Positive Unlabeled (PU) Learning, which was chosen for NodeRock after achieving 97.66% accuracy and 96.88% recall.
 
-<!-- Após clonar o projeto, para não ocorrer conflitos entre os arquivos `package.json` do **NodeRT** e dos projetos do _dataset_, é preciso mover a pasta _dataset_ para outro diretório fora do projeto do **NodeRT**.\ 
-Depois de mover a pasta _dataset_, entre na raiz do projeto do **NodeRT** através do shell e execute o seguinte comando para buildar a ferramenta: 
-```sh
-yarn && yarn build
-```
 
-Para a ferramenta funcionar corretamente é preciso alterar o arquivo `src/Analysis/index.ts`. A única alteração que deve ser feita é comentar a linha 145:
+### [QP2_Feature_Analysis.ipynb]()
 
-```ts
-// sandbox.addAnalysis(new MemoryUsageAnalysis(sandbox));
-```
+**Question:** How much predictive value do the different dynamic features add to the classifiers? 
 
-Com a linha acima comentada, é preciso escolher qual projeto do _dataset_ será testado. Para exemplificar aqui, vou escolher o projeto _json-file-store-issue20-6aada66_ que está no diretório `dataset/knownBugs`.\
-Antes de utilizar a ferramenta, para cada projeto do _dataset_ é preciso adicionar a pasta `node_modules`. Para fazer isso, basta entrar pelo shell na raiz do projeto selecionado e executar o comando:
-```sh
-npm install
-```
+**Analysis:** This notebook contains the Information Gain analysis for the 15 dynamic features. It shows that metrics like Invokes_with_callback_Normalized (IG=0.189) and InvokesInterval_Greater_Than_100_ms_Raw (IG=0.155) are strong predictors for event races.
 
-Feito isso, volte para a raiz do repositório do **NodeRT** através do shell. Agora, vamos testar a ferramenta em si utilizando o seguinte comando:
-```sh
-yarn nodeprof /caminho_para/dataset/knownBugs/json-file-store-issue20-6aada66 testcase.js
-```
 
-Ao executar o comando acima, a ferramenta começará a analisar o caso de teste apontado, no escopo deste projeto o caso de teste está em sua raiz e tem o nome `testcase.js`.\
-Em outros projetos, o caso de teste pode estar numa pasta `test`, por exemplo. Dessa maneira, para referenciar o teste usando o comando acima é necessário passar o caminho relativo da raiz do projeto até o caso de teste, neste exemplo ficaria:
-```sh
-yarn nodeprof /caminho_para/dataset/knownBugs/json-file-store-issue20-6aada66 test/testcase.js
-```
 
-Após a ferramenta terminar sua execução, um arquivo `violations.json` será criado no diretório do caso de teste analisado. Caso a análise tenha dado certo, este arquivo provavelmente não estará vazio e seu conteúdo será composto por referências para as condições de corrida identificadas no teste.
+### [QP3_Performance_Evaluation.ipynb]()
 
-### Executando projetos que utilizam o Mocha
+**Question:** What is the practical runtime performance of using NodeRock to filter tests? 
 
-Alguns projetos do dataset utilizam o **Mocha** para fazer seus testes. Desse modo, é preciso rodar a ferramenta de um jeito um pouco diferente:
+**Analysis:** This notebook details the experiment comparing the runtime of a full test suite analysis (using NACD) vs. the NodeRock-filtered analysis. The results on the node-archiver project showed that NodeRock reduced the number of tests to analyze by ~31% and the runtime to execute 1,000 runs of the test suite by ~6.5%, validating its use as a practical optimization strategy.
 
-```sh
-yarn nodeprof /caminho_para/dataset/explore/nodejs-websocket-e6a57ed/ node_modules/bin/_mocha test/test.js
-```
+## Data and Results
+The repository also includes the data and experimental results discussed in the dissertation:
 
-Passando como segundo argumento o caminho `node_modules/bin/_mocha`, o **NodeRT** será capaz de executar e analisar os testes escritos em **Mocha**.\
-Da mesma forma descrita anteriormente, se a análise for bem sucedida, um arquivo `violations.json` será criado com o conteúdo dos _event races_ identificados. -->
+- [results/extracted_datasets:](results/extracted_datasets) Contains the final .csv files with all 15 dynamic features extracted from each test case in the 24 known projects.
+
+- [results/QP3_results:](results/QP3_results) Contains the raw execution logs and time measurements from the experiment conducted for Research Question 3 (QP3), which compared the performance of the full test suite versus the NodeRock-filtered suite.

@@ -43,7 +43,7 @@ if(rodarTestesCompleto) {
 
     // 2. Treatments and Path Verifications to Get the test names
     getTestsNames();
-
+    
     // 3. Executing the tests individually and placing theirs traces in NodeRock_Info/TracesFolder from loghooks.json
     executeTests();
 
@@ -63,9 +63,8 @@ if(rodarTestesCompleto) {
     labelFeatures();
 
     // 9. Generating the .csv file based on the .json files
-    generateCSV();
+    generateCSV();  
     
-
     // 10. Executes the Python script with the Machine Learning Supervised Models and generate the result.csv
     // console.log(machineLearningClassifyingText);
     // executePythonML();

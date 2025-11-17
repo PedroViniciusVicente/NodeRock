@@ -14,17 +14,127 @@ function chosenProjectFunction() {
     let isScript = false;
 
 
-    let chosenProject = "node-archiver";
+    // let chosenProject = "MeuTestVerificarRuntimes";
+    // let chosenProject = "ARC";
+    // let chosenProject = "socket.io-1862";
+    let chosenProject = "ARC";
+
+
 
 
     switch (chosenProject) {
 
-        // -=+=- 1) NodeRacer exploratory -=+=-
+        // -=+=- 1) Meus testes de exemplo -=+=-
 
-        case "mongo-express":
-            benchmarkName = "mongo-express";
-            pathProjectFolder = path.join(__dirname, "../../projects/exploratory/mongo-express");
+        case "MeuTestBasico": // teste para ver melhor o tempo com cb assincrono
+            benchmarkName = "MeuTestBasico";
+            console.log("Executando analise do meu teste basico para ver o tempo com cb assincrono");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "meuDatasetParaTestes/testeBasico");
+            testFile = "test/test.js";
+            break;
+        
+            // (757 linhas de trace)
+        case "MeuTestBasico2": // main.js e testLeitura.js
+            benchmarkName = "MeuTestBasico2";
+            console.log("Executando analise do meu teste basico2 para ver o tempo ate chamar cb assincrono");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "meuDatasetParaTestes/testeBasico");
+            testFile = "test/testLeitura.js";
+            break;
+
+        case "MeuTestMocha":
+            benchmarkName = "MeuTestMocha";
+            console.log("Executando analise do meu teste simples em Mocha");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "meuDatasetParaTestes/testesSimplesMocha");
+            // testFile = "teste";
+            //testFile = "teste/testeMenor.js";
+            testFile = "teste/arquivoTestesMocha.js";
+
+            raceConditionTests.push("1. Testes da Primeira funcao somarEdobrar com x e y positivos");
+            break;
+
+        case "MeuTestJest": 
+        // comando rodar testes jest direto:
+        // node ./dist/bin/nodeprof.js /home/pedroubuntu/coisasNodeRT/datasetNodeRT/meuDatasetParaTestes/testesJest/ node_modules/.bin/jest teste/testandoJest.test.js
+            benchmarkName = "MeuTestJest";
+            console.log("Executando analise do meu teste simples em Jest");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "meuDatasetParaTestes/testesJest");
+            testFile = "teste/testandoJest.test.js";
+            parameters = "--runInBand"; // Roda os testes sequenciamente (em batch), e não paralelamente
+            isMocha = false;
+            break;
+        
+        case "MeuTestVerificarRuntimes":
+            benchmarkName = "MeuTestVerificarRuntimes";
+            console.log("Executando analise do runtime");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "meuDatasetParaTestes/testesVerificarTempo");
+            testFile = "test/test.js";
+            break;
+
+        case "MeuTestAsyncFunctions":
+            benchmarkName = "MeuTestAsyncFunctions";
+            console.log("Executando analise do async functions");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "meuDatasetParaTestes/testarAsyncfunctions");
+            testFile = "test/test.js";
+            break;
+
+        case "MeuTestAwait":
+            benchmarkName = "MeuTestAwait";
+            console.log("Executando analise do teste com await para medir o tempo de functions com tempo > 100 ms");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "meuDatasetParaTestes/coletarTempoFunctions");
             testFile = "test/";
+            parameters = "-t 50000";
+            break;
+
+        // -=+=- 2) known-bugs -=+=-
+
+
+        // Obs: Na analise com node v14 ele falha na maioria dos testes. isso nao ocorre ao executar os testes com node v10
+        // PRECISA MODIFICAR NO GETTESTSNAMES
+        case "FPS": // known-bugs
+            benchmarkName = "fiware-pep-steelskin";
+            console.log("Executando analise do fiware-pep-steelskin");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "datasetDoNodeRacer/known-bugs/fiware-pep-steelskin");
+            // testFile = "test/unit/race_simple.js";
+            testFile = "test/unit";
+            parameters = "--timeout 5000";
+            raceConditionTests.push("Reuse authentication tokens When a the PEP Proxy has an expired token and another request arrives to the proxy both requests should finish");
+            break;
+
+        // Obs: Na analise com node v14 ele falha na maioria dos testes. isso nao ocorre ao executar os testes com node v10
+        case "NES": // known-bugs
+            benchmarkName = "nes";
+            console.log("Executando analise do nes");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "datasetDoNodeRacer/known-bugs/nes");
+            testFile = "test/client_TP.js";
+            break;
+
+        case "DEL": // known-bugs, funciona muito bem, porem estou usando outro arquivo como entrypoint para teste
+            benchmarkName = "del";
+            console.log("Executando analise do del");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "datasetDoNodeRacer/known-bugs/del");
+            testFile = "test.js";
+            break;
+
+        // Obs: o XLS nao conseguiu ser analisado, (apenas testado). Ele exige o node v10
+        case "XLS": // known-bugs
+            benchmarkName = "xlsx-extract";
+            console.log("Executando analise do xls");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "datasetDoNodeRacer/known-bugs/xlsx-extract");
+            testFile = "test/tests.js";
+            parameters = "--timeout 20000";
+            break;
+
+
+        // -=+=- 2) open-issues -=+=-
+
+
+
+        // -=+=- 3) exploratory -=+=-
+
+        case "ME": // Mongo-express
+            benchmarkName = "mongo-express";
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "datasetDoNodeRacer/exploratory/mongo-express");
+            testFile = "test/lib";
             parameters = "--exit -t 10000";
 
             raceConditionTests.push("Router collection GET /db/.*dbName.*/.*collection.* should return html");
@@ -33,194 +143,37 @@ function chosenProjectFunction() {
             raceConditionTests.push("Router index GET / should return html");
             break;
 
-        case "nedb":
+        case "NEDB":
             benchmarkName = "nedb";
-            pathProjectFolder = path.join(__dirname, "../../projects/exploratory/nedb");
-            // testFile = "test/db.test.js";
-            testFile = "test/";
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "datasetDoNodeRacer/exploratory/nedb");
+            testFile = "test/db.test.js";
+            // testFile = "test/";
             parameters = `--exit -t 20000`;
-
             raceConditionTests.push("Database Using indexes ensureIndex and index initialization in database loading ensureIndex can be called before a loadDatabase and still be initialized and filled correctly");
             raceConditionTests.push("Database Using indexes ensureIndex and index initialization in database loading If a unique constraint is not respected, database loading will not work and no data will be inserted");
             break;
 
-        case "node-archiver":
+        case "ARC":
             benchmarkName = "node-archiver";
-            pathProjectFolder = path.join(__dirname, "../../projects/exploratory/node-archiver");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "datasetDoNodeRacer/exploratory/node-archiver/");
             // testFile = "test/archiver.js";
             testFile = "test/"
             parameters = `--exit -t 10000`;
-
             raceConditionTests.push("archiver api #errors should allow continue on stat failing");
             break;
 
-        case "objection.js":
+        case "OBJ":
             benchmarkName = "objection.js";
-            pathProjectFolder = path.join(__dirname, "../../projects/exploratory/objection.js");
+            pathProjectFolder = path.join("/home/pedroubuntu/coisasNodeRT/datasetNodeRT", "datasetDoNodeRacer/exploratory/objection.js");
             testFile = "tests/unit/utils.js";
-            // testFile = "tests/unit";
             parameters = "--exit -t 10000";
 
             raceConditionTests.push("utils promiseUtils map should not start new operations after an error has been thrown");
             break;
 
 
-        // -=+=- 2) NodeRacer known-bugs -=+=-
 
-        case "agentkeepalive-23":
-            benchmarkName = "agentkeepalive-23";
-            pathProjectFolder = path.join(__dirname, "../../projects/known-bugs/agentkeepalive-23");
-            testFile = "test/";
-            // ./node_modules/.bin/mocha --exit -t 10000 -R spec test
-            parameters = "--timeout 20000 --exit";
-
-            raceConditionTests.push(`transforms script in a test event race script`);
-            break;
-            
-        case "fiware-pep-steelskin":
-            benchmarkName = "fiware-pep-steelskin";
-            pathProjectFolder = path.join(__dirname, "../../projects/known-bugs/fiware-pep-steelskin");
-            // testFile = "test/unit/race_simple.js";
-            testFile = "test/unit";
-            parameters = "--timeout 20000 --exit";
-
-            raceConditionTests.push("Reuse authentication tokens When a the PEP Proxy has an expired token and another request arrives to the proxy both requests should finish");
-            break;
-
-        // WhiteboxGhost
-
-        //node-mkdirp
-
-        case "nes":
-            benchmarkName = "nes";
-            pathProjectFolder = path.join(__dirname, "../../projects/known-bugs/nes");
-            testFile = "test/";
-
-            raceConditionTests.push("Browser Client _reconnect() Requests 1 close and 1 disconnect");
-            break;
-
-        case "node-logger-file-1":
-            benchmarkName = "node-logger-file-1";
-            pathProjectFolder = path.join(__dirname, "../../projects/known-bugs/node-logger-file-1");
-            testFile = "test/";
-            parameters = "--timeout 20000 --exit";
-
-            raceConditionTests.push("triggerRace () should create 6 files and roll 5");
-            break;
-
-        case "socket.io-1862":
-            benchmarkName = "socket.io-1862";
-            pathProjectFolder = path.join(__dirname, "../../projects/known-bugs/socket.io-1862");
-            testFile = "test/";
-            parameters = "--exit";
-            // parameters = "--timeout 20000";
-
-            raceConditionTests.push(`base socket.io disconnect connect, connect again after delay1 ms, and disconnect each connection after delay2 ms have passed since it connected`);
-            break;
-
-        case "del": 
-            benchmarkName = "del";
-            pathProjectFolder = path.join(__dirname, "../../projects/known-bugs/del");
-            testFile = "./";
-
-            raceConditionTests.push("should reveal event race");
-            break;
-
-        //linter-stylint
-
-        case "node-simplecrawler-i298": // this one is from nodert because it has more tests
-            benchmarkName = "node-simplecrawler-i298";
-            pathProjectFolder = path.join(__dirname, "../../projects/nodert/knownbugs/simplecrawler-issue298-ab1af21");
-            testFile = "test/**/*.js";
-
-            raceConditionTests.push("event race reveals event race");
-            break;
-
-        case "xlsx-extract": 
-            benchmarkName = "xlsx-extract";
-            pathProjectFolder = path.join(__dirname, "../../projects/known-bugs/xlsx-extract");
-            testFile = "./";
-            parameters = "--timeout 20000";
-
-            raceConditionTests.push("xlsx extract should read all columns and rows");
-            break;
-
-        // -=+=- 3) NodeRacer open-issues -=+=-
-
-        //bluebird-2
-        //nodesamples (express-user)
-        //get-port
-        //live-server-potential-race
-        //socket.io-client
-        case "socket.io-client": 
-            benchmarkName = "socket.io-client";
-            pathProjectFolder = path.join(__dirname, "../../projects/open-issues/socket.io-client");
-            testFile = "test/";
-            parameters = "--timeout 20000";
-
-            raceConditionTests.push("tescase1 should reveal event race");
-            
-            break;
-
-        // -=+=- 4) NodeRT explore -=+=-
-
-        case "json-file-store-6aada66": 
-            benchmarkName = "json-file-store-6aada66";
-            pathProjectFolder = path.join(__dirname, "../../projects/nodert/explore/json-file-store-6aada66");
-            testFile = "./";
-            parameters = "--timeout 20000";
-
-            raceConditionTests.push("testcase1 should reveal event race");
-            break;
-        
-        case "json-fs-store-4e75c4f": 
-            benchmarkName = "json-fs-store-4e75c4f";
-            pathProjectFolder = path.join(__dirname, "../../projects/nodert/explore/json-fs-store-4e75c4f");
-            testFile = "./";
-            parameters = "--timeout 20000";
-
-            raceConditionTests.push("testcase1 should reveal event race");
-            break;
-
-        case "ncp-6820b0f": 
-            benchmarkName = "ncp-6820b0f";
-            pathProjectFolder = path.join(__dirname, "../../projects/nodert/explore/ncp-6820b0f");
-            testFile = "./";
-            parameters = "--timeout 20000";
-
-            raceConditionTests.push("tescase1 should reveal event race 1");
-            raceConditionTests.push("tescase2 should reveal event race 2");
-            raceConditionTests.push("tescase3 should reveal event race 3");
-            raceConditionTests.push("tescase4 should reveal event race 4");
-            break;
-
-        case "write-f537eb6": 
-            benchmarkName = "write-f537eb6";
-            pathProjectFolder = path.join(__dirname, "../../projects/nodert/explore/write-f537eb6");
-            testFile = "./";
-            parameters = "--timeout 20000";
-
-            raceConditionTests.push("reveal event race");
-            break;
-
-        // -=+=- 5) fs-extra -=+=-
-        case "fsextra":
-            benchmarkName = "fsextra";
-            // path.join(__dirname, "../../projects/nodert/explore/write-f537eb6");
-            pathProjectFolder = path.join(__dirname, "../../projects/fsextra");
-            testFile = "lib/**/__tests__";
-            // testFile = "lib/__tests__/promise.test.js";
-            parameters = "--exit -t 10000";
-
-            // testFile = "lib/ensure/__tests__/link.test.js";
-            raceConditionTests.push("ncp regular files and directories when copying files using filter files are copied correctly");
-
-            //testFile = "lib/remove/__tests__/remove.test.js";
-            raceConditionTests.push("remove + remove() should delete without a callback");
-            // "remove + remove() should delete without a callback"
-            break;
-
-        /*
+        // -=+=- 4) fs-extra -=+=- // rever o ENSURE e o FS e o JSON e o mkdirs e __tests__
         // pedroubuntu@Aspire-A514-54:~/coisasNodeRT/datasetNodeRT/fs-extra/jprichardson_node-fs-extra$ npx mocha lib/ensure/__tests__/link.test.js 
         // (tem 101 testes)
         case "FS_EXTRA":
@@ -455,7 +408,7 @@ function chosenProjectFunction() {
             raceConditionTests.push(`Script for ${benchmarkName}`);
             isScript = true;
             break;
-        */
+
         // case "fiware-pep-steelskin":
         //     benchmarkName = "Script do fiware-pep-steelskin";
         //     pathProjectFolder = "/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/known-bugs/fiware-pep-steelskin";
@@ -468,7 +421,7 @@ function chosenProjectFunction() {
 
 
         default:
-            console.log(`Project '${chosenProject}' is not in the switch list!`);
+            console.log("Esse projeto ainda nao esta nesse switch case!");
             process.exit();
     }
 
@@ -485,14 +438,8 @@ function chosenProjectFunction() {
     const TEMPORARY_ANALYZED_PROJECT = path.join(__dirname, "../FoldersUsedDuringExecution/temporary_analyzedProjectInfo/temporary_analyzedProject.json");
     fs.writeFileSync(TEMPORARY_ANALYZED_PROJECT, JSON.stringify(data, null, 2));
 
-
-    console.log("=".repeat(60));
-    console.log("1) Chosen Project Information:");
-    console.log("=".repeat(60));
-    console.log("Chosen Project Name: ", benchmarkName);
-    console.log("Chosen Project Path: ", data.pathProjectFolder);
-    console.log("Chosen Project Root Test Folder/File: ", data.testFile);
-    console.log("\n");
+    console.log("Analyzed Project Path: ", data.pathProjectFolder);
+    console.log("Analyzed Root Test Folder/File: ", data.testFile);
     
 }
 

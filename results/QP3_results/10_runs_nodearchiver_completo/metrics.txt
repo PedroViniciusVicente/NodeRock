@@ -1,0 +1,20 @@
+Conjunto de Testes Completos
+
+Total Elapsed Time:
+18667 18167 18262 18694 18302 18310 18401 18379 18321 18532
+    Mean = 18403.5
+    Standard Deviation for Population = 165.1503860122646
+
+Time Until First Failure:
+1177 1193 4715 104 2596 1031 1546 443 279 472
+    Mean = 1355.6
+    Standard Deviation for Population = 1317.6977043313082
+
+Total Tests Executed:
+3500 3500 3500 3500 3500 3500 3500 3500 3500 3500
+
+Number of Test Fails: 
+15 6 8 16 9 10 10 10 10 13
+    Mean = 10.7
+    Standard Deviation for Population = 2.9342801502242417
+
