@@ -41,29 +41,29 @@ This file defines the analysis class (MyFunctionCallAnalysis) that instruments t
 
 This repository supports the research conducted. The analysis for each Research Question (QP) can be found in the following Jupyter Notebooks:
 
-### [RQ1_Model_Evaluation](notebooks/main_research.ipynb#rq1)
+### [RQ1_Model_Evaluation](notebooks/main_research.ipynb) - Section "Aplicação dos Modelos de ML - QP1"
 
 **Question:** How effective are different machine learning models at selecting tests with event races? 
 
-**Analysis:** This notebook evaluates various classifiers (SVM, KNN, Random Forest, etc.) and demonstrates the high effectiveness of Positive Unlabeled (PU) Learning, which was chosen for NodeRock after achieving 97.66% accuracy and 96.88% recall.
+**Analysis:** This notebook evaluates various classifiers (SVM, KNN, Random Forest, etc.) and demonstrates the effectiveness of Positive Unlabeled (PU) Learning, which was chosen for NodeRock after achieving 75% accuracy and 84.38% recall.
 
 **Figure:** [RQ1_fig.ipynb](notebooks/RQ1_fig.ipynb).
 
 
-### [RQ2_Feature_Analysis](notebooks/main_research.ipynb#rq2)
+### [RQ2_Feature_Analysis](notebooks/main_research.ipynb) - Section "Cálculo do Information Gain - QP2"
 
 **Question:** How much predictive value do the different dynamic features add to the classifiers? 
 
-**Analysis:** This notebook contains the Information Gain analysis for the 15 dynamic features. It shows that metrics like Invokes_with_callback_Normalized (IG=0.189) and InvokesInterval_Greater_Than_100_ms_Raw (IG=0.155) are strong predictors for event races.
+**Analysis:** This notebook contains the Information Gain analysis for the 15 dynamic features. It shows that metrics like Invokes_with_callback_Normalized (IG=0.189) and InvokesInterval_Greater_Than_100_ms_Raw (IG=0.155) are promising predictors for event races.
 
 **Figure:** [RQ2_fig.ipynb](notebooks/RQ2_fig.ipynb).
 
 
-### [RQ3_Performance_Evaluation](notebooks/main_research.ipynb#rq3)
+### [RQ3_Performance_Evaluation](notebooks/main_research.ipynb) - Section "Aplicação Prática da Detecção - QP3"
 
 **Question:** What is the practical runtime performance of using NodeRock to filter tests? 
 
-**Analysis:** This notebook details the experiment comparing the runtime of a full test suite analysis (using NACD) vs. the NodeRock-filtered analysis. The results on the node-archiver project showed that NodeRock reduced the number of tests to analyze by ~31% and the runtime to execute 1,000 runs of the test suite by ~6.5%, validating its use as a practical optimization strategy.
+**Analysis:** This notebook details the experiment comparing the runtime of a full test suite analysis (using NACD) vs. the NodeRock-filtered analysis. The results on the node-archiver project showed that NodeRock reduced the number of tests to analyze by ~31% and the runtime to execute 1,000 runs of the test suite by ~6.5%, suggesting its use as a practical optimization strategy.
 
 **Figure:** [RQ3_fig.ipynb](notebooks/RQ3_fig.ipynb).
 
