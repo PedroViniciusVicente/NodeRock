@@ -1,0 +1,25 @@
+Creating NodeRock_Info/monkeypatching.json in /home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource/projects/exploratory/node-archiver/NodeRock_Info/monkeypatching.json
+
+
+Creating the normalized features file in NodeRock_Info
+
+
+Gerando o arquivo .CSV:
+
+Creating the CSV file in NodeRock_Info
+
+
+Creating the CSV file in collectedCsvFolder
+
+
+ _   _           _                     _         _                _           _        ____                      _      _           _ _ 
+| \ | | ___   __| | ___ _ __ ___   ___| | __    / \   _ __   __ _| |_   _ ___(_)___   / ___|___  _ __ ___  _ __ | | ___| |_ ___  __| | |
+|  \| |/ _ \ / _` |/ _ \ '__/ _ \ / __| |/ /   / _ \ | '_ \ / _` | | | | / __| / __| | |   / _ \| '_ ` _ \| '_ \| |/ _ \ __/ _ \/ _` | |
+| |\  | (_) | (_| |  __/ | | (_) | (__|   <   / ___ \| | | | (_| | | |_| \__ \ \__ \ | |__| (_) | | | | | | |_) | |  __/ ||  __/ (_| |_|
+|_| \_|\___/ \__,_|\___|_|  \___/ \___|_|\_\ /_/   \_\_| |_|\__,_|_|\__, |___/_|___/  \____\___/|_| |_| |_| .__/|_|\___|\__\___|\__,_(_)
+                                                                    |___/                                 |_|
+
+
+real    13m15,752s
+user    40m10,862s
+sys     1m19,170s

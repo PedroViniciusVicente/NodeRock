@@ -20,6 +20,6 @@ Creating the CSV file in collectedCsvFolder
                                                                     |___/                                 |_|
 
 
-real	12m49,695s
-user	40m47,147s
-sys	1m11,452s
+real    13m7,385s
+user    41m11,928s
+sys     1m20,891s

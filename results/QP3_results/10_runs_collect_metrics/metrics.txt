@@ -1,5 +1,0 @@
-Overhead coleta de Dados
-
-769 793 793 780 777 799 793 778 768 808
-    Mean = 785.8
-    Standard Deviation for Population = 12.6237870704476

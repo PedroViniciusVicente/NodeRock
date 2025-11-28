@@ -1,0 +1,235 @@
+================================================================================
+ Test Execution Summary for Iteration 2/2
+ Completed at: 2025-11-12 11:09:28
+================================================================================
+Total Elapsed Time:       18156.25 seconds
+Time Until First Failure: 5043.27 seconds
+Total Tests Executed:     3500
+Number of Test Fails:     8
+
+--- List of Failed Tests ---
+  1. In Cycle 29: archiver api #errors should allow continue on stat failing
+     File: test/archiver.js
+     --- stdout ---
+
+
+  archiver
+    api
+      #errors
+        1) should allow continue on stat failing
+
+
+  0 passing (50s)
+  1 failing
+
+  1) archiver
+       api
+         #errors
+           should allow continue on stat failing:
+     Error: Timeout of 50000ms exceeded. For async tests and hooks, ensure "done()" is called; if returning a Promise, ensure it resolves. (/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver/test/archiver.js)
+  
+
+
+
+
+     --- stderr ---
+(node:158762) ExperimentalWarning: The fs.promises API is experimental
+
+--------------------
+  2. In Cycle 35: archiver api #errors should allow continue on stat failing
+     File: test/archiver.js
+     --- stdout ---
+
+
+  archiver
+    api
+      #errors
+        1) should allow continue on stat failing
+
+
+  0 passing (50s)
+  1 failing
+
+  1) archiver
+       api
+         #errors
+           should allow continue on stat failing:
+     Error: Timeout of 50000ms exceeded. For async tests and hooks, ensure "done()" is called; if returning a Promise, ensure it resolves. (/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver/test/archiver.js)
+  
+
+
+
+
+     --- stderr ---
+(node:166113) ExperimentalWarning: The fs.promises API is experimental
+
+--------------------
+  3. In Cycle 46: archiver api #errors should allow continue on stat failing
+     File: test/archiver.js
+     --- stdout ---
+
+
+  archiver
+    api
+      #errors
+        1) should allow continue on stat failing
+
+
+  0 passing (50s)
+  1 failing
+
+  1) archiver
+       api
+         #errors
+           should allow continue on stat failing:
+     Error: Timeout of 50000ms exceeded. For async tests and hooks, ensure "done()" is called; if returning a Promise, ensure it resolves. (/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver/test/archiver.js)
+  
+
+
+
+
+     --- stderr ---
+(node:179276) ExperimentalWarning: The fs.promises API is experimental
+
+--------------------
+  4. In Cycle 65: archiver api #errors should allow continue on stat failing
+     File: test/archiver.js
+     --- stdout ---
+
+
+  archiver
+    api
+      #errors
+        1) should allow continue on stat failing
+
+
+  0 passing (50s)
+  1 failing
+
+  1) archiver
+       api
+         #errors
+           should allow continue on stat failing:
+     Error: Timeout of 50000ms exceeded. For async tests and hooks, ensure "done()" is called; if returning a Promise, ensure it resolves. (/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver/test/archiver.js)
+  
+
+
+
+
+     --- stderr ---
+(node:201529) ExperimentalWarning: The fs.promises API is experimental
+
+--------------------
+  5. In Cycle 66: archiver api #errors should allow continue on stat failing
+     File: test/archiver.js
+     --- stdout ---
+
+
+  archiver
+    api
+      #errors
+        1) should allow continue on stat failing
+
+
+  0 passing (50s)
+  1 failing
+
+  1) archiver
+       api
+         #errors
+           should allow continue on stat failing:
+     Error: Timeout of 50000ms exceeded. For async tests and hooks, ensure "done()" is called; if returning a Promise, ensure it resolves. (/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver/test/archiver.js)
+  
+
+
+
+
+     --- stderr ---
+(node:203012) ExperimentalWarning: The fs.promises API is experimental
+
+--------------------
+  6. In Cycle 75: archiver api #errors should allow continue on stat failing
+     File: test/archiver.js
+     --- stdout ---
+
+
+  archiver
+    api
+      #errors
+        1) should allow continue on stat failing
+
+
+  0 passing (50s)
+  1 failing
+
+  1) archiver
+       api
+         #errors
+           should allow continue on stat failing:
+     Error: Timeout of 50000ms exceeded. For async tests and hooks, ensure "done()" is called; if returning a Promise, ensure it resolves. (/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver/test/archiver.js)
+  
+
+
+
+
+     --- stderr ---
+(node:213447) ExperimentalWarning: The fs.promises API is experimental
+
+--------------------
+  7. In Cycle 87: archiver api #errors should allow continue on stat failing
+     File: test/archiver.js
+     --- stdout ---
+
+
+  archiver
+    api
+      #errors
+        1) should allow continue on stat failing
+
+
+  0 passing (50s)
+  1 failing
+
+  1) archiver
+       api
+         #errors
+           should allow continue on stat failing:
+     Error: Timeout of 50000ms exceeded. For async tests and hooks, ensure "done()" is called; if returning a Promise, ensure it resolves. (/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver/test/archiver.js)
+  
+
+
+
+
+     --- stderr ---
+(node:227485) ExperimentalWarning: The fs.promises API is experimental
+
+--------------------
+  8. In Cycle 89: archiver api #errors should allow continue on stat failing
+     File: test/archiver.js
+     --- stdout ---
+
+
+  archiver
+    api
+      #errors
+        1) should allow continue on stat failing
+
+
+  0 passing (50s)
+  1 failing
+
+  1) archiver
+       api
+         #errors
+           should allow continue on stat failing:
+     Error: Timeout of 50000ms exceeded. For async tests and hooks, ensure "done()" is called; if returning a Promise, ensure it resolves. (/home/pedroubuntu/coisasNodeRT/datasetNodeRT/datasetDoNodeRacer/exploratory/node-archiver/test/archiver.js)
+  
+
+
+
+
+     --- stderr ---
+(node:229840) ExperimentalWarning: The fs.promises API is experimental
+
+--------------------
+================================================================================
