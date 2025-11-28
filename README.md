@@ -41,7 +41,7 @@ This file defines the analysis class (MyFunctionCallAnalysis) that instruments t
 
 This repository supports the research conducted. The analysis for each Research Question (QP) can be found in the following Jupyter Notebooks:
 
-### [RQ1_Model_Evaluation](notebooks/main_research.ipynb#cálculo-do-information-gain-qp2)
+### [RQ1_Model_Evaluation](notebooks/main_research.ipynb#rq1)
 
 **Question:** How effective are different machine learning models at selecting tests with event races? 
 
@@ -50,7 +50,7 @@ This repository supports the research conducted. The analysis for each Research 
 **Figure:** [RQ1_fig.ipynb](notebooks/RQ1_fig.ipynb).
 
 
-### [RQ2_Feature_Analysis](notebooks/main_research.ipynb#)
+### [RQ2_Feature_Analysis](notebooks/main_research.ipynb#rq2)
 
 **Question:** How much predictive value do the different dynamic features add to the classifiers? 
 
@@ -59,7 +59,7 @@ This repository supports the research conducted. The analysis for each Research 
 **Figure:** [RQ2_fig.ipynb](notebooks/RQ2_fig.ipynb).
 
 
-### [RQ3_Performance_Evaluation](notebooks/main_research.ipynb#)
+### [RQ3_Performance_Evaluation](notebooks/main_research.ipynb#rq3)
 
 **Question:** What is the practical runtime performance of using NodeRock to filter tests? 
 
