@@ -1,8 +1,8 @@
-# NodeRock
+<!-- # NodeRock -->
 
 <!-- **NodeRock** is a tool... that does this and can be used for thiss... designed by... and .. acknoledgemts... the implementation is made with ... -->
 
-## Guide for installing NodeRock
+# Guide for installing and Using NodeRock
 
 _Adapted from [Matheus Ranzani's NodeRT installation Guide](https://github.com/matheusranzani/Desenvolvimento-TT1/blob/main/README.md)._
 
@@ -82,25 +82,40 @@ If everything worked, your shell should display `v14.16.1`, which is the Node.js
 
 ## Example Usage
 
-With the tools described above installed, you can now test **NodeRT**. To do so, first clone the [project repository](https://github.com/PedroViniciusVicente/NodeRock):
+With the tools described above installed, you can now test **NodeRock**. To do so, first clone the [project repository](https://github.com/PedroViniciusVicente/NodeRock):
 ```sh
 git clone https://github.com/PedroViniciusVicente/NodeRock
 ```
 
-Navigate to the root of the **NodeRT** project using the shell and run the following command to build the tool:
+Navigate to the root of the **NodeRock** project using the shell and run the following command to build the tool:
 ```sh
 yarn && yarn build
 ```
 
-(Terminar o tutorial com a instalação dos projetos de teste, npm install neles, colocar o path direitinho no 1_chosenProject.js e depois dar `node NodeRock_src/entrypoint_NodeRock`, talvez deixar um arquivo main.js na raiz do NodeRock para apenas dar o node main.js mais facilmente com o path já configurado certinho nele...)
+Before executing the tool, you must prepare the application you wish to analyze.
+For example, to reproduce the analysis from RQ3, download and extract the node-archiver project from the folder used in NodeRacer [here](https://brics.dk/noderacer/noderacer-benchmarks.tar.gz).
 
+```bash
+tar -xvf noderacer-benchmarks.tar.gz
+```
+
+Build the target project (the project you want to analyze), and ensure the project is placed in the correct directory. It must align with the path defined in the [1_chosenProject.js](NodeRock_src/entrypoint_NodeRock/1_chosenProject.js) file.
+
+Once the target project is built and correctly positioned, navigate to the source directory and run the entry point:
 ```
 cd NodeRock_src
+node entrypoint_NodeRock
 ```
 
-```
+After running the command, wait for the metrics collection process to finish.
+
+Once completed, the results will be generated in a directory named NodeRock_Info, which can be found in the root directory of the analyzed project.
+
+<!-- ```
 pedroubuntu@Aspire-A514-54:~/coisasNodeRT/NodeRT-OpenSource/NodeRock_src$ node entrypoint_NodeRock/
-```
+``` -->
+
+<!-- (Terminar o tutorial com a instalação dos projetos de teste, npm install neles, colocar o path direitinho no 1_chosenProject.js e depois dar `node NodeRock_src/entrypoint_NodeRock`, talvez deixar um arquivo main.js na raiz do NodeRock para apenas dar o node main.js mais facilmente com o path já configurado certinho nele...) -->
 
 <!-- Após clonar o projeto, para não ocorrer conflitos entre os arquivos `package.json` do **NodeRT** e dos projetos do _dataset_, é preciso mover a pasta _dataset_ para outro diretório fora do projeto do **NodeRT**.\ 
 Depois de mover a pasta _dataset_, entre na raiz do projeto do **NodeRT** através do shell e execute o seguinte comando para buildar a ferramenta: 
