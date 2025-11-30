@@ -1,173 +1,180 @@
-# =============== LIBS ===============
+# pip install pandas numpy scikit-learn pulearn
 
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
 import numpy as np
-import csv
-
-# Normalização Min-Max
-from sklearn.preprocessing import MinMaxScaler
-
-# Modelos
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.naive_bayes import GaussianNB
-from sklearn.svm import SVC
+from sklearn.preprocessing import MinMaxScaler
+from pulearn import ElkanotoPuClassifier
+import warnings
+import random
+import os
 
-# Métricas
-from sklearn.model_selection import StratifiedKFold
-from sklearn.metrics import confusion_matrix, roc_auc_score, roc_curve, classification_report
-
-
-# =============== IMPORTANDO OS CVS ===============
-# No futuro automatizar esse processo pra ele pegar todos os csv de csvBenchmarks automaticamente
-
-# -=+=- Known bugs -=+=-
-df_aka = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataAKA.csv')
-df_fps = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataFPS.csv')
-df_gho = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataGHO.csv')
-df_mkd = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataMKD.csv')
-# nes
-df_nlf = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataNLF.csv')
-df_sio = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataSIO.csv')
-df_del = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataDel.csv')
-df_lst = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataLST.csv')
-df_nsc = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataNSC.csv')
-# xls
-# -=+=- Open issues -=+=-
-df_blueblird = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataBluebird.csv')
-df_express_user = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataExpressUser.csv')
-df_gpt = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataGPT.csv')
-df_lvs = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataLVS.csv')
-df_sioc = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataSIOC.csv')
-# -=+=- Exploratory -=+=-
-df_mongoexpress = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataMongoExpress.csv')
-df_nedb = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataNEDB.csv')
-df_arc = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataARC.csv')
-df_obj = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataOBJ.csv')
-# -=+=- Fs-Extra -=+=-
-df_fsextra = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/csvBenchmarks/dataFsExtra.csv')
-
-# print(df_aka)
+# Configuration
+RANDOM_STATE = 42
+KNOWN_DATA_PATH = './results/combined_df.csv'
+UNKNOWN_DATA_PATH = './NodeRock_src/FoldersUsedDuringExecution/collectedCsvFolder/data.csv'
+OUTPUT_CSV_PATH = './results/predictions_output.csv'
+JSON_OUTPUT_PATH = './results/predicted_races.json'
 
 
-# =============== JUNTANDO OS CVS ===============
-
-df = pd.concat([df_aka, df_fps, df_gho, df_mkd, df_nlf, df_sio, df_del, df_lst, df_nsc,
-                df_blueblird, df_express_user, df_gpt, df_lvs, df_sioc,
-                df_mongoexpress, df_nedb, df_arc, df_obj, df_fsextra], ignore_index=True)
-df['HasEventRace'] = df['HasEventRace'].replace(True, 'True')
-df['HasEventRace'] = df['HasEventRace'].replace('Undefined', 'False')
+def main():
+    np.random.seed(RANDOM_STATE)
+    random.seed(RANDOM_STATE)
+    scaler = MinMaxScaler()
 
 
+    print("="*60)
+    print("1. LOADING AND PREPARING DATA")
+    print("="*60)
 
-# =============== FAZENDO A AMOSTRAGEM (3X1) ===============
+    # 1. Load Data
+    if not os.path.exists(KNOWN_DATA_PATH):
+        raise FileNotFoundError(f"File not found: {KNOWN_DATA_PATH}")
+    if not os.path.exists(UNKNOWN_DATA_PATH):
+        raise FileNotFoundError(f"File not found: {UNKNOWN_DATA_PATH}")
 
-# Atualmente temos 96 linhas, sendo 24 true e 72 false
-df_true = df[df["HasEventRace"] == "True"]
-df_false = df[df["HasEventRace"] == "False"]
+    df_known = pd.read_csv(KNOWN_DATA_PATH)
+    df_unknown = pd.read_csv(UNKNOWN_DATA_PATH)
 
-# Amostragem com proporcao 3 False para 1 True
-df_false_sampled = df_false.sample(n=3 * len(df_true), random_state=0)
-df_sampled = pd.concat([df_true, df_false_sampled])
+    print(f"\nKnown data (Train): {len(df_known)} samples")
+    print(f"Unknown data (Predict): {len(df_unknown)} samples")
 
-# Embaralhando as linhas
-df_sampled = df_sampled.sample(frac=1, random_state=0).reset_index(drop=True)
+    # 1,5. Total_duration_s_Normalized feature inclusion on df_unknown
+    df_unknown = df_unknown.rename(columns={'Total_duration_s': 'Total_duration_s_Raw'})
+    df_unknown['Total_duration_s_Normalized'] = df_unknown.groupby('BenchmarkName')['Total_duration_s_Raw'].transform(
+        lambda x: scaler.fit_transform(x.values.reshape(-1, 1)).flatten()
+    )
 
+    # 2. Define Features
+    # We exclude metadata columns and the target column to define 'features'
+    target_col = 'HasEventRace'
+    info_cols = ['BenchmarkName', 'TestFilePath', 'TestCaseName', 'HasEventRace', 'Unnamed: 0']
+    
+    # Select only numeric columns that are present in both dataframes
+    numeric_cols_known = df_known.select_dtypes(include=[np.number]).columns.tolist()
+    feature_cols = [c for c in numeric_cols_known if c not in info_cols]
+    
 
-# =============== PRE-PROCESSAMENTO ===============
+    
 
-# x sao as variaveis Independentes
-x = df_sampled.drop(columns=["BenchmarkName", "TestFilePath", "TestCaseName", "HasEventRace"])
-# print(x)
-
-# y eh a variaveis Target (Dependente)
-y = df_sampled["HasEventRace"].apply(lambda x: 1 if x == "True" else 0)
-# print(y)
-
-#
-scaler = MinMaxScaler()
-scaler.fit(x)
-x_scaled = scaler.transform(x) # x_scaled sao os atributos normalizados
-
-
-# =============== TREINANDO OS MODELOS DE MACHINE LEARNING ===============
-
-# -=+=- KNN -=+=-
-knn = KNeighborsClassifier(n_neighbors=5)
-knn.fit(x_scaled, y)
-
-# -=+=- DECISION TREE -=+=-
-dt = DecisionTreeClassifier(random_state=0)
-dt.fit(x_scaled, y)
-
-# -=+=- RANDOM FOREST -=+=-
-rf = RandomForestClassifier(n_estimators=100, random_state=0)
-rf.fit(x_scaled, y)
-
-# -=+=- NAIVE BAYES -=+=-
-nb = GaussianNB()
-nb.fit(x_scaled, y)
-
-# -=+=- SUPPORT VECTOR MACHINES (SVM) -=+=-
-svm = SVC(probability=True, kernel='rbf', C=1.0, random_state=0)
-svm.fit(x_scaled, y)
+    # Ensure unknown df has the same columns (filling missing with 0 if necessary)
+    # for col in feature_cols:
+    #     if col not in df_unknown.columns:
+    #         df_unknown[col] = 0
+            
+    print(f"Total features used: {len(feature_cols)}")
+    # print(f"Features: {feature_cols}")
 
 
-# =============== CARREGAMENTO DA ENTRADA ===============
+    X_known = df_known[feature_cols].fillna(0).values 
+    y_known = df_known['HasEventRace'].astype(int).values
+    X_unknown = df_unknown[feature_cols].fillna(0).values 
 
-df_entrada = pd.read_csv('./NodeRock_src/FoldersUsedDuringExecution/collectedCsvFolder/data.csv')
+    print(f"\nDistribution of y_known (0=Unlabeled, 1=Positive): {np.bincount(y_known)}")
 
-df_testsInfo = df_entrada[["BenchmarkName", "TestFilePath", "TestCaseName"]].copy()
-# print(df_testsInfo)
+    print("\n" + "="*60)
+    print("2. DATA NORMALIZATION")
+    print("="*60)
 
+    # Note: Your original code assigned raw values to scaled variables. 
+    X_known_scaled = X_known
+    X_unknown_scaled = scaler.fit_transform(X_unknown)
 
-# =============== PRE PROCESSAMENTO DA ENTRADA ===============
+    print("\n" + "="*60)
+    print("3. TRAINING PU LEARNING MODEL WITH RANDOM FOREST")
+    print("="*60)
 
-x_entrada = df_entrada.drop(columns=["BenchmarkName", "TestFilePath", "TestCaseName", "HasEventRace", 
-                                     "avgRejected_Normalized", "avgRejected_Raw", "avgResolved_Normalized", "avgResolved_Raw", "awaitIntervals_Normalized", "awaitIntervals_Raw",
-                                     "longestResolved_Normalized", "longestResolved_Raw", "resolvedPercentage_Normalized", "resolvedPercentage_Raw", "totalSettledPromises_Normalized", "totalSettledPromises_Raw"])
-# print(x_entrada)
-x_entrada_scaled = scaler.transform(x_entrada)
-# print(x_entrada_scaled)
+    print(f"Positive examples: {np.sum(y_known == 1)}, Unlabeled: {np.sum(y_known == 0)}")
 
+    base_estimator = RandomForestClassifier(
+        n_estimators=50,
+        class_weight='balanced',
+        n_jobs=-1,
+        random_state=RANDOM_STATE
+    )
 
+    pu_estimator = ElkanotoPuClassifier(
+        estimator=base_estimator,
+        hold_out_ratio=0.2
+    )
 
-# =============== FAZENDO A PREVISAO ===============
+    print("\nTraining PU Learning model...")
+    np.random.seed(RANDOM_STATE)
+    
+    try:
+        pu_estimator.fit(X_known_scaled, y_known)
+        print("PU Model trained successfully!")
+    except Exception as e:
+        print(f"Error during training: {e}")
+        return
 
-rotulo_previsto = []
+    print("\n" + "="*60)
+    print("4. PREDICTING LABELS")
+    print("="*60)
 
-for i in range(len(x_entrada_scaled)):
-    rotulo_previsto.append(0)
-    rotulo_previsto[i] += knn.predict([x_entrada_scaled[i]])[0]
-    rotulo_previsto[i] += dt.predict([x_entrada_scaled[i]])[0]
-    rotulo_previsto[i] += rf.predict([x_entrada_scaled[i]])[0]
-    rotulo_previsto[i] += nb.predict([x_entrada_scaled[i]])[0]
-    rotulo_previsto[i] += svm.predict([x_entrada_scaled[i]])[0]
+    y_pred_proba_raw = pu_estimator.predict_proba(X_unknown_scaled)[:, 1]
 
-# Imprimindo o rótulo previsto
-# for i in range (len(x_entrada_scaled)):
-#     print(f"Qtd de modelos que deram true para a linha {i} sao: {rotulo_previsto[i]}")
+    # Clip probabilities to be safe
+    preds_proba = np.clip(y_pred_proba_raw, 0, 1)
 
+    THRESHOLD = 0.3
+    y_pred_unknown = (preds_proba >= THRESHOLD).astype(int)
 
-# =============== GERANDO O CSV DE SAIDA ===============
-df_testsInfo['QuantidadeRotulosPositivo'] = rotulo_previsto
-# print(df_testsInfo)
+    # Assign results back to DataFrame
+    df_unknown['Predicted_HasEventRace'] = y_pred_unknown
+    df_unknown['Predicted_Probability'] = preds_proba
 
-# df_testsInfo.to_csv('collectedResultsMLFolder/resultados_testes.csv')
+    print("\n" + "="*60)
+    print("5. FINAL RESULTS")
+    print("="*60)
 
-# Fix the problem that Pandas doubles the double quotes (""testname"") if testname already had quotes. For example in: almost_through2-concurrent
-# df_testsInfo.to_csv(
-#     './NodeRock_src/FoldersUsedDuringExecution/collectedResultsMLFolder/resultados_testes.csv',
-#     index=False,
-#     quoting=csv.QUOTE_NONE,  # Do not unnecessarily quote fields
-#     escapechar='\\'  # Escape special characters instead of adding extra quotes
-# )
+    positive_predictions_df = df_unknown[df_unknown['Predicted_HasEventRace'] == 1]
 
-df_testsInfo.to_csv('./NodeRock_src/FoldersUsedDuringExecution/collectedResultsMLFolder/resultados_testes.csv');
+    print(f"\nTotal tests analyzed: {len(df_unknown)}")
+    print(f"Predicted as TRUE (HasEventRace): {len(positive_predictions_df)}")
+    print(f"Predicted as FALSE/UNKNOWN: {len(df_unknown) - len(positive_predictions_df)}")
 
+    print(f"\n--- Probability Statistics (Calibrated) ---")
+    print(f"Threshold used: {THRESHOLD}")
+    print(f"Mean Probability: {preds_proba.mean():.4f}")
+    print(f"Min Probability: {preds_proba.min():.4f}")
+    print(f"Max Probability: {preds_proba.max():.4f}")
+    print(f"Std Dev: {preds_proba.std():.4f}")
 
+    print("\n--- Details of predictions (Top 10 highest probability) ---")
+    cols_to_show = ['TestCaseName', 'Predicted_HasEventRace', 'Predicted_Probability']
+    # Check if TestCaseName exists, otherwise pick columns that exist
+    display_cols = [c for c in cols_to_show if c in df_unknown.columns]
+    
+    print(df_unknown[display_cols]
+          .sort_values('Predicted_Probability', ascending=False)
+          .head(50)
+          .to_string(index=False))
 
-print("finalizou")
+    # Optional: Save results to disk
+    # df_unknown.to_csv(OUTPUT_CSV_PATH, index=False)
+    # print(f"\nFull results saved to {OUTPUT_CSV_PATH}")
+
+    print("\n" + "="*60)
+    print("6. GERANDO ARQUIVO JSON DE SAÍDA")
+    print("="*60)
+
+    df_export = df_unknown[df_unknown['Predicted_HasEventRace'] == 1].copy()
+
+    required_cols = ['TestFilePath', 'TestCaseName']
+    if all(col in df_export.columns for col in required_cols):
+        
+        df_export = df_export.rename(columns={
+            'TestFilePath': 'file',
+            'TestCaseName': 'title'
+        })
+
+        final_json_data = df_export[['file', 'title']]
+
+        final_json_data.to_json(JSON_OUTPUT_PATH, orient='records', indent=4)
+
+    print(f"Sucesso! Arquivo JSON gerado em: {os.path.abspath(JSON_OUTPUT_PATH)}")
+    print(f"Foram exportados {len(final_json_data)} itens.")
+
+if __name__ == "__main__":
+    main()
