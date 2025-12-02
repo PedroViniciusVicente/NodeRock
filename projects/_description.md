@@ -1,6 +1,11 @@
 # This folder stores the projects that are being analysed by NodeRock.
 You can download the projects in: https://drive.google.com/drive/folders/1tSmqRCo-l0s_pRtEbzld8SCLYkLamiD3?usp=sharing
 
+To extract the projects along with their NodeRock analysis log, use:
+```
+tar -xzvf compacted_projects.tar.gz
+```
+
 ## NodeRacer Benchmarks
 
 Files used to run the projects

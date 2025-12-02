@@ -74,3 +74,5 @@ The repository also includes the data and experimental results discussed in the 
 - [results/extracted_datasets:](results/extracted_datasets) Contains the final .csv files with all 15 dynamic features extracted from each test case in the 24 known projects.
 
 - [results/QP3_results:](results/QP3_results) Contains the raw execution logs and time measurements from the experiment conducted for Research Question 3 (QP3), which compared the performance of the full test suite versus the NodeRock-filtered suite.
+
+- [projects:](projects) Stores the projects used in this experiment. Their builded version can be downloaded from [drive](https://drive.google.com/drive/folders/1tSmqRCo-l0s_pRtEbzld8SCLYkLamiD3?usp=sharing) along with their NodeRock analysis log in NodeRock_Info.

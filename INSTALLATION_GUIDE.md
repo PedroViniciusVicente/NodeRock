@@ -93,10 +93,10 @@ yarn && yarn build
 ```
 
 Before executing the tool, you must prepare the application you wish to analyze.
-For example, to reproduce the analysis from RQ3, download and extract the node-archiver project from the folder used in NodeRacer [here](https://brics.dk/noderacer/noderacer-benchmarks.tar.gz).
+For example, to reproduce the analysis from RQ3, download and extract the builded version of node-archiver project from [here](https://drive.google.com/drive/folders/1tSmqRCo-l0s_pRtEbzld8SCLYkLamiD3?usp=sharing).
 
 ```bash
-tar -xvf noderacer-benchmarks.tar.gz
+tar -xzvf compacted_projects.tar.gz
 ```
 
 Build the target project (the project you want to analyze), and ensure the project is placed in the correct directory. It must align with the path defined in the [1_chosenProject.js](NodeRock_src/entrypoint_NodeRock/1_chosenProject.js) file.
@@ -109,7 +109,9 @@ node entrypoint_NodeRock
 
 After running the command, wait for the metrics collection process to finish.
 
-Once completed, the results will be generated in a directory named NodeRock_Info, which can be found in the root directory of the analyzed project.
+Once completed, the results will be generated in a directory named NodeRock_Info, which can be found in the root directory of the analyzed project. In this directory, there will be the execution log of all the analyzed tests, along with a json file with the selected and prioritized tests according to the Machine Learning strategy (selected_tests_results.json).
+
+After that, switch node version to 10 and execute the [race_detection_nacd.py](NodeRock_src/entrypoint_NodeRock/pythonML_scripts/race_detection_nacd.py) script to execute the NACD 100 runs analysis.
 
 <!-- ```
 pedroubuntu@Aspire-A514-54:~/coisasNodeRT/NodeRT-OpenSource/NodeRock_src$ node entrypoint_NodeRock/
