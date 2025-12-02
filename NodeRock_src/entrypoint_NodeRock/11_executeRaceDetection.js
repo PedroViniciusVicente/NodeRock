@@ -2,11 +2,11 @@
 
 const shell = require('shelljs');
 
-function executePythonML() {
+function executeRaceDetection() {
 
     const command = "python3 entrypoint_NodeRock/pythonML_scripts/race_detection_nacd.py"
     shell.exec(command);
 
 }
 
-module.exports = { executePythonML };
+module.exports = { executeRaceDetection };

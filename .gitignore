@@ -186,9 +186,11 @@ NodeRock_src/FoldersUsedDuringExecution/temporary_logHooks/*
 NodeRock_src/FoldersUsedDuringExecution/temporary_promises_logs/*
 !NodeRock_src/FoldersUsedDuringExecution/temporary_promises_logs/_description.md
 
-NodeRock_src/FoldersUsedDuringExecution/temporary_TestsNamesAndFiles/*
-!NodeRock_src/FoldersUsedDuringExecution/temporary_TestsNamesAndFiles/_description.md
-
 NodeRock_src/FoldersUsedDuringExecution/temporary_analyzedProjectInfo/*
 !NodeRock_src/FoldersUsedDuringExecution/temporary_analyzedProjectInfo/_description.md
 
+projects/*
+!projects/_description.md
+
+TODO.txt
+artigosLidos.txt

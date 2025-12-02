@@ -19,7 +19,7 @@ The core logic of the NodeRock execution pipeline is implemented as a series of 
 
 - **Metric Extractor:** Executes each test individually to capture raw execution traces ([3_executeTests.js](NodeRock_src/entrypoint_NodeRock/3_executeTests.js)), parses these traces to extract function details and callback delays ([4_extractFunctions.js](NodeRock_src/entrypoint_NodeRock/4_extractFunctions.js)), aggregates trace data into a high-level feature set ([5_extractFeatures.js](NodeRock_src/entrypoint_NodeRock/5_extractFeatures.js)), and runs a second, separate execution with monkey-patching to capture detailed Promise lifecycle metrics ([6_executeMonkeyPatching.js](NodeRock_src/entrypoint_NodeRock/6_executeMonkeyPatching.js)).
 
-- **Machine Learning Detector:** Executes the main Python script to classify tests based on their features ([10_executePythonML.js](NodeRock_src/entrypoint_NodeRock/10_executePythonML.js)) and (for validation) runs an external race detection tool like NACD only on the tests flagged as "suspicious" by the model ([11_executeRaceDetection.js](NodeRock_src/entrypoint_NodeRock/11_executeRaceDetection.js)).
+- **Machine Learning Detector:** Executes the main Python script to select and prioritize tests based on their features ([10_executePythonML.js](NodeRock_src/entrypoint_NodeRock/10_executePythonML.js)) and (for validation) runs an external race detection tool like NACD only on the tests flagged as "suspicious" by the model ([11_executeRaceDetection.js](NodeRock_src/entrypoint_NodeRock/11_executeRaceDetection.js)).
 
 
 ## Instrumentation Hooks

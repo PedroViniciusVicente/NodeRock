@@ -1,6 +1,4 @@
-# OBS: REMBER TO NVM USE 10
-# cd coisasNodeRT/datasetNodeRT
-# time python3 tcc_script_nacd_100runs.py
+# REMBER TO NVM USE 10
 
 import json
 import os
@@ -25,8 +23,8 @@ PROJECT_PATH = ANALYZED_PROJECT_PATH
 TESTS_JSON_PATH = os.path.join(CURRENT_DIR, '../../..', ANALYZED_PROJECT_PATH, 'NodeRock_Info/', 'selected_tests_results.json')
 
 
-NUM_CYCLES = 100       # Number of times to run the test suite in one iteration
-NUM_ITERATIONS = 15    # Number of times to repeat the whole process
+NUM_CYCLES = 10       # Number of times to run the test suite in one iteration
+NUM_ITERATIONS = 2    # Number of times to repeat the whole process
 
 # Directory to save the result files
 OUTPUT_DIR = os.path.join(CURRENT_DIR, '../../..', ANALYZED_PROJECT_PATH, 'NodeRock_Info/', 'nacd_execution_results') 
