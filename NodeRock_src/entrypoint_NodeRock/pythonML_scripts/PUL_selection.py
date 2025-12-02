@@ -5,16 +5,32 @@ import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import MinMaxScaler
 from pulearn import ElkanotoPuClassifier
+import json
 import warnings
 import random
 import os
 
 # Configuration
 RANDOM_STATE = 42
-KNOWN_DATA_PATH = './results/combined_df.csv'
-UNKNOWN_DATA_PATH = './NodeRock_src/FoldersUsedDuringExecution/collectedCsvFolder/data.csv'
-OUTPUT_CSV_PATH = './results/predictions_output.csv'
-JSON_OUTPUT_PATH = './results/predicted_races.json'
+
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+ANALYZED_PROJECT_FILE = os.path.join(CURRENT_DIR, '../..', 'FoldersUsedDuringExecution/temporary_analyzedProjectInfo/temporary_analyzedProject.json')
+with open(ANALYZED_PROJECT_FILE, 'r', encoding='utf-8') as file:
+    analyzed_project_data = json.load(file)
+
+ANALYZED_PROJECT_PATH = analyzed_project_data['pathProjectFolder']
+ANALYZED_PROJECT_NAME = analyzed_project_data['benchmarkName']
+# print(ANALYZED_PROJECT_PATH)
+# print(ANALYZED_PROJECT_NAME)
+
+
+KNOWN_DATA_PATH = os.path.join(CURRENT_DIR, '../../..', 'results/combined_df.csv')
+UNKNOWN_DATA_PATH = os.path.join(CURRENT_DIR, '../../..', ANALYZED_PROJECT_PATH, 'NodeRock_Info/', ANALYZED_PROJECT_NAME + '.csv')
+
+JSON_OUTPUT_PATH = os.path.join(CURRENT_DIR, '../../..', ANALYZED_PROJECT_PATH, 'NodeRock_Info/', 'selected_tests_results.json')
+# OUTPUT_CSV_PATH = './results/predictions_output.csv'
+# JSON_OUTPUT_PATH = './results/predicted_races.json'
 
 
 def main():
@@ -27,7 +43,6 @@ def main():
     print("1. LOADING AND PREPARING DATA")
     print("="*60)
 
-    # 1. Load Data
     if not os.path.exists(KNOWN_DATA_PATH):
         raise FileNotFoundError(f"File not found: {KNOWN_DATA_PATH}")
     if not os.path.exists(UNKNOWN_DATA_PATH):
@@ -39,25 +54,18 @@ def main():
     print(f"\nKnown data (Train): {len(df_known)} samples")
     print(f"Unknown data (Predict): {len(df_unknown)} samples")
 
-    # 1,5. Total_duration_s_Normalized feature inclusion on df_unknown
+    # Total_duration_s_Normalized feature inclusion on df_unknown
     df_unknown = df_unknown.rename(columns={'Total_duration_s': 'Total_duration_s_Raw'})
     df_unknown['Total_duration_s_Normalized'] = df_unknown.groupby('BenchmarkName')['Total_duration_s_Raw'].transform(
         lambda x: scaler.fit_transform(x.values.reshape(-1, 1)).flatten()
     )
 
-    # 2. Define Features
-    # We exclude metadata columns and the target column to define 'features'
     target_col = 'HasEventRace'
     info_cols = ['BenchmarkName', 'TestFilePath', 'TestCaseName', 'HasEventRace', 'Unnamed: 0']
     
-    # Select only numeric columns that are present in both dataframes
     numeric_cols_known = df_known.select_dtypes(include=[np.number]).columns.tolist()
     feature_cols = [c for c in numeric_cols_known if c not in info_cols]
-    
-
-    
-
-    # Ensure unknown df has the same columns (filling missing with 0 if necessary)
+        
     # for col in feature_cols:
     #     if col not in df_unknown.columns:
     #         df_unknown[col] = 0
@@ -76,7 +84,6 @@ def main():
     print("2. DATA NORMALIZATION")
     print("="*60)
 
-    # Note: Your original code assigned raw values to scaled variables. 
     X_known_scaled = X_known
     X_unknown_scaled = scaler.fit_transform(X_unknown)
 
@@ -114,13 +121,11 @@ def main():
 
     y_pred_proba_raw = pu_estimator.predict_proba(X_unknown_scaled)[:, 1]
 
-    # Clip probabilities to be safe
     preds_proba = np.clip(y_pred_proba_raw, 0, 1)
 
     THRESHOLD = 0.3
     y_pred_unknown = (preds_proba >= THRESHOLD).astype(int)
 
-    # Assign results back to DataFrame
     df_unknown['Predicted_HasEventRace'] = y_pred_unknown
     df_unknown['Predicted_Probability'] = preds_proba
 
@@ -160,6 +165,8 @@ def main():
     print("="*60)
 
     df_export = df_unknown[df_unknown['Predicted_HasEventRace'] == 1].copy()
+
+    df_export = df_export.sort_values(by='Predicted_Probability', ascending=False)
 
     required_cols = ['TestFilePath', 'TestCaseName']
     if all(col in df_export.columns for col in required_cols):

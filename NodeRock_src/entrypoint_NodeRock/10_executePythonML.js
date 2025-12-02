@@ -1,11 +1,10 @@
-// 10. Executes the Python script with the Machine Learning Supervised Models and generate the result.csv
+// 10. Executes the Python script with the Machine Learning Supervised Models and generate the predicted_tests_results.json
 
 const shell = require('shelljs');
 
 function executePythonML() {
 
-    // shell.exec("pwd"); // /home/pedroubuntu/coisasNodeRT/NodeRT-OpenSource pois eh o endereco que vc esta antes de executar o comando
-    const command = "python3 entrypoint_NodeRock/pythonML_scripts/main.py"
+    const command = "python3 entrypoint_NodeRock/pythonML_scripts/PUL_selection.py"
     shell.exec(command);
 
 }

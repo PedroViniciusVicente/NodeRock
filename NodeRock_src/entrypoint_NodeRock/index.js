@@ -69,8 +69,11 @@ if(rodarTestesCompleto) {
     // console.log(machineLearningClassifyingText);
     // executePythonML();
 
+    // console.log("\n");
+    // console.log("Remeber to switch to node version 10 to execute the race detection script with NACD!\n");
+
     // 11. Executes the race detection based on collectedResultsMLFolder to find the event races 
-    // executeRaceDetection(chosenProject.pathProjectFolder, chosenProject.testFile);
+    // executeRaceDetection();
 
 }
 else {
