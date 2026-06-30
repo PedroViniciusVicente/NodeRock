@@ -14,7 +14,7 @@ This repository supports the research conducted. The implementation of all machi
 
 Analysis for each Research Question (QP) and its figures can be found in the following Jupyter Notebooks:
 
-### [RQ1_Model_Evaluation](notebooks/main_research.ipynb) - Section "Aplicação dos Modelos de ML - QP1"
+### [RQ1_Model_Evaluation](notebooks/main_research.ipynb) - Section "Application of ML Models - QP1"
 
 **Question:** How effective are different machine learning models at selecting tests with event races? 
 
@@ -23,7 +23,7 @@ Analysis for each Research Question (QP) and its figures can be found in the fol
 **Figure:** [RQ1_fig.ipynb](notebooks/RQ1_fig.ipynb).
 
 
-### [RQ2_Feature_Analysis](notebooks/main_research.ipynb) - Section "Cálculo do Information Gain - QP2"
+### [RQ2_Feature_Analysis](notebooks/main_research.ipynb) - Section "Information Gain Calculation - QP2"
 
 **Question:** How much predictive value do the different dynamic features add to the classifiers? 
 
@@ -32,7 +32,7 @@ Analysis for each Research Question (QP) and its figures can be found in the fol
 **Figure:** [RQ2_fig.ipynb](notebooks/RQ2_fig.ipynb).
 
 
-### [RQ3_Performance_Evaluation](notebooks/main_research.ipynb) - Section "Aplicação Prática da Detecção - QP3"
+### [RQ3_Performance_Evaluation](notebooks/main_research.ipynb) - Section "Practical Application of Detection - QP3"
 
 **Question:** What is the practical runtime performance of using NodeRock to filter tests? 
 
