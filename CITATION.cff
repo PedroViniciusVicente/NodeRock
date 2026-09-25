@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 title: "NodeRock Artifacts"
 version: 1.0.1
-license: "GPLv3"
+license: "GPL-3.0-only"
 type: software
 abstract: "These are the artifacts used in the paper to execute NodeRock"
 message: "If you use this software, please cite it as below."
