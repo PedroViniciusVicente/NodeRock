@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+title: "NodeRock Artifacts"
+version: 1.0.1
+license: "GPLv3"
+type: software
+abstract: "These are the artifacts used in the paper to execute NodeRock"
+message: "If you use this software, please cite it as below."
+authors:
+  - given-names: Pedro
+    family-names: Vicente
+    affiliation: Universidade Federal de Sao Carlos
+    orcid: "https://orcid.org/0009-0000-3825-5082"
+keywords:
+  - computer science
+  - software engineering
+  - automated tests
+  - machine learning
+  - test case prioritization
+  - test suite reduction
