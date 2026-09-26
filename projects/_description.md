@@ -6,7 +6,7 @@ This folder holds the Node.js projects analysed by NodeRock: the 24 projects wit
 
 The built projects, together with their NodeRock analysis logs, are archived on Zenodo:
 
-**https://doi.org/10.5281/zenodo.22967154**
+**https://doi.org/10.5281/zenodo.22968741**
 
 Download `compacted_projects.tar.gz` and extract it inside this folder:
 
