@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/814622987.svg)](https://doi.org/10.5281/zenodo.22967154)
+
 # NodeRock: A Machine Learning Approach to Select Node.js Tests with Event Races
 
 NodeRock is a dynamic analysis tool designed to address the challenge of detecting event races in Node.js applications. Event races are subtle concurrency bugs that are difficult to find and reproduce.
