@@ -2,8 +2,9 @@
 
 # NodeRock: A Machine Learning Approach to Select Node.js Tests with Event Races
 
-This repository contains the source code and datasets for the NodeRock tool and the analysis scripts associated.
+This repository contains the source code, datasets and scripts associated with the study presented in the paper: "NodeRock: A Machine Learning Approach to Select Node.js Tests with Event Races", submitted and accepted to the [25th Brazilian Symposium on Software Quality (SBQS 2026)](https://sbqs.sbc.org.br/2026/index.php/en-us/).
 
+#### Overview
 NodeRock is a dynamic analysis tool designed to address the challenge of detecting event races in Node.js applications. Event races are subtle concurrency bugs that are difficult to find and reproduce.
 
 Instead of attempting to detect these bugs directly, which can be computationally expensive, NodeRock uses a machine learning approach to analyze and select tests prone to event races. The tool operates by collecting execution traces, extracting a set of 15 dynamic features that characterize asynchronous behavior (like callback usage and Promise lifecycles), and then using a ML model to classify and prioritize tests.
@@ -14,7 +15,7 @@ This allows developers to focus their debugging efforts and run expensive detect
 The full paper can be accessed on our GitHub ([Full Paper PDF](https://github.com/PedroViniciusVicente/ArtifactsCharacterizingConcurrencyIssues/blob/main/SBQS2026_paper.pdf?raw=true)) and on our Zenodo repository.
 
 ## NodeRock Artifacts Organization
-The codebase is organized into several modules, extending from low-level profiling infrastructure to machine learning evaluation implemented by different projects:
+The repository is organized into several modules, extending from low-level profiling infrastructure to machine learning evaluation implemented by different projects:
 
 * **NodeProf Core (`nodeprof.js/`)**: Contains the NodeProf profiling framework running on GraalVM, providing instrumentation hooks to intercept asynchronous and runtime JavaScript execution events.
 * **NodeRT Instrumentation & Analysis (`src/`)**: Comprises the TypeScript codebase that implements NodeRT logic built on top of NodeProf.
@@ -22,39 +23,38 @@ The codebase is organized into several modules, extending from low-level profili
 * **Python Research Notebooks (`notebooks/`)**: Contains Jupyter Notebooks (`.ipynb`), including `main_research.ipynb` and RQ figure generation scripts, used for training ML models, computing Information Gain, and running statistical analyses on extracted datasets.
 * **Datasets & Experimental Results (`results/`)**: Stores extracted feature CSV datasets (`results/extracted_datasets/`) and execution logs from experiments (`results/RQ3_results/`).
 
-## Research Questions (RQs) and Analysis
+## Research Questions (RQs) and Key Findings
 
-This repository supports the research conducted. The implementation of all machine learning models, experiments and statistical evaluations can be found in [**notebooks/main_research**](notebooks/main_research.ipynb), a Python Notebook that consumes the CSV data from the files in [results/extracted_datasets](results/extracted_datasets).
-
-Analysis for each Research Question (RQ) and its figures can be found in the following Jupyter Notebooks:
+The empirical evaluation of NodeRock is driven by three main Research Questions. And the implementation of all machine learning models, experiments and statistical evaluations can be found in [**notebooks/main_research**](notebooks/main_research.ipynb) in its respective sections.
 
 ### [RQ1 - Model Evaluation](notebooks/main_research.ipynb) - Section "Application of ML Models"
 
 > **RQ1:** How effective are different machine learning models at selecting tests with event races? 
 
-This notebook evaluates various classifiers (SVM, KNN, Random Forest, etc.) and demonstrates the effectiveness of Positive Unlabeled (PU) Learning, which was chosen for NodeRock after achieving 75% accuracy and 84.38% recall.
+Positive Unlabeled (PU) Learning outperformed traditional supervised classifiers (such as SVM, KNN, and Random Forest) in our experiments, achieving 75% accuracy and 84.38% recall, demonstrating competency in detecting tests prone to event races.
 
 <!-- **Figure:** [RQ1_fig.ipynb](notebooks/RQ1_fig.ipynb). -->
 
 
 ### [RQ2 - Feature Analysis](notebooks/main_research.ipynb) - Section "Information Gain Calculation"
 
-> **RQ2:** How much predictive value do the different dynamic features add to the classifiers? 
+> **RQ2:** How much predictive value do the different dynamic features add to the classifiers?
 
-This notebook contains the Information Gain analysis for the 15 dynamic features. It shows that metrics like Invoked_Callbacks (IG=0.189) and Invokes_Interval_Greater_100ms (IG=0.155) are promising predictors for event races.
+Asynchronous timing and callback behaviors were the most critical indicators of event races in our experiments. Information Gain (IG) analysis revealed that `Invoked_Callbacks` (IG = 0.189) and `Invokes_Interval_Greater_100ms` (IG = 0.155) have the highest predictive power among the extracted dynamic features.
 
 <!-- **Figure:** [RQ2_fig.ipynb](notebooks/RQ2_fig.ipynb). -->
 
 
 ### [RQ3 - Performance Evaluation](notebooks/main_research.ipynb) - Section "Practical Application of Detection"
 
-> **RQ3:** What is the practical runtime performance of using NodeRock to filter tests? 
+> **RQ3:** What is the practical runtime performance of using NodeRock to select and prioritize tests?
 
-This notebook details the experiment comparing the runtime of a full test suite analysis (using NACD) vs. the NodeRock-filtered analysis. The results on the node-archiver project showed that NodeRock reduced the number of tests to analyze by ~31% and the runtime to execute 100 runs of the test suite by ~6.02%.
+When filtering tests on the `node-archiver` benchmark prior to running the NACD detector, NodeRock reduced the number of tests to analyze by ~31%, leading to an overall ~6.02% reduction in analysis time across 100 test suite executions without compromising race detection coverage.
 
 <!-- **Figure:** [RQ3_fig.ipynb](notebooks/RQ3_fig.ipynb). -->
 
 ## Requirements
+To conduct this research, the following hardware and software specs were employed:
 
 ### Hardware
 - **CPU:** 2 Cores / 4 Threads @ 3.00GHz.
@@ -62,25 +62,204 @@ This notebook details the experiment comparing the runtime of a full test suite 
 - **Disk Space:** At least 5 GB of free space (to store downloaded project archives, node_modules, datasets, scripts and execution logs).
 
 ### Software
-- **Operating System:** Linux (tested on Ubuntu 22.04 LTS)
-- **Java / GraalVM:** GraalVM Community Edition v21.2.0 (based on Java 11)
-- **Node.js & npm:** Node.js v14.16.1 and npm (managed via [nvm](https://github.com/nvm-sh/nvm))
-- **Python:** Version 3.10 or higher
+- **Operating System:** Linux (tested on Ubuntu 22.04 LTS; native installation).
+- **Java / GraalVM:** GraalVM Community Edition v21.2.0 (based on Java 11).
+- **Node.js & npm:** Node.js v14.16.1 and npm (managed via [nvm](https://github.com/nvm-sh/nvm)).
+- **Python:** Version 3.10 or higher.
+- **Python Dependencies:** Explicitly versioned in [`requirements.txt`](requirements.txt).
 
 ## Installation
-To setup the environment and install python dependencies:
+
+### 1. Python Environment Setup
+To setup the environment and install the required Python dependencies:
 ```
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-To conclude the prerequisites and installation steps for the JavaScript code instrumentation and traces collection, including setting up GraalVM (v21.2.0), Node.js (v14.16.1), and the underlying NodeProf framework, follow the detailed guide in [INSTALLATION_GUIDE.md](INSTALLATION_GUIDE.md) file.
+### 2. Full Instrumentation Framework Setup (NodeProf & GraalVM)
+To conclude the prerequisites and installation steps for JavaScript code instrumentation and trace collection (setting up GraalVM v21.2.0, Node.js v14.16.1, and the underlying NodeProf framework), follow the detailed step-by-step instructions in [INSTALLATION_GUIDE.md](INSTALLATION_GUIDE.md) file.
 
-*Obs: To replicate the sanity check, the setps in INSTALLATION_GUIDE.md are not necessary, since the sanity check will just execute the ML model using existing data in database.*
+> **Note:** To run the Sanity Check below, the steps in INSTALLATION_GUIDE.md are not necessary, as the sanity check evaluates the pre-extracted dataset with the ML model.
 
 ### Sanity Check
-After the initial Python setup, if the steps were successful, the output should be similar to the following listing
+To verify that the environment and Python dependencies were installed correctly, after the "Python Environment Setup", execute the sanity check script:
+
+```
+$ python3 NodeRock_src/python_sanity_check.py 
+```
+If the setup is functional, the output should conclude with the test prioritization results for the benchmark `node-archiver` (from RQ3):
+```
+======================================================================
+1. LOADING AND PREPARING DATA
+======================================================================
+
+Loaded 'results/combined_df.csv' with 1667 rows and 34 columns
+
+Known data (training): 1632 samples
+Unknown data (prediction): 35 samples
+Total features used: 30
+
+y_known distribution (0=Unknown/False, 1=True): [1601   31]
+
+======================================================================
+2. TRAINING PU LEARNING MODEL
+======================================================================
+Positive examples: 31, unlabeled: 1601
+
+======================================================================
+3. PREDICTING LABELS FOR BENCHMARK 'node-archiver'
+======================================================================
+
+======================================================================
+4. FINAL RESULTS: 'node-archiver' TESTS PRIORITIZED FOR 'HasEventRace'
+======================================================================
+
+Total tests analyzed: 35
+Tests selected (predicted TRUE): 23
+Tests filtered out (predicted FALSE/UNKNOWN): 12
+
+--- Priority ranking (23 tests) ---
+1. archiver api #directory should support setting data properties via function
+2. archiver api #directory should support ignoring matches via function
+3. archiver api #directory should find dot files
+4. plugins tar should append manual symlink
+5. plugins tar should retain symlinks via directory
+6. plugins tar should append stream
+7. archiver api #directory should append multiple entries
+8. archiver api #directory should handle windows path separators in prefix
+9. plugins tar should append folder
+10. plugins tar should append buffer
+11. plugins tar should append via directory
+12. archiver api #glob should append multiple entries
+13. plugins tar should append multiple entries
+14. plugins zip should append manual symlink
+15. plugins zip should allow for custom unix mode
+16. plugins zip should append via file
+17. plugins zip should append stream
+18. archiver api #file should fallback to filepath when no name is set
+19. archiver api #file should append filepath
+20. plugins zip should append via directory
+21. plugins zip should append buffer
+22. archiver api #errors should allow continue on stat failing
+23. plugins zip should append multiple entries
+
+--- Tests filtered out (12 tests) ---
+- plugins zip should allow for entry comments
+- archiver api #abort should have a state of aborted
+- archiver core #_normalizeEntryData should support prefix of the entry name
+- archiver api #file should append multiple entries
+- archiver api #file should fallback to file stats when applicable
+- archiver core #_normalizeEntryData should support special bits on unix
+- archiver api #promise should use a promise
+- plugins zip should allow for archive comment
+- archiver api #append should append multiple entries
+- archiver api #append should append buffer
+- archiver api #append should append stream
+- archiver api #append should append directory
+```
+
+<!-- 
+pedroubuntu@Aspire-A514-54:~/coisasNodeRT/NodeRT-OpenSource$ python3 -m venv venv
+pedroubuntu@Aspire-A514-54:~/coisasNodeRT/NodeRT-OpenSource$ source venv/bin/activate
+(venv) pedroubuntu@Aspire-A514-54:~/coisasNodeRT/NodeRT-OpenSource$ pip install -r requirements.txt 
+Collecting numpy==1.26.4
+  Using cached numpy-1.26.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (18.2 MB)
+Collecting pandas<3.0.0
+  Using cached pandas-2.3.3-cp310-cp310-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.8 MB)
+Collecting pulearn==0.0.11
+  Using cached pulearn-0.0.11-py3-none-any.whl (18 kB)
+Collecting scikit-learn<1.6.0,>=1.0.0
+  Using cached scikit_learn-1.5.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.3 MB)
+Collecting six~=1.16.0
+  Using cached six-1.16.0-py2.py3-none-any.whl (11 kB)
+Collecting python-dateutil>=2.8.2
+  Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+Collecting tzdata>=2022.7
+  Using cached tzdata-2026.5-py2.py3-none-any.whl (347 kB)
+Collecting pytz>=2020.1
+  Using cached pytz-2026.5-py2.py3-none-any.whl (506 kB)
+Collecting joblib>=1.2.0
+  Using cached joblib-1.6.0-py3-none-any.whl (306 kB)
+Collecting scipy>=1.6.0
+  Using cached scipy-1.15.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.7 MB)
+Collecting threadpoolctl>=3.1.0
+  Using cached threadpoolctl-3.7.0-py3-none-any.whl (26 kB)
+Collecting cloudpickle>=3.0
+  Using cached cloudpickle-3.1.2-py3-none-any.whl (22 kB)
+Installing collected packages: pytz, tzdata, threadpoolctl, six, numpy, cloudpickle, scipy, python-dateutil, joblib, scikit-learn, pandas, pulearn
+Successfully installed cloudpickle-3.1.2 joblib-1.6.0 numpy-1.26.4 pandas-2.3.3 pulearn-0.0.11 python-dateutil-2.9.0.post0 pytz-2026.5 scikit-learn-1.5.2 scipy-1.15.3 six-1.16.0 threadpoolctl-3.7.0 tzdata-2026.5
+(venv) pedroubuntu@Aspire-A514-54:~/coisasNodeRT/NodeRT-OpenSource$ python3 NodeRock_src/python_sanity_check.py 
+
+======================================================================
+1. LOADING AND PREPARING DATA
+======================================================================
+
+Loaded 'results/combined_df.csv' with 1667 rows and 34 columns
+
+Known data (training): 1632 samples
+Unknown data (prediction): 35 samples
+Total features used: 30
+
+y_known distribution (0=Unknown/False, 1=True): [1601   31]
+
+======================================================================
+2. TRAINING PU LEARNING MODEL
+======================================================================
+Positive examples: 31, unlabeled: 1601
+
+======================================================================
+3. PREDICTING LABELS FOR BENCHMARK 'node-archiver'
+======================================================================
+
+======================================================================
+4. FINAL RESULTS: 'node-archiver' TESTS PRIORITIZED FOR 'HasEventRace'
+======================================================================
+
+Total tests analyzed: 35
+Tests selected (predicted TRUE): 23
+Tests filtered out (predicted FALSE/UNKNOWN): 12
+
+--- Priority ranking (23 tests) ---
+1. archiver api #directory should support setting data properties via function
+2. archiver api #directory should support ignoring matches via function
+3. archiver api #directory should find dot files
+4. plugins tar should append manual symlink
+5. plugins tar should retain symlinks via directory
+6. plugins tar should append stream
+7. archiver api #directory should append multiple entries
+8. archiver api #directory should handle windows path separators in prefix
+9. plugins tar should append folder
+10. plugins tar should append buffer
+11. plugins tar should append via directory
+12. archiver api #glob should append multiple entries
+13. plugins tar should append multiple entries
+14. plugins zip should append manual symlink
+15. plugins zip should allow for custom unix mode
+16. plugins zip should append via file
+17. plugins zip should append stream
+18. archiver api #file should fallback to filepath when no name is set
+19. archiver api #file should append filepath
+20. plugins zip should append via directory
+21. plugins zip should append buffer
+22. archiver api #errors should allow continue on stat failing
+23. plugins zip should append multiple entries
+
+--- Tests filtered out (12 tests) ---
+- plugins zip should allow for entry comments
+- archiver api #abort should have a state of aborted
+- archiver core #_normalizeEntryData should support prefix of the entry name
+- archiver api #file should append multiple entries
+- archiver api #file should fallback to file stats when applicable
+- archiver core #_normalizeEntryData should support special bits on unix
+- archiver api #promise should use a promise
+- plugins zip should allow for archive comment
+- archiver api #append should append multiple entries
+- archiver api #append should append buffer
+- archiver api #append should append stream
+- archiver api #append should append directory
+-->
 
 ## The NodeRock Pipeline
 The core logic of the NodeRock execution pipeline is implemented as a series of sequential scripts located in the [NodeRock_src/entrypoint_NodeRock](NodeRock_src/entrypoint_NodeRock). The pipeline is divided into three main stages:
