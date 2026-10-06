@@ -194,3 +194,11 @@ projects/*
 
 TODO.txt
 artigosLidos.txt
+
+.Lines_VSCode_Counter/*
+
+venv
+
+compacted_projects.tar.gz
+
+src/Analysis/MyFunctionCallAnalysis/novo_MyFunctionCallAnalysis.ts
