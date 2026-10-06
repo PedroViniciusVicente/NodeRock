@@ -1,0 +1,19 @@
+cff-version: 1.3.0
+title: "NodeRock Artifacts"
+version: 1.0.1
+license: "GPL-3.0-only"
+type: software
+abstract: "Artifacts used in the paper NodeRock"
+message: "Artifacts used in the paper NodeRock: An Approach for Selecting Tests Prone to Event Races in Node.js Applications, published in SBQS 2026."
+authors:
+  - given-names: Pedro
+    family-names: Vicente
+    affiliation: Universidade Federal de Sao Carlos
+    orcid: "https://orcid.org/0009-0000-3825-5082"
+keywords:
+  - computer science
+  - software engineering
+  - automated tests
+  - machine learning
+  - test case prioritization
+  - test suite reduction
