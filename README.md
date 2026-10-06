@@ -1,4 +1,8 @@
+[![DOI](https://zenodo.org/badge/814622987.svg)](https://doi.org/10.5281/zenodo.22967154)
+
 # NodeRock: A Machine Learning Approach to Select Node.js Tests with Event Races
+
+This repository contains the source code and datasets for the NodeRock tool and the analysis scripts associated.
 
 NodeRock is a dynamic analysis tool designed to address the challenge of detecting event races in Node.js applications. Event races are subtle concurrency bugs that are difficult to find and reproduce.
 
@@ -6,9 +10,10 @@ Instead of attempting to detect these bugs directly, which can be computationall
 
 This allows developers to focus their debugging efforts and run expensive detection tools (like [NACD](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ECOOP.2025.9)) on the most critical tests, making the process of identifying tests prone to event races more efficient.
 
-This repository contains the source code for the NodeRock tool and the analysis scripts associated.
+#### Link to Paper:
+The full paper can be accessed on our GitHub ([Full Paper PDF](https://github.com/PedroViniciusVicente/ArtifactsCharacterizingConcurrencyIssues/blob/main/SBQS2026_paper.pdf?raw=true)) and on our Zenodo repository.
 
-## NodeRock Source Code Organization
+## NodeRock Artifacts Organization
 The codebase is organized into several modules, extending from low-level profiling infrastructure to machine learning evaluation implemented by different projects:
 
 * **NodeProf Core (`nodeprof.js/`)**: Contains the NodeProf profiling framework running on GraalVM, providing instrumentation hooks to intercept asynchronous and runtime JavaScript execution events.
@@ -23,50 +28,72 @@ This repository supports the research conducted. The implementation of all machi
 
 Analysis for each Research Question (RQ) and its figures can be found in the following Jupyter Notebooks:
 
-### [RQ1_Model_Evaluation](notebooks/main_research.ipynb) - Section "Application of ML Models - RQ1"
+### [RQ1 - Model Evaluation](notebooks/main_research.ipynb) - Section "Application of ML Models"
 
-**Question:** How effective are different machine learning models at selecting tests with event races? 
+> **RQ1:** How effective are different machine learning models at selecting tests with event races? 
 
-**Analysis:** This notebook evaluates various classifiers (SVM, KNN, Random Forest, etc.) and demonstrates the effectiveness of Positive Unlabeled (PU) Learning, which was chosen for NodeRock after achieving 75% accuracy and 84.38% recall.
+This notebook evaluates various classifiers (SVM, KNN, Random Forest, etc.) and demonstrates the effectiveness of Positive Unlabeled (PU) Learning, which was chosen for NodeRock after achieving 75% accuracy and 84.38% recall.
 
-**Figure:** [RQ1_fig.ipynb](notebooks/RQ1_fig.ipynb).
-
-
-### [RQ2_Feature_Analysis](notebooks/main_research.ipynb) - Section "Information Gain Calculation - RQ2"
-
-**Question:** How much predictive value do the different dynamic features add to the classifiers? 
-
-**Analysis:** This notebook contains the Information Gain analysis for the 15 dynamic features. It shows that metrics like Invoked_Callbacks (IG=0.189) and Invokes_Interval_Greater_100ms (IG=0.155) are promising predictors for event races.
-
-**Figure:** [RQ2_fig.ipynb](notebooks/RQ2_fig.ipynb).
+<!-- **Figure:** [RQ1_fig.ipynb](notebooks/RQ1_fig.ipynb). -->
 
 
-### [RQ3_Performance_Evaluation](notebooks/main_research.ipynb) - Section "Practical Application of Detection - RQ3"
+### [RQ2 - Feature Analysis](notebooks/main_research.ipynb) - Section "Information Gain Calculation"
 
-**Question:** What is the practical runtime performance of using NodeRock to filter tests? 
+> **RQ2:** How much predictive value do the different dynamic features add to the classifiers? 
 
-**Analysis:** This notebook details the experiment comparing the runtime of a full test suite analysis (using NACD) vs. the NodeRock-filtered analysis. The results on the node-archiver project showed that NodeRock reduced the number of tests to analyze by ~31% and the runtime to execute 100 runs of the test suite by ~6.02%.
+This notebook contains the Information Gain analysis for the 15 dynamic features. It shows that metrics like Invoked_Callbacks (IG=0.189) and Invokes_Interval_Greater_100ms (IG=0.155) are promising predictors for event races.
 
-**Figure:** [RQ3_fig.ipynb](notebooks/RQ3_fig.ipynb).
+<!-- **Figure:** [RQ2_fig.ipynb](notebooks/RQ2_fig.ipynb). -->
 
-## Installation and Requirements
 
-All prerequisites and installation steps, including setting up GraalVM (v21.2.0), Node.js (v14.16.1), and the underlying NodeProf framework, are detailed in the [INSTALLATION_GUIDE.md](INSTALLATION_GUIDE.md) file.
+### [RQ3 - Performance Evaluation](notebooks/main_research.ipynb) - Section "Practical Application of Detection"
+
+> **RQ3:** What is the practical runtime performance of using NodeRock to filter tests? 
+
+This notebook details the experiment comparing the runtime of a full test suite analysis (using NACD) vs. the NodeRock-filtered analysis. The results on the node-archiver project showed that NodeRock reduced the number of tests to analyze by ~31% and the runtime to execute 100 runs of the test suite by ~6.02%.
+
+<!-- **Figure:** [RQ3_fig.ipynb](notebooks/RQ3_fig.ipynb). -->
+
+## Requirements
+
+### Hardware
+- **CPU:** 2 Cores / 4 Threads @ 3.00GHz.
+- **RAM:** 8 GB.
+- **Disk Space:** At least 5 GB of free space (to store downloaded project archives, node_modules, datasets, scripts and execution logs).
+
+### Software
+- **Operating System:** Linux (tested on Ubuntu 22.04 LTS)
+- **Java / GraalVM:** GraalVM Community Edition v21.2.0 (based on Java 11)
+- **Node.js & npm:** Node.js v14.16.1 and npm (managed via [nvm](https://github.com/nvm-sh/nvm))
+- **Python:** Version 3.10 or higher
+
+## Installation
+To setup the environment and install python dependencies:
+```
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+To conclude the prerequisites and installation steps for the JavaScript code instrumentation and traces collection, including setting up GraalVM (v21.2.0), Node.js (v14.16.1), and the underlying NodeProf framework, follow the detailed guide in [INSTALLATION_GUIDE.md](INSTALLATION_GUIDE.md) file.
+
+*Obs: To replicate the sanity check, the setps in INSTALLATION_GUIDE.md are not necessary, since the sanity check will just execute the ML model using existing data in database.*
+
+### Sanity Check
+After the initial Python setup, if the steps were successful, the output should be similar to the following listing
 
 ## The NodeRock Pipeline
 The core logic of the NodeRock execution pipeline is implemented as a series of sequential scripts located in the [NodeRock_src/entrypoint_NodeRock](NodeRock_src/entrypoint_NodeRock). The pipeline is divided into three main stages:
 
-- **Test Info Runner:** Sets the configuration for the target project ([1_chosenProject.js](NodeRock_src/entrypoint_NodeRock/1_chosenProject.js)) and discovers all executable, passing tests within it using a custom reporter ([2_getTestsNames.js](NodeRock_src/entrypoint_NodeRock/2_getTestsNames.js)).
+> **Test Info Runner:** Sets the configuration for the target project ([1_chosenProject.js](NodeRock_src/entrypoint_NodeRock/1_chosenProject.js)) and discovers all executable, passing tests within it using a custom reporter ([2_getTestsNames.js](NodeRock_src/entrypoint_NodeRock/2_getTestsNames.js)).
 
-- **Metric Extractor:** Executes each test individually to capture raw execution traces ([3_executeTests.js](NodeRock_src/entrypoint_NodeRock/3_executeTests.js)), parses these traces to extract function details and callback delays ([4_extractFunctions.js](NodeRock_src/entrypoint_NodeRock/4_extractFunctions.js)), aggregates trace data into a high-level feature set ([5_extractFeatures.js](NodeRock_src/entrypoint_NodeRock/5_extractFeatures.js)), and runs a second, separate execution with monkey-patching to capture detailed Promise lifecycle metrics ([6_executeMonkeyPatching.js](NodeRock_src/entrypoint_NodeRock/6_executeMonkeyPatching.js)).
+> **Metric Extractor:** Executes each test individually to capture raw execution traces ([3_executeTests.js](NodeRock_src/entrypoint_NodeRock/3_executeTests.js)), parses these traces to extract function details and callback delays ([4_extractFunctions.js](NodeRock_src/entrypoint_NodeRock/4_extractFunctions.js)), aggregates trace data into a high-level feature set ([5_extractFeatures.js](NodeRock_src/entrypoint_NodeRock/5_extractFeatures.js)), and runs a second, separate execution with monkey-patching to capture detailed Promise lifecycle metrics ([6_executeMonkeyPatching.js](NodeRock_src/entrypoint_NodeRock/6_executeMonkeyPatching.js)).
 
-- **Machine Learning Detector:** Executes the main Python script to select and prioritize tests based on their features ([10_executePythonML.js](NodeRock_src/entrypoint_NodeRock/10_executePythonML.js)) and (for validation) runs an external race detection tool like NACD only on the tests flagged as "suspicious" by the model ([11_executeRaceDetection.js](NodeRock_src/entrypoint_NodeRock/11_executeRaceDetection.js)).
+> **Machine Learning Detector:** Executes the main Python script to select and prioritize tests based on their features ([10_executePythonML.js](NodeRock_src/entrypoint_NodeRock/10_executePythonML.js)) and (for validation) runs an external race detection tool like NACD only on the tests flagged as "suspicious" by the model ([11_executeRaceDetection.js](NodeRock_src/entrypoint_NodeRock/11_executeRaceDetection.js)).
 
 
-## Instrumentation Hooks
-The core data collection logic is powered by NodeProf (which runs on GraalVM). The specific hooks used to intercept asynchronous events and gather trace data are implemented in:
-
-[src/Analysis/MyFunctionCallAnalysis/MyFunctionCallAnalysis.ts](src/Analysis/MyFunctionCallAnalysis/MyFunctionCallAnalysis.ts)
+<!-- ## Instrumentation Hooks
+The core data collection logic is powered by NodeProf (which runs on GraalVM). The specific hooks used to intercept asynchronous events and gather trace data are implemented in [src/Analysis/MyFunctionCallAnalysis/MyFunctionCallAnalysis.ts](src/Analysis/MyFunctionCallAnalysis/MyFunctionCallAnalysis.ts)
 
 This file defines the analysis class (MyFunctionCallAnalysis) that instruments the JavaScript code. It is responsible for capturing:
 
@@ -76,7 +103,7 @@ This file defines the analysis class (MyFunctionCallAnalysis) that instruments t
 
 - The lifecycle of async/await operations (asyncFunctionEnter, awaitPre, awaitPost).
 
-- Timestamps (using performance.now()) for calculating delays between asynchronous operations.
+- Timestamps (using performance.now()) for calculating delays between asynchronous operations. -->
 
 
 ## Data and Results
@@ -87,3 +114,9 @@ The repository also includes the data and experimental results discussed in the 
 - [results/RQ3_results:](results/RQ3_results) Contains the raw execution logs and time measurements from the experiment conducted for Research Question 3 (RQ3), which compared the performance of the full test suite versus the NodeRock-filtered suite.
 
 - [projects:](projects) Stores the description and projects used in this experiment. The built projects, together with their NodeRock analysis logs, are archived on Zenodo.
+
+
+## License
+
+NodeRock builds upon and extends NodeRT. We gratefully acknowledge
+the original authors of [NodeRT](https://doi.org/10.1145/3597926.3598139), whose work is licensed under the GNU GPLv3. NodeRock contains modifications to the original NodeRT source code made from 2024 onward. These modifications and extensions are also distributed under the GNU GPLv3 license.
