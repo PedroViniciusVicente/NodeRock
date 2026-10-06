@@ -2,7 +2,7 @@
 
 # NodeRock: A Machine Learning Approach to Select Node.js Tests with Event Races
 
-This repository contains the source code, datasets and scripts associated with the study presented in the paper: "NodeRock: A Machine Learning Approach to Select Node.js Tests with Event Races", submitted and accepted to the [25th Brazilian Symposium on Software Quality (SBQS 2026)](https://sbqs.sbc.org.br/2026/index.php/en-us/).
+This repository contains the source code, datasets and scripts associated with the study presented in the paper: "NodeRock: A Machine Learning Approach to Select Node.js Tests with Event Races", published at SBQS 2026, the [25th Brazilian Symposium on Software Quality](https://sbqs.sbc.org.br/2026/index.php/en-us/).
 
 #### Overview
 NodeRock is a dynamic analysis tool designed to address the challenge of detecting event races in Node.js applications. Event races are subtle concurrency bugs that are difficult to find and reproduce.
